@@ -48,5 +48,6 @@ Imports:
 Depends: 
     R (>= 2.10)
 VignetteBuilder: knitr
-URL: https://github.com/lzumeta/injurytools
+URL: https://github.com/lzumeta/injurytools,
+    https://lzumeta.github.io/injurytools/
 BugReports: https://github.com/lzumeta/injurytools/issues

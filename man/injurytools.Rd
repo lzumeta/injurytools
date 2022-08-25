@@ -10,6 +10,14 @@
 
 Sports Injury Data are analysed to identify and describe the magnitude of the injury problem, and also to gain more further insights (e.g. determine potential risk factors) by statistical modelling approaches. The 'injurytools' package provides standardized routines and utilities that simplify such analyses. It offers functions for data preparation, informative visualizations and descriptive and model-based analyses.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/lzumeta/injurytools}
+  \item Report bugs at \url{https://github.com/lzumeta/injurytools/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Lore Zumeta Olaskoaga \email{lzumeta@bcamath.org} (\href{https://orcid.org/0000-0001-6141-1469}{ORCID})
 
