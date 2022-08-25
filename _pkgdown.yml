@@ -1,7 +1,6 @@
-url: ~
+url: https://lzumeta.github.io/injurytools/
 template:
   bootstrap: 5
-
 navbar:
   type: default
   left:
@@ -16,47 +15,45 @@ navbar:
     - text: Visualize data
       href: articles/explore-injury-data.html
   right:
-   - icon: fa-github
-     href: https://github.com/lzumeta/injurytools
-
+  - icon: fa-github
+    href: https://github.com/lzumeta/injurytools
 development:
   mode: auto
-
 reference:
-  - title: "Prepare sports injury data"
-    desc: "Functions that preprocess and prepare these type of data in a standardized format."
-    contents:
-      - prepare_data
-  - title: "Compute injury summary statistics"
-    desc: "Functions to estimate sports injury summary statistics."
-    contents:
-      - injsummary
-      - injprop
-  - title: "Visualize sports injury data"
-    desc: "Functions to visualize relevant information in sports injury data."
-    contents:
-      - gg_injphoto
-      - gg_injbarplot
-      - gg_injpolar
-      - gg_injriskmatrix
-  - title: "Data sets"
-    desc: "Internal data sets to illustrate `injurytools` functionalities."
-    contents:
-      - raw_df_exposures
-      - raw_df_injuries
-      - injd
-  - title: "Utilities"
-    desc: "Utility functions."
-    contents:
-      - date2season
-      - cut_injd
-      - is_injd
-      - is_injds
+- title: Prepare sports injury data
+  desc: Functions that preprocess and prepare these type of data in a standardized
+    format.
+  contents: prepare_data
+- title: Compute injury summary statistics
+  desc: Functions to estimate sports injury summary statistics.
+  contents:
+  - injsummary
+  - injprop
+- title: Visualize sports injury data
+  desc: Functions to visualize relevant information in sports injury data.
+  contents:
+  - gg_injphoto
+  - gg_injbarplot
+  - gg_injpolar
+  - gg_injriskmatrix
+- title: Data sets
+  desc: Internal data sets to illustrate `injurytools` functionalities.
+  contents:
+  - raw_df_exposures
+  - raw_df_injuries
+  - injd
+- title: Utilities
+  desc: Utility functions.
+  contents:
+  - date2season
+  - cut_injd
+  - is_injd
+  - is_injds
 articles:
-  - title: "Articles"
-    desc: "Vignettes that describe the usage of injurytools"
-    contents:
-    - prepare-injury-data
-    - estimate-epi-measures
-    - explore-injury-data
+- title: Articles
+  desc: Vignettes that describe the usage of injurytools
+  contents:
+  - prepare-injury-data
+  - estimate-epi-measures
+  - explore-injury-data
 
