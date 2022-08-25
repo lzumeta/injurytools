@@ -1,0 +1,191 @@
+---
+title: "Estimate Measures for Injury Epidemiology"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{estimate-epi-measures}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: refs.bib
+link-citations: yes
+---
+
+```{r, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+## to fold/hook the code
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines) == 1) {
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(if (abs(lines[1]) > 1) more else NULL,
+            x[lines],
+            if (length(x) > lines[abs(length(lines))]) more else NULL
+           )
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+```
+
+```{r load_data, include=FALSE}
+load("../R/sysdata.rda")
+rm(injd)
+injd <- injd2
+```
+
+
+```{r setup, warning=FALSE, message=FALSE}
+library(injurytools)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+```
+
+Whenever the data is collected and prepared, it is essential and straightforward to summarize and explore these data. As it is important to know, from a more applied point of view to sport, how many injuries or what type of injuries occurred.
+
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). These measures are explained below and then [`injsummary()`](https://lzumeta.github.io/injurytools/) and [`injprop()`](https://lzumeta.github.io/injurytools/) functions are illustrated.
+
+# Rates
+
+As @Hodgson2000 state,
+
+*"Sports injuries occur when athletes are exposed to their given sport and they occur under specific conditions, at a known time and place."* 
+
+Thus, when attempting to describe the distribution of injuries it is necessary to relate this to the population at risk over a specified time period. This is why the fundamental unit of measurement is **rate**.
+
+A rate is a measure that consists of a denominator and a numerator over a period of time. Denominator data can be a number of different things (e.g. number of minutes trained/played, number of matches played). As such, it reflects the speed at which new "injury-related" events occurs.
+
+## Injury incidence rate
+
+**Injury incidence rate** is the number of new injury cases ($I$) per unit of player-exposure time, i.e.
+
+$$ I_{r} = \frac{I}{\Delta T}$$
+where $\Delta T$ is the total time under risk of the study population.
+
+## Injury burden rate
+
+**Injury burden rate** is the number of days lost ($n_d$) per unit of player-exposure time, i.e.
+
+$$I_{br} = \frac{n_d}{\Delta T}$$
+where $\Delta T$ is the total time under risk of the study population.
+
+*NOTE 1:* as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by [`gg_injriskmatrix()`](https://lzumeta.github.io/injurytools/) function. 
+
+*NOTE 2:* neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.).
+
+
+## Availability
+
+**Availability** the number of players free of injury ("available") over the total number of players in the study population in specified period of time. 
+
+# In practice
+
+## injsummary()
+
+<details>
+
+<summary>
+  Prepare data
+</summary>
+
+```{r, eval = FALSE}
+df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+                            date = "year", time_expo = "minutes_played")
+df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+                            date_injured = "from", date_recovered = "until")
+injd         <- prepare_all(data_exposures = df_exposures,
+                            data_injuries  = df_injuries,
+                            exp_unit = "matches_minutes")
+```
+
+
+</details>
+
+```{r}
+injds <- injsummary(injd)
+
+# format the table for playerwise dataframe
+injds[[1]] %>% 
+  arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
+  kable(digits = 2, col.names = c("Player", "N injuries", "N days lost",
+                                  "Total exposure", "Incidence", "Burden"))
+
+# format the table for total incidence and burden main columns
+injds[[2]] %>% 
+  select(1:5) %>% 
+  data.frame(row.names = "TOTAL") %>% 
+  kable(digits = 2,
+        col.names = c("N injuries", "N days lost",
+                      "Total exposure", "Incidence", "Burden"),
+        row.names = TRUE) %>% 
+  kable_styling(full_width = FALSE)
+
+# format the table for total incidence and burden point + ci estimates
+injds_tot_cis <- injds[[2]] %>% 
+  select(4:last_col()) %>% 
+  data.frame(row.names = "TOTAL")
+injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
+                                    ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
+injds_tot_cis$ci_injburden <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
+                                    ", ",round(injds_tot_cis$injburden_upper, 1), "]")
+
+conf_level <- attr(injds, "conf_level")*100
+injds_tot_cis %>% 
+  select(1, 9, 2, 10) %>% 
+  kable(digits = 2,
+        col.names = c("Incidence",  paste0("CI", conf_level, "% for \\(I_r\\)"), 
+                      "Burden", paste0("CI", conf_level, "% for \\(I_{br}\\)")))
+  
+```
+
+
+## injprop()
+
+EXPLAIN
+
+<details>
+
+<summary>
+  Prepare data
+</summary>
+
+```{r, eval = FALSE}
+df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+                            date = "year", time_expo = "minutes_played")
+df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+                            date_injured = "from", date_recovered = "until")
+injd         <- prepare_all(data_exposures = df_exposures,
+                            data_injuries  = df_injuries,
+                            exp_unit = "matches_minutes")
+```
+
+</details>
+
+```{r}
+availability_table <- injprop(injd, by = "monthly", var_type_injury = "injury_type")
+```
+
+
+# Further implementation
+
+In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in [`injsummary()`](https://lzumeta.github.io/injurytools/) function.
+
+Finally, this document shows how to perform statistical descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
+
+# References
+
