@@ -47,6 +47,8 @@ knit_hooks$set(output = function(x, options) {
   <strong>WARNING!</strong> File under construction.
 </div>    
 
+**WARNING! File under construction"**
+
 ```{r setup, warning=FALSE, message=FALSE}
 library(injurytools)
 library(dplyr)
