@@ -116,8 +116,8 @@ same functions provided by the package.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <h2 id="prepare-and-standardize-injury-and-exposure-data">1) prepare and standardize injury and exposure data<a class="anchor" aria-label="anchor" href="#prepare-and-standardize-injury-and-exposure-data"></a>
 </h2>
 <p>Thus the early task is to tidy up these two sources of data.</p>
-<p>As example data sets we consider <a href="https://lzumeta.github.io/injurytools/docs/reference/raw_df_injuries.html"><code>raw_df_injuries</code></a>
-and <a href="https://lzumeta.github.io/injurytools/docs/reference/raw_df_exposures.html"><code>raw_df_exposures</code></a>
+<p>As example data sets we consider <a href="https://lzumeta.github.io/injurytools/reference/raw_df_injuries.html"><code>raw_df_injuries</code></a>
+and <a href="https://lzumeta.github.io/injurytools/reference/raw_df_exposures.html"><code>raw_df_exposures</code></a>
 data sets available from the <code>injurytools</code> package. These are
 data of Liverpool Football Club male’s first team players over two
 consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www.transfermarkt.com/" class="external-link uri">https://www.transfermarkt.com/</a> website:</p>
@@ -163,7 +163,7 @@ date and amount of time of exposure and set them proper formats by means
 of <code><a href="../reference/prepare_data.html">prepare_inj()</a></code> and <code><a href="../reference/prepare_data.html">prepare_exp()</a></code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The &lt;code&gt;date&lt;/code&gt; argument should be either of class
 &lt;em&gt;Date&lt;/em&gt;, given in “%Y-%m-%d” format, or of class
 &lt;em&gt;integer&lt;/em&gt;/&lt;em&gt;numeric&lt;/em&gt;, a 4-digit integer referring to year
-in which the season started.&lt;/p&gt;"><sup>2</sup></a>:</p>
+in which the season started.&lt;/p&gt;"><sup>2</sup></a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_injuries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_inj</a></span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,
                            player         <span class="op">=</span> <span class="st">"player_name"</span>,

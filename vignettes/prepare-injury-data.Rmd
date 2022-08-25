@@ -61,14 +61,16 @@ Data can be collected in several ways and by several means. A conventional manne
 
 Thus the early task is to tidy up these two sources of data.
 
-As example data sets we consider [`raw_df_injuries`](https://lzumeta.github.io/injurytools/docs/reference/raw_df_injuries.html) and [`raw_df_exposures`](https://lzumeta.github.io/injurytools/docs/reference/raw_df_exposures.html) data sets available from the `injurytools` package. These are data of Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website:
+As example data sets we consider [`raw_df_injuries`](https://lzumeta.github.io/injurytools/reference/raw_df_injuries.html) and [`raw_df_exposures`](https://lzumeta.github.io/injurytools/reference/raw_df_exposures.html) data sets available from the `injurytools` package. These are data of Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website:
 
 ```{r}
 head(raw_df_injuries)
 head(raw_df_exposures)
 ```
 
-We standardize the key column names such as player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure and set them proper formats by means of `prepare_inj()` and `prepare_exp()`^[The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.]:  
+We standardize the key column names such as player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-1].
+
+[^prepare-note-1]: The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.  
 
 ```{r}
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,

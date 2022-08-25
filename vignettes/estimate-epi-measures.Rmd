@@ -42,12 +42,10 @@ knit_hooks$set(output = function(x, options) {
  })
 ```
 
-```{r load_data, include=FALSE}
-load("../R/sysdata.rda")
-rm(injd)
-injd <- injd2
-```
 
+<div class="alert alert-danger">
+  <strong>WARNING!</strong> File under construction.
+</div>    
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(injurytools)
@@ -58,7 +56,7 @@ library(kableExtra)
 
 Whenever the data is collected and prepared, it is essential and straightforward to summarize and explore these data. As it is important to know, from a more applied point of view to sport, how many injuries or what type of injuries occurred.
 
-This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). These measures are explained below and then [`injsummary()`](https://lzumeta.github.io/injurytools/) and [`injprop()`](https://lzumeta.github.io/injurytools/) functions are illustrated.
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). These measures are explained below and then `injsummary()` and `injprop()` functions are illustrated.
 
 # Rates
 
@@ -84,7 +82,7 @@ where $\Delta T$ is the total time under risk of the study population.
 $$I_{br} = \frac{n_d}{\Delta T}$$
 where $\Delta T$ is the total time under risk of the study population.
 
-*NOTE 1:* as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by [`gg_injriskmatrix()`](https://lzumeta.github.io/injurytools/) function. 
+*NOTE 1:* as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by `gg_injriskmatrix()` function. 
 
 *NOTE 2:* neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.).
 
@@ -183,7 +181,7 @@ availability_table <- injprop(injd, by = "monthly", var_type_injury = "injury_ty
 
 # Further implementation
 
-In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in [`injsummary()`](https://lzumeta.github.io/injurytools/) function.
+In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in `injsummary()` function.
 
 Finally, this document shows how to perform statistical descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
 
