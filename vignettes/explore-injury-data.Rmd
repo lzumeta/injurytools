@@ -16,8 +16,9 @@ knitr::opts_chunk$set(
 ```
 
 <div class="alert alert-danger">
-  <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-</div>
+  <strong>WARNING!</strong> File under construction.
+</div>    
+
 
 ```{r setup}
 library(injurytools)
