@@ -122,7 +122,7 @@ injd         <- prepare_all(data_exposures = df_exposures,
 ```
 </details>
 
-Ǹow, the preprocessed data is passed to `injsummary()` to calculate injury summary statistics:
+Now, the preprocessed data is passed to `injsummary()` to calculate injury summary statistics:
 
 ```{r}
 injds <- injsummary(injd)
