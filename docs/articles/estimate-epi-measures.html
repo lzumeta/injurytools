@@ -79,7 +79,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures for Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2022-08-25</h4>
+            <h4 data-toc-skip class="date">2022-08-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -90,20 +90,20 @@
 <div class="alert alert-danger">
 <p><strong>WARNING!</strong> File under construction.</p>
 </div>
-<p><strong>WARNING! File under construction”</strong></p>
+<p><strong>WARNING! File under construction</strong></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lzumeta/injurytools" class="external-link">injurytools</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></code></pre></div>
-<p>Whenever the data is collected and prepared, it is essential and
-straightforward to summarize and explore these data. As it is important
-to know, from a more applied point of view to sport, how many injuries
-or what type of injuries occurred.</p>
+<p>Whenever the data is collected and prepared, it is important and
+straightforward to summarize and explore them. As it is, from a more
+applied point of view to sport, important to know how many injuries or
+what type of injuries occurred.</p>
 <p>This document shows convenient functions from
 <code>injurytools</code> to describe sports injury data, in terms of
-measures used in sports injury epidemiology (see <span class="citation">Bahr and Holme (<a href="#ref-Bahr2003" role="doc-biblioref">2003</a>)</span>). These measures are explained
-below and then <code><a href="../reference/injsummary.html">injsummary()</a></code> and <code><a href="../reference/injprop.html">injprop()</a></code>
+measures used in sports injury epidemiology (see <span class="citation">Bahr and Holme (<a href="#ref-Bahr2003" role="doc-biblioref">2003</a>)</span>). Below, these measures are
+explained and then <code><a href="../reference/injsummary.html">injsummary()</a></code> and <code><a href="../reference/injprop.html">injprop()</a></code>
 functions are illustrated.</p>
 <div class="section level2">
 <h2 id="rates">Rates<a class="anchor" aria-label="anchor" href="#rates"></a>
@@ -139,21 +139,25 @@ i.e.</p>
 <p><span class="math display">\[I_{br} = \frac{n_d}{\Delta T}\]</span>
 where <span class="math inline">\(\Delta T\)</span> is the total time
 under risk of the study population.</p>
-<p><em>NOTE 1:</em> as <span class="citation">Bahr, Clarsen, and
+<div class="alert alert-warning" role="alert">
+<p><strong>NOTE 1:</strong> as <span class="citation">Bahr, Clarsen, and
 Ekstrand (<a href="#ref-Bahr2018" role="doc-biblioref">2018</a>)</span>
 state, injury incidence (likelihood) and injury burden (severity) should
 be reported and assessed in conjunction rather than in isolation. In
 this regard, see the risk matrix plot provided by
 <code><a href="../reference/gg_injriskmatrix.html">gg_injriskmatrix()</a></code> function.</p>
-<p><em>NOTE 2:</em> neither injury incidence (<span class="math inline">\(I_r\)</span>) nor injury burden (<span class="math inline">\(I_{br}\)</span>) are ratios, and they are not
+</div>
+<div class="alert alert-warning" role="alert">
+<p><strong>NOTE 2:</strong> neither injury incidence (<span class="math inline">\(I_r\)</span>) nor injury burden (<span class="math inline">\(I_{br}\)</span>) are ratios, and they are not
 interpreted as a probability; they are rates and their unit
 (person-time)<span class="math inline">\(^{-1}\)</span> (e.g. per 1000h
 of player-exposure, per player-season etc.).</p>
 </div>
+</div>
 <div class="section level3">
 <h3 id="availability">Availability<a class="anchor" aria-label="anchor" href="#availability"></a>
 </h3>
-<p><strong>Availability</strong> the number of players free of injury
+<p><strong>Availability</strong> is the number of players free of injury
 (“available”) over the total number of players in the study population
 in specified period of time.</p>
 </div>
@@ -162,7 +166,7 @@ in specified period of time.</p>
 <h2 id="in-practice">In practice<a class="anchor" aria-label="anchor" href="#in-practice"></a>
 </h2>
 <div class="section level3">
-<h3 id="injsummary">injsummary()<a class="anchor" aria-label="anchor" href="#injsummary"></a>
+<h3 id="injsummary">- <code>injsummary()</code><a class="anchor" aria-label="anchor" href="#injsummary"></a>
 </h3>
 <details><summary>
 Prepare data
@@ -174,16 +178,38 @@ Prepare data
 <span class="va">injd</span>         <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,
                             data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,
                             exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></code></pre></div>
-</details><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</details><p>Ǹow, the preprocessed data is passed to <code><a href="../reference/injsummary.html">injsummary()</a></code> to
+calculate injury summary statistics:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">injds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span>
 <span class="co">#&gt; Warning in injsummary_unit(unit, injds, quiet): </span>
 <span class="co">#&gt; * Exposure time unit is matches_minutes</span>
 <span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
 <span class="co">#&gt; Warning in injsummary_unit(unit, injds_overall, quiet): </span>
 <span class="co">#&gt; * Exposure time unit is matches_minutes</span>
-<span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
-
-<span class="co"># format the table for playerwise dataframe</span>
+<span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span></code></pre></div>
+<p>We notice that it throws some warning messages (unless
+<code>quiet = TRUE</code>). They are thrown to make it clear what the
+exposure time unit is<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Something that it is important to be aware of.&lt;/p&gt;"><sup>1</sup></a>.</p>
+<p>What <code><a href="../reference/injsummary.html">injsummary()</a></code> returns as its output is a list of two
+elements, i.e. the output stored (here) in the <code>injds</code> object
+consists of,</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injds</span>,<span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ playerwise: tibble [28 × 6] (S3: tbl_df/tbl/data.frame)</span>
+<span class="co">#&gt;  $ overall   : tibble [1 × 11] (S3: tbl_df/tbl/data.frame)</span>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "injds" "list"</span>
+<span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span>
+<span class="co">#&gt;  - attr(*, "unit_timerisk")= chr "100 player-match"</span></code></pre></div>
+<p>two data frames (two tables), which can be accessed by typing
+<code>injds[[1]]</code> (or <code>injds[["playerwise"]]</code>) and
+<code>injds[[2]]</code> (<code>injds[["overal"]]</code>).</p>
+<p>To present the results in a more tidier and comprehensible way
+(instead of <strong>R</strong> code styled output) using <a href="https://rmarkdown.rstudio.com/" class="external-link">RMarkdown</a>, and in particular,
+<code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> function, the following can be done:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># format the table for playerwise dataframe</span>
 <span class="va">injds</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">injincidence</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># sort by decreasing order of injincidence</span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Player"</span>, <span class="st">"N injuries"</span>, <span class="st">"N days lost"</span>,
@@ -772,9 +798,8 @@ simon-mignolet
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># format the table for total incidence and burden main columns</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># format the table for total incidence and burden main columns</span>
 <span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>row.names <span class="op">=</span> <span class="st">"TOTAL"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
@@ -814,19 +839,18 @@ TOTAL
 2049
 </td>
 <td style="text-align:right;">
-700
+74690
 </td>
 <td style="text-align:right;">
-1054.29
+9.88
 </td>
 <td style="text-align:right;">
-26344.29
+246.9
 </td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># format the table for total incidence and burden point + ci estimates</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># format the table for total incidence and burden point + ci estimates</span>
 <span class="va">injds_tot_cis</span> <span class="op">&lt;-</span> <span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>row.names <span class="op">=</span> <span class="st">"TOTAL"</span><span class="op">)</span>
@@ -863,27 +887,193 @@ CI% for <span class="math inline">\(I_{br}\)</span>
 TOTAL
 </td>
 <td style="text-align:right;">
-1054.29
+9.88
 </td>
 <td style="text-align:left;">
-[862.8, 1245.8]
+[8.1, 11.7]
 </td>
 <td style="text-align:right;">
-26344.29
+246.9
 </td>
 <td style="text-align:left;">
-[25387, 27301.6]
+[237.9, 255.9]
 </td>
 </tr></tbody>
 </table>
+<p>Players with the highest injury incidence rate (all type of injuries)
+were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per
+100 player-matches respectively. The teams overall injury incidence was
+of 9.9 injuries per 100 player-matches and the injury burden of 246.9
+days lost per 100 player-matches.</p>
+<p>These summaries can be done by injury type:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">injstats_pertype</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span>
+<span class="co">#&gt; Warning in injsummary_unit(unit, injds, quiet): </span>
+<span class="co">#&gt; * Exposure time unit is matches_minutes</span>
+<span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
+<span class="co">#&gt; Warning in injsummary_unit(unit, injds_overall, quiet): </span>
+<span class="co">#&gt; * Exposure time unit is matches_minutes</span>
+<span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span></code></pre></div>
+<p>These are the teams results regarding injury incidence and injury
+burden according to injury type:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">injstats_pertype</span><span class="op">[[</span><span class="st">"overall"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">injburden</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>,
+        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Type of injury"</span>, <span class="st">"N injuries"</span>, <span class="st">"N days lost"</span>,
+                      <span class="st">"Total exposure"</span>, <span class="st">"Incidence"</span>, <span class="st">"Burden"</span><span class="op">)</span>,
+        row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Type of injury
+</th>
+<th style="text-align:right;">
+N injuries
+</th>
+<th style="text-align:right;">
+N days lost
+</th>
+<th style="text-align:right;">
+Total exposure
+</th>
+<th style="text-align:right;">
+Incidence
+</th>
+<th style="text-align:right;">
+Burden
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Muscle
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+735
+</td>
+<td style="text-align:right;">
+67266
+</td>
+<td style="text-align:right;">
+3.34
+</td>
+<td style="text-align:right;">
+98.34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Ligament
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+596
+</td>
+<td style="text-align:right;">
+67266
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+79.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+332
+</td>
+<td style="text-align:right;">
+67266
+</td>
+<td style="text-align:right;">
+2.81
+</td>
+<td style="text-align:right;">
+44.42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Concussion
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+213
+</td>
+<td style="text-align:right;">
+67266
+</td>
+<td style="text-align:right;">
+2.14
+</td>
+<td style="text-align:right;">
+28.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Bone
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+173
+</td>
+<td style="text-align:right;">
+67266
+</td>
+<td style="text-align:right;">
+1.47
+</td>
+<td style="text-align:right;">
+23.15
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
-<h3 id="injprop">injprop()<a class="anchor" aria-label="anchor" href="#injprop"></a>
+<h3 id="injprop">- <code>injprop()</code><a class="anchor" aria-label="anchor" href="#injprop"></a>
 </h3>
 <p>EXPLAIN</p>
 <details><summary>
 Prepare data
-</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span><span class="va">raw_df_exposures</span>, player <span class="op">=</span> <span class="st">"player_name"</span>,
                             date <span class="op">=</span> <span class="st">"year"</span>, time_expo <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span>
 <span class="va">df_injuries</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_inj</a></span><span class="op">(</span><span class="va">raw_df_injuries</span>, player <span class="op">=</span> <span class="st">"player_name"</span>,
@@ -891,8 +1081,36 @@ Prepare data
 <span class="va">injd</span>         <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,
                             data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,
                             exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></code></pre></div>
-</details><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+</details><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">availability_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprop.html">injprop</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">availability_table</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="co">#&gt;   season           month type_injury     n n_player  prop</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> season 2017/2018 Jul   Available      19       23  82.6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> season 2017/2018 Jul   Ligament        1       23   4.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> season 2017/2018 Jul   Muscle          3       23  13  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2017/2018 Aug   Available      18       23  78.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> season 2017/2018 Aug   Muscle          3       23  13  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> season 2017/2018 Aug   Unknown         2       23   8.7</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">availability_table</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type_injury</span> <span class="op">==</span> <span class="st">"Muscle"</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 6</span></span>
+<span class="co">#&gt;    season           month type_injury     n n_player  prop</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> season 2017/2018 Jul   Muscle          3       23  13  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> season 2017/2018 Aug   Muscle          3       23  13  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> season 2017/2018 Sep   Muscle          1       23   4.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> season 2017/2018 Oct   Muscle          2       23   8.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> season 2017/2018 Nov   Muscle          4       23  17.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> season 2017/2018 Dec   Muscle          4       23  17.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> season 2017/2018 Jan   Muscle          3       23  13  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> season 2017/2018 Mar   Muscle          1       23   4.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> season 2017/2018 Apr   Muscle          2       23   8.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> season 2017/2018 May   Muscle          2       23   8.7</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -933,6 +1151,7 @@ Medicine</em> 34 (2): 133–36. <a href="https://doi.org/10.1136/bjsm.34.2.133" 
 </div>
 </div>
 </div>
+
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>

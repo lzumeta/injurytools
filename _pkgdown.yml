@@ -46,6 +46,7 @@ reference:
   desc: Utility functions.
   contents:
   - date2season
+  - season2year
   - cut_injd
   - is_injd
   - is_injds

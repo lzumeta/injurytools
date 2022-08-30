@@ -47,7 +47,7 @@ knit_hooks$set(output = function(x, options) {
   <strong>WARNING!</strong> File under construction.
 </div>    
 
-**WARNING! File under construction"**
+**WARNING! File under construction**
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(injurytools)
@@ -56,9 +56,9 @@ library(knitr)
 library(kableExtra)
 ```
 
-Whenever the data is collected and prepared, it is essential and straightforward to summarize and explore these data. As it is important to know, from a more applied point of view to sport, how many injuries or what type of injuries occurred.
+Whenever the data is collected and prepared, it is important and straightforward to summarize and explore them. As it is, from a more applied point of view to sport, important to know how many injuries or what type of injuries occurred.
 
-This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). These measures are explained below and then `injsummary()` and `injprop()` functions are illustrated.
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). Below, these measures are explained and then `injsummary()` and `injprop()` functions are illustrated.
 
 # Rates
 
@@ -84,18 +84,24 @@ where $\Delta T$ is the total time under risk of the study population.
 $$I_{br} = \frac{n_d}{\Delta T}$$
 where $\Delta T$ is the total time under risk of the study population.
 
-*NOTE 1:* as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by `gg_injriskmatrix()` function. 
 
-*NOTE 2:* neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.).
+<div class="alert alert-warning" role="alert">
+  **NOTE 1:** as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by `gg_injriskmatrix()` function. 
+</div>
+
+<div class="alert alert-warning" role="alert">
+  **NOTE 2:** neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.).
+
+</div>
 
 
 ## Availability
 
-**Availability** the number of players free of injury ("available") over the total number of players in the study population in specified period of time. 
+**Availability** is the number of players free of injury ("available") over the total number of players in the study population in specified period of time. 
 
 # In practice
 
-## injsummary()
+## - `injsummary()`
 
 <details>
 
@@ -112,19 +118,37 @@ injd         <- prepare_all(data_exposures = df_exposures,
                             data_injuries  = df_injuries,
                             exp_unit = "matches_minutes")
 ```
-
-
 </details>
+
+Ǹow, the preprocessed data is passed to `injsummary()` to calculate injury summary statistics:
 
 ```{r}
 injds <- injsummary(injd)
+```
 
+We notice that it throws some warning messages (unless `quiet = TRUE`). They are thrown to make it clear what the exposure time unit is[^estimate-note-1]. 
+
+[^estimate-note-1]: Something that it is important to be aware of.
+
+What `injsummary()` returns as its output is a list of two elements, i.e. the output stored (here) in the `injds` object consists of,
+
+```{r}
+str(injds,1)
+```
+
+two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
+
+To present the results in a more tidier and comprehensible way (instead of **R** code styled output) using [RMarkdown](https://rmarkdown.rstudio.com/), and in particular, `knitr::kable()` function, the following can be done:
+
+```{r}
 # format the table for playerwise dataframe
 injds[[1]] %>% 
   arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost",
                                   "Total exposure", "Incidence", "Burden"))
+```
 
+```{r}
 # format the table for total incidence and burden main columns
 injds[[2]] %>% 
   select(1:5) %>% 
@@ -134,7 +158,9 @@ injds[[2]] %>%
                       "Total exposure", "Incidence", "Burden"),
         row.names = TRUE) %>% 
   kable_styling(full_width = FALSE)
+```
 
+```{r}
 # format the table for total incidence and burden point + ci estimates
 injds_tot_cis <- injds[[2]] %>% 
   select(4:last_col()) %>% 
@@ -153,8 +179,29 @@ injds_tot_cis %>%
   
 ```
 
+Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 
 
-## injprop()
+These summaries can be done by injury type:
+
+```{r}
+injstats_pertype <- injsummary(injd, var_type_injury = "injury_type")
+```
+
+These are the teams results regarding injury incidence and injury burden according to injury type:
+
+```{r}
+injstats_pertype[["overall"]] %>% 
+  select(1:6) %>% 
+  arrange(desc(injburden)) %>% 
+  kable(digits = 2,
+        col.names = c("Type of injury", "N injuries", "N days lost",
+                      "Total exposure", "Incidence", "Burden"),
+        row.names = TRUE) %>% 
+  kable_styling(full_width = FALSE)
+```
+
+
+## - `injprop()`
 
 EXPLAIN
 
@@ -173,11 +220,19 @@ injd         <- prepare_all(data_exposures = df_exposures,
                             data_injuries  = df_injuries,
                             exp_unit = "matches_minutes")
 ```
-
 </details>
 
 ```{r}
 availability_table <- injprop(injd, by = "monthly", var_type_injury = "injury_type")
+```
+
+```{r}
+head(availability_table)
+```
+
+```{r}
+availability_table %>% 
+  filter(type_injury == "Muscle")
 ```
 
 

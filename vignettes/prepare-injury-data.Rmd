@@ -51,7 +51,9 @@ This document briefly shows how to use the functions that are intended to facili
 
 # Starting point
 
-Data can be collected in several ways and by several means. A conventional manner is to collect data as events occur, and with this respect it is common, in the field of sports medicine, to store injury records on one hand, and data related to training and competitions/matches (*exposure time* among others) in a separate table, on the other hand. That is, we consider that the user has the raw data in two separate data sets that we call **injury** and **exposure data**, respectively^[If the data is not recorded this way, we suggest spliting both information into separate tables and then following the same functions provided by the package.].
+Data can be collected in several ways and by several means. A conventional manner is to collect and store data as events occur. So, with regard to sports medicine, it is common to store injury records on one hand, and on the other side, data related to training and competitions/matches (*exposure time* among others) in a separate table. Following this, we consider that the user has the raw data in two separate data sets that we call **injury** and **exposure data**, respectively[^prepare-note-1].
+
+[^prepare-note-1]: If the data is not recorded this way, we suggest spliting both information into separate tables and then following the same functions provided by the package.
 
 <!-- <img src="../man/figures/Illustration_data.pdf" alt="some text" width="4200" height="4200"> -->
 
@@ -68,9 +70,9 @@ head(raw_df_injuries)
 head(raw_df_exposures)
 ```
 
-We standardize the key column names such as player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-1].
+We standardize the key column names such as player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-2].
 
-[^prepare-note-1]: The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.  
+[^prepare-note-2]: The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.  
 
 ```{r}
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
@@ -142,7 +144,9 @@ The outcome is a prepared data set, structured in an suitable way that is ready 
 
 * `days_lost`: number of days lost due to injury occured at `tstop`/`date_injured` (if any; otherwise 0), i.e. `date_recovered` - `date_injured` in days.
 
-For example the first row of `injd` corresponds to the player Adam Lallana to the risk set that starts in 2017-07-01 and ends at 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), starts when he was fully recovered in 2017-11-23 and finshes when he suffered another hamstring injury^[The fact that `tstart` equals `tstop` is due to the player did not participate and had no minutes playing a match in that period of time. Note that this will cause problems if one wants to use survival analysis techniques. Possible alternatives: use another exposure time unit, or add a small number of minutes (e.g. 0.5)...].  
+For example the first row of `injd` corresponds to the player Adam Lallana to the risk set that starts in 2017-07-01 and ends at 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), starts when he was fully recovered in 2017-11-23 and finshes when he suffered another hamstring injury[^prepare-note-3]
+
+[^prepare-note-3]: The fact that `tstart` equals `tstop` is due to the player did not participate and had no minutes playing a match in that period of time. Note that this will cause problems if one wants to use survival analysis techniques. Possible alternatives: use another exposure time unit, or add a small number of minutes (e.g. 0.5)...  
 
 # The prepared data set, an `injd` object
 

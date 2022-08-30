@@ -79,7 +79,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2022-08-25</h4>
+            <h4 data-toc-skip class="date">2022-08-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -100,12 +100,12 @@ data set is like.</p>
 <h2 id="starting-point">Starting point<a class="anchor" aria-label="anchor" href="#starting-point"></a>
 </h2>
 <p>Data can be collected in several ways and by several means. A
-conventional manner is to collect data as events occur, and with this
-respect it is common, in the field of sports medicine, to store injury
-records on one hand, and data related to training and
+conventional manner is to collect and store data as events occur. So,
+with regard to sports medicine, it is common to store injury records on
+one hand, and on the other side, data related to training and
 competitions/matches (<em>exposure time</em> among others) in a separate
-table, on the other hand. That is, we consider that the user has the raw
-data in two separate data sets that we call <strong>injury</strong> and
+table. Following this, we consider that the user has the raw data in two
+separate data sets that we call <strong>injury</strong> and
 <strong>exposure data</strong>, respectively<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;If the data is not recorded this way, we suggest
 spliting both information into separate tables and then following the
 same functions provided by the package.&lt;/p&gt;"><sup>1</sup></a>.</p>
@@ -278,7 +278,7 @@ row corresponds to the risk set of being injured by a second injury
 minutes playing a match in that period of time. Note that this will
 cause problems if one wants to use survival analysis techniques.
 Possible alternatives: use another exposure time unit, or add a small
-number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
+number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a></p>
 </div>
 <div class="section level2">
 <h2 id="the-prepared-data-set-an-injd-object">The prepared data set, an <code>injd</code> object<a class="anchor" aria-label="anchor" href="#the-prepared-data-set-an-injd-object"></a>
