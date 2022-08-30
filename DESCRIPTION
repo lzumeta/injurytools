@@ -27,6 +27,7 @@ Suggests:
     gridExtra,
     kableExtra,
     knitr,
+    RColorBrewer,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)
