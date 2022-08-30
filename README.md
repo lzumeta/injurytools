@@ -4,7 +4,12 @@
 # injurytools <img src="man/figures/logo.png" align="right" height ="142" />
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
+[![R-CMD-check](https://github.com/lzumeta/injurytools/workflows/R-CMD-check/badge.svg)](https://github.com/lzumeta/injurytools/actions)
 <!-- badges: end -->
+
 <!-- - Shiny: -->
 <!-- - Authors: -->
 <!-- - Version: -->
@@ -71,7 +76,7 @@ gg_injphoto(injd,
         plot.caption = element_text(face = "italic", size = 12, colour = "gray10"))
 ```
 
-![](README-unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
 
 ## How to contribute
 
