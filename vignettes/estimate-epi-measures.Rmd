@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+options(rmarkdown.html_vignette.check_title = FALSE) # to supress R-CMD check
+
 ## to fold/hook the code
 hook_output <- knit_hooks$get("output")
 knit_hooks$set(output = function(x, options) {
