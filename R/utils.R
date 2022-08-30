@@ -51,28 +51,62 @@ exp_unit_suffix <- function(exp_unit) {
 #'
 #' Get the season given the date.
 #'
-#' @inheritParams date_format
+#' @param date A vector of class \link[base:Dates]{Date} or
+#'   \link[base:integer]{integer}/\link[base:numeric]{numeric}. If it is
+#'   \code{integer}/\code{numeric}, it should refer to the year in which the
+#'   season started (e.g. date = 2015 to refer to the 2015/2016 season)(e.g.
+#'   \code{date} = 2018)
 #'
 #' @return Character specifying the respective competition season given the
-#'   date.
+#'   date. The season (output) follows this pattern: "2005/2006".
 #' @export
 #' @importFrom lubridate year month
-#' @importFrom checkmate checkDate
+#' @importFrom checkmate checkDate checkNumeric
 #'
 #' @examples
 #' date <- Sys.Date()
 #' date2season(date)
 date2season <- function(date) {
-  assert(checkDate(date))
+  assert(checkDate(date),
+         checkNumeric(date),
+         combine = "or")
 
-  year <- lubridate::year(date)
-  month <- lubridate::month(date)
-  year1 <- ifelse(month >= 7, year, year - 1)
+  if (inherits(date, "Date")) {
+    year <- lubridate::year(date)
+    month <- lubridate::month(date)
+    year1 <- ifelse(month >= 7, year, year - 1)
+  } else {
+    year1 <- date
+  }
   season <- paste0(year1, "/", year1 + 1)
 
   return(season)
 }
 
+#' Get the year
+#'
+#' Get the year given the season.
+#'
+#' @param season Character/factor specifying the season. It should follow the
+#'   pattern of "xxxx/yyyy" pattern, e.g. "2005/2006".
+#'
+#' @return Given the season it returns the year (in `numeric`) in which the
+#'   season started.
+#' @export
+#'
+#' @importFrom checkmate checkFactor checkCharacter
+#' @importFrom stringr str_sub
+#'
+#' @examples
+#' season <- "2022/2023"
+#' season2year(season)
+season2year <- function(season) {
+  assert(checkmate::checkFactor(season),
+         checkmate::checkCharacter(season),
+         combine = "or")
+  year <- stringr::str_sub(season, start = 1, end = 4)
+  return(as.numeric(year))
+}
 
 #' Cut the range of the follow-up
 #'
