@@ -108,12 +108,12 @@ injsummary <- function(injd, var_type_injury = NULL,
       } else .
     }
 
-  injds_overall <-  injd %>%
-    dplyr::left_join(df_exposures_summary, by = "player") %>%
+  injds_overall <-  injds %>%
+    dplyr::select(.data$player, .data$ninjuries, .data$ndayslost, .data$totalexpo, {{var_type_injury}}) %>%
     dplyr::group_by({{ var_type_injury }}) %>%
-    dplyr::summarise(ninjuries = sum(.data$status),
-                     ndayslost = sum(.data$days_lost),
-                     totalexpo = dplyr::first(.data$totalexpo),
+    dplyr::summarise(ninjuries = sum(.data$ninjuries),
+                     ndayslost = sum(.data$ndayslost),
+                     totalexpo = sum(.data$totalexpo),
                      injincidence = .data$ninjuries/.data$totalexpo,
                      injburden = .data$ndayslost/.data$totalexpo,
                      .groups = "keep") %>%
