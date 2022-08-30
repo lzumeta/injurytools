@@ -25,7 +25,7 @@ providing convenience functions and handy tools to analyse them.
 The functions can be classified into (sports injury) data preparation,
 descriptive analysis and visualization tasks. Further analyses, such as
 the estimation of the risk of injury with other covariate effects, can
-be performed outside of `injurytools`, whether the event of injury
+be performed outside of **`injurytools`**, whether the event of injury
 (outcome variable) is seen as count or time-to-event data.
 
 To get an overview of the package, see the
