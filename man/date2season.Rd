@@ -7,11 +7,15 @@
 date2season(date)
 }
 \arguments{
-\item{date}{a \link[base:Dates]{Date} object.}
+\item{date}{A vector of class \link[base:Dates]{Date} or
+\link[base:integer]{integer}/\link[base:numeric]{numeric}. If it is
+\code{integer}/\code{numeric}, it should refer to the year in which the
+season started (e.g. date = 2015 to refer to the 2015/2016 season)(e.g.
+\code{date} = 2018)}
 }
 \value{
 Character specifying the respective competition season given the
-date.
+date. The season (output) follows this pattern: "2005/2006".
 }
 \description{
 Get the season given the date.

@@ -2,25 +2,45 @@
 % Please edit documentation in R/injprop.R
 \name{injprop}
 \alias{injprop}
-\title{Title}
+\title{Calculate player availability}
 \usage{
-injprop(injd, by = c("monthly", "season"), var_type_injury)
+injprop(injd, by = c("monthly", "season"), var_type_injury = NULL)
 }
 \arguments{
 \item{injd}{Prepared data, an \code{injd} object.}
 
-\item{by}{FILL}
+\item{by}{Character, one of "monthly" or "season", specifying the periodicity
+according to which to calculate the proportions of available and injured
+players/athletes.}
 
 \item{var_type_injury}{Character specifying the name of the column on the
-basis of which to classify the injuries and calculate
-proportions of the injured players. Defaults to
-\code{NULL}.}
+basis of which to classify the injuries and calculate proportions of the
+injured players. Defaults to \code{NULL}.}
 }
 \value{
-FILL
+A data frame containing one row for each combination of season, month
+(optionally) and injury type (if \code{var_type_injury} not specified, then this
+variable has two categories: \emph{Available} and \emph{Injured}). Plus, three more
+columns, specifying the proportion of players (\code{prop}) satisfying the
+corresponding row's combination of values, i.e. how many players at that
+moment were injured with the type of injury of the corresponding row (\code{n}),
+over how many players were at that time in the cohort (\code{n_player}). See
+Note section.
 }
 \description{
-Title
+Calculate the proportions of injured and non-injured (available) players in
+the cohort, on a monthly or season basis. Further information of the type of
+injury may be specified so that the injured players proportions are
+disaggregated and reported according to this variable.
+}
+\note{
+If \code{var_type_injury} is specified (and not \code{NULL}), it may happen that a
+player in one month suffers two different types of injuries. For example, a
+muscle and a ligament injury. In this case, this two injuries contribute to
+the proportions of muscle and ligament injuries for that month, resulting in
+an overall proportion that exceeds 100\%. Besides, the players in Available
+category are those that did not suffer any injury in that moment
+(season-month), they were healthy all the time that the period lasted
 }
 \examples{
 # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
@@ -32,4 +52,7 @@ Title
 #                             exp_unit = "matches_minutes")
 
 injprop(injd, by = "monthly", var_type_injury = "injury_type")
+# injprop(injd, by = "monthly")
+# injprop(injd, by = "season", var_type_injury = "injury_type")
+# injprop(injd, by = "season")
 }

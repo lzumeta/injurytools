@@ -7,8 +7,8 @@
 gg_injpolar(
   injd,
   by = c("monthly", "season"),
-  var_type_injury,
-  title = "Polar area diagram\\ninjured and available (healthy) players per month"
+  var_type_injury = NULL,
+  title = "Polar area diagram\\ninjured and available (healthy) players"
 )
 }
 \arguments{
@@ -29,10 +29,10 @@ the "type of injury". Defaults to \code{NULL}.}
 A ggplot object (to which optionally more layers can be added).
 }
 \description{
-Plot the proportions of available and injured players in the cohort on a
-monthly or season basis. Further information of the type of injury may be
-specified so that the injured players proportion is disaggregated and
-reported according to this variable.
+Plot the proportions of available and injured players in the cohort, on a
+monthly or season basis, by a polar area diagram. Further information of the
+type of injury may be specified so that the injured players proportions are
+disaggregated and reported according to this variable.
 }
 \examples{
 # Prepare data
@@ -44,5 +44,13 @@ reported according to this variable.
 #                             data_injuries  = df_injuries,
 #                             exp_unit = "matches_minutes")
 
-gg_injpolar(injd, var_type_injury = "injury_type")
+## colour palette
+library(ggplot2)
+our_palette <- c("seagreen3", "red3", rev(RColorBrewer::brewer.pal(5, "Reds")))
+gg_injpolar(injd, by = "monthly", var_type_injury = "injury_type",
+            title = "Polar area diagram\ninjured and available (healthy) players per month") +
+  scale_fill_manual(values = our_palette)
+gg_injpolar(injd, by = "monthly",
+            title = "Polar area diagram\ninjured and available (healthy) players per month") +
+  scale_fill_manual(values = our_palette)
 }

@@ -14,6 +14,7 @@ Sports Injury Data are analysed to identify and describe the magnitude of the in
 Useful links:
 \itemize{
   \item \url{https://github.com/lzumeta/injurytools}
+  \item \url{https://lzumeta.github.io/injurytools/}
   \item Report bugs at \url{https://github.com/lzumeta/injurytools/issues}
 }
 
