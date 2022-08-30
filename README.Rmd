@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 # injurytools <img src="man/figures/logo.png" align="right" height ="142" />
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
+[![R-CMD-check.yaml](https://github.com/lzumeta/injurytools/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions)
+[![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 
@@ -28,7 +31,7 @@ knitr::opts_chunk$set(
 
 `injurytools` is a package intended for Sports Medicine: it facilitates the data analysis workflow for sports injury data by providing convenience functions and handy tools to analyse them. 
 
-The functions offered by the package can be classified into (sports injury) data preparation, descriptive analysis and visualization tasks. Further analyses, such as the estimation of the risk of injury with other covariate effects, can be performed outside of `injurytools`, whether the event of injury (outcome variable) is seen as count or
+The functions can be classified into (sports injury) data preparation, descriptive analysis and visualization tasks. Further analyses, such as the estimation of the risk of injury with other covariate effects, can be performed outside of `injurytools`, whether the event of injury (outcome variable) is seen as count or
 time-to-event data.
 
 To get an overview of the package, see the [Articles](https://lzumeta.github.io/injurytools/articles/) section.
