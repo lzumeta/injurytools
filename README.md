@@ -7,7 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
-[![R-CMD-check.yaml](https://github.com/lzumeta/injurytools/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions)
+[![R-CMD-check](https://github.com/lzumeta/injurytools/workflows/R-CMD-check/badge.svg)](https://github.com/lzumeta/injurytools/actions)
 [![MIT
 license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
@@ -18,9 +18,9 @@ license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://open
 
 ## Overview
 
-`injurytools` is a package intended for Sports Medicine: it facilitates
-the data analysis workflow for sports injury data by providing
-convenience functions and handy tools to analyse them.
+**`injurytools`** is a package intended for Sports Medicine: it
+facilitates the data analysis workflow for sports injury data by
+providing convenience functions and handy tools to analyse them.
 
 The functions can be classified into (sports injury) data preparation,
 descriptive analysis and visualization tasks. Further analyses, such as
@@ -56,7 +56,7 @@ Most functions contain or start with `inj*()` which stands for
 **injury**. Functions for data preparation start with `prepare_*()`; and
 those for data visualization wiht `gg_inj*()`.
 
-Below is a quick look at how `injurytools` can help to give a
+Below is a quick look at how **`injurytools`** can help to give a
 comprehensive picture of injury data:
 
 ``` r
