@@ -205,8 +205,6 @@ injstats_pertype[["overall"]] %>%
 
 ## - `injprop()`
 
-EXPLAIN
-
 <details>
 
 <summary>
@@ -224,19 +222,74 @@ injd         <- prepare_all(data_exposures = df_exposures,
 ```
 </details>
 
-```{r}
-availability_table <- injprop(injd, by = "monthly", var_type_injury = "injury_type")
-```
+We calculate the proportions of injured and healthy players on a season basis:
 
 ```{r}
-head(availability_table)
+availability_table1 <- injprop(injd, by = "season")
+availability_table1
 ```
+
+Making use of `knitr::kable()`:
 
 ```{r}
-availability_table %>% 
-  filter(type_injury == "Muscle")
+kable(availability_table1, col.names = c("Season", "Availability", "N", "Total", "%"))
 ```
 
+Overall in the 18-19 season there were more injured players than in the previous season. Let's calculate monthly:
+
+```{r}
+availability_table2 <- injprop(injd, by = "monthly")
+
+## compare two seasons July and August
+availability_table2 %>%
+  group_by(season) %>% 
+  slice(1:4)
+
+
+## compare two seasons January and February
+availability_table2 %>%
+  group_by(season) %>% 
+  slice(13:16)
+```
+
+Looking at monthly basis there were more differences w.r.t. player availability in Liverpool FC 1st male team, during the winter January/February months. More injured players in the 18-19 season. 
+
+
+```{r}
+availability_table3 <- injprop(injd, by = "monthly", var_type_injury = "injury_type")
+```
+
+Tidy up:
+
+```{r, results = "hide", eval = F}
+## season 1
+availability_table3 %>% 
+  filter(season == "season 2017/2018", month == "Jan") %>% 
+  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+        caption = "Season 2017/2018") %>% 
+  kable_styling(full_width = FALSE, position = "float_left")
+## season 2
+availability_table3 %>% 
+  filter(season == "season 2018/2019", month == "Jan") %>% 
+  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+        caption = "Season 2018/2019") %>% 
+  kable_styling(full_width = FALSE, position = "left")
+```
+
+```{r, echo = F}
+## season 1
+availability_table3 %>% 
+  filter(season == "season 2017/2018", month == "Jan") %>% 
+  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+        caption = "Season 2017/2018") %>% 
+  kable_styling(full_width = FALSE, position = "left")
+## season 2
+availability_table3 %>% 
+  filter(season == "season 2018/2019", month == "Jan") %>% 
+  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+        caption = "Season 2018/2019") %>% 
+  kable_styling(full_width = FALSE, position = "left")
+```
 
 # Further implementation
 

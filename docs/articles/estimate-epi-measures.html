@@ -79,7 +79,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures for Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2022-08-30</h4>
+            <h4 data-toc-skip class="date">2022-08-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -1070,7 +1070,6 @@ Bone
 <div class="section level3">
 <h3 id="injprop">- <code>injprop()</code><a class="anchor" aria-label="anchor" href="#injprop"></a>
 </h3>
-<p>EXPLAIN</p>
 <details><summary>
 Prepare data
 </summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -1081,36 +1080,422 @@ Prepare data
 <span class="va">injd</span>         <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,
                             data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,
                             exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></code></pre></div>
-</details><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">availability_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprop.html">injprop</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></code></pre></div>
+</details><p>We calculate the proportions of injured and healthy players on a
+season basis:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">availability_table1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprop.html">injprop</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span>
+<span class="va">availability_table1</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span>
+<span class="co">#&gt;   season           type_injury     n n_player  prop</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> season 2017/2018 Available       7       23  30.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> season 2017/2018 Injured        16       23  69.6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> season 2018/2019 Available       2       19  10.5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2018/2019 Injured        17       19  89.5</span></code></pre></div>
+<p>Making use of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">availability_table</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">availability_table1</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:left;">
+Availability
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+%
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Available
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+30.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Injured
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+69.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Available
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+10.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Injured
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+89.5
+</td>
+</tr>
+</tbody>
+</table>
+<p>Overall in the 18-19 season there were more injured players than in
+the previous season. Let’s calculate monthly:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">availability_table2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprop.html">injprop</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span>
+
+<span class="co">## compare two seasons July and August</span>
+<span class="va">availability_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">season</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># Groups:   season [2]</span></span>
 <span class="co">#&gt;   season           month type_injury     n n_player  prop</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span> season 2017/2018 Jul   Available      19       23  82.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> season 2017/2018 Jul   Ligament        1       23   4.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> season 2017/2018 Jul   Muscle          3       23  13  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2017/2018 Aug   Available      18       23  78.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> season 2017/2018 Aug   Muscle          3       23  13  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> season 2017/2018 Aug   Unknown         2       23   8.7</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">availability_table</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type_injury</span> <span class="op">==</span> <span class="st">"Muscle"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 6</span></span>
-<span class="co">#&gt;    season           month type_injury     n n_player  prop</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> season 2017/2018 Jul   Muscle          3       23  13  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> season 2017/2018 Aug   Muscle          3       23  13  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> season 2017/2018 Sep   Muscle          1       23   4.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> season 2017/2018 Oct   Muscle          2       23   8.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> season 2017/2018 Nov   Muscle          4       23  17.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> season 2017/2018 Dec   Muscle          4       23  17.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> season 2017/2018 Jan   Muscle          3       23  13  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> season 2017/2018 Mar   Muscle          1       23   4.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> season 2017/2018 Apr   Muscle          2       23   8.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> season 2017/2018 May   Muscle          2       23   8.7</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> season 2017/2018 Jul   Injured         4       23  17.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> season 2017/2018 Aug   Available      18       23  78.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2017/2018 Aug   Injured         5       23  21.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> season 2018/2019 Jul   Available      18       19  94.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> season 2018/2019 Jul   Injured         1       19   5.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> season 2018/2019 Aug   Available      15       19  78.9</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> season 2018/2019 Aug   Injured         4       19  21.1</span>
+
+
+<span class="co">## compare two seasons January and February</span>
+<span class="va">availability_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">season</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">13</span><span class="op">:</span><span class="fl">16</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># Groups:   season [2]</span></span>
+<span class="co">#&gt;   season           month type_injury     n n_player  prop</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> season 2017/2018 Jan   Available      18       23  78.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> season 2017/2018 Jan   Injured         5       23  21.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> season 2017/2018 Feb   Available      21       23  91.3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2017/2018 Feb   Injured         2       23   8.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> season 2018/2019 Jan   Available       9       19  47.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> season 2018/2019 Jan   Injured        10       19  52.6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> season 2018/2019 Feb   Available      12       19  63.2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> season 2018/2019 Feb   Injured         7       19  36.8</span></code></pre></div>
+<p>Looking at monthly basis there were more differences w.r.t. player
+availability in Liverpool FC 1st male team, during the winter
+January/February months. More injured players in the 18-19 season.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">availability_table3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprop.html">injprop</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></code></pre></div>
+<p>Tidy up:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## season 1</span>
+<span class="va">availability_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">season</span> <span class="op">==</span> <span class="st">"season 2017/2018"</span>, <span class="va">month</span> <span class="op">==</span> <span class="st">"Jan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,
+        caption <span class="op">=</span> <span class="st">"Season 2017/2018"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span>, position <span class="op">=</span> <span class="st">"float_left"</span><span class="op">)</span>
+<span class="co">## season 2</span>
+<span class="va">availability_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">season</span> <span class="op">==</span> <span class="st">"season 2018/2019"</span>, <span class="va">month</span> <span class="op">==</span> <span class="st">"Jan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,
+        caption <span class="op">=</span> <span class="st">"Season 2018/2019"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
+<table class="table table" style="width: auto !important; ">
+<caption>
+Season 2017/2018
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:left;">
+Month
+</th>
+<th style="text-align:left;">
+Availability
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+%
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Available
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+78.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Ligament
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Muscle
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2017/2018
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table table" style="width: auto !important; ">
+<caption>
+Season 2018/2019
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:left;">
+Month
+</th>
+<th style="text-align:left;">
+Availability
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+%
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Available
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+47.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Bone
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Concussion
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+10.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Ligament
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Muscle
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+15.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+season 2018/2019
+</td>
+<td style="text-align:left;">
+Jan
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section level2">
