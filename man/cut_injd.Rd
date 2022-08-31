@@ -9,8 +9,8 @@ cut_injd(injd, date0, datef)
 \arguments{
 \item{injd}{Prepared data, an \code{injd} object.}
 
-\item{date0}{Starting date, of class \link[base:Dates]{Date} or
-\link[base:numeric]{numeric} and if \code{numeric} it should refer to a
+\item{date0}{Starting date of class \link[base:Dates]{Date} or
+\link[base:numeric]{numeric}. If \code{numeric}, it should refer to a
 year (e.g. \code{date} = 2018). Optional.}
 
 \item{datef}{Ending date. Same class as \code{date0}. Optional.}
