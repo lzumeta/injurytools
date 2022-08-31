@@ -18,15 +18,16 @@ license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://open
 
 ## Overview
 
-**`injurytools`** is a package intended for Sports Medicine: it
-facilitates the data analysis workflow for sports injury data by
-providing convenience functions and handy tools to analyse them.
+**`injurytools`** is a package aimed at Sports Medicine: it facilitates
+the data analysis workflow by providing convenience functions and handy
+tools for sports injury data.
 
 The functions can be classified into (sports injury) data preparation,
-descriptive analysis and visualization tasks. Further analyses, such as
-the estimation of the risk of injury with other covariate effects, can
-be performed outside of **`injurytools`**, whether the event of injury
-(outcome variable) is seen as count or time-to-event data.
+descriptive analyses and data visualization routines. Further analyses,
+such as the estimation of the risk of injury with other covariate
+effects, can be performed outside of **`injurytools`**, whether the
+event of injury (outcome variable) is seen as count or time-to-event
+data.
 
 To get an overview of the package, see the
 [Articles](https://lzumeta.github.io/injurytools/articles/) section.
@@ -54,7 +55,7 @@ We are also planning to release the package to
 
 Most functions contain or start with `inj*()` which stands for
 **injury**. Functions for data preparation start with `prepare_*()`; and
-those for data visualization wiht `gg_inj*()`.
+those for data visualization with `gg_inj*()`.
 
 Below is a quick look at how **`injurytools`** can help to give a
 comprehensive picture of injury data:
