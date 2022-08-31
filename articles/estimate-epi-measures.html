@@ -132,6 +132,7 @@
 <div class="section level2">
 <h2 id="in-practice">In practice<a class="anchor" aria-label="anchor" href="#in-practice"></a>
 </h2>
+<p>Again, as in the <a href="https://lzumeta.github.io/injurytools/docs/articles/prepare-injury-data.html">prepare-data</a> vignette, we use the data sets available from the <code>injurytools</code> package: data from Liverpool Football Club male’s first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www.transfermarkt.com/" class="external-link uri">https://www.transfermarkt.com/</a> website<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;These data sets are provided for illustrative purposes. We warn that they might not be accurate, there might be a mismatch and non-completeness with what actually occurred.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <div class="section level3">
 <h3 id="injsummary">- <code>injsummary()</code><a class="anchor" aria-label="anchor" href="#injsummary"></a>
 </h3>
@@ -153,7 +154,7 @@
 <span><span class="co">#&gt; Warning in injsummary_unit(unit, injds_overall, quiet): </span></span>
 <span><span class="co">#&gt; * Exposure time unit is matches_minutes</span></span>
 <span><span class="co">#&gt;   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span></span></code></pre></div>
-<p>We notice that it throws some warning messages (unless <code>quiet = TRUE</code>). They are thrown to make it clear what the exposure time unit is<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Something that it is important to be aware of.&lt;/p&gt;"><sup>1</sup></a>.</p>
+<p>We notice that it throws some warning messages (unless <code>quiet = TRUE</code>). They are thrown to make it clear what the exposure time unit is<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Something that it is important to be aware of.&lt;/p&gt;"><sup>2</sup></a>.</p>
 <p>What <code><a href="../reference/injsummary.html">injsummary()</a></code> returns as its output is a list of two elements, i.e. the output stored (here) in the <code>injds</code> object consists of,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injds</span>,<span class="fl">1</span><span class="op">)</span></span>
@@ -1044,7 +1045,8 @@ Bone
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2018/2019 Injured        17       19  89.5</span></span></code></pre></div>
 <p>Making use of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">availability_table1</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">availability_table1</span>,</span>
+<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
