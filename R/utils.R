@@ -118,8 +118,8 @@ season2year <- function(season) {
 #'
 #'
 #' @param injd Prepared data, an \code{injd} object.
-#' @param date0 Starting date, of class \link[base:Dates]{Date} or
-#'   \link[base:numeric]{numeric} and if \code{numeric} it should refer to a
+#' @param date0 Starting date of class \link[base:Dates]{Date} or
+#'   \link[base:numeric]{numeric}. If \code{numeric}, it should refer to a
 #'   year (e.g. \code{date} = 2018). Optional.
 #' @param datef Ending date. Same class as \code{date0}. Optional.
 #'
@@ -196,7 +196,7 @@ cut_injd <- function(injd, date0, datef) {
       dplyr::filter(.data$date <= datef)
     data_injuries <- data_injuries %>%
       dplyr::filter(.data$date_injured <= datef |
-                      lubridate::year(.data$date_injured) >= date0)
+                      lubridate::year(.data$date_injured) >= datef)
   }
 
  if (!nrow(data_exposures)) stop("Empty injd object")
