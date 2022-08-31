@@ -103,6 +103,10 @@ where $\Delta T$ is the total time under risk of the study population.
 
 # In practice
 
+Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/docs/articles/prepare-injury-data.html) vignette, we use the data sets available from the `injurytools` package: data from Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website[^estimate-note-1].
+
+[^estimate-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate, there might be a mismatch and non-completeness with what actually occurred.
+
 ## - `injsummary()`
 
 <details>
@@ -128,9 +132,9 @@ Now, the preprocessed data is passed to `injsummary()` to calculate injury summa
 injds <- injsummary(injd)
 ```
 
-We notice that it throws some warning messages (unless `quiet = TRUE`). They are thrown to make it clear what the exposure time unit is[^estimate-note-1]. 
+We notice that it throws some warning messages (unless `quiet = TRUE`). They are thrown to make it clear what the exposure time unit is[^estimate-note-2]. 
 
-[^estimate-note-1]: Something that it is important to be aware of.
+[^estimate-note-2]: Something that it is important to be aware of.
 
 What `injsummary()` returns as its output is a list of two elements, i.e. the output stored (here) in the `injds` object consists of,
 
@@ -232,7 +236,8 @@ availability_table1
 Making use of `knitr::kable()`:
 
 ```{r}
-kable(availability_table1, col.names = c("Season", "Availability", "N", "Total", "%"))
+kable(availability_table1,
+      col.names = c("Season", "Availability", "N", "Total", "%"))
 ```
 
 Overall in the 18-19 season there were more injured players than in the previous season. Let's calculate monthly:
