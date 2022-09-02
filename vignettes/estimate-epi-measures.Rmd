@@ -58,9 +58,9 @@ library(knitr)
 library(kableExtra)
 ```
 
-Whenever the data is collected and prepared, it is important and straightforward to summarize and explore them. As it is, from a more applied point of view to sport, important to know how many injuries or what type of injuries occurred.
+Whenever the data are collected and prepared, it is important and straightforward to summarize and explore them. As it is important to know how many injuries or what type of injuries occurred, from a more applied point of view to sport.
 
-This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). Below, these measures are explained and then `injsummary()` and `injprop()` functions are illustrated.
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). Below, these measures are explained and then, `injsummary()` and `injprop()` functions are illustrated.
 
 # Rates
 

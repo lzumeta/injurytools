@@ -72,7 +72,7 @@ head(raw_df_injuries)
 head(raw_df_exposures)
 ```
 
-We standardize the key column names such as player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-2].
+We standardize the key column names such as, player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure, and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-2].
 
 [^prepare-note-2]: The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.  
 
@@ -91,7 +91,7 @@ df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
                             time_expo     = "minutes_played")
 ```
 
-We suggest collecting exposure time on as fine scale as possible, i.e. **minutes** would be the desired unit as the total time spent training and participating in competitions/matches. However, if the units are "seasons" then do:
+We suggest collecting exposure time on as fine scale as possible, i.e. **minutes** would be the desired unit as the total time spent training and participating in competitions/matches. However, if the units are "seasons", then do:
 
 <details>
 
@@ -144,9 +144,9 @@ The outcome is a prepared data set, structured in an suitable way that is ready 
 
 * `enum`: an integer indicating the recurrence number, i.e. the $k$-th injury (event), at which the observation is at risk.
 
-* `days_lost`: number of days lost due to injury occured at `tstop`/`date_injured` (if any; otherwise 0), i.e. `date_recovered` - `date_injured` in days.
+* `days_lost`: number of days lost due to injury occurred at `tstop`/`date_injured` (if any; otherwise 0), i.e. `date_recovered` - `date_injured` in days.
 
-For example the first row of `injd` corresponds to the player Adam Lallana to the risk set that starts in 2017-07-01 and ends at 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), starts when he was fully recovered in 2017-11-23 and finshes when he suffered another hamstring injury[^prepare-note-3]
+For example the first row of `injd` corresponds to the player Adam Lallana, to the risk set that starts in 2017-07-01 and ends at 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), the set starts when he was fully recovered in 2017-11-23 and finishes when he suffered another hamstring injury[^prepare-note-3].
 
 [^prepare-note-3]: The fact that `tstart` equals `tstop` is due to the player did not participate and had no minutes playing a match in that period of time. Note that this will cause problems if one wants to use survival analysis techniques. Possible alternatives: use another exposure time unit, or add a small number of minutes (e.g. 0.5)...  
 

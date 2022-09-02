@@ -151,7 +151,7 @@ gg_injriskmatrix(injds_perinj,
 <details>
 
 <summary>
-Code for tidying up the tables
+Code for further plot specifications
 </summary>
 ```{r, eval = F}
 palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
@@ -532,7 +532,7 @@ gg_injpolar(injd, by = "monthly",
             var_type_injury = "injury_type",
             title = "Proportion of injured and available\n players in each month according to the type of injury") +
   scale_fill_manual(name = "Type of injury", 
-                    values = palette2[c(1, 8, 3:6)]) + 
+                    values = palette2[c(1, 8, 2:4, 6)]) + 
   theme4
 ```
 </details>
@@ -547,6 +547,6 @@ gg_injpolar(injd, by = "monthly",
             var_type_injury = "injury_type",
             title = "Proportion of injured and available\n players in each month according to the type of injury") +
   scale_fill_manual(name = "Type of injury", 
-                    values = palette2[c(1, 8, 3:6)]) + 
+                    values = palette2[c(1, 8, 2:4, 6)]) + 
   theme4
 ```
