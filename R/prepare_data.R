@@ -120,10 +120,13 @@ prepare_exp <- function(df_exposures0,
                                   "date" = date,
                                   "time_expo" = time_expo) %>%
     dplyr::mutate(player = factor(player),
-                  date = as.character(date),
-                  date = ifelse(nchar(date) == 4,
-                                        as.numeric(date),
-                                        as.Date(date_format(date))))
+                  date = as.character(date))
+  if (nchar(data_exposures$date[[1]]) == 4) {
+    data_exposures$date <- as.numeric(data_exposures$date)
+  } else {
+    data_exposures$date <- as.Date(date_format(data_exposures$date))
+  }
+
   return(data_exposures)
 }
 
