@@ -465,9 +465,9 @@ grid.arrange(p1, p2, ncol = 2,
 
 ## - How many players were injury free in each month?
 
-We will plot polar area diagrams[^visualize-note-1].
+We will plot polar area diagrams[^visualize-note-2].
 
-[^visualize-note-1]: See the *Note* section in `?injprop()` or have a look at this section in [Estimate summary statistics](file:///home/lzumeta/Documents/BCAM_gitlab/injurytools/docs/articles/estimate-epi-measures.html#injprop) vignette, to better understand what the proportions refer to.
+[^visualize-note-2]: See the *Note* section in `?injprop()` or have a look at this section in [Estimate summary statistics](file:///home/lzumeta/Documents/BCAM_gitlab/injurytools/docs/articles/estimate-epi-measures.html#injprop) vignette, to better understand what the proportions refer to.
 
 ```{r, eval = F}
 gg_injpolar(injd, by = "monthly")
