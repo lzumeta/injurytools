@@ -45,7 +45,7 @@ that are routinely made for sports injury surveillance.
 To install the most current version from GitHub:
 
 ``` r
-# devtools::install_github("lzumeta/injurytools")
+devtools::install_github("lzumeta/injurytools")
 ```
 
 We are also planning to release the package to

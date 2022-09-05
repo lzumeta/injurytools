@@ -48,8 +48,8 @@ In practice, the package can help automate certain descriptive reports that are 
 
 To install the most current version from GitHub:
 
-```{r}
-# devtools::install_github("lzumeta/injurytools")
+```{r, eval = F}
+devtools::install_github("lzumeta/injurytools")
 ```
 
 We are also planning to release the package to
