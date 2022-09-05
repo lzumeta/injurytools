@@ -70,8 +70,10 @@ injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
     j <- 1
     for (i in 1:nrow(data_injuries)) {
       player <- data_injuries$player[[i]] %>% as.character()
-      month <- withr::with_locale(c("LC_TIME" = "C"),
-                                  lubridate::month(data_injuries$date_injured[[i]], label = T))
+      date_injured <- data_injuries$date_injured[[i]]
+      month_injured <- withr::with_locale(c("LC_TIME" = "C"),
+                                          lubridate::month(date_injured, label = T))
+
       if (is.null(var_type_injury)) {
         type_injury <- "Injured"
       } else {
@@ -81,7 +83,7 @@ injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
       id_injury <- i
 
       df_polar[j, ] <- data.frame(player = player,
-                                  month = as.character(month),
+                                  month_injured = as.character(month_injured),
                                   type_injury = type_injury,
                                   season = season,
                                   id_injury = id_injury)
@@ -99,13 +101,18 @@ injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
       month_recovered <- withr::with_locale(c("LC_TIME" = "C"),
                                             lubridate::month(date_recovered, label = T))
       year_recovered <- lubridate::year(date_recovered)
-      year_injured <- lubridate::year(data_injuries$date_injured[[i]])
+      year_injured <- lubridate::year(date_injured)
 
+      month <- month_injured
       while(month < month_recovered | (month > month_recovered & year_injured < year_recovered)) {
         j <- j + 1
         month <- withr::with_locale(c("LC_TIME" = "C"),
                                     lubridate::month((as.numeric(month)%%12 + 1), label = T))
-        if (year_injured < year_recovered & as.numeric(month) >= 7) season <- seasons[which(season %in% seasons) + 1]
+        year_season <- season2year(season)
+        if (((year_season+1) == year_injured & as.numeric(month_injured) < 7 & as.numeric(month) >= 7) | ## same year different seasons
+            (year_season == year_injured & year_season < year_recovered & as.numeric(month_recovered) >= 7 & as.numeric(month) >= 7)) { ## different year and season
+          season <- seasons[which(season %in% seasons) + 1]
+        }
         df_polar[j, ] <- cbind(player = player,
                                month = as.character(month),
                                type_injury = type_injury,
