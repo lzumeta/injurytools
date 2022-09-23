@@ -12,6 +12,7 @@
 #'   (categorical) variable referring to the "type of injury" (e.g.
 #'   muscular/articular/others or overuse/not-overuse etc.) according to which
 #'   visualize injury summary statistics (optional, defaults \code{NULL}).
+#' @param add_contour FILL
 #' @param title Text for the main title, passed to
 #'   \code{\link[ggplot2:ggtitle]{ggplot2::ggtitle()}}.
 #' @param xlab  x-axis label to be passed to
@@ -29,6 +30,7 @@
 #' @export
 #'
 #' @importFrom checkmate assert checkClass assert_subset
+#' @importFrom metR geom_text_contour
 #'
 #' @references
 #' Bahr R, Clarsen B, Derman W, et al. International Olympic Committee
@@ -59,6 +61,7 @@
 #' gg_injriskmatrix(injds)
 #' gg_injriskmatrix(injds2, var_type_injury = "injury_type", title = "Risk matrix")
 gg_injriskmatrix <- function(injds, var_type_injury = NULL,  ## group_var has to be entered without quotes
+                             add_contour = TRUE,
                              title = NULL,
                              xlab = "Incidence (injuries per _)",
                              ylab = "Burden (days lost per _)",
@@ -76,11 +79,29 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,  ## group_var has to
     ylab <- stringr::str_replace(ylab, "_", unit_timerisk)
   }
 
+  if (add_contour) {
+    grid <- expand.grid(x = seq(0, max(injds_data[["injincidence_upper"]])),
+                        y = seq(0, max(injds_data[["injburden_upper"]])))
+    grid$z <- grid$x*grid$y
+    labels <- unique(grid$z[grid$z <= max(injds_data[["injburden_upper"]])])
+    grid_label <- data.frame(x = rep(max(grid$x), each = length(labels)),
+                             y = labels)
+  }
+
   ## plot
-  ggplot(data = injds_data, aes(x = .data$injincidence, y = .data$injburden, group = !! var_type_injury)) +
+  p <- ggplot(data = injds_data, aes(x = .data$injincidence, y = .data$injburden, group = !! var_type_injury)) +
     geom_errorbarh(aes(xmin = .data$injincidence_lower, xmax = .data$injincidence_upper), height = errh_height) +
     geom_errorbar(aes(ymin = .data$injburden_lower, ymax = .data$injburden_upper), width = errv_width) +
     geom_point(aes(fill = !! var_type_injury), size = 3.5, colour = "black", shape = 21) +
     xlab(xlab) + ylab(ylab) + ggtitle(title) +
     theme_bw()
+  if (add_contour) {
+    p <- p +
+      geom_contour(aes(x = x, y = y, z = z),
+                   data = grid, inherit.aes = F,
+                   linetype = "longdash", colour = "gray") +
+      geom_text_contour(aes(x = x, y = y, z = z), data = grid, inherit.aes = F,
+                        colour = "gray", stroke = 0.15)
+  }
+  return(p)
 }

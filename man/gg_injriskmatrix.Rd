@@ -7,6 +7,7 @@
 gg_injriskmatrix(
   injds,
   var_type_injury = NULL,
+  add_contour = TRUE,
   title = NULL,
   xlab = "Incidence (injuries per _)",
   ylab = "Burden (days lost per _)",
@@ -22,6 +23,8 @@ gg_injriskmatrix(
 (categorical) variable referring to the "type of injury" (e.g.
 muscular/articular/others or overuse/not-overuse etc.) according to which
 visualize injury summary statistics (optional, defaults \code{NULL}).}
+
+\item{add_contour}{FILL}
 
 \item{title}{Text for the main title, passed to
 \code{\link[ggplot2:ggtitle]{ggplot2::ggtitle()}}.}
