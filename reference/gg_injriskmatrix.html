@@ -71,11 +71,12 @@ intervals, are plotted according to the method used when running
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gg_injriskmatrix</span><span class="op">(</span></span>
 <span>  <span class="va">injds</span>,</span>
 <span>  var_type_injury <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Incidence (injuries per _)"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"Burden (days lost per _)"</span>,</span>
-<span>  errh_height <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  errv_width <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>  errh_height <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  errv_width <span class="op">=</span> <span class="fl">0.05</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -91,6 +92,10 @@ intervals, are plotted according to the method used when running
 (categorical) variable referring to the "type of injury" (e.g.
 muscular/articular/others or overuse/not-overuse etc.) according to which
 visualize injury summary statistics (optional, defaults <code>NULL</code>).</p></dd>
+
+
+<dt>add_contour</dt>
+<dd><p>FILL</p></dd>
 
 
 <dt>title</dt>
@@ -133,7 +138,7 @@ consensus statement: methods for recording and reporting of epidemiological
 data on injury and illness in sport 2020 (including STROBE Extension for
 Sport Injury and Illness Surveillance (STROBE-SIIS)) <em>British Journal of
 Sports Medicine</em> 2020; 54:372-389.</p>
-<p>Fuller, C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
+<p>Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
 in Team Sports: A Review of Principles, Practices and Problems. <em>Sports
 Medicine</em>, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5</p>
     </div>

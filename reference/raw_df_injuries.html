@@ -76,16 +76,17 @@ with <code>rvest</code> and <code>xml2</code> packages.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A data frame with 82 rows corresponding to 23 players and 11 variables:</p><dl><dt>player_name</dt>
-<dd><p>Name of the football player (factor)</p></dd>
-
-<dt>player_id</dt>
-<dd><p>Identification number of the football player (factor)</p></dd>
-
-<dt>season</dt>
-<dd><p>Season to which this player's entry corresponds (factor)</p></dd>
-
-<dt>from</dt>
+    <p>A data frame with 82 rows corresponding to 23 players and 11
+variables:</p><dl><dt>player_name</dt>
+<dd><p>Name of the football player
+(factor)</p></dd>
+ <dt>player_id</dt>
+<dd><p>Identification number of the football player
+(factor)</p></dd>
+ <dt>season</dt>
+<dd><p>Season to which this player's entry corresponds
+(factor)</p></dd>
+ <dt>from</dt>
 <dd><p>Date of the injury of each data entry (Date)</p></dd>
 
 <dt>until</dt>
@@ -98,23 +99,22 @@ with <code>rvest</code> and <code>xml2</code> packages.</p>
 <dd><p>Number of matches lost due to injury (numeric)</p></dd>
 
 <dt>injury</dt>
-<dd><p>Injury specification as it appears in <a href="https://wwww.transfermarkt.com" class="external-link">https://wwww.transfermarkt.com</a> (character)</p></dd>
-
-<dt>injury_acl</dt>
-<dd><p>Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)</p></dd>
+<dd><p>Injury specification as it appears in
+<a href="https://wwww.transfermarkt.com" class="external-link">https://wwww.transfermarkt.com</a> (character)</p></dd>
+ <dt>injury_acl</dt>
+<dd><p>Whether
+it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)</p></dd>
 
 <dt>injury_type</dt>
-<dd><p>A five level categorical variable indicating the type
-of injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any,
-NA otherwise (factor)</p></dd>
-
-<dt>injury_severity</dt>
-<dd><p>A four level categorical variable indicating the
-severity of the injury, whether Minor (&lt;7 days lost), Moderate ([7, 28)
-days lost), Severe ([28, 84) days lost) or Very_severe (&gt;=84 days lost);
-if any, NA otherwise  (factor)</p></dd>
-
-
+<dd><p>A five level categorical variable indicating the type of
+injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any, NA
+otherwise (factor)</p></dd>
+ <dt>injury_severity</dt>
+<dd><p>A four level categorical
+variable indicating the severity of the injury, whether Minor (&lt;7 days
+lost), Moderate ([7, 28) days lost), Severe ([28, 84) days lost) or
+Very_severe (&gt;=84 days lost); if any, NA otherwise  (factor)</p></dd>
+ 
 </dl></div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
@@ -124,7 +124,16 @@ if any, NA otherwise  (factor)</p></dd>
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>This data frame is provided for illustrative purposes. We warn that
 they might not be accurate, there might be a mismatch and non-completeness
-with what actually occurred.</p>
+with what actually occurred. As such, its use cannot be recommended for
+epidemiological research (see also Hoenig et al., 2022).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Hoenig, T., Edouard, P., Krause, M., Malhan, D., Relógio, A.,
+Junge, A., &amp; Hollander, K. (2022). Analysis of more than 20,000 injuries in
+European professional football by using a citizen science-based approach:
+An opportunity for epidemiological research?. <em>Journal of science and
+medicine in sport</em>, 25(4), 300-305.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
