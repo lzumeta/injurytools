@@ -65,7 +65,7 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
                              title = NULL,
                              xlab = "Incidence (injuries per _)",
                              ylab = "Burden (days lost per _)",
-                             errh_height = 3, errv_width = 0.5) {
+                             errh_height = 1, errv_width = 0.05) {
   ## check inputs
   assert(checkClass(injds, "injds"))
   assert_subset(var_type_injury, c(names(injds[[2]]), NULL))
@@ -80,8 +80,8 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
   }
 
   if (add_contour) {
-    grid <- expand.grid(x = seq(0, max(injds_data[["injincidence_upper"]])),
-                        y = seq(0, max(injds_data[["injburden_upper"]])))
+    grid <- expand.grid(x = seq(0, ceiling(max(injds_data[["injincidence_upper"]]))),
+                        y = seq(0, ceiling(max(injds_data[["injburden_upper"]]))))
     grid$z <- grid$x*grid$y
     labels <- unique(grid$z[grid$z <= max(injds_data[["injburden_upper"]])])
     grid_label <- data.frame(x = rep(max(grid$x), each = length(labels)),

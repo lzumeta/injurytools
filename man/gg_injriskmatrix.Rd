@@ -11,8 +11,8 @@ gg_injriskmatrix(
   title = NULL,
   xlab = "Incidence (injuries per _)",
   ylab = "Burden (days lost per _)",
-  errh_height = 3,
-  errv_width = 0.5
+  errh_height = 1,
+  errv_width = 0.05
 )
 }
 \arguments{
