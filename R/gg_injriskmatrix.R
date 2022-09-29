@@ -39,7 +39,7 @@
 #' Sport Injury and Illness Surveillance (STROBE-SIIS)) \emph{British Journal of
 #' Sports Medicine} 2020; 54:372-389.
 #'
-#' Fuller, C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
+#' Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
 #' in Team Sports: A Review of Principles, Practices and Problems. \emph{Sports
 #' Medicine}, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5
 #'
@@ -60,7 +60,7 @@
 #' # Plot
 #' gg_injriskmatrix(injds)
 #' gg_injriskmatrix(injds2, var_type_injury = "injury_type", title = "Risk matrix")
-gg_injriskmatrix <- function(injds, var_type_injury = NULL,  ## group_var has to be entered without quotes
+gg_injriskmatrix <- function(injds, var_type_injury = NULL,
                              add_contour = TRUE,
                              title = NULL,
                              xlab = "Incidence (injuries per _)",
@@ -97,10 +97,10 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,  ## group_var has to
     theme_bw()
   if (add_contour) {
     p <- p +
-      geom_contour(aes(x = x, y = y, z = z),
+      geom_contour(aes(x = .data$x, y = .data$y, z = .data$z),
                    data = grid, inherit.aes = F,
                    linetype = "longdash", colour = "gray") +
-      geom_text_contour(aes(x = x, y = y, z = z), data = grid, inherit.aes = F,
+      geom_text_contour(aes(x = .data$x, y = .data$y, z = .data$z), data = grid, inherit.aes = F,
                         colour = "gray", stroke = 0.15)
   }
   return(p)

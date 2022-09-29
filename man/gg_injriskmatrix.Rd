@@ -78,7 +78,7 @@ data on injury and illness in sport 2020 (including STROBE Extension for
 Sport Injury and Illness Surveillance (STROBE-SIIS)) \emph{British Journal of
 Sports Medicine} 2020; 54:372-389.
 
-Fuller, C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
+Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
 in Team Sports: A Review of Principles, Practices and Problems. \emph{Sports
 Medicine}, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5
 }
