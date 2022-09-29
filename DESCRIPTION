@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Suggests: 
     covr,
     gridExtra,
@@ -41,11 +41,13 @@ Imports:
     ggplot2,
     lubridate,
     magrittr,
+    metR,
     purrr,
     rlang,
     stats,
     stringr,
     tidyr,
+    tidyselect,
     withr
 Depends: 
     R (>= 2.10)
