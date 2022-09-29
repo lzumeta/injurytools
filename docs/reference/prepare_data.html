@@ -88,26 +88,26 @@ vignette for details.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">prepare_inj</span><span class="op">(</span>
-  <span class="va">df_injuries0</span>,
-  player <span class="op">=</span> <span class="st">"player"</span>,
-  date_injured <span class="op">=</span> <span class="st">"date_injured"</span>,
-  date_recovered <span class="op">=</span> <span class="st">"date_recovered"</span>
-<span class="op">)</span>
-
-<span class="fu">prepare_exp</span><span class="op">(</span>
-  <span class="va">df_exposures0</span>,
-  player <span class="op">=</span> <span class="st">"player"</span>,
-  date <span class="op">=</span> <span class="st">"date"</span>,
-  time_expo <span class="op">=</span> <span class="st">"time_expo"</span>
-<span class="op">)</span>
-
-<span class="fu">prepare_all</span><span class="op">(</span>
-  <span class="va">data_exposures</span>,
-  <span class="va">data_injuries</span>,
-  exp_unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"minutes"</span>, <span class="st">"hours"</span>, <span class="st">"days"</span>, <span class="st">"matches_num"</span>, <span class="st">"matches_minutes"</span>,
-    <span class="st">"activity_days"</span>, <span class="st">"seasons"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_inj</span><span class="op">(</span></span>
+<span>  <span class="va">df_injuries0</span>,</span>
+<span>  player <span class="op">=</span> <span class="st">"player"</span>,</span>
+<span>  date_injured <span class="op">=</span> <span class="st">"date_injured"</span>,</span>
+<span>  date_recovered <span class="op">=</span> <span class="st">"date_recovered"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">prepare_exp</span><span class="op">(</span></span>
+<span>  <span class="va">df_exposures0</span>,</span>
+<span>  player <span class="op">=</span> <span class="st">"player"</span>,</span>
+<span>  date <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span>  time_expo <span class="op">=</span> <span class="st">"time_expo"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">prepare_all</span><span class="op">(</span></span>
+<span>  <span class="va">data_exposures</span>,</span>
+<span>  <span class="va">data_injuries</span>,</span>
+<span>  exp_unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"minutes"</span>, <span class="st">"hours"</span>, <span class="st">"days"</span>, <span class="st">"matches_num"</span>, <span class="st">"matches_minutes"</span>,</span>
+<span>    <span class="st">"activity_days"</span>, <span class="st">"seasons"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -210,20 +210,20 @@ task.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df_injuries</span> <span class="op">&lt;-</span> <span class="fu">prepare_inj</span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,</span>
-<span class="r-in">                           player         <span class="op">=</span> <span class="st">"player_name"</span>,</span>
-<span class="r-in">                           date_injured   <span class="op">=</span> <span class="st">"from"</span>,</span>
-<span class="r-in">                           date_recovered <span class="op">=</span> <span class="st">"until"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu">prepare_exp</span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
-<span class="r-in">                            player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
-<span class="r-in">                            date          <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span class="r-in">                            time_expo     <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">injd</span> <span class="op">&lt;-</span> <span class="fu">prepare_all</span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span>
-<span class="r-in">                    data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span>
-<span class="r-in">                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df_injuries</span> <span class="op">&lt;-</span> <span class="fu">prepare_inj</span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,</span></span>
+<span class="r-in"><span>                           player         <span class="op">=</span> <span class="st">"player_name"</span>,</span></span>
+<span class="r-in"><span>                           date_injured   <span class="op">=</span> <span class="st">"from"</span>,</span></span>
+<span class="r-in"><span>                           date_recovered <span class="op">=</span> <span class="st">"until"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu">prepare_exp</span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span></span>
+<span class="r-in"><span>                            player        <span class="op">=</span> <span class="st">"player_name"</span>,</span></span>
+<span class="r-in"><span>                            date          <span class="op">=</span> <span class="st">"year"</span>,</span></span>
+<span class="r-in"><span>                            time_expo     <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">injd</span> <span class="op">&lt;-</span> <span class="fu">prepare_all</span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span></span>
+<span class="r-in"><span>                    data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span></span>
+<span class="r-in"><span>                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   player       t0         tf         date_inj…¹ date_rec…² tstart     tstop     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
@@ -238,16 +238,16 @@ task.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injury_severity &lt;fct&gt;, and abbreviated variable names ¹​date_injured,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​date_recovered</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "injd"       "tbl_df"     "tbl"        "data.frame"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> injd [108 × 19] (S3: injd/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "unit_exposure")= chr "matches_minutes"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "follow_up")= tibble [28 × 3] (S3: tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_exposures")='data.frame':	42 obs. of  16 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_injuries_long")= tibble [164 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

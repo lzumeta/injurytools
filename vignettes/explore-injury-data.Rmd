@@ -383,9 +383,9 @@ injds2_perinj <- injsummary(injd2, var_type_injury = "injury_type")
 
 ## Plot
 p1 <- gg_injriskmatrix(injds1_perinj, var_type_injury = "injury_type", 
-                       title = "Season 2017/2018")
+                       title = "Season 2017/2018", add_contour = FALSE)
 p2 <- gg_injriskmatrix(injds2_perinj, var_type_injury = "injury_type",
-                       title = "Season 2018/2019")
+                       title = "Season 2018/2019", add_contour = FALSE)
 
 # Print both plots side by side
 # grid.arrange(p1, p2, nrow = 1)
@@ -430,7 +430,7 @@ grid.arrange(p1, p2, ncol = 2,
 
 </details>
 
-```{r, echo = F, fig.width = 13, fig.height = 5.8}
+```{r, echo = F, fig.width = 13, fig.height = 5.8, warning = FALSE}
 palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
              "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
@@ -459,7 +459,6 @@ p2 <- p2 +
 grid.arrange(p1, p2, ncol = 2, 
              top = textGrob("Risk matrices", gp=gpar(fontsize = 26, font = 2))) ## for the main title
 ```
-
 
 <br/>
 

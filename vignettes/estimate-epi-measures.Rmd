@@ -150,17 +150,19 @@ To present the results in a more tidier and comprehensible way (instead of **R**
 # format the table for playerwise dataframe
 injds[[1]] %>% 
   arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
-  kable(digits = 2, col.names = c("Player", "N injuries", "N days lost",
+  kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
+                                  "Median days lost", "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
 ```
 
 ```{r}
 # format the table for total incidence and burden main columns
 injds[[2]] %>% 
-  select(1:5) %>% 
+  select(1:7) %>% 
   data.frame(row.names = "TOTAL") %>% 
   kable(digits = 2,
         col.names = c("N injuries", "N days lost",
+                      "Median days lost", "IQR days lost",
                       "Total exposure", "Incidence", "Burden"),
         row.names = TRUE) %>% 
   kable_styling(full_width = FALSE)
@@ -169,7 +171,7 @@ injds[[2]] %>%
 ```{r}
 # format the table for total incidence and burden point + ci estimates
 injds_tot_cis <- injds[[2]] %>% 
-  select(4:last_col()) %>% 
+  select(6:last_col()) %>% 
   data.frame(row.names = "TOTAL")
 injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
                                     ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
@@ -197,10 +199,15 @@ These are the teams results regarding injury incidence and injury burden accordi
 
 ```{r}
 injstats_pertype[["overall"]] %>% 
-  select(1:6) %>% 
+  select(1:10) %>% 
+  mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
+         ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
+         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) %>% 
+  select(1, 11:13, 8:10) %>% 
   arrange(desc(injburden)) %>% 
   kable(digits = 2,
-        col.names = c("Type of injury", "N injuries", "N days lost",
+        col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
+                      "Median days lost (IQR)",
                       "Total exposure", "Incidence", "Burden"),
         row.names = TRUE) %>% 
   kable_styling(full_width = FALSE)

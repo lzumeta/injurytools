@@ -65,7 +65,7 @@ disaggregated and reported according to this variable.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">injprop</span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"monthly"</span>, <span class="st">"season"</span><span class="op">)</span>, var_type_injury <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">injprop</span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"monthly"</span>, <span class="st">"season"</span><span class="op">)</span>, var_type_injury <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -112,15 +112,15 @@ category are those that did not suffer any injury in that moment
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># df_exposures &lt;- prepare_exp(raw_df_exposures, player = "player_name",</span></span>
-<span class="r-in"><span class="co">#                             date = "year", time_expo = "minutes_played")</span></span>
-<span class="r-in"><span class="co"># df_injuries  &lt;- prepare_inj(raw_df_injuries, player = "player_name",</span></span>
-<span class="r-in"><span class="co">#                             date_injured = "from", date_recovered = "until")</span></span>
-<span class="r-in"><span class="co"># injd         &lt;- prepare_all(data_exposures = df_exposures,</span></span>
-<span class="r-in"><span class="co">#                             data_injuries  = df_injuries,</span></span>
-<span class="r-in"><span class="co">#                             exp_unit = "matches_minutes")</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">injprop</span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># df_exposures &lt;- prepare_exp(raw_df_exposures, player = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                             date = "year", time_expo = "minutes_played")</span></span></span>
+<span class="r-in"><span><span class="co"># df_injuries  &lt;- prepare_inj(raw_df_injuries, player = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                             date_injured = "from", date_recovered = "until")</span></span></span>
+<span class="r-in"><span><span class="co"># injd         &lt;- prepare_all(data_exposures = df_exposures,</span></span></span>
+<span class="r-in"><span><span class="co">#                             data_injuries  = df_injuries,</span></span></span>
+<span class="r-in"><span><span class="co">#                             exp_unit = "matches_minutes")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">injprop</span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 98 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    season           month type_injury     n n_player  prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -135,9 +135,9 @@ category are those that did not suffer any injury in that moment
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> season 2017/2018 Oct   Concussion      1       23   4.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> season 2017/2018 Oct   Muscle          2       23   8.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 88 more rows</span></span>
-<span class="r-in"><span class="co"># injprop(injd, by = "monthly")</span></span>
-<span class="r-in"><span class="co"># injprop(injd, by = "season", var_type_injury = "injury_type")</span></span>
-<span class="r-in"><span class="co"># injprop(injd, by = "season")</span></span>
+<span class="r-in"><span><span class="co"># injprop(injd, by = "monthly")</span></span></span>
+<span class="r-in"><span><span class="co"># injprop(injd, by = "season", var_type_injury = "injury_type")</span></span></span>
+<span class="r-in"><span><span class="co"># injprop(injd, by = "season")</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

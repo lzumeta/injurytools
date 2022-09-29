@@ -68,7 +68,7 @@ section.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cut_injd</span><span class="op">(</span><span class="va">injd</span>, <span class="va">date0</span>, <span class="va">datef</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cut_injd</span><span class="op">(</span><span class="va">injd</span>, <span class="va">date0</span>, <span class="va">datef</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -103,25 +103,25 @@ used with caution.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Prepare data</span></span>
-<span class="r-in"><span class="co"># df_injuries &lt;- prepare_inj(df_injuries0   = raw_df_injuries,</span></span>
-<span class="r-in"><span class="co">#                            player         = "player_name",</span></span>
-<span class="r-in"><span class="co">#                            date_injured   = "from",</span></span>
-<span class="r-in"><span class="co">#                            date_recovered = "until")</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co"># df_exposures &lt;- prepare_exp(df_exposures0 = raw_df_exposures,</span></span>
-<span class="r-in"><span class="co">#                             player        = "player_name",</span></span>
-<span class="r-in"><span class="co">#                             date          = "year",</span></span>
-<span class="r-in"><span class="co">#                             time_expo     = "minutes_played")</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co"># injd &lt;- prepare_all(data_exposures = df_exposures,</span></span>
-<span class="r-in"><span class="co">#                     data_injuries  = df_injuries,</span></span>
-<span class="r-in"><span class="co">#                     exp_unit = "matches_minutes")</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cut the follow-up period of the object</span></span>
-<span class="r-in"><span class="co"># (please, use it carefully)</span></span>
-<span class="r-in"><span class="fu">cut_injd</span><span class="op">(</span><span class="va">injd</span>, date0 <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Prepare data</span></span></span>
+<span class="r-in"><span><span class="co"># df_injuries &lt;- prepare_inj(df_injuries0   = raw_df_injuries,</span></span></span>
+<span class="r-in"><span><span class="co">#                            player         = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                            date_injured   = "from",</span></span></span>
+<span class="r-in"><span><span class="co">#                            date_recovered = "until")</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># df_exposures &lt;- prepare_exp(df_exposures0 = raw_df_exposures,</span></span></span>
+<span class="r-in"><span><span class="co">#                             player        = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                             date          = "year",</span></span></span>
+<span class="r-in"><span><span class="co">#                             time_expo     = "minutes_played")</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># injd &lt;- prepare_all(data_exposures = df_exposures,</span></span></span>
+<span class="r-in"><span><span class="co">#                     data_injuries  = df_injuries,</span></span></span>
+<span class="r-in"><span><span class="co">#                     exp_unit = "matches_minutes")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cut the follow-up period of the object</span></span></span>
+<span class="r-in"><span><span class="co"># (please, use it carefully)</span></span></span>
+<span class="r-in"><span><span class="fu">cut_injd</span><span class="op">(</span><span class="va">injd</span>, date0 <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Injury data has been cut to the given follow-up period (in exposure data)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 74 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    player      t0         tf         date_inj…¹ date_rec…² tstart     tstop     </span>

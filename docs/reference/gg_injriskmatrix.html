@@ -68,16 +68,16 @@ intervals, are plotted according to the method used when running
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gg_injriskmatrix</span><span class="op">(</span>
-  <span class="va">injds</span>,
-  var_type_injury <span class="op">=</span> <span class="cn">NULL</span>,
-  add_contour <span class="op">=</span> <span class="cn">TRUE</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  xlab <span class="op">=</span> <span class="st">"Incidence (injuries per _)"</span>,
-  ylab <span class="op">=</span> <span class="st">"Burden (days lost per _)"</span>,
-  errh_height <span class="op">=</span> <span class="fl">3</span>,
-  errv_width <span class="op">=</span> <span class="fl">0.5</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gg_injriskmatrix</span><span class="op">(</span></span>
+<span>  <span class="va">injds</span>,</span>
+<span>  var_type_injury <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Incidence (injuries per _)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Burden (days lost per _)"</span>,</span>
+<span>  errh_height <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  errv_width <span class="op">=</span> <span class="fl">0.05</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -138,24 +138,24 @@ consensus statement: methods for recording and reporting of epidemiological
 data on injury and illness in sport 2020 (including STROBE Extension for
 Sport Injury and Illness Surveillance (STROBE-SIIS)) <em>British Journal of
 Sports Medicine</em> 2020; 54:372-389.</p>
-<p>Fuller, C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
+<p>Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
 in Team Sports: A Review of Principles, Practices and Problems. <em>Sports
 Medicine</em>, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Prepare data</span></span>
-<span class="r-in"><span class="co"># df_exposures &lt;- prepare_exp(raw_df_exposures, player = "player_name",</span></span>
-<span class="r-in"><span class="co">#                             date = "year", time_expo = "minutes_played")</span></span>
-<span class="r-in"><span class="co"># df_injuries  &lt;- prepare_inj(raw_df_injuries, player = "player_name",</span></span>
-<span class="r-in"><span class="co">#                             date_injured = "from", date_recovered = "until")</span></span>
-<span class="r-in"><span class="co"># injd         &lt;- prepare_all(data_exposures = df_exposures,</span></span>
-<span class="r-in"><span class="co">#                             data_injuries  = df_injuries,</span></span>
-<span class="r-in"><span class="co">#                             exp_unit = "matches_minutes")</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Estimate injury summary statistics</span></span>
-<span class="r-in"><span class="va">injds</span> <span class="op">&lt;-</span> <span class="fu"><a href="injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Prepare data</span></span></span>
+<span class="r-in"><span><span class="co"># df_exposures &lt;- prepare_exp(raw_df_exposures, player = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                             date = "year", time_expo = "minutes_played")</span></span></span>
+<span class="r-in"><span><span class="co"># df_injuries  &lt;- prepare_inj(raw_df_injuries, player = "player_name",</span></span></span>
+<span class="r-in"><span><span class="co">#                             date_injured = "from", date_recovered = "until")</span></span></span>
+<span class="r-in"><span><span class="co"># injd         &lt;- prepare_all(data_exposures = df_exposures,</span></span></span>
+<span class="r-in"><span><span class="co">#                             data_injuries  = df_injuries,</span></span></span>
+<span class="r-in"><span><span class="co">#                             exp_unit = "matches_minutes")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Estimate injury summary statistics</span></span></span>
+<span class="r-in"><span><span class="va">injds</span> <span class="op">&lt;-</span> <span class="fu"><a href="injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> * Exposure time unit is matches_minutes</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
@@ -164,7 +164,7 @@ Medicine</em>, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> * Exposure time unit is matches_minutes</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">injds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">injds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> * Exposure time unit is matches_minutes</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
@@ -173,11 +173,11 @@ Medicine</em>, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> * Exposure time unit is matches_minutes</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot</span></span>
-<span class="r-in"><span class="fu">gg_injriskmatrix</span><span class="op">(</span><span class="va">injds</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot</span></span></span>
+<span class="r-in"><span><span class="fu">gg_injriskmatrix</span><span class="op">(</span><span class="va">injds</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="gg_injriskmatrix-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">gg_injriskmatrix</span><span class="op">(</span><span class="va">injds2</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span>, title <span class="op">=</span> <span class="st">"Risk matrix"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">gg_injriskmatrix</span><span class="op">(</span><span class="va">injds2</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span>, title <span class="op">=</span> <span class="st">"Risk matrix"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="gg_injriskmatrix-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
