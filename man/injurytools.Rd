@@ -6,7 +6,7 @@
 \alias{injurytools-package}
 \title{\pkg{injurytools} package}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Sports Injury Data are analysed to identify and describe the magnitude of the injury problem, and also to gain more further insights (e.g. determine potential risk factors) by statistical modelling approaches. The 'injurytools' package provides standardized routines and utilities that simplify such analyses. It offers functions for data preparation, informative visualizations and descriptive and model-based analyses.
 }
