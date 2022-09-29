@@ -13,7 +13,8 @@ injsummary(
 )
 }
 \arguments{
-\item{injd}{\code{injd} \strong{S3} object (see \code{\link[=prepare_all]{prepare_all()}}).}
+\item{injd}{\code{injd} \strong{S3} object (see
+\code{\link[=prepare_all]{prepare_all()}}).}
 
 \item{var_type_injury}{Character specifying the name of the column according
 to which compute injury summary statistics. It should refer to a
@@ -31,14 +32,20 @@ zero-inflated negative binomial.}
 (defaults to \code{FALSE}).}
 }
 \value{
-A list of two data frames comprising player-wise and overall
-injury summary statistics, respectively, that constitute an \code{injds}
-\strong{S3} object, and both of them made up of the following columns:
+A list of two data frames comprising player-wise and overall injury
+summary statistics, respectively, that constitute an \code{injds}
+\strong{S3} object. Both of them made up of the following columns:
 \itemize{
-\item \code{ninjuries}: number of injuries sustained by the player over the
-given period specified by the \code{injd} data frame.
-\item \code{ndayslost}: number of days lost by the player due to injury
-over the given period specified by the \code{injd} data frame.
+\item \code{ninjuries}: number of injuries sustained by the player or
+overall in the team over the given period specified by the \code{injd}
+data frame.
+\item \code{ndayslost}: number of days lost by the player or overall
+in the team due to injury over the given period specified by the
+\code{injd} data frame.
+\item \code{median_dayslost}: median of number of days lost (i.e.
+\code{ndayslost}) playerwise or overall in the team.
+\item \code{iqr_dayslost}: interquartile range of number of days lost
+(i.e. \code{ndayslost}) playerwise or overall in the team.
 \item \code{totalexpo}: total exposure that the player has been under risk
 of sustaining an injury.
 \item \code{injincidence}: injury incidence, number of injuries per unit of
@@ -48,10 +55,33 @@ exposure.
 \item \code{var_type_injury}: only if it is specified as an argument to
 function.
 }
+Apart from this column names, they may further include these other columns
+depending on the user's specifications to the function:
+\itemize{
+\item \code{percent_ninjuries}: percentage (\%) of number of injuries of
+that type relative to all types of injuries (if \code{var_type_injury}
+specified).
+\item \code{percent_dayslost}: percentage (\%) of number of days lost
+because of injuries of that type relative to the total number of days
+lost because of all types of injuries (if \code{var_type_injury}
+specified).
+\item \code{injincidence_sd} and \code{injburden_sd}: estimated standard
+deviation, by the specified \code{method} parameter, of injury incidence
+(\code{injincidence}) and injury burden (\code{injburden}), for the
+overall injury summary statistics (the 2nd element of the function
+output).
+\item \code{injincidence_lower} and \code{injburden_lower}: lower bound
+of, for example, 95\% confidence interval (if \code{conf_level = 0.95})
+of injury incidence (\code{injincidence}) and injury burden
+(\code{injburden}), for the overall injury summary statistics (the 2nd
+element of the function output).
+\item \code{injincidence_upper} and \code{injburden_upper}: the same (as
+above item) applies but for the upper bound.
+}
 }
 \description{
 Calculate injury summary statistics such as injury incidence and injury
-burden (REF-ak), including total number of injuries, number of days lost due
+burden (see Bahr et al. 20), including total number of injuries, number of days lost due
 to injury, total time of exposure etc., by means of a classic-standard
 (Poisson) method, negative binomial, zero-inflated poisson or zero-inflated
 negative binomial, on a player and overall basis.
@@ -66,4 +96,10 @@ negative binomial, on a player and overall basis.
 #                             exp_unit = "matches_minutes")
 
 injsummary(injd)
+}
+\references{
+Bahr R., Clarsen B., & Ekstrand J. (2018). Why we should focus on the burden
+of injuries and illnesses, not just their incidence. \emph{British Journal of
+Sports Medicine}, 52(16), 1018–1021.
+https://doi.org/10.1136/bjsports-2017-098160
 }
