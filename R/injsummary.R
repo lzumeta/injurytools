@@ -143,7 +143,7 @@ injsummary <- function(injd, var_type_injury = NULL,
           tidyr::complete(.data$player, {{ var_type_injury }}) %>%
           dplyr::group_by(.data$player) %>%
           dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE)) %>%  ## replacing NAs with the same totalexpo values
-          dplyr::mutate(iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", iqr_dayslost),
+          dplyr::mutate(iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
                         dplyr::across(c(.data$ninjuries:.data$median_dayslost, .data$totalexpo:.data$injburden),
                                       ~ifelse(is.na(.), 0, .))) %>%
           dplyr::ungroup()
