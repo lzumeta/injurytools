@@ -69,16 +69,17 @@ library(injurytools)
 library(ggplot2)
 
 gg_injphoto(injd, 
-            title = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
+            title   = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
             by_date = "2 month") +
   ## plus some lines of ggplot2 code..
-  xlab("Follow-up date") + ylab("Players") + labs(caption = "source: transfermarkt.com") +
+  xlab("Follow-up date") + ylab("Players") + 
+  labs(caption = "source: transfermarkt.com") +
   theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 22),
         axis.text.x.bottom = element_text(size = 13, angle = 20, hjust = 1),
-        axis.text.y.left = element_text(size = 12),
+        axis.text.y.left   = element_text(size = 12),
         axis.title.x = element_text(size = 20, face = "bold", vjust = -1),
         axis.title.y = element_text(size = 20, face = "bold", vjust = 1.8),
-        legend.text = element_text(size = 20),
+        legend.text  = element_text(size = 20),
         plot.caption = element_text(face = "italic", size = 12, colour = "gray10"))
 ```
 
