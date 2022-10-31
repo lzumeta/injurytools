@@ -54,7 +54,7 @@ prepare_inj <- function(df_injuries0,
     checkMultiClass(df_injuries0[[player]], c("factor", "character")),
     checkClass(df_injuries0[[date_injured]], "Date"),
     checkClass(df_injuries0[[date_recovered]], "Date"),
-  combine = "and")
+    combine = "and")
   if (any(df_injuries0[[date_injured]] > df_injuries0[[date_recovered]])) stop("date_recovered should be >= date_injured")
 
   ## rename
@@ -240,8 +240,8 @@ prepare_all <- function(data_exposures,
 
   ## check inputs
   assert(checkChoice(exp_unit, c("minutes", "hours", "days",
-                                   "matches_num", "matches_minutes",
-                                   "activity_days", "seasons")),
+                                 "matches_num", "matches_minutes",
+                                 "activity_days", "seasons")),
          combine = "and")
 
   followup_df <- data_followup(data_exposures)
