@@ -1,9 +1,9 @@
-df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-                           player         = "player_name",
-                           date_injured   = "from",
-                           date_recovered = "until")
-
 test_that("prepare_inj works", {
+  df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
+                             player         = "player_name",
+                             date_injured   = "from",
+                             date_recovered = "until")
+
   expect_equal(is.data.frame(df_injuries), TRUE)
   expect_data_frame(df_injuries,
                     nrow = nrow(raw_df_injuries), ncol = ncol(raw_df_injuries))
@@ -12,12 +12,12 @@ test_that("prepare_inj works", {
 })
 
 
-df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                            player        = "player_name",
-                            date          = "year",
-                            time_expo     = "minutes_played")
-
 test_that("prepare_exp works", {
+  df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
+                              player        = "player_name",
+                              date          = "year",
+                              time_expo     = "minutes_played")
+
   expect_equal(is.data.frame(df_exposures), TRUE)
   expect_data_frame(df_exposures,
                     nrow = nrow(raw_df_exposures), ncol = ncol(raw_df_exposures))
@@ -27,9 +27,18 @@ test_that("prepare_exp works", {
 
 
 test_that("prepare_all works", {
-  injd <- prepare_all(data_exposures = df_exposures,
+  df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
+                             player         = "player_name",
+                             date_injured   = "from",
+                             date_recovered = "until")
+  df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
+                              player        = "player_name",
+                              date          = "year",
+                              time_expo     = "minutes_played")
+
+  injd <- suppressWarnings(prepare_all(data_exposures = df_exposures,
                       data_injuries  = df_injuries,
-                      exp_unit = "matches_minutes")
+                      exp_unit = "matches_minutes"))
   expect_equal(is.data.frame(injd), TRUE)
   expect_s3_class(injd, "injd")
   expect_subset(c("player", "t0", "tf", "date_injured", "date_recovered",
@@ -44,6 +53,15 @@ test_that("prepare_all works", {
 })
 
 test_that("when dates in injury and exposure data do not match, prepare_all works fine", {
+  df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
+                             player         = "player_name",
+                             date_injured   = "from",
+                             date_recovered = "until")
+  df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
+                              player        = "player_name",
+                              date          = "year",
+                              time_expo     = "minutes_played")
+
   data_exposures <- filter(df_exposures, date == 2018)
   w <- capture_warnings(prepare_all(data_exposures = data_exposures,
                                           data_injuries  = df_injuries,
