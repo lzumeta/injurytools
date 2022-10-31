@@ -42,15 +42,9 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
-<div class="alert alert-danger">
-<strong>WARNING!</strong> File under construction.
-</div>    
-
-
-
-
-**WARNING! File under construction**
-
+<!-- <div class="alert alert-danger"> -->
+<!-- <strong>WARNING!</strong> File under construction. -->
+<!-- </div>     -->
 
 ```{r setup, message = F}
 library(injurytools)
