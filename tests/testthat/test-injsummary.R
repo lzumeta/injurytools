@@ -1,7 +1,7 @@
-raw_df_injuries <- dplyr::filter(raw_df_injuries, player_name %in% c("lionel-messi", "mohamed-salah"))
-raw_df_exposures <- dplyr::filter(raw_df_exposures, player_name %in% c("lionel-messi", "mohamed-salah"))
-
 test_that("Test that injsummary works", {
+  raw_df_injuries <- dplyr::filter(raw_df_injuries, player_name %in% c("mohamed-salah"))
+  raw_df_exposures <- dplyr::filter(raw_df_exposures, player_name %in% c("mohamed-salah"))
+
   df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
                              player         = "player_name",
                              date_injured   = "from",
@@ -36,6 +36,9 @@ test_that("Test that injsummary works", {
 })
 
 test_that("Test that warnings are working", {
+  raw_df_injuries <- dplyr::filter(raw_df_injuries, player_name %in% c("mohamed-salah"))
+  raw_df_exposures <- dplyr::filter(raw_df_exposures, player_name %in% c("mohamed-salah"))
+
   df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
                              player         = "player_name",
                              date_injured   = "from",
