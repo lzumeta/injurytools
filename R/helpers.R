@@ -15,7 +15,7 @@ check_injfollowup <- function(followup_df, data_injuries) {
     droplevels()
   data_injuries_new <- data_injuries_new %>%
     dplyr::filter(.data$date_injured >= .data$t0 & .data$date_injured <= .data$tf) %>%
-    dplyr::select(-.data$t0, -.data$tf)
+    dplyr::select(-"t0", -"tf")
 
   if (!identical(data_injuries, data_injuries_new)) {
     warning("Injury data has been cut to the given follow-up period (in exposure data)")

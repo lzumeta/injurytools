@@ -113,7 +113,7 @@ injsummary <- function(injd, var_type_injury = NULL,
     }
     quit_players <- df_exposures_summary %>%
       dplyr::filter(.data$totalexpo == 0) %>%
-      select(.data$player) %>%
+      select("player") %>%
       dplyr::pull() %>%
       as.character()
     injd <- injd %>%
@@ -144,7 +144,7 @@ injsummary <- function(injd, var_type_injury = NULL,
           dplyr::group_by(.data$player) %>%
           dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE)) %>%  ## replacing NAs with the same totalexpo values
           dplyr::mutate(iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
-                        dplyr::across(c(.data$ninjuries:.data$median_dayslost, .data$totalexpo:.data$injburden),
+                        dplyr::across(c("ninjuries":"median_dayslost", "totalexpo":"injburden"),
                                       ~ifelse(is.na(.), 0, .))) %>%
           dplyr::ungroup()
       } else .
@@ -152,7 +152,7 @@ injsummary <- function(injd, var_type_injury = NULL,
 
   ## - overall
   injds_overall <-  injds %>%
-    dplyr::select(.data$player, .data$ninjuries, .data$ndayslost, .data$totalexpo, {{var_type_injury}}) %>%
+    dplyr::select("player", "ninjuries", "ndayslost", "totalexpo", {{var_type_injury}}) %>%
     dplyr::group_by({{ var_type_injury }}) %>%
     dplyr::summarise(ninjuries = sum(.data$ninjuries),
                      ndayslost = sum(.data$ndayslost),
@@ -169,12 +169,12 @@ injsummary <- function(injd, var_type_injury = NULL,
           tidyr::complete({ {var_type_injury }}) %>%
           dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE), ## replacing NAs with the same totalexpo values
                         iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
-                        dplyr::across(c(.data$ninjuries:.data$median_dayslost, .data$totalexpo:.data$injburden),
+                        dplyr::across(c("ninjuries":"median_dayslost", "totalexpo":"injburden"),
                                       ~ifelse(is.na(.), 0, .)),
                         percent_ninjuries = round(.data$ninjuries*100/sum(.data$ninjuries), 2),
                         percent_dayslost = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) %>%
-          dplyr::select(.data$injury_type, .data$ninjuries, .data$percent_ninjuries,
-                        .data$ndayslost, .data$percent_dayslost, tidyselect::everything()) # order the column names
+          dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
+                        "ndayslost", "percent_dayslost", tidyselect::everything()) # order the column names
       } else .
     }
 
@@ -189,10 +189,10 @@ injsummary <- function(injd, var_type_injury = NULL,
     injds_overall <- dplyr::left_join(injds_overall, injds_overall_aux, by = names(injds_overall)[[1]]) %>%
       dplyr::rename(median_dayslost = .data$median_dayslost.y,
                     iqr_dayslost = .data$iqr_dayslost.y) %>%
-      dplyr::select(.data$injury_type, .data$ninjuries, .data$percent_ninjuries,
-                    .data$ndayslost, .data$percent_dayslost, .data$median_dayslost,
-                    .data$iqr_dayslost, tidyselect::everything(),
-                    -.data$median_dayslost.x, -.data$iqr_dayslost.x)
+      dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
+                    "ndayslost", "percent_dayslost", "median_dayslost",
+                    "iqr_dayslost", tidyselect::everything(),
+                    -"median_dayslost.x", -"iqr_dayslost.x")
   }
 
 
@@ -257,7 +257,7 @@ injsummary_unit <- function(unit, injds, quiet) {
                      "\n  So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)\n\n"))
     }
     injds <- injds %>%
-      dplyr::mutate(dplyr::across(.data$injincidence:dplyr::last_col(), ~ .x*90*100))
+      dplyr::mutate(dplyr::across("injincidence":dplyr::last_col(), ~ .x*90*100))
     unit_timerisk <- "100 player-match"
   } else if (unit %in% c("matches_num", "days", "activity_days")) {
     if (!quiet) {
