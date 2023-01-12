@@ -101,7 +101,7 @@ where $\Delta T$ is the total time under risk of the study population.
 
 # In practice
 
-Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/docs/articles/prepare-injury-data.html) vignette, we use the data sets available from the `injurytools` package: data from Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website[^estimate-note-1].
+Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html) vignette, we use the data sets available from the `injurytools` package: data from Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website[^estimate-note-1].
 
 [^estimate-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate, there might be a mismatch and non-completeness with what actually occurred.
 
