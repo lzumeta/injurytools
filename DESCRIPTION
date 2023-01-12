@@ -1,5 +1,5 @@
 Package: injurytools
-Title: A toolkit for Sports Injury Data Analysis
+Title: A Toolkit for Sports Injury Data Analysis
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Lore",
@@ -12,12 +12,12 @@ Authors@R: c(
            role = c("aut"),
            email = "dlee@bcamath.org",
            comment = c(ORCID = "0000-0002-8995-8535")))
-Description: Sports Injury Data are analysed to identify and describe the
-  magnitude of the injury problem, and also to gain more further insights 
-  (e.g. determine potential risk factors) by statistical modelling approaches. 
-  The 'injurytools' package provides standardized routines and utilities that 
-  simplify such analyses. It offers functions for data preparation, informative 
-  visualizations and descriptive and model-based analyses.
+Description: Sports Injury Data analysis aims to identify and describe the
+  magnitude of the injury problem, and to more insights (e.g. determine
+  potential risk factors) by statistical modelling approaches. The 'injurytools'
+  package provides standardized routines and utilities that simplify such
+  analyses. It offers functions for data preparation, informative visualizations 
+  and descriptive and model-based analyses.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

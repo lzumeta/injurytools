@@ -7,7 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
-[![R-CMD-check](https://github.com/lzumeta/injurytools/workflows/R-CMD-check/badge.svg)](https://github.com/lzumeta/injurytools/actions)
+[![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
 [![MIT
 license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
