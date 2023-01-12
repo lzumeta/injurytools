@@ -71,7 +71,7 @@
 #'   \item{days_lost}{Number of days lost due to injury (numeric)}
 #'   \item{games_lost}{Number of matches lost due to injury (numeric)}
 #'   \item{injury}{Injury specification as it appears in
-#'   \url{https://wwww.transfermarkt.com} (character)} \item{injury_acl}{Whether
+#'   \url{https://www.transfermarkt.com} (character)} \item{injury_acl}{Whether
 #'   it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)}
 #'   \item{injury_type}{A five level categorical variable indicating the type of
 #'   injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any, NA
