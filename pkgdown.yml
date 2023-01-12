@@ -1,11 +1,11 @@
-pandoc: 2.7.3
-pkgdown: 2.0.6
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   estimate-epi-measures: estimate-epi-measures.html
   explore-injury-data: explore-injury-data.html
   prepare-injury-data: prepare-injury-data.html
-last_built: 2022-11-01T12:08Z
+last_built: 2023-01-12T16:42Z
 urls:
   reference: https://lzumeta.github.io/injurytools/reference
   article: https://lzumeta.github.io/injurytools/articles
