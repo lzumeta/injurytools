@@ -231,10 +231,12 @@ injsummary <- function(injd, var_type_injury = NULL,
 #' @param quiet Logical, whether or not to silence the warning messages
 #'   (defaults to \code{FALSE}).
 #'
-#' @return A list of two elements: (i) same injds data frame with 'injincidence'
+#' @return A list of two elements:
+#' (i) same injds data frame with 'injincidence'
 #'   and 'injburden' values transformed according to \code{unit}, named
-#'   \code{injds} and (ii) a character vector that expresses the statistic used
-#'   for the rates (the unit used for the player's time at risk).
+#'   \code{injds} and
+#'   (ii) a character vector that expresses the unit used for the rates, i.e.
+#'   for the player's time at risk, named \code{unit_timerisk}.
 #'
 #' @keywords internal
 injsummary_unit <- function(unit, injds, quiet) {

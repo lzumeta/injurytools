@@ -16,10 +16,12 @@ injury data.}
 (defaults to \code{FALSE}).}
 }
 \value{
-A list of two elements: (i) same injds data frame with 'injincidence'
+A list of two elements:
+(i) same injds data frame with 'injincidence'
 and 'injburden' values transformed according to \code{unit}, named
-\code{injds} and (ii) a character vector that expresses the statistic used
-for the rates (the unit used for the player's time at risk).
+\code{injds} and
+(ii) a character vector that expresses the unit used for the rates, i.e.
+for the player's time at risk, named \code{unit_timerisk}.
 }
 \description{
 Transform injsummary() output according to the unit of exposure
