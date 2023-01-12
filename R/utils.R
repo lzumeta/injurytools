@@ -155,7 +155,7 @@ season2year <- function(season) {
 #' # (please, use it carefully)
 #' cut_injd(injd, date0 = 2018)
 cut_injd <- function(injd, date0, datef) {
-  ## check inputs
+
   assert(checkClass(injd, "injd"))
   data_exposures <- attr(injd, "data_exposures")
 
