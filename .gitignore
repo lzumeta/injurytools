@@ -1,8 +1,11 @@
+*.Rproj
 .Rproj.user
 .Rhistory
-.Rdata
+.RData
+.Rbuildignore
+.Rprofile
 .httr-oauth
 .DS_Store
-docs
+docs/
 /doc/
 /Meta/
