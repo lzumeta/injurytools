@@ -50,7 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul>
@@ -81,8 +81,8 @@
             
             <h4 data-toc-skip class="date">2023-01-24</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/explore-injury-data.Rmd" class="external-link"><code>vignettes/explore-injury-data.Rmd</code></a></small>
-      <div class="d-none name"><code>explore-injury-data.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/visualize-injury-data.Rmd" class="external-link"><code>vignettes/visualize-injury-data.Rmd</code></a></small>
+      <div class="d-none name"><code>visualize-injury-data.Rmd</code></div>
     </div>
 
     
@@ -120,11 +120,12 @@ non-completeness with what actually occurred.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <span>        axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span>, face <span class="op">=</span> <span class="st">"bold"</span>, vjust <span class="op">=</span> <span class="fl">1.8</span><span class="op">)</span>,</span>
 <span>        legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
 <span>        plot.caption <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>, size <span class="op">=</span> <span class="fl">12</span>, colour <span class="op">=</span> <span class="st">"gray10"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-injury-data_files/figure-html/unnamed-chunk-2-1.png" width="1315.2"></p>
+<p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-2-1.png" width="1315.2"></p>
 <p>Let’s count how many injuries (red crosses in the graph) occurred and
 how severe they were (length of the thick black line).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">injds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="va">injds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span> </span>
 <span><span class="va">injds_perinj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span> </span>
 <span><span class="co"># injds</span></span></code></pre></div>
 <details><summary>
@@ -166,7 +167,7 @@ player-matches</caption>
 <tbody><tr class="odd">
 <td align="center">82</td>
 <td align="center">2049</td>
-<td align="center">7.5</td>
+<td align="center">18.97222</td>
 <td align="center">9.88 (8.09,11.68)</td>
 <td align="center">246.9 (237.93,255.87)</td>
 </tr></tbody>
@@ -237,13 +238,15 @@ player-matches</caption>
 <p>Let’s plot the information shown in the second table in a risk matrix
 that displays injury incidence against injury burden.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_injriskmatrix.html">gg_injriskmatrix</a></span><span class="op">(</span><span class="va">injds_perinj</span>, </span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="fu"><a href="../reference/gg_injriskmatrix.html">gg_injriskmatrix</a></span><span class="op">(</span><span class="va">injds_perinj</span>, </span>
 <span>                 var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span>, </span>
 <span>                 title <span class="op">=</span> <span class="st">"Risk matrix"</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Code for further plot specifications
 </summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#000000"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>,</span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="va">palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#000000"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>,</span>
 <span>             <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span></span>
 <span><span class="co"># source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/</span></span>
 <span><span class="va">theme3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
@@ -260,7 +263,7 @@ Code for further plot specifications
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Type of injury"</span>,</span>
 <span>                    values <span class="op">=</span> <span class="va">palette</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="va">theme3</span></span></code></pre></div>
-</details><p><img src="explore-injury-data_files/figure-html/unnamed-chunk-9-1.png" width="864"></p>
+</details><p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-9-1.png" width="864"></p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -268,17 +271,19 @@ Code for further plot specifications
 </h2>
 <p>We prepare two <code>injd</code> objects:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">injd1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cut_injd.html">cut_injd</a></span><span class="op">(</span><span class="va">injd</span>, datef <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="va">injd1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cut_injd.html">cut_injd</a></span><span class="op">(</span><span class="va">injd</span>, datef <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></span>
 <span><span class="va">injd2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cut_injd.html">cut_injd</a></span><span class="op">(</span><span class="va">injd</span>, date0 <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot just for checking whether cut_injd() worked well</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gg_injphoto.html">gg_injphoto</a></span><span class="op">(</span><span class="va">injd1</span>, fix <span class="op">=</span> <span class="cn">TRUE</span>, by_date <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gg_injphoto.html">gg_injphoto</a></span><span class="op">(</span><span class="va">injd2</span>, fix <span class="op">=</span> <span class="cn">TRUE</span>, by_date <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-injury-data_files/figure-html/unnamed-chunk-12-1.png" width="1728"></p>
+<p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-12-1.png" width="1728"></p>
 <p>Let’s compute injury summary statistics for each season.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">injds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="va">injds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd1</span><span class="op">)</span></span>
 <span><span class="va">injds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd2</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Code for tidying up the tables
@@ -305,11 +310,11 @@ Code for tidying up the tables
 <caption>Injury incidence and injury burden are reported as 100
 player-matches</caption>
 <colgroup>
-<col width="15%">
+<col width="14%">
 <col width="16%">
-<col width="15%">
-<col width="25%">
-<col width="28%">
+<col width="14%">
+<col width="24%">
+<col width="29%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">N injuries</th>
@@ -321,9 +326,9 @@ player-matches</caption>
 <tbody><tr class="odd">
 <td align="center">26</td>
 <td align="center">1141</td>
-<td align="center">25</td>
-<td align="center">8.59 (5.82,11.36)</td>
-<td align="center">376.94 (358.59,395.3)</td>
+<td align="center">24.80435</td>
+<td align="center">6.26 (4.24,8.28)</td>
+<td align="center">274.84 (261.45,288.22)</td>
 </tr></tbody>
 </table>
 <p><strong>Season 2018/2019</strong></p>
@@ -335,7 +340,7 @@ player-matches</caption>
 <col width="15%">
 <col width="14%">
 <col width="25%">
-<col width="29%">
+<col width="30%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">N injuries</th>
@@ -347,9 +352,9 @@ player-matches</caption>
 <tbody><tr class="odd">
 <td align="center">56</td>
 <td align="center">908</td>
-<td align="center">9</td>
-<td align="center">15.09 (11.77,18.4)</td>
-<td align="center">244.6 (231.25,257.95)</td>
+<td align="center">12.27027</td>
+<td align="center">13.5 (10.53,16.47)</td>
+<td align="center">218.94 (206.98,230.89)</td>
 </tr></tbody>
 </table>
 <p><br></p>
@@ -401,14 +406,15 @@ Code for further plot specifications
 <span>  <span class="va">theme2</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p11</span>, <span class="va">p21</span>, <span class="va">p12</span>, <span class="va">p22</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="explore-injury-data_files/figure-html/unnamed-chunk-19-1.png" width="1344"></p>
+</details><p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-19-1.png" width="1344"></p>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="which-injuries-were-more-frequent-and-more-burdensome">- Which injuries were more frequent? And more burdensome?<a class="anchor" aria-label="anchor" href="#which-injuries-were-more-frequent-and-more-burdensome"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Calculate summary statistics</span></span>
+<code class="sourceCode R"><span><span class="co"># warnings set to FALSE</span></span>
+<span><span class="co">## Calculate summary statistics</span></span>
 <span><span class="va">injds1_perinj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd1</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span>
 <span><span class="va">injds2_perinj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd2</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span>
 <span></span>
@@ -450,18 +456,18 @@ Code for further plot specifications
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>             top <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html" class="external-link">textGrob</a></span><span class="op">(</span><span class="st">"Risk matrices"</span>, gp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">26</span>, font <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">## for the main title</span></span></code></pre></div>
-</details><p><img src="explore-injury-data_files/figure-html/unnamed-chunk-22-1.png" width="1248"></p>
+</details><p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-22-1.png" width="1248"></p>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="how-many-players-were-injury-free-in-each-month">- How many players were injury free in each month?<a class="anchor" aria-label="anchor" href="#how-many-players-were-injury-free-in-each-month"></a>
 </h3>
-<p>We will plot polar area diagrams<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;See the &lt;em&gt;Note&lt;/em&gt; section in &lt;code&gt;?injprop()&lt;/code&gt;
-or have a look at this section in &lt;a href="file:///home/lzumeta/Documents/BCAM_gitlab/injurytools/docs/articles/estimate-epi-measures.html#injprop"&gt;Estimate
+<p>We will plot polar area diagrams<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;See the &lt;em&gt;Note&lt;/em&gt; section in &lt;code&gt;?injprev()&lt;/code&gt;
+or have a look at this section in &lt;a href="file:///home/lzumeta/Documents/BCAM_gitlab/injurytools/docs/articles/estimate-epi-measures.html#injprev"&gt;Estimate
 summary statistics&lt;/a&gt; vignette, to better understand what the
 proportions refer to.&lt;/p&gt;'><sup>2</sup></a>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_injpolar.html">gg_injpolar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_injprev_polar.html">gg_injprev_polar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Code for further plot specifications
 </summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -473,14 +479,14 @@ Code for further plot specifications
 <span>                strip.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/gg_injpolar.html">gg_injpolar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>,</span>
+<span><span class="fu"><a href="../reference/gg_injprev_polar.html">gg_injprev_polar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>,</span>
 <span>            title <span class="op">=</span> <span class="st">"Proportion of injured and available\n players in each month"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Type of injury"</span>, </span>
 <span>                    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seagreen3"</span>, <span class="st">"red3"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="va">theme4</span></span></code></pre></div>
-</details><p><img src="explore-injury-data_files/figure-html/unnamed-chunk-25-1.png" width="960"></p>
+</details><p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-25-1.png" width="960"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_injpolar.html">gg_injpolar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_injprev_polar.html">gg_injprev_polar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Code for further plot specifications
 </summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -489,13 +495,13 @@ Code for further plot specifications
 <span><span class="co"># source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/</span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/gg_injpolar.html">gg_injpolar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, </span>
+<span><span class="fu"><a href="../reference/gg_injprev_polar.html">gg_injprev_polar</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, </span>
 <span>            var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span>,</span>
 <span>            title <span class="op">=</span> <span class="st">"Proportion of injured and available\n players in each month according to the type of injury"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Type of injury"</span>, </span>
 <span>                    values <span class="op">=</span> <span class="va">palette2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="va">theme4</span></span></code></pre></div>
-</details><p><img src="explore-injury-data_files/figure-html/unnamed-chunk-28-1.png" width="960"></p>
+</details><p><img src="visualize-injury-data_files/figure-html/unnamed-chunk-28-1.png" width="960"></p>
 </div>
 </div>
 

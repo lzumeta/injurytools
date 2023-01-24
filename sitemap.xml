@@ -13,13 +13,13 @@
     <loc>https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/explore-injury-data.html</loc>
-  </url>
-  <url>
     <loc>https://lzumeta.github.io/injurytools/articles/index.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/articles/visualize-injury-data.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/authors.html</loc>
@@ -37,7 +37,7 @@
     <loc>https://lzumeta.github.io/injurytools/reference/data_followup.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/data_injuarieslong.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/data_injurieslong.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/date2season.html</loc>
@@ -55,7 +55,7 @@
     <loc>https://lzumeta.github.io/injurytools/reference/gg_injphoto.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_injpolar.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/gg_injprev_polar.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/gg_injriskmatrix.html</loc>
@@ -67,7 +67,7 @@
     <loc>https://lzumeta.github.io/injurytools/reference/injd.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injprop.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/injprev.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/injsummary.html</loc>
@@ -85,6 +85,9 @@
     <loc>https://lzumeta.github.io/injurytools/reference/is_injds.html</loc>
   </url>
   <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/new_injd.html</loc>
+  </url>
+  <url>
     <loc>https://lzumeta.github.io/injurytools/reference/pipe.html</loc>
   </url>
   <url>
@@ -98,5 +101,8 @@
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/season2year.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/validate_injd.html</loc>
   </url>
 </urlset>

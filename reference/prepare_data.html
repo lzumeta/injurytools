@@ -48,7 +48,7 @@ vignette for details."><meta property="og:image" content="https://lzumeta.github
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -113,7 +113,7 @@ vignette for details.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df_injuries0</dt>
-<dd><p>A data frame containing injury information, i.e. columns
+<dd><p>A data frame containing injury information, with columns
 referring to the player name/id, date of injury and date of recovery (as
 minimal data).</p></dd>
 
@@ -134,8 +134,8 @@ information about the date of recovery is stored.</p></dd>
 
 
 <dt>df_exposures0</dt>
-<dd><p>A data frame containing exposure information, i.e.
-columns referring to the player name/id, date of exposure, and the total
+<dd><p>A data frame containing exposure information, with
+columns referring to the player name/id, date of exposure and the total
 time of exposure of the corresponding data entry (as minimal data).</p></dd>
 
 
@@ -173,12 +173,12 @@ default).</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p><code>prepare_inj()</code> returns a data frame in which the key columns in
-injury data are standardized and have a proper format.</p>
+<p><code>prepare_inj()</code> returns a data frame in which the <strong>key
+columns</strong> in injury data are standardized and have a proper format.</p>
 
 
-<p><code>prepare_exp()</code> returns a data frame in which the key columns in
-exposure data are standardized and have a proper format.</p>
+<p><code>prepare_exp()</code> returns a data frame in which the <strong>key
+columns</strong> in exposure data are standardized and have a proper format.</p>
 
 
 <p><code>prepare_all()</code> returns the <code>injd</code></p>
@@ -220,34 +220,14 @@ task.</p>
 <span class="r-in"><span>                            date          <span class="op">=</span> <span class="st">"year"</span>,</span></span>
 <span class="r-in"><span>                            time_expo     <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">injd</span> <span class="op">&lt;-</span> <span class="fu">prepare_all</span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span></span>
 <span class="r-in"><span>                    data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span></span>
 <span class="r-in"><span>                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   player       t0         tf         date_inj…¹ date_rec…² tstart     tstop     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> adam-lallana 2017-07-01 2019-06-30 2017-07-31 2017-11-25 2017-07-01 2017-07-31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> adam-lallana 2017-07-01 2019-06-30 2018-03-31 2018-05-13 2017-11-25 2018-03-31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> adam-lallana 2017-07-01 2019-06-30 2018-09-04 2018-10-19 2018-05-13 2018-09-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> adam-lallana 2017-07-01 2019-06-30 2018-11-09 2018-12-04 2018-10-19 2018-11-09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> adam-lallana 2017-07-01 2019-06-30 2019-01-06 2019-01-18 2018-12-04 2019-01-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> adam-lallana 2017-07-01 2019-06-30 2019-04-01 2019-05-31 2019-01-18 2019-04-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 12 more variables: tstart_minPlay &lt;dbl&gt;, tstop_minPlay &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;dbl&gt;, enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injury_severity &lt;fct&gt;, and abbreviated variable names ¹​date_injured,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​date_recovered</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "injd"       "tbl_df"     "tbl"        "data.frame"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> injd [82 × 19] (S3: injd/tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "unit_exposure")= chr "matches_minutes"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "follow_up")= tibble [28 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_exposures")='data.frame':	42 obs. of  16 variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "data_injuries_long")= tibble [164 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

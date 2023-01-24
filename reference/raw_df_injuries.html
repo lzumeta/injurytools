@@ -36,7 +36,7 @@ with rvest and xml2 packages."><meta property="og:image" content="https://lzumet
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -78,15 +78,15 @@ with <code>rvest</code> and <code>xml2</code> packages.</p>
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     <p>A data frame with 82 rows corresponding to 23 players and 11
 variables:</p><dl><dt>player_name</dt>
-<dd><p>Name of the football player
-(factor)</p></dd>
- <dt>player_id</dt>
-<dd><p>Identification number of the football player
-(factor)</p></dd>
- <dt>season</dt>
-<dd><p>Season to which this player's entry corresponds
-(factor)</p></dd>
- <dt>from</dt>
+<dd><p>Name of the football player (factor)</p></dd>
+
+<dt>player_id</dt>
+<dd><p>Identification number of the football player (factor)</p></dd>
+
+<dt>season</dt>
+<dd><p>Season to which this player's entry corresponds (factor)</p></dd>
+
+<dt>from</dt>
 <dd><p>Date of the injury of each data entry (Date)</p></dd>
 
 <dt>until</dt>
@@ -99,21 +99,21 @@ variables:</p><dl><dt>player_name</dt>
 <dd><p>Number of matches lost due to injury (numeric)</p></dd>
 
 <dt>injury</dt>
-<dd><p>Injury specification as it appears in
-<a href="https://www.transfermarkt.com" class="external-link">https://www.transfermarkt.com</a> (character)</p></dd>
- <dt>injury_acl</dt>
-<dd><p>Whether
-it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)</p></dd>
+<dd><p>Injury specification as it appears in <a href="https://www.transfermarkt.com" class="external-link">https://www.transfermarkt.com</a> (character)</p></dd>
+
+<dt>injury_acl</dt>
+<dd><p>Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)</p></dd>
 
 <dt>injury_type</dt>
 <dd><p>A five level categorical variable indicating the type of
 injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any, NA
 otherwise (factor)</p></dd>
- <dt>injury_severity</dt>
-<dd><p>A four level categorical
-variable indicating the severity of the injury, whether Minor (&lt;7 days
-lost), Moderate ([7, 28) days lost), Severe ([28, 84) days lost) or
-Very_severe (&gt;=84 days lost); if any, NA otherwise  (factor)</p></dd>
+
+<dt>injury_severity</dt>
+<dd><p>A four level categorical variable indicating the
+severity of the injury (if any), whether Minor (&lt;7 days lost), Moderate
+([7, 28) days lost), Severe ([28, 84) days lost) or
+Very_severe (&gt;=84 days lost); NA otherwise (factor)</p></dd>
  
 </dl></div>
     <div class="section level2">

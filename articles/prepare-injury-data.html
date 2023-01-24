@@ -50,7 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul>
@@ -107,7 +107,7 @@ competitions/matches (<em>exposure time</em> among others) in a separate
 table. Following this, we consider that the user has the raw data in two
 separate data sets that we call <strong>injury</strong> and
 <strong>exposure data</strong>, respectively<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;If the data is not recorded this way, we suggest
-spliting both information into separate tables and then following the
+splitting both information into separate tables and then following the
 same functions provided by the package.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <!-- <img src="../man/figures/Illustration_data.pdf" alt="some text" width="4200" height="4200"> -->
 <p><img src="../reference/figures/Illustration_data.png"></p>
@@ -181,8 +181,8 @@ if the units are “seasons”, then do:</p>
 <details><summary>
 See the R-code
 </summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## a possible way for the case that each row in exposure data correspond to a</span></span>
-<span><span class="co">## season and there is nor more information about time of exposure</span></span>
+<code class="sourceCode R"><span><span class="co">## a possible way for the case where each row in exposure data correspond to a</span></span>
+<span><span class="co">## season and there is no more information about time of exposure</span></span>
 <span><span class="va">raw_df_exposures</span><span class="op">$</span><span class="va">time_expo_aux</span> <span class="op">&lt;-</span> <span class="fl">1</span> </span>
 <span><span class="va">df_exposures2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
 <span>                             player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
@@ -214,7 +214,7 @@ See the R-code
 <p>Then, we apply <code><a href="../reference/prepare_data.html">prepare_all()</a></code> to the data sets tidied up
 above. It is important to specify the unit of exposure,
 <code>exp_unit</code> argument, that must be one of “minutes”, “hours”,
-“days”, “matches_num”, “matches_minutes”, or “activity_days”,
+“days”, “matches_num”, “matches_minutes”, “activity_days” or
 “seasons”.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injd</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span>
@@ -241,7 +241,7 @@ above. It is important to specify the unit of exposure,
 <p>The outcome is a prepared data set, structured in an suitable way
 that is ready for its use by statistical modelling approaches. This data
 set will always have the columns listed below (standardized columns or
-created by the function), as well as further (optional) sports related
+created by the function), as well as further (optional) sports-related
 variables.</p>
 <ul>
 <li><p><code>player</code>: player identifier.</p></li>
@@ -291,12 +291,11 @@ number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
 <p>and have the following attributes:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; injd [82 × 19] (S3: injd/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; injd [108 × 19] (S3: injd/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
 <span><span class="co">#&gt;  - attr(*, "follow_up")= tibble [28 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  - attr(*, "data_exposures")='data.frame':   42 obs. of  16 variables:</span></span>
-<span><span class="co">#&gt;  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  - attr(*, "data_injuries_long")= tibble [164 × 3] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
 <ul>
 <li><p><code>unit_exposure</code>: a character indicating the unit of
 exposure time used in this object.</p></li>
@@ -307,9 +306,6 @@ player with their first and last dates observed (<code>t0</code> and
 frame.</p></li>
 <li><p><code>data_injuries</code>: the preprocessed injury data
 frame.</p></li>
-<li><p><code>data_injuries_long</code>: <code>data_injuries</code> data
-frame in long format in which each row corresponds to
-player-event_type.</p></li>
 </ul>
 <p>To extract one of the attributes, for example
 <code>unit_exposure</code>, type:</p>

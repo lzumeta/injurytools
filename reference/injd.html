@@ -34,7 +34,7 @@ raw_df_injuries (prepare_inj(raw_df_injuries, ...))."><meta property="og:image" 
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -120,7 +120,7 @@ and has 108 rows and 19 columns:</p><dl><dt>player</dt>
 <dd><p>Number of matches lost due to injury (numeric)</p></dd>
 
 <dt>injury</dt>
-<dd><p>Injury specification as it appears in <a href="https://wwww.transfermarkt.com" class="external-link">https://wwww.transfermarkt.com</a>, if any; otherwise NA (character)</p></dd>
+<dd><p>Injury specification as it appears in <a href="https://www.transfermarkt.com" class="external-link">https://www.transfermarkt.com</a>, if any; otherwise NA (character)</p></dd>
 
 <dt>injury_acl</dt>
 <dd><p>Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL); if the interval corresponds to an injury, NA otherwise (factor)</p></dd>
@@ -132,18 +132,18 @@ NA otherwise (factor)</p></dd>
 
 <dt>injury_severity</dt>
 <dd><p>A four level categorical variable indicating the
-severity of the injury, whether Minor (&lt;7 days lost), Moderate ([7, 28)
+severity of the injury (if any), whether Minor (&lt;7 days lost), Moderate ([7, 28)
 days lost), Severe ([28, 84) days lost) or Very_severe (&gt;=84 days lost);
-if any, NA otherwise (factor)</p></dd>
+NA otherwise (factor)</p></dd>
 
 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>It consists of a data frame plus 5 other attributes,
-a character specifying the unit of exposure (<code>unit_exposure</code>); and 4
-(auxiliary) data frames: <code>follow_up</code>, <code>data_exposures</code>,
-<code>data_injuries</code> and <code>data_injuries_long</code>.</p>
+    <p>It consists of a data frame plus 4 other attributes,
+a character specifying the unit of exposure (<code>unit_exposure</code>); and 3
+(auxiliary) data frames: <code>follow_up</code>, <code>data_exposures</code> and
+<code>data_injuries</code>.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

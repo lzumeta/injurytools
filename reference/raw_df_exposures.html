@@ -40,7 +40,7 @@ with rvest and xml2 packages."><meta property="og:image" content="https://lzumet
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a>
     <a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a>
-    <a class="dropdown-item" href="../articles/explore-injury-data.html">Visualize data</a>
+    <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -84,53 +84,52 @@ with <code>rvest</code> and <code>xml2</code> packages.</p>
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     <p>A data frame with 42 rows corresponding to 28 football players and 16
 variables:</p><dl><dt>player_name</dt>
-<dd><p>Name of the football player
-(factor)</p></dd>
- <dt>player_id</dt>
-<dd><p>Identification number of the football player
-(factor)</p></dd>
- <dt>season</dt>
-<dd><p>Season to which this player's entry corresponds
-(factor)</p></dd>
- <dt>year</dt>
+<dd><p>Name of the football player (factor)</p></dd>
+
+<dt>player_id</dt>
+<dd><p>Identification number of the football player (factor)</p></dd>
+
+<dt>season</dt>
+<dd><p>Season to which this player's entry corresponds (factor)</p></dd>
+
+<dt>year</dt>
 <dd><p>Year in which each season started (numeric)</p></dd>
 
 <dt>matches_played</dt>
-<dd><p>Matches played by the player in each season
-(numeric)</p></dd>
- <dt>minutes_played</dt>
-<dd><p>Minutes played by the player in each
-season (numeric)</p></dd>
- <dt>liga</dt>
-<dd><p>Name of the ligue where the player played in
-each season (factor)</p></dd>
- <dt>club_name</dt>
-<dd><p>Name of the club to which the player
-belongs in each season (factor)</p></dd>
- <dt>club_id</dt>
-<dd><p>Identification number of
-the club to which the player belongs in each season (factor)</p></dd>
+<dd><p>Matches played by the player in each season (numeric)</p></dd>
+
+<dt>minutes_played</dt>
+<dd><p>Minutes played by the player in each season (numeric)</p></dd>
+
+<dt>liga</dt>
+<dd><p>Name of the ligue where the player played in each season (factor)</p></dd>
+
+<dt>club_name</dt>
+<dd><p>Name of the club to which the player belongs in each season (factor)</p></dd>
+
+<dt>club_id</dt>
+<dd><p>Identification number of the club to which the player belongs in each season (factor)</p></dd>
 
 <dt>age</dt>
 <dd><p>Age of the player in each season (numeric)</p></dd>
- <dt>place</dt>
-<dd><p>Place
-of birth of each player (character)</p></dd>
- <dt>position</dt>
-<dd><p>Position of the player
-on the pitch (factor)</p></dd>
- <dt>foot</dt>
-<dd><p>Dominant leg of the player. One of both,
-left or right (factor)</p></dd>
- <dt>goals</dt>
-<dd><p>Number of goals scored by the player
-in that season (numeric)</p></dd>
- <dt>assists</dt>
-<dd><p>Number of assists provided by the
-player in that season (numerical)</p></dd>
- <dt>reds</dt>
-<dd><p>Number of the red cards
-given to the player in that season (numeric)</p></dd>
+
+<dt>place</dt>
+<dd><p>Place of birth of each player (character)</p></dd>
+
+<dt>position</dt>
+<dd><p>Position of the player on the pitch (factor)</p></dd>
+
+<dt>foot</dt>
+<dd><p>Dominant leg of the player. One of both, left or right (factor)</p></dd>
+
+<dt>goals</dt>
+<dd><p>Number of goals scored by the player in that season (numeric)</p></dd>
+
+<dt>assists</dt>
+<dd><p>Number of assists provided by the player in that season (numerical)</p></dd>
+
+<dt>reds</dt>
+<dd><p>Number of the red cards given to the player in that season (numeric)</p></dd>
  
 </dl></div>
     <div class="section level2">
