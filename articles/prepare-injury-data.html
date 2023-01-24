@@ -157,10 +157,11 @@ consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www
 <span><span class="co">#&gt; 4 right     3       7    0</span></span>
 <span><span class="co">#&gt; 5 right     0       0    0</span></span>
 <span><span class="co">#&gt; 6  left     1       5    0</span></span></code></pre></div>
-<p>We standardize the key column names such as, player (subject)
-identifier, dates of injury and recovery (if any), training/match/season
-date and amount of time of exposure, and set them proper formats by
-means of <code><a href="../reference/prepare_data.html">prepare_inj()</a></code> and <code><a href="../reference/prepare_data.html">prepare_exp()</a></code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The &lt;code&gt;date&lt;/code&gt; argument should be either of class
+<p>We standardize the <strong>key column names</strong> such as: player
+(subject) identifier, dates of injury and recovery (if any),
+training/match/season date and amount of time of exposure. And set them
+proper names and formats by means of <code><a href="../reference/prepare_data.html">prepare_inj()</a></code> and
+<code><a href="../reference/prepare_data.html">prepare_exp()</a></code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The &lt;code&gt;date&lt;/code&gt; argument should be either of class
 &lt;em&gt;Date&lt;/em&gt;, given in “%Y-%m-%d” format, or of class
 &lt;em&gt;integer&lt;/em&gt;/&lt;em&gt;numeric&lt;/em&gt;, a 4-digit integer referring to year
 in which the season started.&lt;/p&gt;"><sup>2</sup></a>.</p>
@@ -188,6 +189,8 @@ See the R-code
 <span>                             player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                             date          <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>                             time_expo     <span class="op">=</span> <span class="st">"time_expo_aux"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## note 'tstart_s' and 'tstop_s' columns</span></span>
 <span><span class="va">injd</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures2</span>,</span>
 <span>                     data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span>
 <span>                     exp_unit <span class="op">=</span> <span class="st">"seasons"</span><span class="op">)</span></span>
@@ -249,8 +252,8 @@ variables.</p>
 corresponding player, i.e. player’s first and last dates observed (same
 value for each <code>player</code>).</p></li>
 <li><p><code>date_injured</code> and <code>date_recovered</code>: dates
-of injury and recovery of the corresponding observation (if any;
-otherwise <code>NA</code>).</p></li>
+of injury and recovery of the corresponding observation (if any).
+Otherwise <code>NA</code>.</p></li>
 <li><p><code>tstart</code> and <code>tstop</code>: beginning and ending
 dates of the corresponding interval in which the observation has been at
 risk of injury.</p></li>

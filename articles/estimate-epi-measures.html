@@ -157,7 +157,7 @@ interpreted as a probability; they are rates and their unit
 of player-exposure, per player-season etc.).</p>
 </div>
 <div class="alert alert-warning" role="alert">
-<p><strong>NOTE 3:</strong> as <span class="citation">Waldén et al. (<a href="#ref-walden2023" role="doc-biblioref">2023</a>)</span> points out,
+<p><strong>NOTE 3:</strong> as <span class="citation">Waldén et al. (<a href="#ref-walden2023" role="doc-biblioref">2023</a>)</span> point out,
 incidence-based measures that provide a standard time-window for the
 population at risk (injuries per hour) are preferable to measures for
 which the time at risk varies across individuals (injuries per
@@ -231,10 +231,10 @@ consists of,</p>
 <code>injds[[1]]</code> (or <code>injds[["playerwise"]]</code>) and
 <code>injds[[2]]</code> (<code>injds[["overal"]]</code>).</p>
 <p>To present the results in a more tidier and comprehensible way
-(instead of <strong>R</strong> code styled output) using <a href="https://rmarkdown.rstudio.com/" class="external-link">RMarkdown</a>, and in particular,
-<code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> function, the following can be done:</p>
+(instead of <strong>R</strong> code styled output) the following can be
+done:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># format the table of playerwise dataframe</span></span>
+<code class="sourceCode R"><span><span class="co"># format the 'playerwise' data frame for output as a table</span></span>
 <span><span class="va">injds</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">injincidence</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># sort by decreasing order of injincidence</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -564,8 +564,10 @@ james-milner
 </tr>
 </tbody>
 </table>
+<p>Using <a href="https://rmarkdown.rstudio.com/" class="external-link">RMarkdown</a>, and in
+particular, <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden main columns</span></span>
+<code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden (main columns)</span></span>
 <span><span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>row.names <span class="op">=</span> <span class="st">"TOTAL"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -635,7 +637,7 @@ TOTAL
 </tr></tbody>
 </table>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden point + ci estimates</span></span>
+<code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden (point + ci estimates)</span></span>
 <span><span class="va">injds_tot_cis</span> <span class="op">&lt;-</span> <span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>row.names <span class="op">=</span> <span class="st">"TOTAL"</span><span class="op">)</span></span>
@@ -987,8 +989,8 @@ Injured
 </tr>
 </tbody>
 </table>
-<p>Overall in the 18-19 season there were more injured players than in
-the previous season. Let’s calculate monthly:</p>
+<p>Overall, there were more injured players in the 18-19 season than in
+the previous season. Let’s calculate it monthly:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">availability_table2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span>
 <span></span>
@@ -1026,7 +1028,7 @@ the previous season. Let’s calculate monthly:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> season 2018/2019 Jan   Injured        10       19  52.6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> season 2018/2019 Feb   Available      12       19  63.2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> season 2018/2019 Feb   Injured         7       19  36.8</span></span></code></pre></div>
-<p>Looking at monthly basis there were more differences w.r.t. player
+<p>Looking at monthly basis, there were more differences w.r.t. player
 availability in Liverpool FC 1st male team, during the winter
 January/February months. More injured players in the 18-19 season.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
