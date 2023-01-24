@@ -86,7 +86,7 @@
 #' @importFrom dplyr filter mutate select
 #' @importFrom checkmate assert checkClass assert_subset
 #' @importFrom stats qnorm quantile median
-#' @importFrom tidyselect everything
+#' @importFrom tidyselect everything all_of
 #'
 #' @examples
 #' # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
@@ -183,7 +183,7 @@ injsummary <- function(injd, var_type_injury = NULL,
                                       ~ifelse(is.na(.), 0, .)),
                         percent_ninjuries = round(.data$ninjuries*100/sum(.data$ninjuries), 2),
                         percent_dayslost  = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) %>%
-          dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
+          dplyr::select(tidyselect::all_of(var_type_injury), "ninjuries", "percent_ninjuries",
                         "ndayslost", "percent_dayslost", tidyselect::everything()) # order the column names
       } else .
     }
@@ -201,7 +201,7 @@ injsummary <- function(injd, var_type_injury = NULL,
       dplyr::rename(mean_dayslost   = "mean_dayslost.y",
                     median_dayslost = "median_dayslost.y",
                     iqr_dayslost    = "iqr_dayslost.y") %>%
-      dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
+      dplyr::select(tidyselect::all_of(var_type_injury), "ninjuries", "percent_ninjuries",
                     "ndayslost", "percent_dayslost", "mean_dayslost",
                     "median_dayslost","iqr_dayslost", tidyselect::everything(),
                     -"mean_dayslost.x", -"median_dayslost.x", -"iqr_dayslost.x")
