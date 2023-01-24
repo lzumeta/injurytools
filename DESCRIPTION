@@ -1,6 +1,6 @@
 Package: injurytools
 Title: A Toolkit for Sports Injury Data Analysis
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
     person(given = "Lore",
            family = "Zumeta Olaskoaga",
