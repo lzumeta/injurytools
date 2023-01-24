@@ -18,7 +18,7 @@ license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://open
 
 ## Overview
 
-**`injurytools`** is a package aimed at Sports Medicine: it facilitates
+**`injurytools`** is a package aimed at Sports Medicine that facilitates
 the data analysis workflow by providing convenience functions and handy
 tools for sports injury data.
 
