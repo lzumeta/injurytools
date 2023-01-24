@@ -20,7 +20,7 @@ environment:
   # USE_RTOOLS: true
   # R_REMOTES_STANDALONE: true
 
-  # Adapt as necessary starting from here
+# Adapt as necessary starting from here
 
 build_script:
   - travis-tool.sh install_deps
