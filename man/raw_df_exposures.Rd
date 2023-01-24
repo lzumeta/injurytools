@@ -6,23 +6,23 @@
 \title{Minimal example of exposure data}
 \format{
 A data frame with 42 rows corresponding to 28 football players and 16
-variables: \describe{ \item{player_name}{Name of the football player
-(factor)} \item{player_id}{Identification number of the football player
-(factor)} \item{season}{Season to which this player's entry corresponds
-(factor)} \item{year}{Year in which each season started (numeric)}
-\item{matches_played}{Matches played by the player in each season
-(numeric)} \item{minutes_played}{Minutes played by the player in each
-season (numeric)} \item{liga}{Name of the ligue where the player played in
-each season (factor)} \item{club_name}{Name of the club to which the player
-belongs in each season (factor)} \item{club_id}{Identification number of
-the club to which the player belongs in each season (factor)}
-\item{age}{Age of the player in each season (numeric)} \item{place}{Place
-of birth of each player (character)} \item{position}{Position of the player
-on the pitch (factor)} \item{foot}{Dominant leg of the player. One of both,
-left or right (factor)} \item{goals}{Number of goals scored by the player
-in that season (numeric)} \item{assists}{Number of assists provided by the
-player in that season (numerical)} \item{reds}{Number of the red cards
-given to the player in that season (numeric)} }
+variables: \describe{
+\item{player_name}{Name of the football player (factor)}
+\item{player_id}{Identification number of the football player (factor)}
+\item{season}{Season to which this player's entry corresponds (factor)}
+\item{year}{Year in which each season started (numeric)}
+\item{matches_played}{Matches played by the player in each season (numeric)}
+\item{minutes_played}{Minutes played by the player in each season (numeric)}
+\item{liga}{Name of the ligue where the player played in each season (factor)}
+\item{club_name}{Name of the club to which the player belongs in each season (factor)}
+\item{club_id}{Identification number of the club to which the player belongs in each season (factor)}
+\item{age}{Age of the player in each season (numeric)}
+\item{place}{Place of birth of each player (character)}
+\item{position}{Position of the player on the pitch (factor)}
+\item{foot}{Dominant leg of the player. One of both, left or right (factor)}
+\item{goals}{Number of goals scored by the player in that season (numeric)}
+\item{assists}{Number of assists provided by the player in that season (numerical)}
+\item{reds}{Number of the red cards given to the player in that season (numeric)} }
 }
 \source{
 \url{https://www.transfermarkt.com/}

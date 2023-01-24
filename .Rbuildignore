@@ -5,6 +5,7 @@
 ^pkgdown$
 ^\.github$
 ^codecov\.yml$
+^appveyor\.yml$
 ^doc$
 ^Meta$
 ^README.Rmd

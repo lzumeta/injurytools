@@ -20,7 +20,7 @@ NULL
 #> NULL
 #'
 #' @rdname prepare_data
-#' @param df_injuries0 A data frame containing injury information, i.e. columns
+#' @param df_injuries0 A data frame containing injury information, with columns
 #'   referring to the player name/id, date of injury and date of recovery (as
 #'   minimal data).
 #' @param player Character referring to the column name where player information
@@ -30,8 +30,8 @@ NULL
 #' @param date_recovered Character referring to the column name where the
 #'   information about the date of recovery is stored.
 #'
-#' @return \code{prepare_inj()} returns a data frame in which the key columns in
-#'   injury data are standardized and have a proper format.
+#' @return \code{prepare_inj()} returns a data frame in which the \strong{key
+#'   columns} in injury data are standardized and have a proper format.
 #'
 #' @importFrom checkmate assert
 #' @importFrom checkmate checkClass checkMultiClass
@@ -73,8 +73,8 @@ prepare_inj <- function(df_injuries0,
 
 
 #' @rdname prepare_data
-#' @param df_exposures0 A data frame containing exposure information, i.e.
-#'   columns referring to the player name/id, date of exposure, and the total
+#' @param df_exposures0 A data frame containing exposure information, with
+#'   columns referring to the player name/id, date of exposure and the total
 #'   time of exposure of the corresponding data entry (as minimal data).
 #' @param player Character referring to the column name where player information
 #'   is stored.
@@ -88,8 +88,8 @@ prepare_inj <- function(df_injuries0,
 #' @param time_expo Character referring to the column name where the information
 #'   about the time of exposure in that corresponding date is stored.
 #'
-#' @return \code{prepare_exp()} returns a data frame in which the key columns in
-#'   exposure data are standardized and have a proper format.
+#' @return \code{prepare_exp()} returns a data frame in which the \strong{key
+#'   columns} in exposure data are standardized and have a proper format.
 #'
 #' @importFrom tidyselect all_of
 #' @export
@@ -112,8 +112,8 @@ prepare_exp <- function(df_exposures0,
     checkClass(df_exposures0[[time_expo]], "numeric"),
     combine = "and"
   )
-  if (class(date) %in% c("integer", "numeric")) {
-    if (all(nchar(as.character(date)) != 4)) {
+  if (class(df_exposures0[[date]]) %in% c("integer", "numeric")) {
+    if (any(nchar(as.character(df_exposures0[[date]])) != 4)) {
       stop("If the 'date' column is numeric, it must refer to the year")
     }
   }
@@ -148,7 +148,7 @@ data_followup <- function(data_exposures) {
   ## check inputs
   assert(checkMultiClass(data_exposures[["date"]], c("Date", "numeric", "integer")))
   if (class(data_exposures$date) %in% c("integer", "numeric")) {
-    if (all(nchar(as.character(data_exposures$date)) != 4)) {
+    if (any(nchar(as.character(data_exposures$date)) != 4)) {
       stop("If the 'date' column is numeric, it must refer to the year")
     }
   }
@@ -169,25 +169,6 @@ data_followup <- function(data_exposures) {
   return(followup_df)
 }
 
-
-#' Transform injury data into a long format
-#'
-#' @inheritParams prepare_all
-#'
-#' @return The \code{data_injuries} data frame in long format in which each row
-#'   corresponds to player-event.
-#' @importFrom rlang .data :=
-#' @importFrom dplyr select arrange mutate
-#' @importFrom tidyr gather
-#' @importFrom tidyselect all_of
-#' @keywords internal
-data_injuarieslong <- function(data_injuries) {
-  data_injuries %>%
-    dplyr::select("player", "date_injured", "date_recovered") %>%
-    tidyr::gather(key = "event", value = "date", "date_injured", "date_recovered") %>%
-    dplyr::arrange(.data$player, .data$date) %>%
-    dplyr::mutate(event = factor(.data$event))
-}
 
 #' @rdname prepare_data
 #' @param data_exposures Exposure data frame with standardized column names, in
@@ -232,13 +213,14 @@ data_injuarieslong <- function(data_injuries) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' injd <- prepare_all(data_exposures = df_exposures,
 #'                     data_injuries  = df_injuries,
 #'                     exp_unit = "matches_minutes")
 #' head(injd)
 #' class(injd)
 #' str(injd, 1)
-#'
+#' }
 prepare_all <- function(data_exposures,
                         data_injuries,
                         exp_unit = c("minutes", "hours", "days",
@@ -263,7 +245,7 @@ prepare_all <- function(data_exposures,
   injd <- injd %>%
     dplyr::group_by(.data$player) %>%
     dplyr::slice(1:n(), n()) %>%  ## copy last row
-    dplyr::mutate_at(vars(-"player", -"t0", "tf"), ~replace(.x, row_number() == n(), NA)) %>%
+    dplyr::mutate_at(vars(-"player", -"t0", -"tf"), ~replace(.x, row_number() == n(), NA)) %>%
     ## edit this last row with slice and add NAs at every variable except for (Jug, t0, tf)
     ## This step is done in order to arrive until the last follow-up date
     ## (base::replace() in order to keep the columns type such as Team) BEFORE: c(.x[-n()], NA).
@@ -273,9 +255,11 @@ prepare_all <- function(data_exposures,
     dplyr::select("player", "t0", "tf", "date_injured", "date_recovered", "tstart", "tstop", tidyselect::everything()) %>%
     dplyr::ungroup()
 
-  ## Delete those players' observations whose recovery date is later than the end of her follow-up
+  ## Fill tstop for non-injured players and delete those players' observations whose
+  ## recovery date is later than the end of her follow-up
   injd <- injd %>%
     dplyr::group_by(.data$player) %>%
+    dplyr::mutate_at(vars("tstop"), ~replace(.x, row_number() == 1 & is.na(.x), as.Date(.data$tf)[1])) %>%
     dplyr::filter(.data$tstart <= .data$tstop) %>%
     droplevels() %>%
     dplyr::ungroup()
@@ -333,7 +317,6 @@ prepare_all <- function(data_exposures,
   attr(injd, "follow_up") <- followup_df
   attr(injd, "data_exposures") <- data_exposures %>% select(-"date_aux")
   attr(injd, "data_injuries") <- data_injuries
-  attr(injd, "data_injuries_long")  <- data_injuarieslong(data_injuries)
   return(injd)
 }
 
@@ -346,59 +329,4 @@ prepare_all <- function(data_exposures,
 #' @export
 is_injd <- function(x) inherits(x, "injd")
 
-
-
-
-## deprecated
-# prepare_all <- function(...) {
-#   ...
-#   1) and 2) BEFORE
-#   injd$tstart_min <- 0
-#   injd$tstop_min <- 0
-#   for (i in seq_len(nrow(injd))) {
-#     play <- injd$player[[i]]
-#     tstart <- injd$tstart[[i]]
-#     tstop <- injd$tstop[[i]]
-#
-#     ## Minutes (calendar time)
-#     # injd$time_min[[i]] <- sum(exposures_fem[exposures_fem$player %in% jug & exposures_fem$Fecha >= t0 & exposures_fem$Fecha <= tf, "Tiempo"])
-#     injd$tstop_min[[i]] <- pdata_exposures %>%   ## lo mismo
-#       dplyr::filter(player %in% play, date >= tstart, date < tstop) %>%
-#       dplyr::select(time_expo) %>%
-#       .[[1]] %>%
-#       sum()
-#   }
-#
-#   # 2) ALTERNATIVE WAY NOW
-#   # Below: before for loop; Now instead of a for loop with purrr (functional programming), faster.
-#   for (i in seq_len(nrow(injd))) {
-#     playr <- injd$player[[i]]
-#     tstart <- injd$tstart[[i]]
-#     tstop <- injd$tstop[[i]]
-#
-#     # injd$time_min[[i]] <- sum(exposures_fem[exposures_fem$player %in% jug & exposures_fem$Fecha >= t0 & exposures_fem$Fecha <= tf, "Tiempo"])
-#     injd[[tstop_unx]][[i]] <- data_exposures %>%   ## the same
-#       dplyr::filter(.data$player %in% playr, .data$date >= tstart, .data$date < tstop) %>%
-#       dplyr::select(.data$time_expo) %>%
-#       .[[1]] %>%
-#       sum()
-#   }
-#
-#   # 3) Add enum, status and days_lost columns, edit tstop_min and tstart_min
-#   injd <- injd %>%
-#     dplyr::group_by(player) %>%
-#     dplyr::mutate(
-#       tstop_min = cumsum(tstop_min),
-#       tstart_min = dplyr::lag(tstop_min, default = 0),
-#       enum = dplyr::lag(1 * (!is.na(date_injured)), default = 0),
-#       enum =  cumsum(enum) + 1,
-#       status = dplyr::if_else(is.na(date_injured), 0, 1),
-#       days_lost = as.numeric(difftime(date_recovered, date_injured, "days"))
-#     ) %>%
-#     dplyr::ungroup() %>%
-#     dplyr::select(player, t0, tf, date_injured, date_recovered, tstart, tstop,
-#                   tstart_min, tstop_min, status, enum, days_lost,
-#                   dplyr::everything())
-#   ...
-# }
 

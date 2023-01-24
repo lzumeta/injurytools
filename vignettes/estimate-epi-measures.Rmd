@@ -1,5 +1,5 @@
 ---
-title: "Estimate Measures for Injury Epidemiology"
+title: "Estimate Measures of Injury Epidemiology"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,6 +9,7 @@ vignette: >
 bibliography: refs.bib
 link-citations: yes
 ---
+
 
 ```{r, include = FALSE}
 library(knitr)
@@ -56,11 +57,12 @@ library(knitr)
 library(kableExtra)
 ```
 
-Whenever the data are collected and prepared, it is important and straightforward to summarize and explore them. As it is important to know how many injuries or what type of injuries occurred, from a more applied point of view to sport.
+Whenever one collects and prepares the data, the next natural step is to summarize and explore these data. In this case, from a sports-applied point of view, one wants to know how many and what type of injuries have occurred, how often they have occurred or what the load has been.
 
-This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003). Below, these measures are explained and then, `injsummary()` and `injprop()` functions are illustrated.
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003 and @walden2023). Below, these measures are explained and then, `injsummary()` and `injprev()` functions are illustrated.
 
-# Rates
+# Measures of occurrence
+## Rates
 
 As @Hodgson2000 state,
 
@@ -68,16 +70,16 @@ As @Hodgson2000 state,
 
 Thus, when attempting to describe the distribution of injuries it is necessary to relate this to the population at risk over a specified time period. This is why the fundamental unit of measurement is **rate**.
 
-A rate is a measure that consists of a denominator and a numerator over a period of time. Denominator data can be a number of different things (e.g. number of minutes trained/played, number of matches played). As such, it reflects the speed at which new "injury-related" events occurs.
+A rate is a measure that consists of a denominator and a numerator over a period of time. Denominator data can be a number of different things (e.g. number of minutes trained/played, number of matches played). As such, it reflects the speed at which new "injury-related" events occur.
 
-## Injury incidence rate
+### Injury incidence rate
 
 **Injury incidence rate** is the number of new injury cases ($I$) per unit of player-exposure time, i.e.
 
 $$ I_{r} = \frac{I}{\Delta T}$$
 where $\Delta T$ is the total time under risk of the study population.
 
-## Injury burden rate
+### Injury burden rate
 
 **Injury burden rate** is the number of days lost ($n_d$) per unit of player-exposure time, i.e.
 
@@ -90,14 +92,19 @@ where $\Delta T$ is the total time under risk of the study population.
 </div>
 
 <div class="alert alert-warning" role="alert">
-  **NOTE 2:** neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.).
-
+  **NOTE 2:** neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.). 
 </div>
 
+<div class="alert alert-warning" role="alert">
+**NOTE 3:** as @walden2023 points out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
+</div>
 
-## Availability
+## Prevalence
 
-**Availability** is the number of players free of injury ("available") over the total number of players in the study population in specified period of time. 
+**Prevalence**, period prevalence, is a proportion that refers to the number of players that has reported the injury of interest ($X$) divided by the total player-population at risk at any time during the specified period of time ($\Delta T$ time window). This includes players who already had the condition at the start of the study period as well as those who acquired it during that period.
+
+$$P = \frac{X}{N}$$
+where $X$ is the number of injury cases and $N$ the total number of players in the study at any point in the window of time $\Delta T$.
 
 # In practice
 
@@ -137,7 +144,7 @@ We notice that it throws some warning messages (unless `quiet = TRUE`). They are
 What `injsummary()` returns as its output is a list of two elements, i.e. the output stored (here) in the `injds` object consists of,
 
 ```{r}
-str(injds,1)
+str(injds, 1)
 ```
 
 two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
@@ -145,21 +152,22 @@ two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `
 To present the results in a more tidier and comprehensible way (instead of **R** code styled output) using [RMarkdown](https://rmarkdown.rstudio.com/), and in particular, `knitr::kable()` function, the following can be done:
 
 ```{r}
-# format the table for playerwise dataframe
+# format the table of playerwise dataframe
 injds[[1]] %>% 
   arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
+  head(10) %>%
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
-                                  "Median days lost", "IQR days lost",
+                                  "Mean days lost", "Median days lost", "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
 ```
 
 ```{r}
-# format the table for total incidence and burden main columns
+# format the table of total incidence and burden main columns
 injds[[2]] %>% 
-  select(1:7) %>% 
+  select(1:8) %>% 
   data.frame(row.names = "TOTAL") %>% 
   kable(digits = 2,
-        col.names = c("N injuries", "N days lost",
+        col.names = c("N injuries", "N days lost", "Mean days lost",
                       "Median days lost", "IQR days lost",
                       "Total exposure", "Incidence", "Burden"),
         row.names = TRUE) %>% 
@@ -167,7 +175,7 @@ injds[[2]] %>%
 ```
 
 ```{r}
-# format the table for total incidence and burden point + ci estimates
+# format the table of total incidence and burden point + ci estimates
 injds_tot_cis <- injds[[2]] %>% 
   select(6:last_col()) %>% 
   data.frame(row.names = "TOTAL")
@@ -190,14 +198,14 @@ Players with the highest injury incidence rate (all type of injuries) were Adam 
 These summaries can be done by injury type:
 
 ```{r}
-injstats_pertype <- injsummary(injd, var_type_injury = "injury_type")
+injstats_pertype <- injsummary(injd, var_type_injury = "injury_type", quiet = T)
 ```
 
 These are the teams results regarding injury incidence and injury burden according to injury type:
 
 ```{r}
 injstats_pertype[["overall"]] %>% 
-  select(1:10) %>% 
+  select(1:5, 7:11) %>% 
   mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
          ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
          median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) %>% 
@@ -212,7 +220,7 @@ injstats_pertype[["overall"]] %>%
 ```
 
 
-## - `injprop()`
+## - `injprev()`
 
 <details>
 
@@ -231,10 +239,10 @@ injd         <- prepare_all(data_exposures = df_exposures,
 ```
 </details>
 
-We calculate the proportions of injured and healthy players on a season basis:
+We calculate the injury prevalence and the proportions of injury-free players on a season basis:
 
 ```{r}
-availability_table1 <- injprop(injd, by = "season")
+availability_table1 <- injprev(injd, by = "season")
 availability_table1
 ```
 
@@ -248,7 +256,7 @@ kable(availability_table1,
 Overall in the 18-19 season there were more injured players than in the previous season. Let's calculate monthly:
 
 ```{r}
-availability_table2 <- injprop(injd, by = "monthly")
+availability_table2 <- injprev(injd, by = "monthly")
 
 ## compare two seasons July and August
 availability_table2 %>%
@@ -266,7 +274,7 @@ Looking at monthly basis there were more differences w.r.t. player availability 
 
 
 ```{r}
-availability_table3 <- injprop(injd, by = "monthly", var_type_injury = "injury_type")
+availability_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
 ```
 
 Tidy up:
@@ -305,7 +313,7 @@ availability_table3 %>%
 
 In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in `injsummary()` function.
 
-Finally, this document shows how to perform statistical descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
+Finally, this document shows how to perform descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
 
 # References
 

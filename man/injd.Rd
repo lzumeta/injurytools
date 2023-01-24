@@ -23,15 +23,15 @@ and has 108 rows and 19 columns:
 \item{player_id}{Identification number of the football player (factor)}
 \item{season}{Season to which this player's entry corresponds (factor)}
 \item{games_lost}{Number of matches lost due to injury (numeric)}
-\item{injury}{Injury specification as it appears in \url{https://wwww.transfermarkt.com}, if any; otherwise NA (character)}
+\item{injury}{Injury specification as it appears in \url{https://www.transfermarkt.com}, if any; otherwise NA (character)}
 \item{injury_acl}{Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL); if the interval corresponds to an injury, NA otherwise (factor)}
 \item{injury_type}{A five level categorical variable indicating the type
 of injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any,
 NA otherwise (factor)}
 \item{injury_severity}{A four level categorical variable indicating the
-severity of the injury, whether Minor (<7 days lost), Moderate ([7, 28)
+severity of the injury (if any), whether Minor (<7 days lost), Moderate ([7, 28)
 days lost), Severe ([28, 84) days lost) or Very_severe (>=84 days lost);
-if any, NA otherwise (factor)}
+NA otherwise (factor)}
 }
 }
 \usage{
@@ -45,9 +45,9 @@ provided by the package. The result of applying \code{prepare_all()} to to
 \emph{raw_df_injuries} (\code{prepare_inj(raw_df_injuries, ...)}).
 }
 \details{
-It consists of a data frame plus 5 other attributes,
-a character specifying the unit of exposure (\code{unit_exposure}); and 4
-(auxiliary) data frames: \code{follow_up}, \code{data_exposures},
-\code{data_injuries} and \code{data_injuries_long}.
+It consists of a data frame plus 4 other attributes,
+a character specifying the unit of exposure (\code{unit_exposure}); and 3
+(auxiliary) data frames: \code{follow_up}, \code{data_exposures} and
+\code{data_injuries}.
 }
 \keyword{datasets}

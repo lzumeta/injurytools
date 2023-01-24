@@ -42,6 +42,8 @@ data frame.
 \item \code{ndayslost}: number of days lost by the player or overall
 in the team due to injury over the given period specified by the
 \code{injd} data frame.
+\item \code{mean_dayslost}: average of number of days lost (i.e.
+\code{ndayslost}) playerwise or overall in the team.
 \item \code{median_dayslost}: median of number of days lost (i.e.
 \code{ndayslost}) playerwise or overall in the team.
 \item \code{iqr_dayslost}: interquartile range of number of days lost
@@ -66,7 +68,7 @@ because of injuries of that type relative to the total number of days
 lost because of all types of injuries (if \code{var_type_injury}
 specified).
 \item \code{injincidence_sd} and \code{injburden_sd}: estimated standard
-deviation, by the specified \code{method} parameter, of injury incidence
+deviation, by the specified \code{method} argument, of injury incidence
 (\code{injincidence}) and injury burden (\code{injburden}), for the
 overall injury summary statistics (the 2nd element of the function
 output).
@@ -81,10 +83,10 @@ above item) applies but for the upper bound.
 }
 \description{
 Calculate injury summary statistics such as injury incidence and injury
-burden (see Bahr et al. 20), including total number of injuries, number of days lost due
-to injury, total time of exposure etc., by means of a classic-standard
-(Poisson) method, negative binomial, zero-inflated poisson or zero-inflated
-negative binomial, on a player and overall basis.
+burden (see Bahr et al. 20), including total number of injuries, number of
+days lost due to injury, total time of exposure etc., by means of a (widely
+used) Poisson method, negative binomial, zero-inflated poisson or
+zero-inflated negative binomial, on a player and overall basis.
 }
 \examples{
 # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
@@ -102,4 +104,10 @@ Bahr R., Clarsen B., & Ekstrand J. (2018). Why we should focus on the burden
 of injuries and illnesses, not just their incidence. \emph{British Journal of
 Sports Medicine}, 52(16), 1018–1021.
 https://doi.org/10.1136/bjsports-2017-098160
+
+Waldén M., Mountjoy M., McCall A., Serner A., Massey A., Tol J. L.,
+... & Andersen T. E. (2023). Football-specific extension of the IOC
+consensus statement: methods for recording and reporting of epidemiological
+data on injury and illness in sport 2020. \emph{British journal of sports
+medicine}.
 }

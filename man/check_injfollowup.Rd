@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{check_injfollowup}
 \alias{check_injfollowup}
-\title{Check that dates in injury data and exposure data}
+\title{Check the dates in injury data and exposure data}
 \usage{
 check_injfollowup(followup_df, data_injuries)
 }
@@ -12,8 +12,8 @@ check_injfollowup(followup_df, data_injuries)
 \item{data_injuries}{Data frame given in prepare_all() function.}
 }
 \value{
-Same injury data or cut in which the dates of injury occurrences
-are within the dates of each player's follow-up period.
+Same injury data or cut injury data in which the dates of injury
+occurrences are within the dates of each player's follow-up period.
 }
 \description{
 Check that dates of injury data are within the dates of exposure data.

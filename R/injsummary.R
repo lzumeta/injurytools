@@ -1,10 +1,10 @@
 #' Injury summary statistics
 #'
 #' Calculate injury summary statistics such as injury incidence and injury
-#' burden (see Bahr et al. 20), including total number of injuries, number of days lost due
-#' to injury, total time of exposure etc., by means of a classic-standard
-#' (Poisson) method, negative binomial, zero-inflated poisson or zero-inflated
-#' negative binomial, on a player and overall basis.
+#' burden (see Bahr et al. 20), including total number of injuries, number of
+#' days lost due to injury, total time of exposure etc., by means of a (widely
+#' used) Poisson method, negative binomial, zero-inflated poisson or
+#' zero-inflated negative binomial, on a player and overall basis.
 #'
 #' @param injd \code{injd} \strong{S3} object (see
 #'   \code{\link[=prepare_all]{prepare_all()}}).
@@ -30,6 +30,8 @@
 #'        \item \code{ndayslost}: number of days lost by the player or overall
 #'        in the team due to injury over the given period specified by the
 #'        \code{injd} data frame.
+#'        \item \code{mean_dayslost}: average of number of days lost (i.e.
+#'        \code{ndayslost}) playerwise or overall in the team.
 #'        \item \code{median_dayslost}: median of number of days lost (i.e.
 #'        \code{ndayslost}) playerwise or overall in the team.
 #'        \item \code{iqr_dayslost}: interquartile range of number of days lost
@@ -54,7 +56,7 @@
 #'      lost because of all types of injuries (if \code{var_type_injury}
 #'      specified).
 #'      \item \code{injincidence_sd} and \code{injburden_sd}: estimated standard
-#'      deviation, by the specified \code{method} parameter, of injury incidence
+#'      deviation, by the specified \code{method} argument, of injury incidence
 #'      (\code{injincidence}) and injury burden (\code{injburden}), for the
 #'      overall injury summary statistics (the 2nd element of the function
 #'      output).
@@ -73,6 +75,12 @@
 #'  of injuries and illnesses, not just their incidence. \emph{British Journal of
 #'  Sports Medicine}, 52(16), 1018–1021.
 #'  https://doi.org/10.1136/bjsports-2017-098160
+#'
+#'  Waldén M., Mountjoy M., McCall A., Serner A., Massey A., Tol J. L.,
+#'  ... & Andersen T. E. (2023). Football-specific extension of the IOC
+#'  consensus statement: methods for recording and reporting of epidemiological
+#'  data on injury and illness in sport 2020. \emph{British journal of sports
+#'  medicine}.
 #'
 #' @importFrom rlang .data ensym
 #' @importFrom dplyr filter mutate select
@@ -113,8 +121,8 @@ injsummary <- function(injd, var_type_injury = NULL,
     }
     quit_players <- df_exposures_summary %>%
       dplyr::filter(.data$totalexpo == 0) %>%
-      select("player") %>%
-      dplyr::pull() %>%
+      dplyr::select("player") %>%
+      .[[1]] %>%
       as.character()
     injd <- injd %>%
       dplyr::filter(.data$player != quit_players) %>%
@@ -128,13 +136,14 @@ injsummary <- function(injd, var_type_injury = NULL,
   injds <- injd %>%
     dplyr::left_join(df_exposures_summary, by = "player") %>%
     dplyr::group_by(.data$player, {{ var_type_injury }}) %>%
-    dplyr::summarise(ninjuries = sum(.data$status),
-                     ndayslost = sum(.data$days_lost),
+    dplyr::summarise(ninjuries       = sum(.data$status),
+                     ndayslost       = sum(.data$days_lost),
+                     mean_dayslost   = mean(.data$days_lost),
                      median_dayslost = stats::median(.data$days_lost),
-                     iqr_dayslost = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75)),
-                     totalexpo = dplyr::first(.data$totalexpo),
-                     injincidence = .data$ninjuries/.data$totalexpo,
-                     injburden = .data$ndayslost/.data$totalexpo,
+                     iqr_dayslost    = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75)),
+                     totalexpo       = dplyr::first(.data$totalexpo),
+                     injincidence    = .data$ninjuries/.data$totalexpo,
+                     injburden       = .data$ndayslost/.data$totalexpo,
                      .groups = "keep") %>%
     dplyr::ungroup() %>%
     {
@@ -154,45 +163,48 @@ injsummary <- function(injd, var_type_injury = NULL,
   injds_overall <-  injds %>%
     dplyr::select("player", "ninjuries", "ndayslost", "totalexpo", {{var_type_injury}}) %>%
     dplyr::group_by({{ var_type_injury }}) %>%
-    dplyr::summarise(ninjuries = sum(.data$ninjuries),
-                     ndayslost = sum(.data$ndayslost),
+    dplyr::summarise(ninjuries       = sum(.data$ninjuries),
+                     ndayslost       = sum(.data$ndayslost),
+                     mean_dayslost   = mean(injd$days_lost),
                      median_dayslost = stats::median(injd$days_lost), ## Important: median of injd$days_lost and not .data$...
-                     iqr_dayslost = paste0(stats::quantile(injd$days_lost, 0.25), "-", stats::quantile(injd$days_lost, 0.75)), ## Important: iqr of injd$days_lost and not .data$...
-                     totalexpo = sum(.data$totalexpo),
-                     injincidence = .data$ninjuries/.data$totalexpo,
-                     injburden = .data$ndayslost/.data$totalexpo,
+                     iqr_dayslost    = paste0(stats::quantile(injd$days_lost, 0.25), "-", stats::quantile(injd$days_lost, 0.75)), ## Important: iqr of injd$days_lost and not .data$...
+                     totalexpo       = sum(.data$totalexpo),
+                     injincidence    = .data$ninjuries/.data$totalexpo,
+                     injburden       = .data$ndayslost/.data$totalexpo,
                      .groups = "keep") %>%
     dplyr::ungroup() %>%
     {
       if(!is.null(var_type_injury)) {
         filter(., !is.na({{var_type_injury}})) %>%
           tidyr::complete({ {var_type_injury }}) %>%
-          dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE), ## replacing NAs with the same totalexpo values
+          dplyr::mutate(totalexpo    = mean(.data$totalexpo, na.rm = TRUE), ## replacing NAs with the same totalexpo values
                         iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
                         dplyr::across(c("ninjuries":"median_dayslost", "totalexpo":"injburden"),
                                       ~ifelse(is.na(.), 0, .)),
                         percent_ninjuries = round(.data$ninjuries*100/sum(.data$ninjuries), 2),
-                        percent_dayslost = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) %>%
+                        percent_dayslost  = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) %>%
           dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
                         "ndayslost", "percent_dayslost", tidyselect::everything()) # order the column names
       } else .
     }
 
-  ## correct median_dayslost and iqr_dayslost values if var_type_injury specified
+  ## correct mean_dayslost, median_dayslost and iqr_dayslost values if var_type_injury specified
   if(!is.null(var_type_injury)) {
     injds_overall_aux <- injd %>%
       dplyr::group_by({{ var_type_injury }}) %>%
-      dplyr::summarise(median_dayslost = stats::median(.data$days_lost, na.rm = T),
-                    iqr_dayslost = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75))) %>%
+      dplyr::summarise(mean_dayslost   = mean(.data$days_lost, na.rm = T),
+                       median_dayslost = stats::median(.data$days_lost, na.rm = T),
+                       iqr_dayslost    = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75))) %>%
       dplyr::ungroup()
     ## merge with injds_overall (smash these two variables)
     injds_overall <- dplyr::left_join(injds_overall, injds_overall_aux, by = names(injds_overall)[[1]]) %>%
-      dplyr::rename(median_dayslost = .data$median_dayslost.y,
-                    iqr_dayslost = .data$iqr_dayslost.y) %>%
+      dplyr::rename(mean_dayslost   = "mean_dayslost.y",
+                    median_dayslost = "median_dayslost.y",
+                    iqr_dayslost    = "iqr_dayslost.y") %>%
       dplyr::select("injury_type", "ninjuries", "percent_ninjuries",
-                    "ndayslost", "percent_dayslost", "median_dayslost",
-                    "iqr_dayslost", tidyselect::everything(),
-                    -"median_dayslost.x", -"iqr_dayslost.x")
+                    "ndayslost", "percent_dayslost", "mean_dayslost",
+                    "median_dayslost","iqr_dayslost", tidyselect::everything(),
+                    -"mean_dayslost.x", -"median_dayslost.x", -"iqr_dayslost.x")
   }
 
 
@@ -200,7 +212,7 @@ injsummary <- function(injd, var_type_injury = NULL,
   if (method == "poisson") { ## assuming that the number of injuries follows a poisson and basing on CLT  ## CHECK THIS WITH pois.exact and check ggeffects package!
     injds_overall <- injds_overall %>%
       dplyr::mutate(injincidence_sd = sqrt(.data$injincidence/.data$totalexpo),
-                    injburden_sd = sqrt(.data$injburden/.data$totalexpo),
+                    injburden_sd    = sqrt(.data$injburden/.data$totalexpo),
                     injincidence_lower = .data$injincidence - stats::qnorm(conf_level)*.data$injincidence_sd,
                     injincidence_upper = .data$injincidence + stats::qnorm(conf_level)*.data$injincidence_sd,
                     injburden_lower = .data$injburden - qnorm(conf_level)*.data$injburden_sd,
@@ -218,7 +230,7 @@ injsummary <- function(injd, var_type_injury = NULL,
   class(injds) <- c("injds", class(injds))
   attr(injds, "unit_exposure") <- unit
   attr(injds, "unit_timerisk") <- injds_aux$unit_timerisk
-  attr(injd, "conf_level") <- conf_level
+  attr(injd, "conf_level")     <- conf_level
 
   return(injds)
 }
@@ -232,7 +244,7 @@ injsummary <- function(injd, var_type_injury = NULL,
 #'   (defaults to \code{FALSE}).
 #'
 #' @return A list of two elements:
-#' (i) same injds data frame with 'injincidence'
+#'   (i) same injds data frame with 'injincidence'
 #'   and 'injburden' values transformed according to \code{unit}, named
 #'   \code{injds} and
 #'   (ii) a character vector that expresses the unit used for the rates, i.e.
@@ -242,7 +254,7 @@ injsummary <- function(injd, var_type_injury = NULL,
 injsummary_unit <- function(unit, injds, quiet) {
   if(unit %in% c("minutes", "hours")) {
     if (!quiet) {
-      warning(paste0("\n* Exposure time unit is ", unit,
+      warning(paste0("\n Exposure time unit is ", unit,
                      "\n  So... Injury incidence and injury burden are calculated per 1000h of player-exposure\n\n"))
     }
     if (unit == "minutes") {
@@ -255,7 +267,7 @@ injsummary_unit <- function(unit, injds, quiet) {
     unit_timerisk <- "1000h player-exposure"
   } else if (unit == "matches_minutes") {
     if (!quiet) {
-      warning(paste0("\n* Exposure time unit is ", unit,
+      warning(paste0("\n  Exposure time unit is ", unit,
                      "\n  So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)\n\n"))
     }
     injds <- injds %>%
@@ -263,7 +275,7 @@ injsummary_unit <- function(unit, injds, quiet) {
     unit_timerisk <- "100 player-match"
   } else if (unit %in% c("matches_num", "days", "activity_days")) {
     if (!quiet) {
-      warning(paste0("\n* Exposure time unit is ", unit,
+      warning(paste0("\n  Exposure time unit is ", unit,
                      "\n  So... Injury incidence and injury burden are calculated per 100 of ", unit, " of exposure\n\n"))
     }
     injds <- injds %>%

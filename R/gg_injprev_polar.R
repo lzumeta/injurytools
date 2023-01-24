@@ -37,22 +37,24 @@
 #' #                             exp_unit = "matches_minutes")
 #'
 #' ## colour palette
+#' \dontrun{
 #' library(ggplot2)
 #' our_palette <- c("seagreen3", "red3", rev(RColorBrewer::brewer.pal(5, "Reds")))
-#' gg_injpolar(injd, by = "monthly", var_type_injury = "injury_type",
+#' gg_injprev_polar(injd, by = "monthly", var_type_injury = "injury_type",
 #'             title = "Polar area diagram\ninjured and available (healthy) players per month") +
 #'   scale_fill_manual(values = our_palette)
-#' gg_injpolar(injd, by = "monthly",
+#' gg_injprev_polar(injd, by = "monthly",
 #'             title = "Polar area diagram\ninjured and available (healthy) players per month") +
 #'   scale_fill_manual(values = our_palette)
-gg_injpolar <- function(injd,
+#'}
+gg_injprev_polar <- function(injd,
                         by = c("monthly", "season"),
                         var_type_injury = NULL,
                         title = "Polar area diagram\ninjured and available (healthy) players") {
 
   assert(checkClass(injd, "injd"))
 
-  df_polar <- injprop(injd, by, var_type_injury)
+  df_polar <- injprev(injd, by, var_type_injury)
 
 
 
@@ -62,7 +64,7 @@ gg_injpolar <- function(injd,
       ggplot(aes(x = month, y = .data$prop)) +
       geom_bar(aes(fill = .data$type_injury),
                width = 1, stat = "identity", colour = "grey",
-               size = 0.3, position = position_identity(), alpha = 0.75) +
+               linewidth = 0.3, position = position_identity(), alpha = 0.75) +
       coord_polar() +
       facet_wrap(~season) +
       # scale_fill_manual(values = our_palette[seq_len(nlevels(df_polar$type_injury))]) + ## change this!!
@@ -78,7 +80,7 @@ gg_injpolar <- function(injd,
       ggplot(aes(x = .data$season, y = .data$prop)) +
       geom_bar(aes(fill = .data$type_injury),
                width = 1, stat = "identity", colour = "grey",
-               size = 0.3, position = position_identity(), alpha = 0.75) +
+               linewidth = 0.3, position = position_identity(), alpha = 0.75) +
       coord_polar() +
       # scale_fill_manual(values = our_palette[seq_len(nlevels(df_polar$type_injury))]) + ## change this!!
       scale_y_sqrt() +

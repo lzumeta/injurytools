@@ -1,3 +1,15 @@
+test_that("data_injurieslong works fine", {
+  df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
+                             player         = "player_name",
+                             date_injured   = "from",
+                             date_recovered = "until")
+
+  data_injuries_long <- data_injurieslong(df_injuries)
+  expect_data_frame(data_injuries_long, nrows = 164L, ncols = 3L)
+  expect_subset(c("player", "event", "date"),
+                names(data_injuries_long))
+})
+
 test_that("date2season works", {
   date <- as.Date("2023-01-09")
   expect_identical(date2season(date), "2022/2023")
@@ -29,7 +41,7 @@ test_that("cut_injd works", {
 
   injd_cut <- suppressWarnings(cut_injd(injd, date0 = 2018))
 
-  expect_data_frame(injd_cut, nrow = 56L, ncols = 19L)
+  expect_data_frame(injd_cut, nrow = 74L, ncols = 19L)
   expect_s3_class(injd_cut, "injd")
   expect_warning(cut_injd(injd, date0 = 2018), "has been cut")
 })

@@ -55,7 +55,7 @@ This document briefly shows how to use the functions that are intended to facili
 
 Data can be collected in several ways and by several means. A conventional manner is to collect and store data as events occur. So, with regard to sports medicine, it is common to store injury records on one hand, and on the other side, data related to training and competitions/matches (*exposure time* among others) in a separate table. Following this, we consider that the user has the raw data in two separate data sets that we call **injury** and **exposure data**, respectively[^prepare-note-1].
 
-[^prepare-note-1]: If the data is not recorded this way, we suggest spliting both information into separate tables and then following the same functions provided by the package.
+[^prepare-note-1]: If the data is not recorded this way, we suggest splitting both information into separate tables and then following the same functions provided by the package.
 
 <!-- <img src="../man/figures/Illustration_data.pdf" alt="some text" width="4200" height="4200"> -->
 
@@ -100,8 +100,8 @@ We suggest collecting exposure time on as fine scale as possible, i.e. **minutes
 </summary>
 
 ```{r}
-## a possible way for the case that each row in exposure data correspond to a
-## season and there is nor more information about time of exposure
+## a possible way for the case where each row in exposure data correspond to a
+## season and there is no more information about time of exposure
 raw_df_exposures$time_expo_aux <- 1 
 df_exposures2 <- prepare_exp(df_exposures0 = raw_df_exposures,
                              player        = "player_name",
@@ -116,7 +116,7 @@ head(injd)
 
 # 2) integrate both sources of data
 
-Then, we apply `prepare_all()` to the data sets tidied up above. It is important to specify the unit of exposure, `exp_unit` argument, that must be one of "minutes", "hours", "days", "matches_num", "matches_minutes", or "activity_days", "seasons".
+Then, we apply `prepare_all()` to the data sets tidied up above. It is important to specify the unit of exposure, `exp_unit` argument, that must be one of "minutes", "hours", "days", "matches_num", "matches_minutes", "activity_days" or  "seasons".
 
 ```{r}
 injd <-  prepare_all(data_exposures = df_exposures,
@@ -128,7 +128,7 @@ head(injd)
 #   slice(1, n())
 ```
 
-The outcome is a prepared data set, structured in an suitable way that is ready for its use by statistical modelling approaches. This data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports related variables.
+The outcome is a prepared data set, structured in an suitable way that is ready for its use by statistical modelling approaches. This data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
 
 * `player`: player identifier.
 
@@ -171,8 +171,6 @@ str(injd, 1)
 * `data_exposures`: the preprocessed exposure data frame.
 
 * `data_injuries`: the preprocessed injury data frame.
-
-* `data_injuries_long`: `data_injuries` data frame in long format in which each row corresponds to player-event_type.
 
 To extract one of the attributes, for example `unit_exposure`, type:
 

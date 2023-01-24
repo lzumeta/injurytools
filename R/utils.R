@@ -1,3 +1,23 @@
+#' Transform injury data into a long format
+#'
+#' @inheritParams prepare_all
+#'
+#' @return The \code{data_injuries} data frame in long format in which each row
+#'   corresponds to player-event.
+#' @importFrom rlang .data :=
+#' @importFrom dplyr select arrange mutate
+#' @importFrom tidyr gather
+#' @importFrom tidyselect all_of
+#' @keywords internal
+data_injurieslong <- function(data_injuries) {
+  data_injuries %>%
+    dplyr::select("player", "date_injured", "date_recovered") %>%
+    tidyr::gather(key = "event", value = "date", "date_injured", "date_recovered") %>%
+    dplyr::arrange(.data$player, .data$date) %>%
+    dplyr::mutate(event = factor(.data$event))
+}
+
+
 #' Proper Conversion of Date objects
 #'
 #' Converts \link[base:Dates]{Date} objects into a common format used for every
@@ -153,7 +173,9 @@ season2year <- function(season) {
 #'
 #' # Cut the follow-up period of the object
 #' # (please, use it carefully)
+#' \dontrun{
 #' cut_injd(injd, date0 = 2018)
+#' }
 cut_injd <- function(injd, date0, datef) {
 
   assert(checkClass(injd, "injd"))

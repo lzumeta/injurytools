@@ -10,7 +10,7 @@ gg_injriskmatrix(
   add_contour = TRUE,
   title = NULL,
   xlab = "Incidence (injuries per _)",
-  ylab = "Burden (days lost per _)",
+  ylab = "Mean time-loss (days) per injury",
   errh_height = 1,
   errv_width = 0.05
 )
@@ -24,7 +24,10 @@ gg_injriskmatrix(
 muscular/articular/others or overuse/not-overuse etc.) according to which
 visualize injury summary statistics (optional, defaults \code{NULL}).}
 
-\item{add_contour}{FILL}
+\item{add_contour}{Logical, whether or not to add contour lines of the
+product between injury incidence and mean severity (i.e. 'incidence x
+average time-loss'), which leads to injury burden (defaults to
+\code{TRUE}).}
 
 \item{title}{Text for the main title, passed to
 \code{\link[ggplot2:ggtitle]{ggplot2::ggtitle()}}.}
@@ -48,10 +51,14 @@ A ggplot object (to which optionally more layers can be added).
 }
 \description{
 Given an \code{injds} \strong{S3} object it depicts risk matrix plots (see
-References section), a graph of injury severity plotted against injury
-incidence. The point estimates of each measure, as well as their confidence
-intervals, are plotted according to the method used when running
-\code{\link[=injsummary]{injsummary()}} function.
+References section), a graph in which the injury incidence (frequency) is
+plotted against the average days lost per injury (consequence). The point
+estimate of injury incidence together with its confidence interval is
+plotted, according to the method used when running
+\code{\link[=injsummary]{injsummary()}} function. On the y-axis the mean
+time-loss per injury together with \eqn{\pm} IQR (days) is plotted. The size
+of the points and the number shown inside report the injury burden (days lost
+per player-exposure time), the bigger the size the greater.
 }
 \examples{
 # Prepare data
@@ -64,12 +71,14 @@ intervals, are plotted according to the method used when running
 #                             exp_unit = "matches_minutes")
 
 # Estimate injury summary statistics
+\dontrun{
 injds <- injsummary(injd)
 injds2 <- injsummary(injd, var_type_injury = "injury_type")
 
 # Plot
 gg_injriskmatrix(injds)
 gg_injriskmatrix(injds2, var_type_injury = "injury_type", title = "Risk matrix")
+}
 }
 \references{
 Bahr R, Clarsen B, Derman W, et al. International Olympic Committee

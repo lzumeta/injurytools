@@ -40,9 +40,10 @@ gg_injphoto <- function(injd, title = NULL, fix = FALSE, by_date = "1 months") {
   assert(checkClass(injd, "injd"))
 
   ## extract necessary data
-  data_injuries_long <- attr(injd, "data_injuries_long")
   data_followup <- attr(injd, "follow_up")
   data_injuries <- attr(injd, "data_injuries")
+
+  data_injuries_long <- data_injurieslong(data_injuries)
 
   ## if data_injuries_long$date >= data_followup$tf
   if (fix) {
@@ -70,7 +71,7 @@ gg_injphoto <- function(injd, title = NULL, fix = FALSE, by_date = "1 months") {
     geom_segment(data = data_followup, aes(x = .data$t0, xend = .data$tf,
                                            y = .data$player, yend = .data$player)) +
     geom_segment(data = data_injuries, aes(x = .data$date_injured, xend = .data$date_recovered,
-                                           y = .data$player, yend = .data$player), size = 1) +
+                                           y = .data$player, yend = .data$player), linewidth = 1) +
     geom_point(data = data_injuries_long, aes(x = .data$date, y = .data$player,
                                               shape = .data$event, color = .data$event), size = 5) +
     xlab(NULL) + ylab(NULL) + ggtitle(title) +

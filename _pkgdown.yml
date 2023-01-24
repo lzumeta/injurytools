@@ -13,7 +13,7 @@ navbar:
     - text: Estimate summary statistics
       href: articles/estimate-epi-measures.html
     - text: Visualize data
-      href: articles/explore-injury-data.html
+      href: articles/visualize-injury-data.html
   right:
   - icon: fa-github
     href: https://github.com/lzumeta/injurytools
@@ -28,13 +28,13 @@ reference:
   desc: Functions to estimate sports injury summary statistics.
   contents:
   - injsummary
-  - injprop
+  - injprev
 - title: Visualize sports injury data
   desc: Functions to visualize relevant information in sports injury data.
   contents:
   - gg_injphoto
   - gg_injbarplot
-  - gg_injpolar
+  - gg_injprev_polar
   - gg_injriskmatrix
 - title: Data sets
   desc: Internal data sets to illustrate `injurytools` functionalities.
@@ -56,5 +56,5 @@ articles:
   contents:
   - prepare-injury-data
   - estimate-epi-measures
-  - explore-injury-data
+  - visualize-injury-data
 

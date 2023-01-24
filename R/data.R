@@ -21,23 +21,23 @@
 #'   medicine in sport}, 25(4), 300-305.
 #'
 #' @format A data frame with 42 rows corresponding to 28 football players and 16
-#'   variables: \describe{ \item{player_name}{Name of the football player
-#'   (factor)} \item{player_id}{Identification number of the football player
-#'   (factor)} \item{season}{Season to which this player's entry corresponds
-#'   (factor)} \item{year}{Year in which each season started (numeric)}
-#'   \item{matches_played}{Matches played by the player in each season
-#'   (numeric)} \item{minutes_played}{Minutes played by the player in each
-#'   season (numeric)} \item{liga}{Name of the ligue where the player played in
-#'   each season (factor)} \item{club_name}{Name of the club to which the player
-#'   belongs in each season (factor)} \item{club_id}{Identification number of
-#'   the club to which the player belongs in each season (factor)}
-#'   \item{age}{Age of the player in each season (numeric)} \item{place}{Place
-#'   of birth of each player (character)} \item{position}{Position of the player
-#'   on the pitch (factor)} \item{foot}{Dominant leg of the player. One of both,
-#'   left or right (factor)} \item{goals}{Number of goals scored by the player
-#'   in that season (numeric)} \item{assists}{Number of assists provided by the
-#'   player in that season (numerical)} \item{reds}{Number of the red cards
-#'   given to the player in that season (numeric)} }
+#'   variables: \describe{
+#'   \item{player_name}{Name of the football player (factor)}
+#'   \item{player_id}{Identification number of the football player (factor)}
+#'   \item{season}{Season to which this player's entry corresponds (factor)}
+#'   \item{year}{Year in which each season started (numeric)}
+#'   \item{matches_played}{Matches played by the player in each season (numeric)}
+#'   \item{minutes_played}{Minutes played by the player in each season (numeric)}
+#'   \item{liga}{Name of the ligue where the player played in each season (factor)}
+#'   \item{club_name}{Name of the club to which the player belongs in each season (factor)}
+#'   \item{club_id}{Identification number of the club to which the player belongs in each season (factor)}
+#'   \item{age}{Age of the player in each season (numeric)}
+#'   \item{place}{Place of birth of each player (character)}
+#'   \item{position}{Position of the player on the pitch (factor)}
+#'   \item{foot}{Dominant leg of the player. One of both, left or right (factor)}
+#'   \item{goals}{Number of goals scored by the player in that season (numeric)}
+#'   \item{assists}{Number of assists provided by the player in that season (numerical)}
+#'   \item{reds}{Number of the red cards given to the player in that season (numeric)} }
 #' @source \url{https://www.transfermarkt.com/}
 "raw_df_exposures"
 
@@ -63,22 +63,23 @@
 #'   medicine in sport}, 25(4), 300-305.
 #'
 #' @format A data frame with 82 rows corresponding to 23 players and 11
-#'   variables: \describe{ \item{player_name}{Name of the football player
-#'   (factor)} \item{player_id}{Identification number of the football player
-#'   (factor)} \item{season}{Season to which this player's entry corresponds
-#'   (factor)} \item{from}{Date of the injury of each data entry (Date)}
+#'   variables: \describe{
+#'   \item{player_name}{Name of the football player (factor)}
+#'   \item{player_id}{Identification number of the football player (factor)}
+#'   \item{season}{Season to which this player's entry corresponds (factor)}
+#'   \item{from}{Date of the injury of each data entry (Date)}
 #'   \item{until}{Date of the recovery of each data entry (Date)}
 #'   \item{days_lost}{Number of days lost due to injury (numeric)}
 #'   \item{games_lost}{Number of matches lost due to injury (numeric)}
-#'   \item{injury}{Injury specification as it appears in
-#'   \url{https://www.transfermarkt.com} (character)} \item{injury_acl}{Whether
-#'   it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)}
+#'   \item{injury}{Injury specification as it appears in \url{https://www.transfermarkt.com} (character)}
+#'   \item{injury_acl}{Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)}
 #'   \item{injury_type}{A five level categorical variable indicating the type of
 #'   injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any, NA
-#'   otherwise (factor)} \item{injury_severity}{A four level categorical
-#'   variable indicating the severity of the injury, whether Minor (<7 days
-#'   lost), Moderate ([7, 28) days lost), Severe ([28, 84) days lost) or
-#'   Very_severe (>=84 days lost); if any, NA otherwise  (factor)} }
+#'   otherwise (factor)}
+#'   \item{injury_severity}{A four level categorical variable indicating the
+#'   severity of the injury (if any), whether Minor (<7 days lost), Moderate
+#'   ([7, 28) days lost), Severe ([28, 84) days lost) or
+#'   Very_severe (>=84 days lost); NA otherwise (factor)} }
 #' @source \url{https://www.transfermarkt.com/}
 "raw_df_injuries"
 
@@ -90,10 +91,10 @@
 #' *raw_df_exposures* (\code{prepare_exp(raw_df_exposures, ...)}) and
 #' *raw_df_injuries* (\code{prepare_inj(raw_df_injuries, ...)}).
 #'
-#' It consists of a data frame plus 5 other attributes,
-#' a character specifying the unit of exposure (\code{unit_exposure}); and 4
-#' (auxiliary) data frames: \code{follow_up}, \code{data_exposures},
-#' \code{data_injuries} and \code{data_injuries_long}.
+#' It consists of a data frame plus 4 other attributes,
+#' a character specifying the unit of exposure (\code{unit_exposure}); and 3
+#' (auxiliary) data frames: \code{follow_up}, \code{data_exposures} and
+#' \code{data_injuries}.
 #'
 #' @format The main data frame in \code{injd} gathers information of 28 players
 #'   and has 108 rows and 19 columns:
@@ -113,14 +114,14 @@
 #'    \item{player_id}{Identification number of the football player (factor)}
 #'    \item{season}{Season to which this player's entry corresponds (factor)}
 #'    \item{games_lost}{Number of matches lost due to injury (numeric)}
-#'    \item{injury}{Injury specification as it appears in \url{https://wwww.transfermarkt.com}, if any; otherwise NA (character)}
+#'    \item{injury}{Injury specification as it appears in \url{https://www.transfermarkt.com}, if any; otherwise NA (character)}
 #'    \item{injury_acl}{Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL); if the interval corresponds to an injury, NA otherwise (factor)}
 #'    \item{injury_type}{A five level categorical variable indicating the type
 #'     of injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any,
 #'     NA otherwise (factor)}
 #'    \item{injury_severity}{A four level categorical variable indicating the
-#'     severity of the injury, whether Minor (<7 days lost), Moderate ([7, 28)
+#'     severity of the injury (if any), whether Minor (<7 days lost), Moderate ([7, 28)
 #'     days lost), Severe ([28, 84) days lost) or Very_severe (>=84 days lost);
-#'     if any, NA otherwise (factor)}
+#'     NA otherwise (factor)}
 #'   }
 "injd"

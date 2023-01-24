@@ -43,14 +43,12 @@
 gg_injbarplot <- function(injds, type = c("incidence", "burden"), title = NULL) {
 
   ## check inputs
+  if (missing(type)) type <- "incidence"
   assert(checkClass(injds, "injds"),
-         checkChoice(type, c("incidence", "burden")),
-         combie = "and")
+         checkChoice(type, c(missing(type), "incidence", "burden")),
+         combine = "and")
 
   injds <- injds[[1]]
-
-  ## do something or try to transform injds?
-  if (missing(type)) type <- "incidence"
   col_type <- dplyr::if_else(type == "incidence", "injincidence", "injburden")
 
   ggplot(data = injds,

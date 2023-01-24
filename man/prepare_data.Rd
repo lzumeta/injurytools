@@ -29,7 +29,7 @@ prepare_all(
 )
 }
 \arguments{
-\item{df_injuries0}{A data frame containing injury information, i.e. columns
+\item{df_injuries0}{A data frame containing injury information, with columns
 referring to the player name/id, date of injury and date of recovery (as
 minimal data).}
 
@@ -42,8 +42,8 @@ information about the date of injury is stored.}
 \item{date_recovered}{Character referring to the column name where the
 information about the date of recovery is stored.}
 
-\item{df_exposures0}{A data frame containing exposure information, i.e.
-columns referring to the player name/id, date of exposure, and the total
+\item{df_exposures0}{A data frame containing exposure information, with
+columns referring to the player name/id, date of exposure and the total
 time of exposure of the corresponding data entry (as minimal data).}
 
 \item{date}{Character referring to the column name where the exposure date
@@ -67,11 +67,11 @@ same fashion that \code{prepare_inj()} returns.}
 default).}
 }
 \value{
-\code{prepare_inj()} returns a data frame in which the key columns in
-injury data are standardized and have a proper format.
+\code{prepare_inj()} returns a data frame in which the \strong{key
+columns} in injury data are standardized and have a proper format.
 
-\code{prepare_exp()} returns a data frame in which the key columns in
-exposure data are standardized and have a proper format.
+\code{prepare_exp()} returns a data frame in which the \strong{key
+columns} in exposure data are standardized and have a proper format.
 
 \code{prepare_all()} returns the \code{injd} \strong{S3} object that
 contains all the necessary information and a proper data structure to
@@ -126,11 +126,12 @@ df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
                             date          = "year",
                             time_expo     = "minutes_played")
 
+\dontrun{
 injd <- prepare_all(data_exposures = df_exposures,
                     data_injuries  = df_injuries,
                     exp_unit = "matches_minutes")
 head(injd)
 class(injd)
 str(injd, 1)
-
+}
 }

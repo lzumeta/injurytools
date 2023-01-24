@@ -6,22 +6,23 @@
 \title{Minimal example of injury data}
 \format{
 A data frame with 82 rows corresponding to 23 players and 11
-variables: \describe{ \item{player_name}{Name of the football player
-(factor)} \item{player_id}{Identification number of the football player
-(factor)} \item{season}{Season to which this player's entry corresponds
-(factor)} \item{from}{Date of the injury of each data entry (Date)}
+variables: \describe{
+\item{player_name}{Name of the football player (factor)}
+\item{player_id}{Identification number of the football player (factor)}
+\item{season}{Season to which this player's entry corresponds (factor)}
+\item{from}{Date of the injury of each data entry (Date)}
 \item{until}{Date of the recovery of each data entry (Date)}
 \item{days_lost}{Number of days lost due to injury (numeric)}
 \item{games_lost}{Number of matches lost due to injury (numeric)}
-\item{injury}{Injury specification as it appears in
-\url{https://www.transfermarkt.com} (character)} \item{injury_acl}{Whether
-it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)}
+\item{injury}{Injury specification as it appears in \url{https://www.transfermarkt.com} (character)}
+\item{injury_acl}{Whether it is Anterior Cruciate Ligament (ACL) injury or not (NO_ACL)}
 \item{injury_type}{A five level categorical variable indicating the type of
 injury, whether Bone, Concussion, Ligament, Muscle or Unknown; if any, NA
-otherwise (factor)} \item{injury_severity}{A four level categorical
-variable indicating the severity of the injury, whether Minor (<7 days
-lost), Moderate ([7, 28) days lost), Severe ([28, 84) days lost) or
-Very_severe (>=84 days lost); if any, NA otherwise  (factor)} }
+otherwise (factor)}
+\item{injury_severity}{A four level categorical variable indicating the
+severity of the injury (if any), whether Minor (<7 days lost), Moderate
+([7, 28) days lost), Severe ([28, 84) days lost) or
+Very_severe (>=84 days lost); NA otherwise (factor)} }
 }
 \source{
 \url{https://www.transfermarkt.com/}

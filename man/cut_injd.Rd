@@ -50,5 +50,7 @@ used with caution.
 
 # Cut the follow-up period of the object
 # (please, use it carefully)
+\dontrun{
 cut_injd(injd, date0 = 2018)
+}
 }

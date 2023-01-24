@@ -1,9 +1,9 @@
-#' Calculate player availability
+#' Calculate injury prevalence
 #'
-#' Calculate the proportions of injured and non-injured (available) players in
-#' the cohort, on a monthly or season basis. Further information of the type of
-#' injury may be specified so that the injured players proportions are
-#' disaggregated and reported according to this variable.
+#' Calculate the prevalence of injured players and the proportion of non-injured
+#' (available) players in the cohort, on a monthly or season basis. Further
+#' information of the type of injury may be specified so that the
+#' injury-specific prevalences are reported according to this variable.
 #'
 #' @param injd Prepared data, an \code{injd} object.
 #' @param by Character, one of "monthly" or "season", specifying the periodicity
@@ -17,10 +17,10 @@
 #'   (optionally) and injury type (if `var_type_injury` not specified, then this
 #'   variable has two categories: *Available* and *Injured*). Plus, three more
 #'   columns, specifying the proportion of players (`prop`) satisfying the
-#'   corresponding row's combination of values, i.e. how many players at that
-#'   moment were injured with the type of injury of the corresponding row (`n`),
-#'   over how many players were at that time in the cohort (`n_player`). See
-#'   Note section.
+#'   corresponding row's combination of values, i.e. prevalence, how many
+#'   players were injured at that moment with the type of injury of the
+#'   corresponding row (`n`), over how many players were at that time in the
+#'   cohort (`n_player`). See Note section.
 #'
 #' @note
 #' If `var_type_injury` is specified (and not `NULL`), it may happen that a
@@ -29,11 +29,20 @@
 #' the proportions of muscle and ligament injuries for that month, resulting in
 #' an overall proportion that exceeds 100%. Besides, the players in Available
 #' category are those that did not suffer any injury in that moment
-#' (season-month), they were healthy all the time that the period lasted
+#' (season-month), that is, they were healthy all the time that the period
+#' lasted
 #' @export
 #'
 #' @importFrom dplyr mutate select arrange group_by summarize
 #' @importFrom checkmate assert checkClass checkChoice
+#'
+#' @references
+#' Bahr R, Clarsen B, Derman W, et al. International Olympic Committee
+#' consensus statement: methods for recording and reporting of epidemiological
+#' data on injury and illness in sport 2020 (including STROBE Extension for
+#' Sport Injury and Illness Surveillance (STROBE-SIIS)) \emph{British Journal of
+#' Sports Medicine} 2020; 54:372-389.
+#'
 #'
 #' @examples
 #' # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
@@ -44,11 +53,11 @@
 #' #                             data_injuries  = df_injuries,
 #' #                             exp_unit = "matches_minutes")
 #'
-#' injprop(injd, by = "monthly", var_type_injury = "injury_type")
-#' # injprop(injd, by = "monthly")
-#' # injprop(injd, by = "season", var_type_injury = "injury_type")
-#' # injprop(injd, by = "season")
-injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
+#' injprev(injd, by = "monthly", var_type_injury = "injury_type")
+#' injprev(injd, by = "monthly")
+#' injprev(injd, by = "season", var_type_injury = "injury_type")
+#' injprev(injd, by = "season")
+injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
   assert(checkClass(injd, "injd"),
          checkChoice(by, c("monthly", "season")),
          checkClass(var_type_injury, "character", null.ok = TRUE),
@@ -151,7 +160,7 @@ injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
 
     if (is.null(var_type_injury)) {
       df_polar <- df_polar %>%
-        dplyr::select(-.data$id_injury) %>%
+        dplyr::select(-"id_injury") %>%
         unique()
     }
 
@@ -235,7 +244,7 @@ injprop <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
 
     if (is.null(var_type_injury)) {
       df_polar <- df_polar %>%
-        dplyr::select(-.data$id_injury) %>%
+        dplyr::select(-"id_injury") %>%
         unique()
     }
 
