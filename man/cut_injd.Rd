@@ -19,7 +19,7 @@ year (e.g. \code{date} = 2018). Optional.}
 An \code{injd} object with a shorter follow-up period.
 }
 \description{
-Given an \code{injd} object cut the range of the time period such that the
+Given an \code{injd} object, cut the range of the time period such that the
 limits of the observed dates, first and last observed dates, are \code{date0}
 and \code{datef}, respectively. It is possible to specify just one date, i.e.
 the two dates of the range do not necessarily have to be entered. See Note

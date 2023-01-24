@@ -7,7 +7,7 @@
 gg_injphoto(injd, title = NULL, fix = FALSE, by_date = "1 months")
 }
 \arguments{
-\item{injd}{Prepared data, an \code{injd} object.}
+\item{injd}{Prepared data. An \code{injd} object.}
 
 \item{title}{Text for the main title.}
 
@@ -17,7 +17,7 @@ scale, regardless some recovery dates might be longer than the
 maximum observed exposure date.}
 
 \item{by_date}{increment of the date sequence at which x-axis tick-marks are
-to drawn. Argument to be passed to
+to drawn. An argument to be passed to
 \code{\link[base:seq.Date]{base::seq.Date()}}.}
 }
 \value{
@@ -26,9 +26,9 @@ A ggplot object (to which optionally more layers can be added).
 \description{
 Given an \code{injd} \strong{S3} object it plots an overview of the injuries
 sustained by each player/athlete in the cohort during the follow-up. Each
-subject timeline is depicted horizontally where red cross indicates the exact
-injury date, blue circle the recovery date and bold black line indicates the
-duration of the injury (time-loss).
+subject timeline is depicted horizontally where the red cross indicates the
+exact injury date, the blue circle the recovery date and the bold black line
+indicates the duration of the injury (time-loss).
 }
 \examples{
 # Prepare data

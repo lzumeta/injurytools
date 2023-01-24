@@ -2,7 +2,7 @@
 % Please edit documentation in R/injsummary.R
 \name{is_injds}
 \alias{is_injds}
-\title{Check if object is of class \code{injds}}
+\title{Check if an object is of class \code{injds}}
 \usage{
 is_injds(x)
 }

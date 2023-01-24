@@ -1,7 +1,7 @@
-#' Polar area diagrams for available/injured players proportions
+#' Plot polar area diagrams representing available/injured players proportions
 #'
 #' Plot the proportions of available and injured players in the cohort, on a
-#' monthly or season basis, by a polar area diagram. Further information of the
+#' monthly or season basis, by a polar area diagram. Further information on the
 #' type of injury may be specified so that the injured players proportions are
 #' disaggregated and reported according to this variable.
 #'

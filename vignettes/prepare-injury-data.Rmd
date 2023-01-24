@@ -72,7 +72,7 @@ head(raw_df_injuries)
 head(raw_df_exposures)
 ```
 
-We standardize the key column names such as, player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure, and set them proper formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-2].
+We standardize the **key column names** such as: player (subject) identifier, dates of injury and recovery (if any), training/match/season date and amount of time of exposure. And set them proper names and formats by means of `prepare_inj()` and `prepare_exp()`[^prepare-note-2].
 
 [^prepare-note-2]: The `date` argument should be either of class *Date*, given in "%Y-%m-%d" format, or of class *integer*/*numeric*, a 4-digit integer referring to year in which the season started.  
 
@@ -107,6 +107,8 @@ df_exposures2 <- prepare_exp(df_exposures0 = raw_df_exposures,
                              player        = "player_name",
                              date          = "year",
                              time_expo     = "time_expo_aux")
+
+## note 'tstart_s' and 'tstop_s' columns
 injd <-  prepare_all(data_exposures = df_exposures2,
                      data_injuries  = df_injuries,
                      exp_unit = "seasons")
@@ -134,7 +136,7 @@ The outcome is a prepared data set, structured in an suitable way that is ready 
 
 * `t0` and `tf`: the follow-up period of the corresponding player, i.e. player's first and last dates observed (same value for each `player`).
 
-* `date_injured` and `date_recovered`: dates of injury and recovery of the corresponding observation (if any; otherwise `NA`).
+* `date_injured` and `date_recovered`: dates of injury and recovery of the corresponding observation (if any). Otherwise `NA`.
 
 * `tstart` and `tstop`: beginning and ending dates of the corresponding interval in which the observation has been at risk of injury.
 

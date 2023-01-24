@@ -11,7 +11,7 @@ gg_injbarplot(injds, type = c("incidence", "burden"), title = NULL)
 \code{\link[=injsummary]{injsummary()}}).}
 
 \item{type}{A character value indicating whether to plot injury incidence's
-or injury burden's ranking, one of "incidence" or "burden",
+or injury burden's ranking. One of "incidence" or "burden",
 respectively.}
 
 \item{title}{Text for the main title.}

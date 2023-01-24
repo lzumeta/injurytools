@@ -6,7 +6,7 @@
 #' @param injds \code{injds} \strong{S3} object (see
 #'   \code{\link[=injsummary]{injsummary()}}).
 #' @param type A character value indicating whether to plot injury incidence's
-#'             or injury burden's ranking, one of "incidence" or "burden",
+#'             or injury burden's ranking. One of "incidence" or "burden",
 #'             respectively.
 #' @param title Text for the main title.
 #'

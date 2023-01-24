@@ -1,4 +1,4 @@
-#' Injury summary statistics
+#' Estimate injury summary statistics
 #'
 #' Calculate injury summary statistics such as injury incidence and injury
 #' burden (see Bahr et al. 20), including total number of injuries, number of
@@ -16,7 +16,7 @@
 #'   "poisson", "negbin", "zinfpois" or "zinfnb"; characters that stand for
 #'   Poisson method, negative binomial method, zero-inflated Poisson and
 #'   zero-inflated negative binomial.
-#' @param conf_level Confidence level (default = 0.95).
+#' @param conf_level Confidence level (defaults to 0.95).
 #' @param quiet Logical, whether or not to silence the warning messages
 #'   (defaults to \code{FALSE}).
 #'
@@ -292,7 +292,7 @@ injsummary_unit <- function(unit, injds, quiet) {
   return(res)
 }
 
-#' Check if object is of class \code{injds}
+#' Check if an object is of class \code{injds}
 #'
 #' Check if an object x is of class \code{injds}.
 #'

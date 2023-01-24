@@ -51,8 +51,7 @@ information is stored. Besides, the column must be of class
 \link[base:Dates]{Date} or
 \link[base:integer]{integer}/\link[base:numeric]{numeric}. If it is
 \code{integer}/\code{numeric}, it should refer to the year in which the
-season started (e.g. date = 2015 to refer to the 2015/2016 season)(e.g.
-\code{date} = 2018).}
+season started (e.g. \code{date} = 2015 to refer to the 2015/2016 season).}
 
 \item{time_expo}{Character referring to the column name where the information
 about the time of exposure in that corresponding date is stored.}

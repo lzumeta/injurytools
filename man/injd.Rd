@@ -11,12 +11,12 @@ and has 108 rows and 19 columns:
 \item{player}{Player identifier (factor)}
 \item{t0}{Follow-up period of the corresponding player, i.e. player’s first observed date, same value for each player (Date)}
 \item{tf}{Follow-up period of the corresponding player, i.e. player’s last observed date, same value for each player (Date)}
-\item{date_injured}{Date of injury of the corresponding observation (if any; otherwise NA) (Date)}
-\item{date_recovered}{Date of recovery of the corresponding observation (if any; otherwise NA) (Date)}
+\item{date_injured}{Date of injury of the corresponding observation (if any). Otherwise NA (Date)}
+\item{date_recovered}{Date of recovery of the corresponding observation (if any). Otherwise NA (Date)}
 \item{tstart}{Beginning date of the corresponding interval in which the observation has been at risk of injury (Date)}
 \item{tstop}{Ending date of the corresponding interval in which the observation has been at risk of injury (Date)}
-\item{tstart_minPlay}{Beginning time, minutes played in matches until the start of this interval in which the observation has been at risk of injury (numeric)}
-\item{tstop_minPlay}{Ending time, minutes played in matches until the finish of this interval in which the observation has been at risk of injury (numeric)}
+\item{tstart_minPlay}{Beginning time. Minutes played in matches until the start of this interval in which the observation has been at risk of injury (numeric)}
+\item{tstop_minPlay}{Ending time. Minutes played in matches until the finish of this interval in which the observation has been at risk of injury (numeric)}
 \item{status}{injury (event) indicator (numeric)}
 \item{enum}{an integer indicating the recurrence number, i.e. the \eqn{k}-th injury (event), at which the observation is at risk}
 \item{days_lost}{Number of days lost due to injury (numeric)}
@@ -40,12 +40,12 @@ injd
 \description{
 An \code{injd} object (\strong{S3}), called \code{injd}, to showcase what
 this object is like and also to save computation time in some help files
-provided by the package. The result of applying \code{prepare_all()} to to
-\emph{raw_df_exposures} (\code{prepare_exp(raw_df_exposures, ...)}) and
+provided by the package. The result of applying \code{prepare_all()} to
+\emph{raw_df_exposures} (\code{prepare_exp(raw_df_exposures, ...)}) and \cr
 \emph{raw_df_injuries} (\code{prepare_inj(raw_df_injuries, ...)}).
 }
 \details{
-It consists of a data frame plus 4 other attributes,
+It consists of a data frame plus 4 other attributes:
 a character specifying the unit of exposure (\code{unit_exposure}); and 3
 (auxiliary) data frames: \code{follow_up}, \code{data_exposures} and
 \code{data_injuries}.

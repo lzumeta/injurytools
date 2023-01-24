@@ -96,7 +96,7 @@ where $\Delta T$ is the total time under risk of the study population.
 </div>
 
 <div class="alert alert-warning" role="alert">
-**NOTE 3:** as @walden2023 points out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
+**NOTE 3:** as @walden2023 point out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
 </div>
 
 ## Prevalence
@@ -149,10 +149,10 @@ str(injds, 1)
 
 two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
 
-To present the results in a more tidier and comprehensible way (instead of **R** code styled output) using [RMarkdown](https://rmarkdown.rstudio.com/), and in particular, `knitr::kable()` function, the following can be done:
+To present the results in a more tidier and comprehensible way (instead of **R** code styled output) the following can be done:
 
 ```{r}
-# format the table of playerwise dataframe
+# format the 'playerwise' data frame for output as a table
 injds[[1]] %>% 
   arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
   head(10) %>%
@@ -161,8 +161,10 @@ injds[[1]] %>%
                                   "Total exposure", "Incidence", "Burden"))
 ```
 
+Using [RMarkdown](https://rmarkdown.rstudio.com/), and in particular, `knitr::kable()` function.
+
 ```{r}
-# format the table of total incidence and burden main columns
+# format the table of total incidence and burden (main columns)
 injds[[2]] %>% 
   select(1:8) %>% 
   data.frame(row.names = "TOTAL") %>% 
@@ -175,7 +177,7 @@ injds[[2]] %>%
 ```
 
 ```{r}
-# format the table of total incidence and burden point + ci estimates
+# format the table of total incidence and burden (point + ci estimates)
 injds_tot_cis <- injds[[2]] %>% 
   select(6:last_col()) %>% 
   data.frame(row.names = "TOTAL")
@@ -190,7 +192,6 @@ injds_tot_cis %>%
   kable(digits = 2,
         col.names = c("Incidence",  paste0("CI", conf_level, "% for \\(I_r\\)"), 
                       "Burden", paste0("CI", conf_level, "% for \\(I_{br}\\)")))
-  
 ```
 
 Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 
@@ -253,7 +254,7 @@ kable(availability_table1,
       col.names = c("Season", "Availability", "N", "Total", "%"))
 ```
 
-Overall in the 18-19 season there were more injured players than in the previous season. Let's calculate monthly:
+Overall, there were more injured players in the 18-19 season than in the previous season. Let's calculate it monthly:
 
 ```{r}
 availability_table2 <- injprev(injd, by = "monthly")
@@ -270,7 +271,7 @@ availability_table2 %>%
   slice(13:16)
 ```
 
-Looking at monthly basis there were more differences w.r.t. player availability in Liverpool FC 1st male team, during the winter January/February months. More injured players in the 18-19 season. 
+Looking at monthly basis, there were more differences w.r.t. player availability in Liverpool FC 1st male team, during the winter January/February months. More injured players in the 18-19 season. 
 
 
 ```{r}

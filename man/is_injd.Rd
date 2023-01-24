@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_data.R
 \name{is_injd}
 \alias{is_injd}
-\title{Check if object is of class \code{injd}}
+\title{Check if an object is of class \code{injd}}
 \usage{
 is_injd(x)
 }

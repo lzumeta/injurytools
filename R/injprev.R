@@ -2,11 +2,11 @@
 #'
 #' Calculate the prevalence of injured players and the proportion of non-injured
 #' (available) players in the cohort, on a monthly or season basis. Further
-#' information of the type of injury may be specified so that the
+#' information on the type of injury may be specified so that the
 #' injury-specific prevalences are reported according to this variable.
 #'
-#' @param injd Prepared data, an \code{injd} object.
-#' @param by Character, one of "monthly" or "season", specifying the periodicity
+#' @param injd Prepared data. An \code{injd} object.
+#' @param by Character. One of "monthly" or "season", specifying the periodicity
 #'   according to which to calculate the proportions of available and injured
 #'   players/athletes.
 #' @param var_type_injury Character specifying the name of the column on the

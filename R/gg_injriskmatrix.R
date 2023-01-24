@@ -1,37 +1,37 @@
-#' Risk matrix plot
+#' Plot risk matrices
 #'
-#' Given an \code{injds} \strong{S3} object it depicts risk matrix plots (see
-#' References section), a graph in which the injury incidence (frequency) is
-#' plotted against the average days lost per injury (consequence). The point
-#' estimate of injury incidence together with its confidence interval is
-#' plotted, according to the method used when running
-#' \code{\link[=injsummary]{injsummary()}} function. On the y-axis the mean
-#' time-loss per injury together with \eqn{\pm} IQR (days) is plotted. The size
-#' of the points and the number shown inside report the injury burden (days lost
-#' per player-exposure time), the bigger the size the greater.
+#' Given an \code{injds} \strong{S3} object, it depicts risk matrix plots , a
+#' graph in which the injury incidence (frequency) is plotted against the
+#' average days lost per injury (consequence). The point estimate of injury
+#' incidence together with its confidence interval is plotted, according to the
+#' method used when running \code{\link[=injsummary]{injsummary()}} function. On
+#' the y-axis, the mean time-loss per injury together with \eqn{\pm} IQR (days)
+#' is plotted. The number shown inside the point and the point size itself,
+#' report the injury burden (days lost per player-exposure time), the bigger the
+#' size the greater the burden. See References section.
 #'
 #'
 #' @param injds \code{injds} \strong{S3} object (see
 #'   \code{\link[=injsummary]{injsummary()}})
-#' @param var_type_injury Character specifying the name of the column, a
+#' @param var_type_injury Character specifying the name of the column. A
 #'   (categorical) variable referring to the "type of injury" (e.g.
 #'   muscular/articular/others or overuse/not-overuse etc.) according to which
-#'   visualize injury summary statistics (optional, defaults \code{NULL}).
+#'   visualize injury summary statistics (optional, defaults to \code{NULL}).
 #' @param add_contour Logical, whether or not to add contour lines of the
 #'   product between injury incidence and mean severity (i.e. 'incidence x
 #'   average time-loss'), which leads to injury burden (defaults to
 #'   \code{TRUE}).
-#' @param title Text for the main title, passed to
+#' @param title Text for the main title passed to
 #'   \code{\link[ggplot2:ggtitle]{ggplot2::ggtitle()}}.
 #' @param xlab  x-axis label to be passed to
 #'   \code{\link[ggplot2:xlab]{ggplot2::xlab()}}.
 #' @param ylab  y-axis label to be passed to
 #'   \code{\link[ggplot2:ylab]{ggplot2::ylab()}}.
-#' @param errh_height Set the height of the horizontal interval whiskers;
+#' @param errh_height Set the height of the horizontal interval whiskers; the
 #'   \code{height} argument for
 #'   \code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}
-#' @param errv_width Set the width of the vertical interval whiskers;
-#'   \code{width} argument for
+#' @param errv_width Set the width of the vertical interval whiskers; the
+#'   \code{width} argument for \cr
 #'   \code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}
 #'
 #' @return  A ggplot object (to which optionally more layers can be added).
@@ -49,8 +49,8 @@
 #' Sports Medicine} 2020; 54:372-389.
 #'
 #' Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
-#' in Team Sports: A Review of Principles, Practices and Problems. \emph{Sports
-#' Medicine}, 48(7), 1597–1606. https://doi.org/10.1007/s40279-018-0913-5
+#' in Team Sports: A Review of Principles, Practices and Problems.\emph{Sports
+#' Medicine}, 48(7), 1597–1606. \cr https://doi.org/10.1007/s40279-018-0913-5
 #'
 #' @examples
 #' # Prepare data

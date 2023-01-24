@@ -8,10 +8,10 @@ season2year(season)
 }
 \arguments{
 \item{season}{Character/factor specifying the season. It should follow the
-pattern of "xxxx/yyyy" pattern, e.g. "2005/2006".}
+pattern "xxxx/yyyy", e.g. "2005/2006".}
 }
 \value{
-Given the season it returns the year (in \code{numeric}) in which the
+Given the season, it returns the year (in \code{numeric}) in which the
 season started.
 }
 \description{

@@ -7,9 +7,9 @@
 injprev(injd, by = c("monthly", "season"), var_type_injury = NULL)
 }
 \arguments{
-\item{injd}{Prepared data, an \code{injd} object.}
+\item{injd}{Prepared data. An \code{injd} object.}
 
-\item{by}{Character, one of "monthly" or "season", specifying the periodicity
+\item{by}{Character. One of "monthly" or "season", specifying the periodicity
 according to which to calculate the proportions of available and injured
 players/athletes.}
 
@@ -30,7 +30,7 @@ cohort (\code{n_player}). See Note section.
 \description{
 Calculate the prevalence of injured players and the proportion of non-injured
 (available) players in the cohort, on a monthly or season basis. Further
-information of the type of injury may be specified so that the
+information on the type of injury may be specified so that the
 injury-specific prevalences are reported according to this variable.
 }
 \note{

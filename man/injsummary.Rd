@@ -2,7 +2,7 @@
 % Please edit documentation in R/injsummary.R
 \name{injsummary}
 \alias{injsummary}
-\title{Injury summary statistics}
+\title{Estimate injury summary statistics}
 \usage{
 injsummary(
   injd,
@@ -26,7 +26,7 @@ defaults to \code{NULL}.}
 Poisson method, negative binomial method, zero-inflated Poisson and
 zero-inflated negative binomial.}
 
-\item{conf_level}{Confidence level (default = 0.95).}
+\item{conf_level}{Confidence level (defaults to 0.95).}
 
 \item{quiet}{Logical, whether or not to silence the warning messages
 (defaults to \code{FALSE}).}
