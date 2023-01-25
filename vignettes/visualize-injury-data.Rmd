@@ -97,7 +97,7 @@ Code for tidying up the table
 injds[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -105,7 +105,7 @@ injds[["overall"]] %>%
 injds_perinj[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:4, incidence_new, burden_new) %>% 
+  select(1:2, 4, 9, incidence_new, burden_new) %>% 
   kable(col.names = c("Type of injury", "N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -118,7 +118,7 @@ injds_perinj[["overall"]] %>%
 injds[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -129,7 +129,7 @@ injds[["overall"]] %>%
 injds_perinj[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:4, incidence_new, burden_new) %>% 
+  select(1:2, 4, 9, incidence_new, burden_new) %>% 
   kable(col.names = c("Type of injury", "N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -240,7 +240,7 @@ Code for tidying up the tables
 injds1[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -249,7 +249,7 @@ injds1[["overall"]] %>%
 injds2[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), "  (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), "  (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -261,7 +261,7 @@ injds2[["overall"]] %>%
 injds1[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -272,7 +272,7 @@ injds1[["overall"]] %>%
 injds2[["overall"]] %>% 
   mutate(incidence_new = paste0(round(injincidence, 2), "  (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new = paste0(round(injburden, 2), "  (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) %>% 
-  select(1:3, incidence_new, burden_new) %>% 
+  select(1:2, 6, incidence_new, burden_new) %>% 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption = "Injury incidence and injury burden are reported as 100 player-matches",
         align = "c")
@@ -466,7 +466,7 @@ grid.arrange(p1, p2, ncol = 2,
 
 We will plot polar area diagrams[^visualize-note-2].
 
-[^visualize-note-2]: See the *Note* section in `?injprev()` or have a look at this section in [Estimate summary statistics](file:///home/lzumeta/Documents/BCAM_gitlab/injurytools/docs/articles/estimate-epi-measures.html#injprev) vignette, to better understand what the proportions refer to.
+[^visualize-note-2]: See the *Note* section in `?injprev()` or have a look at this section in [Estimate summary statistics](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html#injprev) vignette, to better understand what the proportions refer to.
 
 ```{r, eval = F}
 gg_injprev_polar(injd, by = "monthly")

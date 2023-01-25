@@ -176,10 +176,12 @@ injds[[2]] %>%
   kable_styling(full_width = FALSE)
 ```
 
+Note that to provide numbers that are easy to interpret and to avoid small decimals, injury incidence and injury burden are reported 'per 100 player-match exposure'. As in this example exposure time is **minutes played in matches**, we multiply the rates by 90*100 (i.e. 90 minutes lasts a football match). Therefore, the reported incidence rate is estimated by $\hat{I}_r = \frac{82}{74690}\times90\times100$.  
+
 ```{r}
 # format the table of total incidence and burden (point + ci estimates)
 injds_tot_cis <- injds[[2]] %>% 
-  select(6:last_col()) %>% 
+  select(7:last_col()) %>% 
   data.frame(row.names = "TOTAL")
 injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
                                     ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
