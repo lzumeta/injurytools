@@ -9,6 +9,10 @@ is_injds(x)
 \arguments{
 \item{x}{any R object.}
 }
+\value{
+A logical value: \code{TRUE} if \code{x} inherits from \code{injds}
+class, \code{FALSE} otherwise.
+}
 \description{
 Check if an object x is of class \code{injds}.
 }

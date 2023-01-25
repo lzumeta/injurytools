@@ -35,17 +35,17 @@ type of injury may be specified so that the injured players proportions are
 disaggregated and reported according to this variable.
 }
 \examples{
-# Prepare data
-# df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
-#                             date = "year", time_expo = "minutes_played")
-# df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
-#                             date_injured = "from", date_recovered = "until")
-# injd         <- prepare_all(data_exposures = df_exposures,
-#                             data_injuries  = df_injuries,
-#                             exp_unit = "matches_minutes")
+\donttest{
+df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+                            date = "year", time_expo = "minutes_played")
+df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+                            date_injured = "from", date_recovered = "until")
+injd         <- prepare_all(data_exposures = df_exposures,
+                            data_injuries  = df_injuries,
+                            exp_unit = "matches_minutes")
+}
 
-## colour palette
-\dontrun{
+\donttest{
 library(ggplot2)
 our_palette <- c("seagreen3", "red3", rev(RColorBrewer::brewer.pal(5, "Reds")))
 gg_injprev_polar(injd, by = "monthly", var_type_injury = "injury_type",

@@ -212,7 +212,7 @@ data_followup <- function(data_exposures) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' injd <- prepare_all(data_exposures = df_exposures,
 #'                     data_injuries  = df_injuries,
 #'                     exp_unit = "matches_minutes")
@@ -322,9 +322,11 @@ prepare_all <- function(data_exposures,
 
 #' Check if an object is of class \code{injd}
 #'
-#' Check if an object x is of class \code{injds}.
+#' Check if an object \code{x} is of class \code{injd}.
 #'
 #' @param x any R object.
+#' @return A logical value: \code{TRUE} if \code{x} inherits from \code{injd}
+#'   class, \code{FALSE} otherwise.
 #' @export
 is_injd <- function(x) inherits(x, "injd")
 

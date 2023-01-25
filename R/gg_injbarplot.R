@@ -17,19 +17,18 @@
 #' @importFrom forcats fct_reorder
 #'
 #' @examples
-#' # Prepare data
-#' # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
-#' #                             date = "year", time_expo = "minutes_played")
-#' # df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
-#' #                             date_injured = "from", date_recovered = "until")
-#' # injd         <- prepare_all(data_exposures = df_exposures,
-#' #                             data_injuries  = df_injuries,
-#' #                             exp_unit = "matches_minutes")
+#' \donttest{
+#' df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+#'                             date = "year", time_expo = "minutes_played")
+#' df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+#'                             date_injured = "from", date_recovered = "until")
+#' injd         <- prepare_all(data_exposures = df_exposures,
+#'                             data_injuries  = df_injuries,
+#'                             exp_unit = "matches_minutes")
+#'}
 #'
-#' # Estimate injury summary statistics
 #' injds <- injsummary(injd)
 #'
-#' # Plot
 #' p1 <- gg_injbarplot(injds, type = "incidence",
 #'                     title = "Overall injury incidence per player")
 #' p2 <- gg_injbarplot(injds, type = "burden",

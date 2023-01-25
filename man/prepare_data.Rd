@@ -125,7 +125,7 @@ df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
                             date          = "year",
                             time_expo     = "minutes_played")
 
-\dontrun{
+\donttest{
 injd <- prepare_all(data_exposures = df_exposures,
                     data_injuries  = df_injuries,
                     exp_unit = "matches_minutes")

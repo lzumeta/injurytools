@@ -89,13 +89,15 @@
 #' @importFrom tidyselect everything all_of
 #'
 #' @examples
-#' # df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
-#' #                             date = "year", time_expo = "minutes_played")
-#' # df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
-#' #                             date_injured = "from", date_recovered = "until")
-#' # injd         <- prepare_all(data_exposures = df_exposures,
-#' #                             data_injuries  = df_injuries,
-#' #                             exp_unit = "matches_minutes")
+#' \donttest{
+#' df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+#'                             date = "year", time_expo = "minutes_played")
+#' df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+#'                             date_injured = "from", date_recovered = "until")
+#' injd         <- prepare_all(data_exposures = df_exposures,
+#'                             data_injuries  = df_injuries,
+#'                             exp_unit = "matches_minutes")
+#' }
 #'
 #' injsummary(injd)
 injsummary <- function(injd, var_type_injury = NULL,
@@ -297,5 +299,7 @@ injsummary_unit <- function(unit, injds, quiet) {
 #' Check if an object x is of class \code{injds}.
 #'
 #' @param x any R object.
+#' @return A logical value: \code{TRUE} if \code{x} inherits from \code{injds}
+#'   class, \code{FALSE} otherwise.
 #' @export
 is_injds <- function(x) inherits(x, "injds")

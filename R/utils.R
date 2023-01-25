@@ -155,24 +155,23 @@ season2year <- function(season) {
 #'
 #' @examples
 #' # Prepare data
-#' # df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-#' #                            player         = "player_name",
-#' #                            date_injured   = "from",
-#' #                            date_recovered = "until")
-#' #
-#' # df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-#' #                             player        = "player_name",
-#' #                             date          = "year",
-#' #                             time_expo     = "minutes_played")
-#' #
-#' # injd <- prepare_all(data_exposures = df_exposures,
-#' #                     data_injuries  = df_injuries,
-#' #                     exp_unit = "matches_minutes")
+#' \donttest{
+#' df_injuries  <- prepare_inj(df_injuries0   = raw_df_injuries,
+#'                            player         = "player_name",
+#'                            date_injured   = "from",
+#'                            date_recovered = "until")
 #'
+#' df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
+#'                             player        = "player_name",
+#'                             date          = "year",
+#'                             time_expo     = "minutes_played")
 #'
-#' # Cut the follow-up period of the object
-#' # (please, use it carefully)
-#' \dontrun{
+#' injd <- prepare_all(data_exposures = df_exposures,
+#'                     data_injuries  = df_injuries,
+#'                     exp_unit = "matches_minutes")
+#'}
+#'
+#' \donttest{
 #' cut_injd(injd, date0 = 2018)
 #' }
 cut_injd <- function(injd, date0, datef) {
@@ -229,4 +228,3 @@ cut_injd <- function(injd, date0, datef) {
   return(injd_new)
 }
 
-## injfilter (?) I consider that it's better to filter exposure and injury data
