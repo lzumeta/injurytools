@@ -104,26 +104,44 @@ used with caution.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Prepare data</span></span></span>
-<span class="r-in"><span><span class="co"># df_injuries &lt;- prepare_inj(df_injuries0   = raw_df_injuries,</span></span></span>
-<span class="r-in"><span><span class="co">#                            player         = "player_name",</span></span></span>
-<span class="r-in"><span><span class="co">#                            date_injured   = "from",</span></span></span>
-<span class="r-in"><span><span class="co">#                            date_recovered = "until")</span></span></span>
-<span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># df_exposures &lt;- prepare_exp(df_exposures0 = raw_df_exposures,</span></span></span>
-<span class="r-in"><span><span class="co">#                             player        = "player_name",</span></span></span>
-<span class="r-in"><span><span class="co">#                             date          = "year",</span></span></span>
-<span class="r-in"><span><span class="co">#                             time_expo     = "minutes_played")</span></span></span>
-<span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># injd &lt;- prepare_all(data_exposures = df_exposures,</span></span></span>
-<span class="r-in"><span><span class="co">#                     data_injuries  = df_injuries,</span></span></span>
-<span class="r-in"><span><span class="co">#                     exp_unit = "matches_minutes")</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="va">df_injuries</span>  <span class="op">&lt;-</span> <span class="fu"><a href="prepare_data.html">prepare_inj</a></span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,</span></span>
+<span class="r-in"><span>                           player         <span class="op">=</span> <span class="st">"player_name"</span>,</span></span>
+<span class="r-in"><span>                           date_injured   <span class="op">=</span> <span class="st">"from"</span>,</span></span>
+<span class="r-in"><span>                           date_recovered <span class="op">=</span> <span class="st">"until"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu"><a href="prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span></span>
+<span class="r-in"><span>                            player        <span class="op">=</span> <span class="st">"player_name"</span>,</span></span>
+<span class="r-in"><span>                            date          <span class="op">=</span> <span class="st">"year"</span>,</span></span>
+<span class="r-in"><span>                            time_expo     <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Cut the follow-up period of the object</span></span></span>
-<span class="r-in"><span><span class="co"># (please, use it carefully)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">injd</span> <span class="op">&lt;-</span> <span class="fu"><a href="prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span></span>
+<span class="r-in"><span>                    data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span></span>
+<span class="r-in"><span>                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">cut_injd</span><span class="op">(</span><span class="va">injd</span>, date0 <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Injury data has been cut to the given follow-up period (in exposure data)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 74 × 19</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    player      t0         tf         date_inj…¹ date_rec…² tstart     tstop     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> adam-lalla… 2018-07-01 2019-06-30 2018-09-04 2018-10-19 2018-07-01 2018-09-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> adam-lalla… 2018-07-01 2019-06-30 2018-11-09 2018-12-04 2018-10-19 2018-11-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> adam-lalla… 2018-07-01 2019-06-30 2019-01-06 2019-01-18 2018-12-04 2019-01-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> adam-lalla… 2018-07-01 2019-06-30 2019-04-01 2019-05-31 2019-01-18 2019-04-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> adam-lalla… 2018-07-01 2019-06-30 <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         2019-05-31 2019-06-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> alisson     2018-07-01 2019-06-30 <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         2018-07-01 2019-06-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> andrew-rob… 2018-07-01 2019-06-30 2018-12-03 2018-12-07 2018-07-01 2018-12-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> andrew-rob… 2018-07-01 2019-06-30 2019-02-25 2019-02-26 2018-12-07 2019-02-25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> andrew-rob… 2018-07-01 2019-06-30 2019-05-08 2019-05-11 2019-02-26 2019-05-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> andrew-rob… 2018-07-01 2019-06-30 2019-06-12 2019-06-24 2019-05-11 2019-06-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 64 more rows, 12 more variables: tstart_minPlay &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tstop_minPlay &lt;dbl&gt;, status &lt;dbl&gt;, enum &lt;dbl&gt;, days_lost &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   player_id &lt;fct&gt;, season &lt;fct&gt;, games_lost &lt;dbl&gt;, injury &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;, injury_severity &lt;fct&gt;, and abbreviated</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable names ¹​date_injured, ²​date_recovered</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

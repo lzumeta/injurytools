@@ -79,7 +79,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2023-01-24</h4>
+            <h4 data-toc-skip class="date">2023-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -636,10 +636,17 @@ TOTAL
 </td>
 </tr></tbody>
 </table>
+<p>Note that to provide numbers that are easy to interpret and to avoid
+small decimals, injury incidence and injury burden are reported ‘per 100
+player-match exposure’. As in this example exposure time is
+<strong>minutes played in matches</strong>, we multiply the rates by
+90*100 (i.e. 90 minutes lasts a football match). Therefore, the reported
+incidence rate is estimated by <span class="math inline">\(\hat{I}_r =
+\frac{82}{74690}\times90\times100\)</span>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden (point + ci estimates)</span></span>
 <span><span class="va">injds_tot_cis</span> <span class="op">&lt;-</span> <span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>row.names <span class="op">=</span> <span class="st">"TOTAL"</span><span class="op">)</span></span>
 <span><span class="va">injds_tot_cis</span><span class="op">$</span><span class="va">ci_injincidence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"["</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">injds_tot_cis</span><span class="op">$</span><span class="va">injincidence_lower</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>                                    <span class="st">", "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">injds_tot_cis</span><span class="op">$</span><span class="va">injincidence_upper</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"]"</span><span class="op">)</span></span>
@@ -659,7 +666,7 @@ TOTAL
 <th style="text-align:right;">
 Incidence
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 CI% for <span class="math inline">\(I_r\)</span>
 </th>
 <th style="text-align:right;">
@@ -674,16 +681,16 @@ CI% for <span class="math inline">\(I_{br}\)</span>
 TOTAL
 </td>
 <td style="text-align:right;">
-74690
-</td>
-<td style="text-align:right;">
-255.87
-</td>
-<td style="text-align:right;">
 9.88
 </td>
 <td style="text-align:left;">
 [8.1, 11.7]
+</td>
+<td style="text-align:right;">
+246.9
+</td>
+<td style="text-align:left;">
+[237.9, 255.9]
 </td>
 </tr></tbody>
 </table>
@@ -1335,8 +1342,7 @@ Medicine</em> 37 (5): 384–92. <a href="https://doi.org/10.1136/bjsm.37.5.384" 
 </div>
 <div id="ref-Hodgson2000" class="csl-entry">
 Hodgson Phillips, L. 2000. <span>“Sports Injury Incidence.”</span>
-<em>British Journal of Sports Medicine</em> 34 (2): 133–36.
-https://doi.org/<a href="http://dx.doi.org/10.1136/bjsm.34.2.133" class="external-link">http://dx.doi.org/10.1136/bjsm.34.2.133</a>.
+<em>British Journal of Sports Medicine</em> 34 (2): 133–36. <a href="https://doi.org/10.1136/bjsm.34.2.133" class="external-link">https://doi.org/10.1136/bjsm.34.2.133</a>.
 </div>
 <div id="ref-walden2023" class="csl-entry">
 Waldén, Markus, Margo Mountjoy, Alan McCall, Andreas Serner, Andrew
@@ -1344,7 +1350,7 @@ Massey, Johannes L Tol, Roald Bahr, et al. 2023.
 <span>“Football-Specific Extension of the IOC Consensus Statement:
 Methods for Recording and Reporting of Epidemiological Data on Injury
 and Illness in Sport 2020.”</span> <em>British Journal of Sports
-Medicine</em>.
+Medicine</em>. <a href="https://doi.org/10.1136/bjsports-2022-106405" class="external-link">https://doi.org/10.1136/bjsports-2022-106405</a>.
 </div>
 </div>
 </div>
