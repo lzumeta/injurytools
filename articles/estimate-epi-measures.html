@@ -53,6 +53,9 @@
     <a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -79,7 +82,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2023-01-25</h4>
+            <h4 data-toc-skip class="date">2023-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -87,9 +90,6 @@
 
     
     
-<!-- <div class="alert alert-danger"> -->
-<!--   <strong>WARNING!</strong> File under construction. -->
-<!-- </div>     -->
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lzumeta/injurytools" class="external-link">injurytools</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -97,8 +97,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span></code></pre></div>
 <p>Whenever one collects and prepares the data, the next natural step is
 to summarize and explore these data. In this case, from a sports-applied
-point of view, one wants to know how many and what type of injuries have
-occurred, how often they have occurred or what the load has been.</p>
+point of view, one wants to know e.g.: how many and what type of
+injuries have occurred, how often they have occurred or what the load
+has been.</p>
 <p>This document shows convenient functions from
 <code>injurytools</code> to describe sports injury data, in terms of
 measures used in sports injury epidemiology (see <span class="citation">Bahr and Holme (<a href="#ref-Bahr2003" role="doc-biblioref">2003</a>)</span> and <span class="citation">Waldén
@@ -564,8 +565,9 @@ james-milner
 </tr>
 </tbody>
 </table>
-<p>Using <a href="https://rmarkdown.rstudio.com/" class="external-link">RMarkdown</a>, and in
-particular, <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> function.</p>
+<p>We used <a href="https://rmarkdown.rstudio.com/" class="external-link">RMarkdown</a>, in
+particular <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> function, to report these tables
+in this way.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden (main columns)</span></span>
 <span><span class="va">injds</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -640,8 +642,8 @@ TOTAL
 small decimals, injury incidence and injury burden are reported ‘per 100
 player-match exposure’. As in this example exposure time is
 <strong>minutes played in matches</strong>, we multiply the rates by
-90*100 (i.e. 90 minutes lasts a football match). Therefore, the reported
-incidence rate is estimated by <span class="math inline">\(\hat{I}_r =
+90*100 (i.e. 90 minutes lasts a football match). The reported incidence
+rate is estimated by <span class="math inline">\(\hat{I}_r =
 \frac{82}{74690}\times90\times100\)</span>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># format the table of total incidence and burden (point + ci estimates)</span></span>
@@ -699,11 +701,11 @@ were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per
 100 player-matches respectively. The teams overall injury incidence was
 of 9.9 injuries per 100 player-matches and the injury burden of 246.9
 days lost per 100 player-matches.</p>
-<p>These summaries can be done by injury type:</p>
+<p>These summaries can be done by type of injury:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injstats_pertype</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injsummary.html">injsummary</a></span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span>, quiet <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>These are the teams results regarding injury incidence and injury
-burden according to injury type:</p>
+<p>These are the results of the team regarding injury incidence and
+injury burden by type of injury:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injstats_pertype</span><span class="op">[[</span><span class="st">"overall"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -894,8 +896,8 @@ Prepare data
 </details><p>We calculate the injury prevalence and the proportions of injury-free
 players on a season basis:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">availability_table1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
-<span><span class="va">availability_table1</span></span>
+<code class="sourceCode R"><span><span class="va">prev_table1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
+<span><span class="va">prev_table1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
 <span><span class="co">#&gt;   season           type_injury     n n_player  prop</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -905,15 +907,15 @@ players on a season basis:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> season 2018/2019 Injured        17       19  89.5</span></span></code></pre></div>
 <p>Making use of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">availability_table1</span>,</span>
-<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">prev_table1</span>,</span>
+<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Status"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
 Season
 </th>
 <th style="text-align:left;">
-Availability
+Status
 </th>
 <th style="text-align:right;">
 N
@@ -999,10 +1001,10 @@ Injured
 <p>Overall, there were more injured players in the 18-19 season than in
 the previous season. Let’s calculate it monthly:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">availability_table2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">prev_table2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## compare two seasons July and August</span></span>
-<span><span class="va">availability_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">prev_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">season</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
@@ -1020,7 +1022,7 @@ the previous season. Let’s calculate it monthly:</p>
 <span></span>
 <span></span>
 <span><span class="co">## compare two seasons January and February</span></span>
-<span><span class="va">availability_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">prev_table2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">season</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">13</span><span class="op">:</span><span class="fl">16</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
@@ -1039,19 +1041,19 @@ the previous season. Let’s calculate it monthly:</p>
 availability in Liverpool FC 1st male team, during the winter
 January/February months. More injured players in the 18-19 season.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">availability_table3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">prev_table3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/injprev.html">injprev</a></span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"monthly"</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></code></pre></div>
 <p>Tidy up:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## season 1</span></span>
-<span><span class="va">availability_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">prev_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">season</span> <span class="op">==</span> <span class="st">"season 2017/2018"</span>, <span class="va">month</span> <span class="op">==</span> <span class="st">"Jan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Status"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
 <span>        caption <span class="op">=</span> <span class="st">"Season 2017/2018"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span>, position <span class="op">=</span> <span class="st">"float_left"</span><span class="op">)</span></span>
 <span><span class="co">## season 2</span></span>
-<span><span class="va">availability_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">prev_table3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">season</span> <span class="op">==</span> <span class="st">"season 2018/2019"</span>, <span class="va">month</span> <span class="op">==</span> <span class="st">"Jan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Availability"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Month"</span>, <span class="st">"Status"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
 <span>        caption <span class="op">=</span> <span class="st">"Season 2018/2019"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table" style="width: auto !important; ">
@@ -1066,7 +1068,7 @@ Season
 Month
 </th>
 <th style="text-align:left;">
-Availability
+Status
 </th>
 <th style="text-align:right;">
 N
@@ -1173,7 +1175,7 @@ Season
 Month
 </th>
 <th style="text-align:left;">
-Availability
+Status
 </th>
 <th style="text-align:right;">
 N
