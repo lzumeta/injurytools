@@ -5,9 +5,10 @@
 
 <!-- badges: start -->
 
+[![](https://www.r-pkg.org/badges/version/registr)](https://cran.r-project.org/package=registr)
+[![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
-[![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
 [![MIT
 license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
@@ -37,10 +38,11 @@ that are routinely made for sports injury surveillance.
 
 ## Installation
 
-<!-- To install from [CRAN](https://CRAN.R-project.org): -->
-<!-- ``` {r} -->
-<!-- install.packages("injurytools") -->
-<!-- ``` -->
+To install from [CRAN](https://CRAN.R-project.org):
+
+``` r
+install.packages("injurytools")
+```
 
 To install the most current version from GitHub:
 
@@ -48,16 +50,13 @@ To install the most current version from GitHub:
 devtools::install_github("lzumeta/injurytools")
 ```
 
-We are also planning to release the package to
-[CRAN](https://CRAN.R-project.org). We expect it to be available soon.
-
 ## Usage
 
 Most functions contain or start with `inj*()` which stands for
 **injury**. Functions for data preparation start with `prepare_*()`; and
 those for data visualization with `gg_inj*()`.
 
-Below is a quick look at how **`injurytools`** can help to give a
+The below outlines at a glance how **`injurytools`** can help to get a
 comprehensive picture of injury data:
 
 ``` r
@@ -79,7 +78,7 @@ gg_injphoto(injd,
         plot.caption = element_text(face = "italic", size = 12, colour = "gray10"))
 ```
 
-![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ## How to contribute
 

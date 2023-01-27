@@ -16,8 +16,9 @@ knitr::opts_chunk$set(
 # injurytools <img src="man/figures/logo.png" align="right" height ="142" />
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
+[![](https://www.r-pkg.org/badges/version/registr)](https://cran.r-project.org/package=registr)
 [![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
@@ -40,11 +41,11 @@ In practice, the package can help automate certain descriptive reports that are 
 
 ## Installation
 
-<!-- To install from [CRAN](https://CRAN.R-project.org): -->
+To install from [CRAN](https://CRAN.R-project.org):
 
-<!-- ``` {r} -->
-<!-- install.packages("injurytools") -->
-<!-- ``` -->
+``` {r, eval = FALSE}
+install.packages("injurytools")
+```
 
 To install the most current version from GitHub:
 
@@ -52,8 +53,6 @@ To install the most current version from GitHub:
 devtools::install_github("lzumeta/injurytools")
 ```
 
-We are also planning to release the package to
-[CRAN](https://CRAN.R-project.org). We expect it to be available soon.
 
 ## Usage
 
@@ -61,8 +60,8 @@ Most functions contain or start with `inj*()` which stands for **injury**.
 Functions for data preparation start with `prepare_*()`; and those for data
 visualization with `gg_inj*()`.
 
-Below is a quick look at how **`injurytools`** can help to give a comprehensive
-picture of injury data:
+The below outlines at a glance how **`injurytools`** can help to get a 
+comprehensive picture of injury data:
 
 ```{r, fig.width = 14.5, fig.height = 6.9}
 library(injurytools)
