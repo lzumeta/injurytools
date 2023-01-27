@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![](https://www.r-pkg.org/badges/version/registr)](https://cran.r-project.org/package=registr)
+[![](https://www.r-pkg.org/badges/version/injurytools)](https://cran.r-project.org/package=injurytools)
 [![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
