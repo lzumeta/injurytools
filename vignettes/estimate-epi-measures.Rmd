@@ -46,10 +46,6 @@ knit_hooks$set(output = function(x, options) {
 ```
 
 
-<!-- <div class="alert alert-danger"> -->
-<!--   <strong>WARNING!</strong> File under construction. -->
-<!-- </div>     -->
-
 ```{r setup, warning=FALSE, message=FALSE}
 library(injurytools)
 library(dplyr)
@@ -57,7 +53,7 @@ library(knitr)
 library(kableExtra)
 ```
 
-Whenever one collects and prepares the data, the next natural step is to summarize and explore these data. In this case, from a sports-applied point of view, one wants to know how many and what type of injuries have occurred, how often they have occurred or what the load has been.
+Whenever one collects and prepares the data, the next natural step is to summarize and explore these data. In this case, from a sports-applied point of view, one wants to know e.g.: how many and what type of injuries have occurred, how often they have occurred or what the load has been.
 
 This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003 and @walden2023). Below, these measures are explained and then, `injsummary()` and `injprev()` functions are illustrated.
 
@@ -161,7 +157,7 @@ injds[[1]] %>%
                                   "Total exposure", "Incidence", "Burden"))
 ```
 
-Using [RMarkdown](https://rmarkdown.rstudio.com/), and in particular, `knitr::kable()` function.
+We used [RMarkdown](https://rmarkdown.rstudio.com/), in particular `knitr::kable()` function, to report these tables in this way.
 
 ```{r}
 # format the table of total incidence and burden (main columns)
@@ -176,7 +172,7 @@ injds[[2]] %>%
   kable_styling(full_width = FALSE)
 ```
 
-Note that to provide numbers that are easy to interpret and to avoid small decimals, injury incidence and injury burden are reported 'per 100 player-match exposure'. As in this example exposure time is **minutes played in matches**, we multiply the rates by 90*100 (i.e. 90 minutes lasts a football match). Therefore, the reported incidence rate is estimated by $\hat{I}_r = \frac{82}{74690}\times90\times100$.  
+Note that to provide numbers that are easy to interpret and to avoid small decimals, injury incidence and injury burden are reported 'per 100 player-match exposure'. As in this example exposure time is **minutes played in matches**, we multiply the rates by 90*100 (i.e. 90 minutes lasts a football match). The reported incidence rate is estimated by $\hat{I}_r = \frac{82}{74690}\times90\times100$.  
 
 ```{r}
 # format the table of total incidence and burden (point + ci estimates)
@@ -198,13 +194,13 @@ injds_tot_cis %>%
 
 Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 
 
-These summaries can be done by injury type:
+These summaries can be done by type of injury:
 
 ```{r}
 injstats_pertype <- injsummary(injd, var_type_injury = "injury_type", quiet = T)
 ```
 
-These are the teams results regarding injury incidence and injury burden according to injury type:
+These are the results of the team regarding injury incidence and injury burden by type of injury:
 
 ```{r}
 injstats_pertype[["overall"]] %>% 
@@ -245,30 +241,30 @@ injd         <- prepare_all(data_exposures = df_exposures,
 We calculate the injury prevalence and the proportions of injury-free players on a season basis:
 
 ```{r}
-availability_table1 <- injprev(injd, by = "season")
-availability_table1
+prev_table1 <- injprev(injd, by = "season")
+prev_table1
 ```
 
 Making use of `knitr::kable()`:
 
 ```{r}
-kable(availability_table1,
-      col.names = c("Season", "Availability", "N", "Total", "%"))
+kable(prev_table1,
+      col.names = c("Season", "Status", "N", "Total", "%"))
 ```
 
 Overall, there were more injured players in the 18-19 season than in the previous season. Let's calculate it monthly:
 
 ```{r}
-availability_table2 <- injprev(injd, by = "monthly")
+prev_table2 <- injprev(injd, by = "monthly")
 
 ## compare two seasons July and August
-availability_table2 %>%
+prev_table2 %>%
   group_by(season) %>% 
   slice(1:4)
 
 
 ## compare two seasons January and February
-availability_table2 %>%
+prev_table2 %>%
   group_by(season) %>% 
   slice(13:16)
 ```
@@ -277,37 +273,37 @@ Looking at monthly basis, there were more differences w.r.t. player availability
 
 
 ```{r}
-availability_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
+prev_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
 ```
 
 Tidy up:
 
 ```{r, results = "hide", eval = F}
 ## season 1
-availability_table3 %>% 
+prev_table3 %>% 
   filter(season == "season 2017/2018", month == "Jan") %>% 
-  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+  kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
         caption = "Season 2017/2018") %>% 
   kable_styling(full_width = FALSE, position = "float_left")
 ## season 2
-availability_table3 %>% 
+prev_table3 %>% 
   filter(season == "season 2018/2019", month == "Jan") %>% 
-  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+  kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
         caption = "Season 2018/2019") %>% 
   kable_styling(full_width = FALSE, position = "left")
 ```
 
 ```{r, echo = F}
 ## season 1
-availability_table3 %>% 
+prev_table3 %>% 
   filter(season == "season 2017/2018", month == "Jan") %>% 
-  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+  kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
         caption = "Season 2017/2018") %>% 
   kable_styling(full_width = FALSE, position = "left")
 ## season 2
-availability_table3 %>% 
+prev_table3 %>% 
   filter(season == "season 2018/2019", month == "Jan") %>% 
-  kable(col.names = c("Season", "Month", "Availability", "N", "Total", "%"),
+  kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
         caption = "Season 2018/2019") %>% 
   kable_styling(full_width = FALSE, position = "left")
 ```
