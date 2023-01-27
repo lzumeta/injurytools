@@ -14,6 +14,8 @@ navbar:
       href: articles/estimate-epi-measures.html
     - text: Visualize data
       href: articles/visualize-injury-data.html
+  - text: News
+    href: news/index.html
   right:
   - icon: fa-github
     href: https://github.com/lzumeta/injurytools
