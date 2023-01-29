@@ -237,7 +237,7 @@ prepare_all <- function(data_exposures,
   data_injuries <- check_injfollowup(followup_df, data_injuries)
 
   injd <- followup_df %>%
-    dplyr::left_join(data_injuries, by = c("player" = "player")) %>%
+    dplyr::left_join(data_injuries, by = c("player" = "player"), multiple = "all") %>%
     dplyr::arrange(.data$player, .data$t0, .data$date_injured)
 
   ## Create two variables of date type: tstart and tstop

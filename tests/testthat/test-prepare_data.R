@@ -81,12 +81,13 @@ test_that("prepare_all works fine when dates in injury and exposure data do not 
                               time_expo     = "minutes_played")
 
   data_exposures <- filter(df_exposures, date == 2018)
-  w <- capture_warnings(prepare_all(data_exposures = data_exposures,
-                                          data_injuries  = df_injuries,
-                                          exp_unit = "matches_minutes"))
-  expect_length(w, 1)
-  expect_match(w, regexp = "Injury data has been cut")
 
+  # Should have 1 warning
+  expect_snapshot({
+    out <- prepare_all(data_exposures = data_exposures,
+                       data_injuries  = df_injuries,
+                       exp_unit = "matches_minutes")
+  })
 })
 
 test_that("data_followup works as expected", {
