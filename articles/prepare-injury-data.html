@@ -82,7 +82,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2023-01-29</h4>
+            <h4 data-toc-skip class="date">2023-01-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -146,20 +146,20 @@ consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www
 <span><span class="co">#&gt; 4 alex-oxlade-chamberlain    143424  17/18 2017             32           1483</span></span>
 <span><span class="co">#&gt; 5                 alisson    105470  18/19 2018             38           3420</span></span>
 <span><span class="co">#&gt; 6        andrew-robertson    234803  17/18 2017             22           1943</span></span>
-<span><span class="co">#&gt;      liga    club_name club_id age            place                   position</span></span>
-<span><span class="co">#&gt; 1 premier fc-liverpool      31  29      St Albans   Midfield_AttackingMidfield</span></span>
-<span><span class="co">#&gt; 2 premier fc-liverpool      31  30      St Albans   Midfield_AttackingMidfield</span></span>
-<span><span class="co">#&gt; 3 premier fc-liverpool      31  25        Sevilla            Defender_LeftBack</span></span>
-<span><span class="co">#&gt; 4 premier fc-liverpool      31  24     Portsmouth     Midfield_CentralMidfield</span></span>
-<span><span class="co">#&gt; 5 premier fc-liverpool      31  26  Novo Hamburgo                   Goalkeeper</span></span>
-<span><span class="co">#&gt; 6 premier fc-liverpool      31  23        Glasgow            Defender_LeftBack</span></span>
-<span><span class="co">#&gt;    foot goals assists reds</span></span>
-<span><span class="co">#&gt; 1  both     0       0    0</span></span>
-<span><span class="co">#&gt; 2  both     0       0    0</span></span>
-<span><span class="co">#&gt; 3  left     0       0    0</span></span>
-<span><span class="co">#&gt; 4 right     3       7    0</span></span>
-<span><span class="co">#&gt; 5 right     0       0    0</span></span>
-<span><span class="co">#&gt; 6  left     1       5    0</span></span></code></pre></div>
+<span><span class="co">#&gt;      liga    club_name club_id age place                   position  foot goals</span></span>
+<span><span class="co">#&gt; 1 premier fc-liverpool      31  29  &lt;NA&gt; Midfield_AttackingMidfield  both     0</span></span>
+<span><span class="co">#&gt; 2 premier fc-liverpool      31  30  &lt;NA&gt; Midfield_AttackingMidfield  both     0</span></span>
+<span><span class="co">#&gt; 3 premier fc-liverpool      31  25  &lt;NA&gt;          Defender_LeftBack  left     0</span></span>
+<span><span class="co">#&gt; 4 premier fc-liverpool      31  24  &lt;NA&gt;   Midfield_CentralMidfield right     3</span></span>
+<span><span class="co">#&gt; 5 premier fc-liverpool      31  26  &lt;NA&gt;                 Goalkeeper right     0</span></span>
+<span><span class="co">#&gt; 6 premier fc-liverpool      31  23  &lt;NA&gt;          Defender_LeftBack  left     1</span></span>
+<span><span class="co">#&gt;   assists reds</span></span>
+<span><span class="co">#&gt; 1       0    0</span></span>
+<span><span class="co">#&gt; 2       0    0</span></span>
+<span><span class="co">#&gt; 3       0    0</span></span>
+<span><span class="co">#&gt; 4       7    0</span></span>
+<span><span class="co">#&gt; 5       0    0</span></span>
+<span><span class="co">#&gt; 6       5    0</span></span></code></pre></div>
 <p>We standardize the <strong>key column names</strong> such as: player
 (subject) identifier, dates of injury and recovery (if any),
 training/match/season date and amount of time of exposure. And set them
