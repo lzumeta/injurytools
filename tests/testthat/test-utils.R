@@ -52,3 +52,4 @@ test_that("cut_injd aborts when it has to", {
   expect_error(cut_injd(injd, datef = 2016), "Empty")
   expect_error(cut_injd(injd, datef = as.Date("2018-01-09")), "datef and data_exposures")
 })
+

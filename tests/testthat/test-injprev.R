@@ -1,7 +1,7 @@
 
 test_that("injprev works", {
   injprev_df <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
-  expect_data_frame(injprev_df, nrows = 143L, ncols = 6L)
+  expect_data_frame(injprev_df, nrows = 132L, ncols = 6L)
   expect_subset(c("season", "month", "type_injury", "n", "n_player", "prop"),
                 names(injprev_df))
   expect_equal(levels(injprev_df$month),

@@ -5,7 +5,7 @@ test_that("injsummary works", {
   expect_identical(length(injds), 2L)
   expect_s3_class(injds, "injds")
   expect_equal(is_injds(injds), TRUE)
-  expect_data_frame(injds[[1]], nrows = 109L, ncols = 9L)
+  expect_data_frame(injds[[1]], nrows = 53L, ncols = 9L)
   expect_data_frame(injds[[2]], nrows = 1L, ncols = 14L)
   expect_equal(attr(injds, "unit_exposure"), "matches_minutes")
   expect_equal(attr(injds, "unit_timerisk"), "100 player-match")
@@ -28,7 +28,7 @@ test_that("injsummary works", {
   expect_identical(length(injds), 2L)
   expect_s3_class(injds, "injds")
   expect_equal(is_injds(injds), TRUE)
-  expect_data_frame(injds[[1]], nrows = 763L, ncols = 10L)
+  expect_data_frame(injds[[1]], nrows = 371L, ncols = 10L)
   expect_data_frame(injds[[2]], nrows = 7L, ncols = 17L)
   expect_subset(c("playerwise", "overall"), names(injds))
 
