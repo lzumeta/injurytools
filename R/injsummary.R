@@ -216,8 +216,8 @@ injsummary <- function(injd, var_type_injury = NULL,
     injds_overall <- injds_overall %>%
       dplyr::mutate(injincidence_sd = sqrt(.data$injincidence/.data$totalexpo),
                     injburden_sd    = sqrt(.data$injburden/.data$totalexpo),
-                    injincidence_lower = .data$injincidence - stats::qnorm(conf_level)*.data$injincidence_sd,
-                    injincidence_upper = .data$injincidence + stats::qnorm(conf_level)*.data$injincidence_sd,
+                    injincidence_lower = .data$injincidence - stats::qnorm(minusalphahalf)*.data$injincidence_sd,
+                    injincidence_upper = .data$injincidence + stats::qnorm(minusalphahalf)*.data$injincidence_sd,
                     injburden_lower = .data$injburden - qnorm(minusalphahalf)*.data$injburden_sd,
                     injburden_upper = .data$injburden + qnorm(minusalphahalf)*.data$injburden_sd)
   }
