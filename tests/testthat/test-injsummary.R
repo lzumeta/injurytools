@@ -9,6 +9,7 @@ test_that("injsummary works", {
   expect_data_frame(injds[[2]], nrows = 1L, ncols = 14L)
   expect_equal(attr(injds, "unit_exposure"), "matches_minutes")
   expect_equal(attr(injds, "unit_timerisk"), "100 player-match")
+  expect_equal(attr(injds, "conf_level"), 0.95)
   expect_subset(c("playerwise", "overall"), names(injds))
 
   expect_subset(c("player", "ninjuries", "ndayslost", "mean_dayslost",

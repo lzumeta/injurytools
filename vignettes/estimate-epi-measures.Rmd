@@ -188,8 +188,8 @@ conf_level <- attr(injds, "conf_level")*100
 injds_tot_cis %>% 
   select(1, 9, 2, 10) %>% 
   kable(digits = 2,
-        col.names = c("Incidence",  paste0("CI", conf_level, "% for \\(I_r\\)"), 
-                      "Burden", paste0("CI", conf_level, "% for \\(I_{br}\\)")))
+        col.names = c("Incidence",  paste0("CI ", conf_level, "% for \\(I_r\\)"), 
+                      "Burden", paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
 ```
 
 Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 

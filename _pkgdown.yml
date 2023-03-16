@@ -2,7 +2,6 @@ url: https://lzumeta.github.io/injurytools/
 template:
   bootstrap: 5
 navbar:
-  type: default
   left:
   - text: Reference
     href: reference/index.html
@@ -59,4 +58,9 @@ articles:
   - prepare-injury-data
   - estimate-epi-measures
   - visualize-injury-data
+authors:
+  Lore Zumeta Olaskoaga:
+    href: https://lzumeta.eus/
+  Dae-Jin Lee:
+    href: http://idaejin.github.io/
 

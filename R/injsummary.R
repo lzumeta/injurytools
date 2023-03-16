@@ -211,14 +211,15 @@ injsummary <- function(injd, var_type_injury = NULL,
 
 
   ## method (point estimate and standard error)
+  minusalphahalf <- conf_level + (1 - conf_level)/2
   if (method == "poisson") { ## assuming that the number of injuries follows a poisson and basing on CLT  ## CHECK THIS WITH pois.exact and check ggeffects package!
     injds_overall <- injds_overall %>%
       dplyr::mutate(injincidence_sd = sqrt(.data$injincidence/.data$totalexpo),
                     injburden_sd    = sqrt(.data$injburden/.data$totalexpo),
                     injincidence_lower = .data$injincidence - stats::qnorm(conf_level)*.data$injincidence_sd,
                     injincidence_upper = .data$injincidence + stats::qnorm(conf_level)*.data$injincidence_sd,
-                    injburden_lower = .data$injburden - qnorm(conf_level)*.data$injburden_sd,
-                    injburden_upper = .data$injburden + qnorm(conf_level)*.data$injburden_sd)
+                    injburden_lower = .data$injburden - qnorm(minusalphahalf)*.data$injburden_sd,
+                    injburden_upper = .data$injburden + qnorm(minusalphahalf)*.data$injburden_sd)
   }
 
   ## put proper units to injury incidence and injury burden
@@ -232,7 +233,7 @@ injsummary <- function(injd, var_type_injury = NULL,
   class(injds) <- c("injds", class(injds))
   attr(injds, "unit_exposure") <- unit
   attr(injds, "unit_timerisk") <- injds_aux$unit_timerisk
-  attr(injd, "conf_level")     <- conf_level
+  attr(injds, "conf_level")    <- conf_level
 
   return(injds)
 }

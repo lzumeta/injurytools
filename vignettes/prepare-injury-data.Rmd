@@ -130,7 +130,7 @@ head(injd)
 #   slice(1, n())
 ```
 
-The outcome is a prepared data set, structured in an suitable way that is ready for its use by statistical modelling approaches. This data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
+The outcome is a prepared data set, structured in a suitable way that is ready for its use by statistical modelling approaches. This data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
 
 * `player`: player identifier.
 
