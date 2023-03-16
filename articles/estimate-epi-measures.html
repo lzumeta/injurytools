@@ -29,7 +29,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">injurytools</a>
 
@@ -82,7 +82,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2023-02-21</h4>
+            <h4 data-toc-skip class="date">2023-03-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -227,7 +227,8 @@ consists of,</p>
 <span><span class="co">#&gt;  $ overall   : tibble [1 × 14] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "injds" "list"</span></span>
 <span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
-<span><span class="co">#&gt;  - attr(*, "unit_timerisk")= chr "100 player-match"</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "unit_timerisk")= chr "100 player-match"</span></span>
+<span><span class="co">#&gt;  - attr(*, "conf_level")= num 0.95</span></span></code></pre></div>
 <p>two data frames (two tables), which can be accessed by typing
 <code>injds[[1]]</code> (or <code>injds[["playerwise"]]</code>) and
 <code>injds[[2]]</code> (<code>injds[["overal"]]</code>).</p>
@@ -659,8 +660,8 @@ rate is estimated by <span class="math inline">\(\hat{I}_r =
 <span><span class="va">injds_tot_cis</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Incidence"</span>,  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI"</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_r\\)"</span><span class="op">)</span>, </span>
-<span>                      <span class="st">"Burden"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI"</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_{br}\\)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Incidence"</span>,  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI "</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_r\\)"</span><span class="op">)</span>, </span>
+<span>                      <span class="st">"Burden"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI "</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_{br}\\)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -669,13 +670,13 @@ rate is estimated by <span class="math inline">\(\hat{I}_r =
 Incidence
 </th>
 <th style="text-align:left;">
-CI% for <span class="math inline">\(I_r\)</span>
+CI 95% for <span class="math inline">\(I_r\)</span>
 </th>
 <th style="text-align:right;">
 Burden
 </th>
 <th style="text-align:left;">
-CI% for <span class="math inline">\(I_{br}\)</span>
+CI 95% for <span class="math inline">\(I_{br}\)</span>
 </th>
 </tr></thead>
 <tbody><tr>
@@ -692,7 +693,7 @@ TOTAL
 246.9
 </td>
 <td style="text-align:left;">
-[237.9, 255.9]
+[236.2, 257.6]
 </td>
 </tr></tbody>
 </table>
@@ -1365,7 +1366,7 @@ Medicine</em>. <a href="https://doi.org/10.1136/bjsports-2022-106405" class="ext
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Lore Zumeta Olaskoaga, Dae-Jin Lee.</p>
+<p>Developed by <a href="https://lzumeta.eus/" class="external-link">Lore Zumeta Olaskoaga</a>, <a href="http://idaejin.github.io/" class="external-link">Dae-Jin Lee</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
