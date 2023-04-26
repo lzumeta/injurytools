@@ -195,31 +195,78 @@ medicine</em>.</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $playerwise</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    player        ninju…¹ ndays…² mean_…³ media…⁴ iqr_d…⁵ total…⁶ injin…⁷ injbu…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> adam-lallana        6     302   43.1     43   18.5-5…     700   77.1   <span style="text-decoration: underline;">3</span>883. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> alberto-more…       1      50   25       25   12.5-3…    <span style="text-decoration: underline;">1</span>264    7.12   356. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> alex-oxlade-…       1     316  316      316   316-316    <span style="text-decoration: underline;">1</span>483    6.07  <span style="text-decoration: underline;">1</span>918. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> alisson             0       0    0        0   0-0        <span style="text-decoration: underline;">3</span>420    0        0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> andrew-rober…       5      22    3.67     2.5 1.25-3…    <span style="text-decoration: underline;">5</span>162    8.72    38.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> daniel-sturr…       3     122   30.5     33.5 12-52       927   29.1   <span style="text-decoration: underline;">1</span>184. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> danny-ings          0       0    0        0   0-0         265    0        0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dejan-lovren        6     160   22.9     13   9-28.5     <span style="text-decoration: underline;">3</span>109   17.4    463. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> divock-origi        1       5    2.5      2.5 1.25-3…     366   24.6    123. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> dominic-sola…       0       0    0        0   0-0         581    0        0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 18 more rows, and abbreviated variable names ¹​ninjuries, ²​ndayslost,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​mean_dayslost, ⁴​median_dayslost, ⁵​iqr_dayslost, ⁶​totalexpo, ⁷​injincidence,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁸​injburden</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    player         ninjuries ndayslost mean_dayslost median_dayslost iqr_dayslost</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> adam-lallana           6       302         43.1             43   18.5-52.5   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> alberto-moreno         1        50         25               25   12.5-37.5   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> alex-oxlade-c…         1       316        316              316   316-316     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> alisson                0         0          0                0   0-0         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> andrew-robert…         5        22          3.67             2.5 1.25-3.75   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> daniel-sturri…         3       122         30.5             33.5 12-52       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> danny-ings             0         0          0                0   0-0         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dejan-lovren           6       160         22.9             13   9-28.5      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> divock-origi           1         5          2.5              2.5 1.25-3.75   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> dominic-solan…         0         0          0                0   0-0         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: totalexpo &lt;dbl&gt;, injincidence &lt;dbl&gt;, injburden &lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $overall</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ninjuries ndayslost mean_day…¹ media…² iqr_d…³ total…⁴ injin…⁵ injbu…⁶ injin…⁷</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        82      <span style="text-decoration: underline;">2</span>049       19.0     7.5 1-20.25   <span style="text-decoration: underline;">74</span>690    9.88    247.    1.09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: injburden_sd &lt;dbl&gt;, injincidence_lower &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injincidence_upper &lt;dbl&gt;, injburden_lower &lt;dbl&gt;, injburden_upper &lt;dbl&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​mean_dayslost, ²​median_dayslost, ³​iqr_dayslost,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​totalexpo, ⁵​injincidence, ⁶​injburden, ⁷​injincidence_sd</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ninjuries ndayslost mean_dayslost median_dayslost iqr_dayslost totalexpo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        82      <span style="text-decoration: underline;">2</span>049          19.0             7.5 1-20.25          <span style="text-decoration: underline;">74</span>690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: injincidence &lt;dbl&gt;, injburden &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injincidence_sd &lt;dbl&gt;, injburden_sd &lt;dbl&gt;, injincidence_lower &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injincidence_upper &lt;dbl&gt;, injburden_lower &lt;dbl&gt;, injburden_upper &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "injds" "list" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"unit_exposure")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "matches_minutes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"unit_timerisk")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "100 player-match"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"conf_level")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.95</span>
+<span class="r-in"><span><span class="fu">injsummary</span><span class="op">(</span><span class="va">injd</span>, var_type_injury <span class="op">=</span> <span class="st">"injury_type"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Exposure time unit is matches_minutes</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Exposure time unit is matches_minutes</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $playerwise</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 140 × 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    player         injury_type ninjuries ndayslost mean_dayslost median_dayslost</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> adam-lallana   Bone                0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> adam-lallana   Concussion          3        97          32.3              25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> adam-lallana   Ligament            0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> adam-lallana   Muscle              3       205          68.3              45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> adam-lallana   Unknown             0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> alberto-moreno Bone                0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> alberto-moreno Concussion          0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> alberto-moreno Ligament            1        50          50                50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> alberto-moreno Muscle              0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> alberto-moreno Unknown             0         0           0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 130 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: iqr_dayslost &lt;chr&gt;, totalexpo &lt;dbl&gt;, injincidence &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injburden &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   injury_type ninjuries percent_ninjuries ndayslost percent_dayslost</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bone               11              13.4       173             8.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Concussion         16              19.5       213            10.4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Ligament            9              11.0       596            29.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Muscle             25              30.5       735            35.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Unknown            21              25.6       332            16.2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: mean_dayslost &lt;dbl&gt;, median_dayslost &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   iqr_dayslost &lt;chr&gt;, totalexpo &lt;dbl&gt;, injincidence &lt;dbl&gt;, injburden &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injincidence_sd &lt;dbl&gt;, injburden_sd &lt;dbl&gt;, injincidence_lower &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   injincidence_upper &lt;dbl&gt;, injburden_lower &lt;dbl&gt;, injburden_upper &lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "injds" "list" </span>
