@@ -100,6 +100,7 @@ injd         <- prepare_all(data_exposures = df_exposures,
 }
 
 injsummary(injd)
+injsummary(injd, var_type_injury = "injury_type")
 }
 \references{
 Bahr R., Clarsen B., & Ekstrand J. (2018). Why we should focus on the burden

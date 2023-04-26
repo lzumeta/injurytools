@@ -100,6 +100,7 @@
 #' }
 #'
 #' injsummary(injd)
+#' injsummary(injd, var_type_injury = "injury_type")
 injsummary <- function(injd, var_type_injury = NULL,
                        method = c("poisson","negbin", "zinfpois", "zinfnb"),
                        conf_level = 0.95,
@@ -113,6 +114,7 @@ injsummary <- function(injd, var_type_injury = NULL,
   df_exposures_summary <- df_exposures %>%
     dplyr::group_by(.data$player) %>%
     dplyr::summarise(totalexpo = sum(.data$time_expo))
+  totalexpo_vec <- sum(df_exposures_summary$totalexpo)
 
   ## if total expo = 0, omit those variables and throw a message
   if (any(df_exposures_summary$totalexpo == 0)) {
@@ -170,14 +172,14 @@ injsummary <- function(injd, var_type_injury = NULL,
                      mean_dayslost   = mean(injd$days_lost),
                      median_dayslost = stats::median(injd$days_lost), ## Important: median of injd$days_lost and not .data$...
                      iqr_dayslost    = paste0(stats::quantile(injd$days_lost, 0.25), "-", stats::quantile(injd$days_lost, 0.75)), ## Important: iqr of injd$days_lost and not .data$...
-                     totalexpo       = sum(.data$totalexpo),
+                     totalexpo       = totalexpo_vec,
                      injincidence    = .data$ninjuries/.data$totalexpo,
                      injburden       = .data$ndayslost/.data$totalexpo,
                      .groups = "keep") %>%
     dplyr::ungroup() %>%
     {
       if(!is.null(var_type_injury)) {
-        filter(., !is.na({{var_type_injury}})) %>%
+        dplyr::filter(., !is.na({{var_type_injury}})) %>%
           tidyr::complete({ {var_type_injury }}) %>%
           dplyr::mutate(totalexpo    = mean(.data$totalexpo, na.rm = TRUE), ## replacing NAs with the same totalexpo values
                         iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
