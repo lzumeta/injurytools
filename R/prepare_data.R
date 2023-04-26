@@ -108,7 +108,7 @@ prepare_exp <- function(df_exposures0,
     checkClass(df_exposures0, "data.frame"),
     checkMultiClass(df_exposures0[[player]], c("factor", "character")),
     checkMultiClass(df_exposures0[[date]], c("Date", "numeric", "integer")),
-    checkClass(df_exposures0[[time_expo]], "numeric"),
+    checkMultiClass(df_exposures0[[time_expo]], c("numeric", "integer")),
     combine = "and"
   )
   if (class(df_exposures0[[date]]) %in% c("integer", "numeric")) {
@@ -162,7 +162,7 @@ data_followup <- function(data_exposures) {
   ## tf the end of the season (June first)
   if (is.numeric(data_exposures$date)) {
     followup_df$t0 <- as.Date(date_format(paste0(followup_df$t0, "-07-01")))
-    followup_df$tf <- as.Date(date_format(paste0(followup_df$tf + 1 , "-06-30")))
+    followup_df$tf <- as.Date(date_format(paste0(followup_df$tf + 1, "-06-30")))
   }
 
   return(followup_df)
