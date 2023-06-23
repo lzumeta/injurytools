@@ -48,9 +48,9 @@ knit_hooks$set(output = function(x, options) {
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(injurytools)
-library(dplyr)
-library(knitr)
-library(kableExtra)
+library(dplyr)      
+library(knitr)      
+library(kableExtra) 
 ```
 
 Whenever one collects and prepares the data, the next natural step is to summarize and explore these data. In this case, from a sports-applied point of view, one wants to know e.g.: how many and what type of injuries have occurred, how often they have occurred or what the load has been.
@@ -82,25 +82,14 @@ where $\Delta T$ is the total time under risk of the study population.
 $$I_{br} = \frac{n_d}{\Delta T}$$
 where $\Delta T$ is the total time under risk of the study population.
 
-
-<div class="alert alert-warning" role="alert">
-  **NOTE 1:** as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by `gg_injriskmatrix()` function. 
-</div>
-
-<div class="alert alert-warning" role="alert">
-  **NOTE 2:** neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.). 
-</div>
-
-<div class="alert alert-warning" role="alert">
-**NOTE 3:** as @walden2023 point out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
-</div>
-
 ## Prevalence
 
 **Prevalence**, period prevalence, is a proportion that refers to the number of players that has reported the injury of interest ($X$) divided by the total player-population at risk at any time during the specified period of time ($\Delta T$ time window). This includes players who already had the condition at the start of the study period as well as those who acquired it during that period.
 
 $$P = \frac{X}{N}$$
 where $X$ is the number of injury cases and $N$ the total number of players in the study at any point in the window of time $\Delta T$.
+
+<div class="alert alert-primary" role="alert"> Please, see also the [Notes](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html#notes) section below.</div>
 
 # In practice
 
@@ -147,7 +136,27 @@ two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `
 
 To present the results in a more tidier and comprehensible way (instead of **R** code styled output) the following can be done:
 
-```{r}
+```{r, eval = F}
+# the 'playerwise' data frame
+injds[[1]]
+```
+
+<details>
+<summary>
+  Code to format the table
+</summary>
+```{r, eval = F}
+# format the 'playerwise' data frame for output as a table
+injds[[1]] %>% 
+  arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
+  head(10) %>%
+  kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
+                                  "Mean days lost", "Median days lost", "IQR days lost",
+                                  "Total exposure", "Incidence", "Burden"))
+```
+</details>
+
+```{r, echo = F}
 # format the 'playerwise' data frame for output as a table
 injds[[1]] %>% 
   arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
@@ -159,7 +168,31 @@ injds[[1]] %>%
 
 We used [RMarkdown](https://rmarkdown.rstudio.com/), in particular `knitr::kable()` function, to report these tables in this way.
 
-```{r}
+```{r, eval = F}
+# the 'overall' data frame
+injds[[2]]
+```
+
+<details>
+<summary>
+  Code to format the table
+</summary>
+
+```{r, eval = F}
+# format the table of total incidence and burden (main columns)
+injds[[2]] %>% 
+  select(1:8) %>% 
+  data.frame(row.names = "TOTAL") %>% 
+  kable(digits = 2,
+        col.names = c("N injuries", "N days lost", "Mean days lost",
+                      "Median days lost", "IQR days lost",
+                      "Total exposure", "Incidence", "Burden"),
+        row.names = TRUE) %>% 
+  kable_styling(full_width = FALSE)
+```
+</details>
+
+```{r, echo = F}
 # format the table of total incidence and burden (main columns)
 injds[[2]] %>% 
   select(1:8) %>% 
@@ -174,22 +207,47 @@ injds[[2]] %>%
 
 Note that to provide numbers that are easy to interpret and to avoid small decimals, injury incidence and injury burden are reported 'per 100 player-match exposure'. As in this example exposure time is **minutes played in matches**, we multiply the rates by 90*100 (i.e. 90 minutes lasts a football match). The reported incidence rate is estimated by $\hat{I}_r = \frac{82}{74690}\times90\times100$.  
 
-```{r}
+<details>
+<summary>
+  Code to format the table
+</summary>
+```{r, eval = F}
 # format the table of total incidence and burden (point + ci estimates)
 injds_tot_cis <- injds[[2]] %>% 
   select(7:last_col()) %>% 
   data.frame(row.names = "TOTAL")
 injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
-                                    ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
-injds_tot_cis$ci_injburden <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
-                                    ", ",round(injds_tot_cis$injburden_upper, 1), "]")
+                                        ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
+injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
+                                        ", ",round(injds_tot_cis$injburden_upper, 1), "]")
 
 conf_level <- attr(injds, "conf_level")*100
+
 injds_tot_cis %>% 
   select(1, 9, 2, 10) %>% 
   kable(digits = 2,
         col.names = c("Incidence",  paste0("CI ", conf_level, "% for \\(I_r\\)"), 
-                      "Burden", paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
+                      "Burden",     paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
+```
+</details>
+
+```{r, echo = F}
+# format the table of total incidence and burden (point + ci estimates)
+injds_tot_cis <- injds[[2]] %>% 
+  select(7:last_col()) %>% 
+  data.frame(row.names = "TOTAL")
+injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
+                                        ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
+injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
+                                        ", ",round(injds_tot_cis$injburden_upper, 1), "]")
+
+conf_level <- attr(injds, "conf_level")*100
+
+injds_tot_cis %>% 
+  select(1, 9, 2, 10) %>% 
+  kable(digits = 2,
+        col.names = c("Incidence",  paste0("CI ", conf_level, "% for \\(I_r\\)"), 
+                      "Burden",     paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
 ```
 
 Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 
@@ -202,7 +260,32 @@ injstats_pertype <- injsummary(injd, var_type_injury = "injury_type", quiet = T)
 
 These are the results of the team regarding injury incidence and injury burden by type of injury:
 
-```{r}
+```{r, eval = F}
+injstats_pertype[["overall"]]
+```
+
+<details>
+<summary>
+  Code to format the table
+</summary>
+```{r, eval = F}
+injstats_pertype[["overall"]] %>% 
+  select(1:5, 7:11) %>% 
+  mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
+         ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
+         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) %>% 
+  select(1, 11:13, 8:10) %>% 
+  arrange(desc(injburden)) %>% 
+  kable(digits = 2,
+        col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
+                      "Median days lost (IQR)",
+                      "Total exposure", "Incidence", "Burden"),
+        row.names = TRUE) %>% 
+  kable_styling(full_width = FALSE)
+```
+</details>
+
+```{r, echo = F}
 injstats_pertype[["overall"]] %>% 
   select(1:5, 7:11) %>% 
   mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
@@ -276,9 +359,11 @@ Looking at monthly basis, there were more differences w.r.t. player availability
 prev_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
 ```
 
-Tidy up:
-
-```{r, results = "hide", eval = F}
+<details>
+<summary>
+  Tidy up
+</summary>
+```{r, eval = F}
 ## season 1
 prev_table3 %>% 
   filter(season == "season 2017/2018", month == "Jan") %>% 
@@ -292,6 +377,7 @@ prev_table3 %>%
         caption = "Season 2018/2019") %>% 
   kable_styling(full_width = FALSE, position = "left")
 ```
+</details>
 
 ```{r, echo = F}
 ## season 1
@@ -313,6 +399,21 @@ prev_table3 %>%
 In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in `injsummary()` function.
 
 Finally, this document shows how to perform descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
+
+# Notes 
+
+<div class="alert alert-warning" role="alert">
+  **NOTE 1:** as @Bahr2018 state, injury incidence (likelihood) and injury burden (severity) should be reported and assessed in conjunction rather than in isolation. In this regard, see the risk matrix plot provided by `gg_injriskmatrix()` function. 
+</div>
+
+<div class="alert alert-warning" role="alert">
+  **NOTE 2:** neither injury incidence ($I_r$) nor injury burden ($I_{br}$) are ratios, and they are not interpreted as a probability; they are rates and their unit (person-time)$^{-1}$ (e.g. per 1000h of player-exposure, per player-season etc.). 
+</div>
+
+<div class="alert alert-warning" role="alert">
+**NOTE 3:** as @walden2023 point out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
+</div>
+
 
 # References
 
