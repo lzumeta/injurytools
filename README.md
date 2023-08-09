@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# injurytools <img src="man/figures/logo.png" align="right" height ="142" />
+# injurytools <a href="https://lzumeta.github.io/injurytools/"><img src="man/figures/logo.png" align="right" height="138" style="float:right;"/></a>
 
 <!-- badges: start -->
 
@@ -9,6 +9,7 @@
 [![R-CMD-check](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lzumeta/injurytools/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/injurytools)](https://cran.r-project.org/package=injurytools)
 [![MIT
 license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
@@ -78,7 +79,7 @@ gg_injphoto(injd,
         plot.caption = element_text(face = "italic", size = 12, colour = "gray10"))
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ## How to contribute
 

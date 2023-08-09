@@ -84,10 +84,10 @@ where $\Delta T$ is the total time under risk of the study population.
 
 ## Prevalence
 
-**Prevalence**, period prevalence, is a proportion that refers to the number of players that has reported the injury of interest ($X$) divided by the total player-population at risk at any time during the specified period of time ($\Delta T$ time window). This includes players who already had the condition at the start of the study period as well as those who acquired it during that period.
+**Prevalence**, period prevalence, is a proportion that refers to the number of players that have reported the injury of interest ($X$) divided by the total player-population at risk at any time during the specified period of time ($\Delta T$ time window). This includes players who already had the injury at the start of the time period as well as those who suffer it during that period.
 
 $$P = \frac{X}{N}$$
-where $X$ is the number of injury cases and $N$ the total number of players in the study at any point in the window of time $\Delta T$.
+where $X$ is the number of injury cases and $N$ is the total number of players in the study at any point in the time window $\Delta T$.
 
 <div class="alert alert-primary" role="alert"> Please, see also the [Notes](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html#notes) section below.</div>
 
