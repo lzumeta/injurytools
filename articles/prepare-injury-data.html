@@ -237,8 +237,8 @@ above. It is important to specify the unit of exposure,
 <span><span class="co">#&gt; <span style="color: #949494;">#   enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span>
-<span><span class="co"># injd %&gt;% </span></span>
-<span><span class="co">#   group_by(player) %&gt;% </span></span>
+<span><span class="co"># injd |&gt; </span></span>
+<span><span class="co">#   group_by(player) |&gt; </span></span>
 <span><span class="co">#   slice(1, n())</span></span></code></pre></div>
 <p>The outcome is a prepared data set, structured in a suitable way that
 is ready for its use by statistical modelling approaches. This data set
