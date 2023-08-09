@@ -10,10 +10,10 @@
 #' @importFrom tidyselect all_of
 #' @keywords internal
 data_injurieslong <- function(data_injuries) {
-  data_injuries %>%
-    dplyr::select("player", "date_injured", "date_recovered") %>%
-    tidyr::gather(key = "event", value = "date", "date_injured", "date_recovered") %>%
-    dplyr::arrange(.data$player, .data$date) %>%
+  data_injuries |>
+    dplyr::select("player", "date_injured", "date_recovered") |>
+    tidyr::gather(key = "event", value = "date", "date_injured", "date_recovered") |>
+    dplyr::arrange(.data$player, .data$date) |>
     dplyr::mutate(event = factor(.data$event))
 }
 
@@ -204,17 +204,17 @@ cut_injd <- function(injd, date0, datef) {
   exp_unit <- attr(injd, "unit_exposure")
 
   if (!missing(date0)) {
-    data_exposures <- data_exposures %>%
+    data_exposures <- data_exposures |>
       dplyr::filter(.data$date >= date0)
-    data_injuries <- data_injuries %>%
+    data_injuries <- data_injuries |>
       dplyr::filter(.data$date_injured >= date0 |
                       lubridate::year(.data$date_injured) >= date0)
   }
 
   if (!missing(datef)) {
-    data_exposures <- data_exposures %>%
+    data_exposures <- data_exposures |>
       dplyr::filter(.data$date <= datef)
-    data_injuries <- data_injuries %>%
+    data_injuries <- data_injuries |>
       dplyr::filter(.data$date_injured <= datef |
                       lubridate::year(.data$date_injured) >= datef)
   }

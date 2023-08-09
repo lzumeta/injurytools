@@ -63,7 +63,7 @@ prepare_inj <- function(df_injuries0,
   data_injuries <- dplyr::rename(df_injuries0,
                                  "player"         = tidyselect::all_of(player),
                                  "date_injured"   = tidyselect::all_of(date_injured),
-                                 "date_recovered" = tidyselect::all_of(date_recovered)) %>%
+                                 "date_recovered" = tidyselect::all_of(date_recovered)) |>
     dplyr::mutate(player = factor(player),
                   date_injured = as.Date(date_format(date_injured)),
                   date_recovered = as.Date(date_format(date_recovered)))
@@ -121,7 +121,7 @@ prepare_exp <- function(df_exposures0,
   data_exposures <- dplyr::rename(df_exposures0,
                                   "player"    = tidyselect::all_of(player),
                                   "date"      = tidyselect::all_of(date),
-                                  "time_expo" = tidyselect::all_of(time_expo)) %>%
+                                  "time_expo" = tidyselect::all_of(time_expo)) |>
     dplyr::mutate(player = factor(player),
                   date = as.character(date))
   if (nchar(data_exposures$date[[1]]) == 4) {
@@ -152,10 +152,10 @@ data_followup <- function(data_exposures) {
     }
   }
 
-  followup_df <- data_exposures %>%
-    dplyr::group_by(.data$player) %>%
+  followup_df <- data_exposures |>
+    dplyr::group_by(.data$player) |>
     dplyr::summarise(t0 = min(.data$date),
-                     tf = max(.data$date)) %>%
+                     tf = max(.data$date)) |>
     dplyr::ungroup()
 
   ## if seasons(date of class numeric).. t0 beginning of the (pre)season (July);
@@ -236,31 +236,31 @@ prepare_all <- function(data_exposures,
 
   data_injuries <- check_injfollowup(followup_df, data_injuries)
 
-  injd <- followup_df %>%
-    dplyr::left_join(data_injuries, by = c("player" = "player"), multiple = "all") %>%
+  injd <- followup_df |>
+    dplyr::left_join(data_injuries, by = c("player" = "player"), multiple = "all") |>
     dplyr::arrange(.data$player, .data$t0, .data$date_injured)
 
   ## Create two variables of date type: tstart and tstop
-  injd <- injd %>%
-    dplyr::group_by(.data$player) %>%
-    dplyr::slice(1:n(), n()) %>%  ## copy last row
-    dplyr::mutate_at(vars(-"player", -"t0", -"tf"), ~replace(.x, row_number() == n(), NA)) %>%
+  injd <- injd |>
+    dplyr::group_by(.data$player) |>
+    dplyr::slice(1:n(), n()) |>  ## copy last row
+    dplyr::mutate_at(vars(-"player", -"t0", -"tf"), ~replace(.x, row_number() == n(), NA)) |>
     ## edit this last row with slice and add NAs at every variable except for (Jug, t0, tf)
     ## This step is done in order to arrive until the last follow-up date
     ## (base::replace() in order to keep the columns type such as Team) BEFORE: c(.x[-n()], NA).
-    dplyr::distinct() %>%  ## delete duplicated rows (it is the case of non injured players, the ones that are deleted)
+    dplyr::distinct() |>  ## delete duplicated rows (it is the case of non injured players, the ones that are deleted)
     dplyr::mutate(tstart = dplyr::lag(.data$date_recovered, default = .data$t0[1]),
-                  tstop = c(.data$date_injured[seq(length.out = (n() - 1))], .data$tf[n()])) %>% ## same as date_injured[1:(n()-1)]
-    dplyr::select("player", "t0", "tf", "date_injured", "date_recovered", "tstart", "tstop", tidyselect::everything()) %>%
+                  tstop = c(.data$date_injured[seq(length.out = (n() - 1))], .data$tf[n()])) |> ## same as date_injured[1:(n()-1)]
+    dplyr::select("player", "t0", "tf", "date_injured", "date_recovered", "tstart", "tstop", tidyselect::everything()) |>
     dplyr::ungroup()
 
   ## Fill tstop for non-injured players and delete those players' observations whose
   ## recovery date is later than the end of her follow-up
-  injd <- injd %>%
-    dplyr::group_by(.data$player) %>%
-    dplyr::mutate_at(vars("tstop"), ~replace(.x, row_number() == 1 & is.na(.x), as.Date(.data$tf)[1])) %>%
-    dplyr::filter(.data$tstart <= .data$tstop) %>%
-    droplevels() %>%
+  injd <- injd |>
+    dplyr::group_by(.data$player) |>
+    dplyr::mutate_at(vars("tstop"), ~replace(.x, row_number() == 1 & is.na(.x), as.Date(.data$tf)[1])) |>
+    dplyr::filter(.data$tstart <= .data$tstop) |>
+    droplevels() |>
     dplyr::ungroup()
 
   ## Obtain minutes (or other units) of exposure
@@ -268,7 +268,7 @@ prepare_all <- function(data_exposures,
   unx <- exp_unit_suffix(exp_unit)
   tstart_unx <- paste0("tstart_", unx)
   tstop_unx <- paste0("tstop_", unx)
-  injd <- injd %>%
+  injd <- injd |>
     dplyr::mutate(
       !!(tstart_unx) := 0,
       !!(tstop_unx)  := 0
@@ -279,18 +279,18 @@ prepare_all <- function(data_exposures,
   } else {
     data_exposures$date_aux <- data_exposures$date
   }
-  injd <- injd %>%
+  injd <- injd |>
     dplyr::mutate(!!(tstop_unx) := purrr::pmap_dbl(.l = list(.data$player, .data$tstart, .data$tstop),
                                                    .f = function(playr, tstart, tstop) {
-                                                     data_exposures %>%
-                                                       dplyr::filter(.data$player %in% playr, .data$date_aux >= tstart, .data$date_aux < tstop) %>%
-                                                       dplyr::select("time_expo") %>%
-                                                       .[[1]] %>%
+                                                     data_exposures |>
+                                                       dplyr::filter(.data$player %in% playr, .data$date_aux >= tstart, .data$date_aux < tstop) |>
+                                                       dplyr::select("time_expo") |>
+                                                       (\(x) x[[1]])() |>
                                                        sum()}))
 
   ## 3) Add enum, status and days_lost columns; edit tstop_min and tstart_min
-  injd <- injd %>%
-    dplyr::group_by(.data$player) %>%
+  injd <- injd |>
+    dplyr::group_by(.data$player) |>
     dplyr::mutate(
       !!(tstop_unx) := cumsum(.data[[tstop_unx]]),
       !!(tstart_unx) := dplyr::lag(.data[[tstop_unx]], default = 0),
@@ -301,8 +301,8 @@ prepare_all <- function(data_exposures,
                          0,
                          as.numeric(difftime(.data$date_recovered, .data$date_injured, units = "days"))
       )
-    ) %>%
-    dplyr::ungroup() %>%
+    ) |>
+    dplyr::ungroup() |>
     dplyr::select("player", "t0", "tf", "date_injured",
                   "date_recovered", "tstart", "tstop",
                   tidyselect::all_of(tstart_unx), tidyselect::all_of(tstop_unx),
@@ -314,7 +314,7 @@ prepare_all <- function(data_exposures,
   class(injd) <- c("injd", class(injd))
   attr(injd, "unit_exposure") <- exp_unit
   attr(injd, "follow_up") <- followup_df
-  attr(injd, "data_exposures") <- data_exposures %>% select(-"date_aux")
+  attr(injd, "data_exposures") <- data_exposures |> select(-"date_aux")
   attr(injd, "data_injuries") <- data_injuries
   return(injd)
 }

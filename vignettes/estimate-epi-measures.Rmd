@@ -147,9 +147,9 @@ injds[[1]]
 </summary>
 ```{r, eval = F}
 # format the 'playerwise' data frame for output as a table
-injds[[1]] %>% 
-  arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
-  head(10) %>%
+injds[[1]] |> 
+  arrange(desc(injincidence)) |> # sort by decreasing order of injincidence
+  head(10) |>
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
                                   "Mean days lost", "Median days lost", "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
@@ -158,9 +158,9 @@ injds[[1]] %>%
 
 ```{r, echo = F}
 # format the 'playerwise' data frame for output as a table
-injds[[1]] %>% 
-  arrange(desc(injincidence)) %>% # sort by decreasing order of injincidence
-  head(10) %>%
+injds[[1]] |> 
+  arrange(desc(injincidence)) |> # sort by decreasing order of injincidence
+  head(10) |>
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
                                   "Mean days lost", "Median days lost", "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
@@ -180,28 +180,28 @@ injds[[2]]
 
 ```{r, eval = F}
 # format the table of total incidence and burden (main columns)
-injds[[2]] %>% 
-  select(1:8) %>% 
-  data.frame(row.names = "TOTAL") %>% 
+injds[[2]] |> 
+  select(1:8) |> 
+  data.frame(row.names = "TOTAL") |> 
   kable(digits = 2,
         col.names = c("N injuries", "N days lost", "Mean days lost",
                       "Median days lost", "IQR days lost",
                       "Total exposure", "Incidence", "Burden"),
-        row.names = TRUE) %>% 
+        row.names = TRUE) |> 
   kable_styling(full_width = FALSE)
 ```
 </details>
 
 ```{r, echo = F}
 # format the table of total incidence and burden (main columns)
-injds[[2]] %>% 
-  select(1:8) %>% 
-  data.frame(row.names = "TOTAL") %>% 
+injds[[2]] |> 
+  select(1:8) |> 
+  data.frame(row.names = "TOTAL") |> 
   kable(digits = 2,
         col.names = c("N injuries", "N days lost", "Mean days lost",
                       "Median days lost", "IQR days lost",
                       "Total exposure", "Incidence", "Burden"),
-        row.names = TRUE) %>% 
+        row.names = TRUE) |> 
   kable_styling(full_width = FALSE)
 ```
 
@@ -213,8 +213,8 @@ Note that to provide numbers that are easy to interpret and to avoid small decim
 </summary>
 ```{r, eval = F}
 # format the table of total incidence and burden (point + ci estimates)
-injds_tot_cis <- injds[[2]] %>% 
-  select(7:last_col()) %>% 
+injds_tot_cis <- injds[[2]] |> 
+  select(7:last_col()) |> 
   data.frame(row.names = "TOTAL")
 injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
                                         ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
@@ -223,8 +223,8 @@ injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower
 
 conf_level <- attr(injds, "conf_level")*100
 
-injds_tot_cis %>% 
-  select(1, 9, 2, 10) %>% 
+injds_tot_cis |> 
+  select(1, 9, 2, 10) |> 
   kable(digits = 2,
         col.names = c("Incidence",  paste0("CI ", conf_level, "% for \\(I_r\\)"), 
                       "Burden",     paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
@@ -233,8 +233,8 @@ injds_tot_cis %>%
 
 ```{r, echo = F}
 # format the table of total incidence and burden (point + ci estimates)
-injds_tot_cis <- injds[[2]] %>% 
-  select(7:last_col()) %>% 
+injds_tot_cis <- injds[[2]] |> 
+  select(7:last_col()) |> 
   data.frame(row.names = "TOTAL")
 injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
                                         ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
@@ -243,8 +243,8 @@ injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower
 
 conf_level <- attr(injds, "conf_level")*100
 
-injds_tot_cis %>% 
-  select(1, 9, 2, 10) %>% 
+injds_tot_cis |> 
+  select(1, 9, 2, 10) |> 
   kable(digits = 2,
         col.names = c("Incidence",  paste0("CI ", conf_level, "% for \\(I_r\\)"), 
                       "Burden",     paste0("CI ", conf_level, "% for \\(I_{br}\\)")))
@@ -269,35 +269,35 @@ injstats_pertype[["overall"]]
   Code to format the table
 </summary>
 ```{r, eval = F}
-injstats_pertype[["overall"]] %>% 
-  select(1:5, 7:11) %>% 
+injstats_pertype[["overall"]] |> 
+  select(1:5, 7:11) |> 
   mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
          ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
-         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) %>% 
-  select(1, 11:13, 8:10) %>% 
-  arrange(desc(injburden)) %>% 
+         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) |> 
+  select(1, 11:13, 8:10) |> 
+  arrange(desc(injburden)) |> 
   kable(digits = 2,
         col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
                       "Median days lost (IQR)",
                       "Total exposure", "Incidence", "Burden"),
-        row.names = TRUE) %>% 
+        row.names = TRUE) |> 
   kable_styling(full_width = FALSE)
 ```
 </details>
 
 ```{r, echo = F}
-injstats_pertype[["overall"]] %>% 
-  select(1:5, 7:11) %>% 
+injstats_pertype[["overall"]] |> 
+  select(1:5, 7:11) |> 
   mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
          ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
-         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) %>% 
-  select(1, 11:13, 8:10) %>% 
-  arrange(desc(injburden)) %>% 
+         median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) |> 
+  select(1, 11:13, 8:10) |> 
+  arrange(desc(injburden)) |> 
   kable(digits = 2,
         col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
                       "Median days lost (IQR)",
                       "Total exposure", "Incidence", "Burden"),
-        row.names = TRUE) %>% 
+        row.names = TRUE) |> 
   kable_styling(full_width = FALSE)
 ```
 
@@ -341,14 +341,14 @@ Overall, there were more injured players in the 18-19 season than in the previou
 prev_table2 <- injprev(injd, by = "monthly")
 
 ## compare two seasons July and August
-prev_table2 %>%
-  group_by(season) %>% 
+prev_table2 |>
+  group_by(season) |> 
   slice(1:4)
 
 
 ## compare two seasons January and February
-prev_table2 %>%
-  group_by(season) %>% 
+prev_table2 |>
+  group_by(season) |> 
   slice(13:16)
 ```
 
@@ -365,32 +365,32 @@ prev_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
 </summary>
 ```{r, eval = F}
 ## season 1
-prev_table3 %>% 
-  filter(season == "season 2017/2018", month == "Jan") %>% 
+prev_table3 |> 
+  filter(season == "season 2017/2018", month == "Jan") |> 
   kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
-        caption = "Season 2017/2018") %>% 
+        caption = "Season 2017/2018") |> 
   kable_styling(full_width = FALSE, position = "float_left")
 ## season 2
-prev_table3 %>% 
-  filter(season == "season 2018/2019", month == "Jan") %>% 
+prev_table3 |> 
+  filter(season == "season 2018/2019", month == "Jan") |> 
   kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
-        caption = "Season 2018/2019") %>% 
+        caption = "Season 2018/2019") |> 
   kable_styling(full_width = FALSE, position = "left")
 ```
 </details>
 
 ```{r, echo = F}
 ## season 1
-prev_table3 %>% 
-  filter(season == "season 2017/2018", month == "Jan") %>% 
+prev_table3 |> 
+  filter(season == "season 2017/2018", month == "Jan") |> 
   kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
-        caption = "Season 2017/2018") %>% 
+        caption = "Season 2017/2018") |> 
   kable_styling(full_width = FALSE, position = "left")
 ## season 2
-prev_table3 %>% 
-  filter(season == "season 2018/2019", month == "Jan") %>% 
+prev_table3 |> 
+  filter(season == "season 2018/2019", month == "Jan") |> 
   kable(col.names = c("Season", "Month", "Status", "N", "Total", "%"),
-        caption = "Season 2018/2019") %>% 
+        caption = "Season 2018/2019") |> 
   kable_styling(full_width = FALSE, position = "left")
 ```
 

@@ -111,8 +111,8 @@ injsummary <- function(injd, var_type_injury = NULL,
   if (missing(method)) method <- "poisson"
 
   df_exposures <- attr(injd, "data_exposures")
-  df_exposures_summary <- df_exposures %>%
-    dplyr::group_by(.data$player) %>%
+  df_exposures_summary <- df_exposures |>
+    dplyr::group_by(.data$player) |>
     dplyr::summarise(totalexpo = sum(.data$time_expo))
   totalexpo_vec <- sum(df_exposures_summary$totalexpo)
 
@@ -123,13 +123,13 @@ injsummary <- function(injd, var_type_injury = NULL,
                      "  We assume that they have not been exposed to injury and thus,",
                      " they are omitted from this summary\n"))
     }
-    quit_players <- df_exposures_summary %>%
-      dplyr::filter(.data$totalexpo == 0) %>%
-      dplyr::select("player") %>%
-      .[[1]] %>%
+    quit_players <- df_exposures_summary |>
+      dplyr::filter(.data$totalexpo == 0) |>
+      dplyr::select("player") |>
+      (\(x) x[[1]])() |>
       as.character()
-    injd <- injd %>%
-      dplyr::filter(.data$player != quit_players) %>%
+    injd <- injd |>
+      dplyr::filter(.data$player != quit_players) |>
       droplevels()
   }
 
@@ -137,9 +137,9 @@ injsummary <- function(injd, var_type_injury = NULL,
 
   ## calculate summary statistics
   ## - playerwise
-  injds <- injd %>%
-    dplyr::left_join(df_exposures_summary, by = "player") %>%
-    dplyr::group_by(.data$player, {{ var_type_injury }}) %>%
+  injds <- injd |>
+    dplyr::left_join(df_exposures_summary, by = "player") |>
+    dplyr::group_by(.data$player, {{ var_type_injury }}) |>
     dplyr::summarise(ninjuries       = sum(.data$status),
                      ndayslost       = sum(.data$days_lost),
                      mean_dayslost   = mean(.data$days_lost),
@@ -148,25 +148,26 @@ injsummary <- function(injd, var_type_injury = NULL,
                      totalexpo       = dplyr::first(.data$totalexpo),
                      injincidence    = .data$ninjuries/.data$totalexpo,
                      injburden       = .data$ndayslost/.data$totalexpo,
-                     .groups = "keep") %>%
-    dplyr::ungroup() %>%
-    {
+                     .groups = "keep") |>
+    dplyr::ungroup() |>
+    (\(x)
       if(!is.null(var_type_injury)) {
-        filter(., !is.na({{var_type_injury}})) %>%
-          tidyr::complete(.data$player, {{ var_type_injury }}) %>%
-          dplyr::group_by(.data$player) %>%
-          dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE)) %>%  ## replacing NAs with the same totalexpo values
+        filter(x, !is.na({{var_type_injury}})) |>
+          tidyr::complete(.data$player, {{ var_type_injury }}) |>
+          dplyr::group_by(.data$player) |>
+          dplyr::mutate(totalexpo = mean(.data$totalexpo, na.rm = TRUE)) |>  ## replacing NAs with the same totalexpo values
           dplyr::mutate(iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
                         dplyr::across(c("ninjuries":"median_dayslost", "totalexpo":"injburden"),
-                                      ~ifelse(is.na(.), 0, .))) %>%
+                                      ~ifelse(is.na(.), 0, .))) |>
           dplyr::ungroup()
-      } else .
-    }
+      } else {
+        x
+      })()
 
   ## - overall
-  injds_overall <-  injds %>%
-    dplyr::select("player", "ninjuries", "ndayslost", "totalexpo", {{var_type_injury}}) %>%
-    dplyr::group_by({{ var_type_injury }}) %>%
+  injds_overall <-  injds |>
+    dplyr::select("player", "ninjuries", "ndayslost", "totalexpo", {{var_type_injury}}) |>
+    dplyr::group_by({{ var_type_injury }}) |>
     dplyr::summarise(ninjuries       = sum(.data$ninjuries),
                      ndayslost       = sum(.data$ndayslost),
                      mean_dayslost   = mean(injd$days_lost),
@@ -175,36 +176,37 @@ injsummary <- function(injd, var_type_injury = NULL,
                      totalexpo       = totalexpo_vec,
                      injincidence    = .data$ninjuries/.data$totalexpo,
                      injburden       = .data$ndayslost/.data$totalexpo,
-                     .groups = "keep") %>%
-    dplyr::ungroup() %>%
-    {
+                     .groups = "keep") |>
+    dplyr::ungroup() |>
+    (\(x)
       if(!is.null(var_type_injury)) {
-        dplyr::filter(., !is.na({{var_type_injury}})) %>%
-          tidyr::complete({ {var_type_injury }}) %>%
+        dplyr::filter(x, !is.na({{var_type_injury}})) |>
+          tidyr::complete({ {var_type_injury }}) |>
           dplyr::mutate(totalexpo    = mean(.data$totalexpo, na.rm = TRUE), ## replacing NAs with the same totalexpo values
                         iqr_dayslost = ifelse(is.na(.data$ndayslost), "0-0", .data$iqr_dayslost),
                         dplyr::across(c("ninjuries":"median_dayslost", "totalexpo":"injburden"),
                                       ~ifelse(is.na(.), 0, .)),
                         percent_ninjuries = round(.data$ninjuries*100/sum(.data$ninjuries), 2),
-                        percent_dayslost  = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) %>%
+                        percent_dayslost  = round(.data$ndayslost*100/sum(.data$ndayslost), 2)) |>
           dplyr::select(tidyselect::all_of(var_type_injury), "ninjuries", "percent_ninjuries",
                         "ndayslost", "percent_dayslost", tidyselect::everything()) # order the column names
-      } else .
-    }
+      } else {
+        x
+      })()
 
   ## correct mean_dayslost, median_dayslost and iqr_dayslost values if var_type_injury specified
   if(!is.null(var_type_injury)) {
-    injds_overall_aux <- injd %>%
-      dplyr::group_by({{ var_type_injury }}) %>%
+    injds_overall_aux <- injd |>
+      dplyr::group_by({{ var_type_injury }}) |>
       dplyr::summarise(mean_dayslost   = mean(.data$days_lost, na.rm = T),
                        median_dayslost = stats::median(.data$days_lost, na.rm = T),
-                       iqr_dayslost    = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75))) %>%
+                       iqr_dayslost    = paste0(stats::quantile(.data$days_lost, 0.25), "-", stats::quantile(.data$days_lost, 0.75))) |>
       dplyr::ungroup()
     ## merge with injds_overall (smash these two variables)
-    injds_overall <- dplyr::left_join(injds_overall, injds_overall_aux, by = names(injds_overall)[[1]]) %>%
+    injds_overall <- dplyr::left_join(injds_overall, injds_overall_aux, by = names(injds_overall)[[1]]) |>
       dplyr::rename(mean_dayslost   = "mean_dayslost.y",
                     median_dayslost = "median_dayslost.y",
-                    iqr_dayslost    = "iqr_dayslost.y") %>%
+                    iqr_dayslost    = "iqr_dayslost.y") |>
       dplyr::select(tidyselect::all_of(var_type_injury), "ninjuries", "percent_ninjuries",
                     "ndayslost", "percent_dayslost", "mean_dayslost",
                     "median_dayslost","iqr_dayslost", tidyselect::everything(),
@@ -215,7 +217,7 @@ injsummary <- function(injd, var_type_injury = NULL,
   ## method (point estimate and standard error)
   minusalphahalf <- conf_level + (1 - conf_level)/2
   if (method == "poisson") { ## assuming that the number of injuries follows a poisson and basing on CLT  ## CHECK THIS WITH pois.exact and check ggeffects package!
-    injds_overall <- injds_overall %>%
+    injds_overall <- injds_overall |>
       dplyr::mutate(injincidence_sd = sqrt(.data$injincidence/.data$totalexpo),
                     injburden_sd    = sqrt(.data$injburden/.data$totalexpo),
                     injincidence_lower = .data$injincidence - stats::qnorm(minusalphahalf)*.data$injincidence_sd,
@@ -263,10 +265,10 @@ injsummary_unit <- function(unit, injds, quiet) {
                      "\n  So... Injury incidence and injury burden are calculated per 1000h of player-exposure\n\n"))
     }
     if (unit == "minutes") {
-      injds <- injds %>%
+      injds <- injds |>
         dplyr::mutate(dplyr::across(.data$injincidence:dplyr::last_col(), ~ .x*60*1000))
     } else {
-      injds <- injds %>%
+      injds <- injds |>
         dplyr::mutate(dplyr::across(.data$injincidence:dplyr::last_col(), ~ .x*1000))
     }
     unit_timerisk <- "1000h player-exposure"
@@ -275,7 +277,7 @@ injsummary_unit <- function(unit, injds, quiet) {
       warning(paste0("\n  Exposure time unit is ", unit,
                      "\n  So... Injury incidence and injury burden are calculated per 100 player-matches of exposure (90 minutes times 100)\n\n"))
     }
-    injds <- injds %>%
+    injds <- injds |>
       dplyr::mutate(dplyr::across("injincidence":dplyr::last_col(), ~ .x*90*100))
     unit_timerisk <- "100 player-match"
   } else if (unit %in% c("matches_num", "days", "activity_days")) {
@@ -283,7 +285,7 @@ injsummary_unit <- function(unit, injds, quiet) {
       warning(paste0("\n  Exposure time unit is ", unit,
                      "\n  So... Injury incidence and injury burden are calculated per 100 of ", unit, " of exposure\n\n"))
     }
-    injds <- injds %>%
+    injds <- injds |>
       dplyr::mutate(dplyr::across(.data$injincidence:dplyr::last_col(), ~ .x*100))
     unit <- dplyr::case_when(unit == "matches_num" ~ "matches",
                              unit == "days" ~ "days",

@@ -83,7 +83,7 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
   injds_data <- injds[[2]]
   if (!is.null(var_type_injury)) var_type_injury <- rlang::sym(var_type_injury)
   ## add proper iqr numeric values
-  injds_data <- injds_data %>%
+  injds_data <- injds_data |>
     mutate(quart25_dayslost = as.numeric(stringr::str_split(.data$iqr_dayslost, "-", simplify = T)[, 1]),
            quart75_dayslost = as.numeric(stringr::str_split(.data$iqr_dayslost, "-", simplify = T)[, 2]))
 

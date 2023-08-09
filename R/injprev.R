@@ -80,7 +80,7 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
 
     j <- 1
     for (i in 1:nrow(data_injuries)) {
-      player <- data_injuries$player[[i]] %>% as.character()
+      player <- data_injuries$player[[i]] |> as.character()
       date_injured <- data_injuries$date_injured[[i]]
       month_injured <- withr::with_locale(c("LC_TIME" = "C"),
                                           lubridate::month(date_injured, label = T))
@@ -88,9 +88,9 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
       if (is.null(var_type_injury)) {
         type_injury <- "Injured"
       } else {
-        type_injury <- data_injuries[[var_type_injury]][[i]] %>% as.character()
+        type_injury <- data_injuries[[var_type_injury]][[i]] |> as.character()
       }
-      season <- data_injuries$season[[i]] %>% as.character()
+      season <- data_injuries$season[[i]] |> as.character()
       id_injury <- i
 
       df_polar[j, ] <- data.frame(player = player,
@@ -134,19 +134,19 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
       j <- j + 1
     }
 
-    data_exposures <- attr(injd, "data_exposures") %>%
-      dplyr::mutate(season = factor(date2season(.data$date))) %>%
-      dplyr::select(player, season) %>%
+    data_exposures <- attr(injd, "data_exposures") |>
+      dplyr::mutate(season = factor(date2season(.data$date))) |>
+      dplyr::select(player, season) |>
       unique()
     ## expand to twelve month each season that each player has
-    data_exposures <- purrr::map_dfr(seq_len(12), ~data_exposures) %>%
-      dplyr::arrange(player, season) %>%
+    data_exposures <- purrr::map_dfr(seq_len(12), ~data_exposures) |>
+      dplyr::arrange(player, season) |>
       dplyr::mutate(month = rep(c("Jul", "Aug", "Sep", "Oct", "Nov",
                                   "Dec", "Jan", "Feb", "Mar", "Apr",
                                   "May", "Jun"), times = nrow(data_exposures)))
 
     df_polar <- dplyr::right_join(df_polar, data_exposures,
-                                  by = c("player", "season", "month")) %>%
+                                  by = c("player", "season", "month")) |>
       dplyr::mutate(season = factor(season, levels = levels(data_exposures$season)),
                     month = factor(stringr::str_to_title(month),
                                    levels = c("Jul", "Aug", "Sep", "Oct", "Nov",
@@ -155,26 +155,26 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
                     player = factor(player),
                     type_injury = ifelse(is.na(type_injury), "Available", type_injury),
                     type_injury = stats::relevel(factor(type_injury), ref = "Available"),
-                    season = factor(season)) %>%
-      dplyr::group_by(season, month, type_injury, player) %>%  ## important step
-      unique() %>%
+                    season = factor(season)) |>
+      dplyr::group_by(season, month, type_injury, player) |>  ## important step
+      unique() |>
       dplyr::ungroup()
 
     if (is.null(var_type_injury)) {
-      df_polar <- df_polar %>%
-        dplyr::select(-"id_injury") %>%
+      df_polar <- df_polar |>
+        dplyr::select(-"id_injury") |>
         unique()
     }
 
     ## Calculate proportions
-    df_polar <- df_polar %>%
-      dplyr::group_by(season, month) %>%
-      dplyr::mutate(n_player = dplyr::n_distinct(player)) %>%
-      dplyr::ungroup() %>%
-      dplyr::group_by(season, month, type_injury) %>%
+    df_polar <- df_polar |>
+      dplyr::group_by(season, month) |>
+      dplyr::mutate(n_player = dplyr::n_distinct(player)) |>
+      dplyr::ungroup() |>
+      dplyr::group_by(season, month, type_injury) |>
       dplyr::summarise(n = dplyr::n(),
-                       n_player = dplyr::first(.data$n_player)) %>%
-      dplyr::ungroup() %>%
+                       n_player = dplyr::first(.data$n_player)) |>
+      dplyr::ungroup() |>
       dplyr::mutate(prop = round(.data$n/.data$n_player*100,1),
                     season = factor(paste0("season ", as.character(season))))
   }
@@ -188,13 +188,13 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
 
     j <- 1
     for (i in 1:nrow(data_injuries)) {
-      player <- data_injuries$player[[i]] %>% as.character()
+      player <- data_injuries$player[[i]] |> as.character()
       if (is.null(var_type_injury)) {
         type_injury <- "Injured"
       } else {
-        type_injury <- data_injuries[[var_type_injury]][[i]] %>% as.character()
+        type_injury <- data_injuries[[var_type_injury]][[i]] |> as.character()
       }
-      season <- data_injuries$season[[i]] %>% as.character()
+      season <- data_injuries$season[[i]] |> as.character()
       id_injury <- i
 
       df_polar[j, ] <- data.frame(player = player,
@@ -228,37 +228,37 @@ injprev <- function(injd, by = c("monthly", "season"), var_type_injury = NULL) {
       j <- j + 1
     }
 
-    data_exposures <- attr(injd, "data_exposures") %>%
-      dplyr::mutate(season = factor(date2season(.data$date))) %>%
-      dplyr::select(player, season) %>%
+    data_exposures <- attr(injd, "data_exposures") |>
+      dplyr::mutate(season = factor(date2season(.data$date))) |>
+      dplyr::select(player, season) |>
       unique()
 
     df_polar <- dplyr::right_join(df_polar, data_exposures,
-                                  by = c("player", "season")) %>%
+                                  by = c("player", "season")) |>
       dplyr::mutate(season = factor(season, levels = levels(data_exposures$season)),
                     player = factor(player),
                     type_injury = ifelse(is.na(type_injury), "Available", type_injury),
                     type_injury = stats::relevel(factor(type_injury), ref = "Available"),
-                    season = factor(season)) %>%
-      dplyr::group_by(season, type_injury, player) %>%  ## important step
-      unique() %>%
+                    season = factor(season)) |>
+      dplyr::group_by(season, type_injury, player) |>  ## important step
+      unique() |>
       dplyr::ungroup()
 
     if (is.null(var_type_injury)) {
-      df_polar <- df_polar %>%
-        dplyr::select(-"id_injury") %>%
+      df_polar <- df_polar |>
+        dplyr::select(-"id_injury") |>
         unique()
     }
 
     ## Calculate proportions
-    df_polar <- df_polar %>%
-      dplyr::group_by(season) %>%
-      dplyr::mutate(n_player = dplyr::n_distinct(player)) %>%
-      dplyr::ungroup() %>%
-      dplyr::group_by(season, type_injury) %>%
+    df_polar <- df_polar |>
+      dplyr::group_by(season) |>
+      dplyr::mutate(n_player = dplyr::n_distinct(player)) |>
+      dplyr::ungroup() |>
+      dplyr::group_by(season, type_injury) |>
       dplyr::summarise(n = dplyr::n(),
-                       n_player = dplyr::first(.data$n_player)) %>%
-      dplyr::ungroup() %>%
+                       n_player = dplyr::first(.data$n_player)) |>
+      dplyr::ungroup() |>
       dplyr::mutate(prop = round(.data$n/.data$n_player*100,1),
                     season = factor(paste0("season ", as.character(season))))
 

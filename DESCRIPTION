@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
     covr,
     gridExtra,
@@ -40,7 +40,6 @@ Imports:
     forcats,
     ggplot2,
     lubridate,
-    magrittr,
     metR,
     purrr,
     rlang,
@@ -50,7 +49,7 @@ Imports:
     tidyselect,
     withr
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 VignetteBuilder: knitr
 URL: https://github.com/lzumeta/injurytools,
     https://lzumeta.github.io/injurytools/

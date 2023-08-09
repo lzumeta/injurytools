@@ -11,10 +11,10 @@
 #' @keywords internal
 check_injfollowup <- function(followup_df, data_injuries) {
   data_injuries_new <- dplyr::left_join(data_injuries, followup_df,
-                                        by = c("player" = "player")) %>%
+                                        by = c("player" = "player")) |>
     droplevels()
-  data_injuries_new <- data_injuries_new %>%
-    dplyr::filter(.data$date_injured >= .data$t0 & .data$date_injured <= .data$tf) %>%
+  data_injuries_new <- data_injuries_new |>
+    dplyr::filter(.data$date_injured >= .data$t0 & .data$date_injured <= .data$tf) |>
     dplyr::select(-"t0", -"tf")
 
   if (!identical(data_injuries, data_injuries_new)) {
