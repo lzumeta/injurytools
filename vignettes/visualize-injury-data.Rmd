@@ -40,6 +40,8 @@ knit_hooks$set(output = function(x, options) {
   x <- paste(c(x, ""), collapse = "\n")
   hook_output(x, options)
 })
+
+modern_r <- getRversion() >= "4.1.0"
 ```
 
 
@@ -111,7 +113,7 @@ injds_perinj[["overall"]] |>
 
 **Overall**
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 injds[["overall"]] |> 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
@@ -122,7 +124,7 @@ injds[["overall"]] |>
 ```
 
 **Overall per type of injury**
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 injds_perinj[["overall"]] |> 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
@@ -254,7 +256,7 @@ injds2[["overall"]] |>
 </details>
 
 **Season 2017/2018**
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 injds1[["overall"]] |> 
   mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
@@ -265,7 +267,7 @@ injds1[["overall"]] |>
 ```
 
 **Season 2018/2019**
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 injds2[["overall"]] |> 
   mutate(incidence_new = paste0(round(injincidence, 2), "  (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
          burden_new    = paste0(round(injburden, 2), "  (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 

@@ -43,6 +43,8 @@ knit_hooks$set(output = function(x, options) {
    x <- paste(c(x, ""), collapse = "\n")
    hook_output(x, options)
  })
+
+modern_r <- getRversion() >= "4.1.0"
 ```
 
 
@@ -156,7 +158,7 @@ injds[[1]] |>
 ```
 </details>
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 # format the 'playerwise' data frame for output as a table
 injds[[1]] |> 
   arrange(desc(injincidence)) |> # sort by decreasing order of injincidence
@@ -192,7 +194,7 @@ injds[[2]] |>
 ```
 </details>
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 # format the table of total incidence and burden (main columns)
 injds[[2]] |> 
   select(1:8) |> 
@@ -231,7 +233,7 @@ injds_tot_cis |>
 ```
 </details>
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 # format the table of total incidence and burden (point + ci estimates)
 injds_tot_cis <- injds[[2]] |> 
   select(7:last_col()) |> 
@@ -285,7 +287,7 @@ injstats_pertype[["overall"]] |>
 ```
 </details>
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 injstats_pertype[["overall"]] |> 
   select(1:5, 7:11) |> 
   mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
@@ -337,7 +339,7 @@ kable(prev_table1,
 
 Overall, there were more injured players in the 18-19 season than in the previous season. Let's calculate it monthly:
 
-```{r}
+```{r, eval = modern_r}
 prev_table2 <- injprev(injd, by = "monthly")
 
 ## compare two seasons July and August
@@ -379,7 +381,7 @@ prev_table3 |>
 ```
 </details>
 
-```{r, echo = F}
+```{r, echo = F, eval = modern_r}
 ## season 1
 prev_table3 |> 
   filter(season == "season 2017/2018", month == "Jan") |> 

@@ -7,7 +7,7 @@
 #' @importFrom rlang .data :=
 #' @importFrom dplyr select arrange mutate
 #' @importFrom tidyr gather
-#' @importFrom tidyselect all_of
+#'
 #' @keywords internal
 data_injurieslong <- function(data_injuries) {
   data_injuries |>
@@ -32,6 +32,8 @@ data_injurieslong <- function(data_injuries) {
 #'   a fixed locale and time zone, i.e. setting the LC_TIME component to C and
 #'   timezone to UTC (the safest choice, non-geographic and Coordinated
 #'   Universal Time).
+#'
+#' @importFrom withr with_locale
 #'
 #' @keywords internal
 date_format <- function(date) {

@@ -20,11 +20,6 @@
 #'
 #' @import ggplot2
 #' @importFrom checkmate assert checkClass
-#' @importFrom stats relevel
-#' @importFrom purrr map_dfr
-#' @importFrom lubridate month year
-#' @importFrom stringr str_to_title
-#' @importFrom withr with_locale
 #'
 #' @examples
 #' \donttest{

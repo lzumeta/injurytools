@@ -40,6 +40,7 @@
 #' @importFrom checkmate assert checkClass assert_subset
 #' @importFrom metR geom_text_contour
 #' @importFrom stringr str_split
+#' @importFrom rlang sym
 #'
 #' @references
 #' Bahr R, Clarsen B, Derman W, et al. International Olympic Committee

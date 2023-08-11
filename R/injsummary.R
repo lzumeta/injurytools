@@ -87,6 +87,7 @@
 #' @importFrom checkmate assert checkClass assert_subset
 #' @importFrom stats qnorm quantile median
 #' @importFrom tidyselect everything all_of
+#' @importFrom tidyr complete
 #'
 #' @examples
 #' \donttest{

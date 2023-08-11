@@ -49,7 +49,7 @@ Imports:
     tidyselect,
     withr
 Depends: 
-    R (>= 4.1.0)
+    R (>= 3.5)
 VignetteBuilder: knitr
 URL: https://github.com/lzumeta/injurytools,
     https://lzumeta.github.io/injurytools/

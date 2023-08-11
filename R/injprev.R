@@ -35,6 +35,10 @@
 #'
 #' @importFrom dplyr mutate select arrange group_by summarize
 #' @importFrom checkmate assert checkClass checkChoice
+#' @importFrom stringr str_to_title
+#' @importFrom withr with_locale
+#' @importFrom lubridate month year
+#' @importFrom stringr str_to_title
 #'
 #' @references
 #' Bahr R, Clarsen B, Derman W, et al. International Olympic Committee
