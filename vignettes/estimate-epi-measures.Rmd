@@ -218,12 +218,12 @@ Note that to provide numbers that are easy to interpret and to avoid small decim
 injds_tot_cis <- injds[[2]] |> 
   select(7:last_col()) |> 
   data.frame(row.names = "TOTAL")
-injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
-                                        ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
-injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
-                                        ", ",round(injds_tot_cis$injburden_upper, 1), "]")
+injds_tot_cis$ci_injincidence <- paste0("[",  round(injds_tot_cis$injincidence_lower, 1),
+                                        ", ", round(injds_tot_cis$injincidence_upper, 1), "]")
+injds_tot_cis$ci_injburden    <- paste0("[",  round(injds_tot_cis$injburden_lower, 1),
+                                        ", ", round(injds_tot_cis$injburden_upper, 1), "]")
 
-conf_level <- attr(injds, "conf_level")*100
+conf_level <- attr(injds, "conf_level") * 100
 
 injds_tot_cis |> 
   select(1, 9, 2, 10) |> 
@@ -238,12 +238,12 @@ injds_tot_cis |>
 injds_tot_cis <- injds[[2]] |> 
   select(7:last_col()) |> 
   data.frame(row.names = "TOTAL")
-injds_tot_cis$ci_injincidence <- paste0("[", round(injds_tot_cis$injincidence_lower, 1),
-                                        ", ",round(injds_tot_cis$injincidence_upper, 1), "]")
-injds_tot_cis$ci_injburden    <- paste0("[", round(injds_tot_cis$injburden_lower, 1),
-                                        ", ",round(injds_tot_cis$injburden_upper, 1), "]")
+injds_tot_cis$ci_injincidence <- paste0("[",  round(injds_tot_cis$injincidence_lower, 1),
+                                        ", ", round(injds_tot_cis$injincidence_upper, 1), "]")
+injds_tot_cis$ci_injburden    <- paste0("[",  round(injds_tot_cis$injburden_lower, 1),
+                                        ", ", round(injds_tot_cis$injburden_upper, 1), "]")
 
-conf_level <- attr(injds, "conf_level")*100
+conf_level <- attr(injds, "conf_level") * 100
 
 injds_tot_cis |> 
   select(1, 9, 2, 10) |> 

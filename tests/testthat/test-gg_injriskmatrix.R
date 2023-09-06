@@ -5,12 +5,12 @@ test_that("gg_injriskmatrix works", {
     gg_injriskmatrix(injds2, var_type_injury = "injury_type", title = "Risk matrix",
                      add_contour = FALSE)
   )
-  expect_s3_class(gg1, class = c("gg","ggplot"))
+  expect_s3_class(gg1, class = c("gg", "ggplot"))
 
   gg2 <- suppressWarnings(
     gg_injriskmatrix(injds2, var_type_injury = "injury_type", add_contour = TRUE)
     )
-  expect_s3_class(gg2, class = c("gg","ggplot"))
+  expect_s3_class(gg2, class = c("gg", "ggplot"))
 })
 
 test_that("gg_injriskmatrix throws warnings", {

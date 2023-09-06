@@ -84,7 +84,7 @@ validate_injd <- function(x) {
     stop("The `x` data frame has not proper column names",
          call. = FALSE)
   }
-  if (!all(values$player %in% follow_up$player) | !all(x$player %in% data_exposures$player)) {
+  if (!all(values$player %in% follow_up$player) || !all(x$player %in% data_exposures$player)) {
     stop("All players for whom exposure data are available should be in `x`",
          call. = FALSE)
   }
@@ -97,7 +97,7 @@ validate_injd <- function(x) {
     stop("tstart and tstop are not correctly recorded in `x`",
          call. = FALSE)
   }
-  if (!all(values$status %in% 0:1) | any(is.na(x$date_injured) & x$status == 1)) {
+  if (!all(values$status %in% 0:1) || any(is.na(x$date_injured) & x$status == 1)) {
     stop("status is not correctly recorded in `x`",
          call. = FALSE)
   }
@@ -128,9 +128,9 @@ validate_injd <- function(x) {
   }
   min_dates <- unlist(tapply(data_exposures$date, data_exposures$player, min))
   max_dates <- unlist(tapply(data_exposures$date, data_exposures$player, max))
-  if(is.numeric(data_exposures$date)) {
+  if (is.numeric(data_exposures$date)) {
     min_dates <- as.Date(date_format(paste0(min_dates, "-07-01")))
-    max_dates <- as.Date(date_format(paste0(max_dates + 1 , "-06-30")))
+    max_dates <- as.Date(date_format(paste0(max_dates + 1, "-06-30")))
   }
   if (any(min_dates != follow_up$t0 | max_dates != follow_up$tf)) {
     stop("attr(`x`, 'follow_up') is not properly built",
@@ -147,7 +147,7 @@ validate_injd <- function(x) {
   date_injured2  <- do.call(c, tapply(data_injuries$date_injured, data_injuries$player, function(x) x))
   date_recovery1 <- do.call(c, tapply(values$date_recovered, values$player, function(x) stats::na.omit(x)))
   date_recovery2 <- do.call(c, tapply(data_injuries$date_recovered, data_injuries$player, function(x) x))
-  if (length(date_injured1) == length(date_injured2) & length(date_recovery1) == length(date_recovery2)) {
+  if (length(date_injured1) == length(date_injured2) && length(date_recovery1) == length(date_recovery2)) {
     if (any(date_injured1 != date_injured2 | date_recovery1 != date_recovery2)) {
       stop("attr(`x`, 'data_injuries') and `x` do not have same info on injuries",
            call. = FALSE)

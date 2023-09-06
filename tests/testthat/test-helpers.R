@@ -36,7 +36,7 @@ test_that("validate_injd works", {
   expect_error(validate_injd(injd2), "is not properly built")
 
   data_injuries <- attr(injd, "data_injuries")
-  data_injuries <- data_injuries[-1,]
+  data_injuries <- data_injuries[-1, ]
   injd3 <- injd
   attr(injd3, "data_injuries") <- data_injuries
   expect_error(validate_injd(injd3), "do not have same info on injuries")

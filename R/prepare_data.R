@@ -243,7 +243,7 @@ prepare_all <- function(data_exposures,
   ## Create two variables of date type: tstart and tstop
   injd <- injd |>
     dplyr::group_by(.data$player) |>
-    dplyr::slice(1:n(), n()) |>  ## copy last row
+    dplyr::slice(seq_len(n()), n()) |>  ## copy last row
     dplyr::mutate_at(vars(-"player", -"t0", -"tf"), ~replace(.x, row_number() == n(), NA)) |>
     ## edit this last row with slice and add NAs at every variable except for (Jug, t0, tf)
     ## This step is done in order to arrive until the last follow-up date

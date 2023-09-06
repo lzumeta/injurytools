@@ -106,7 +106,7 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
   if (add_contour) {
     grid <- expand.grid(x = seq(0, ceiling(max(injds_data[["injincidence_upper"]])), length.out = 100),
                         y = seq(0, ceiling(max(injds_data[["quart75_dayslost"]]))),  length.out = 100)
-    grid$z <- grid$x*grid$y
+    grid$z <- grid$x * grid$y
     # labels <- unique(grid$z[grid$z <= max(injds_data[["quart75_dayslost"]])])
     # grid_label <- data.frame(x = rep(max(grid$x), each = length(labels)),
     #                          y = labels)

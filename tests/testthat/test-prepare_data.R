@@ -10,7 +10,7 @@ test_that("prepare_inj works", {
   expect_identical(class(df_injuries[["date_injured"]]), "Date")
   expect_identical(class(df_injuries[["date_recovered"]]), "Date")
 
-  raw_df_injuries$until[[1]] <- raw_df_injuries$from[[1]] -2
+  raw_df_injuries$until[[1]] <- raw_df_injuries$from[[1]] - 2
   expect_error(prepare_inj(df_injuries0   = raw_df_injuries,
                            player         = "player_name",
                            date_injured   = "from",

@@ -325,7 +325,7 @@ p21 <- p21 +
   ggtitle("2018/2019 season") +
   scale_y_continuous(limits = c(0, 80)) + 
   theme2 
-p22 <-p22 +
+p22 <- p22 +
   ylab("Player-wise burden (days lost per 100 player-match)") +
   scale_y_continuous(limits = c(0, 6110)) + 
   theme2
@@ -361,7 +361,7 @@ p21 <- p21 +
   ggtitle("2018/2019 season") +
   scale_y_continuous(limits = c(0, 80)) + 
   theme2 
-p22 <-p22 +
+p22 <- p22 +
   ylab("Player-wise burden (days lost per 100 player-match)") +
   scale_y_continuous(limits = c(0, 6110)) + 
   theme2
@@ -424,7 +424,7 @@ p2 <- p2 +
   theme3
 
 grid.arrange(p1, p2, ncol = 2, 
-             top = textGrob("Risk matrices", gp=gpar(fontsize = 26, font = 2))) ## for the main title
+             top = textGrob("Risk matrices", gp = gpar(fontsize = 26, font = 2))) ## for the main title
 ```
 
 </details>
@@ -456,7 +456,7 @@ p2 <- p2 +
   theme3
 
 grid.arrange(p1, p2, ncol = 2, 
-             top = textGrob("Risk matrices", gp=gpar(fontsize = 26, font = 2))) ## for the main title
+             top = textGrob("Risk matrices", gp = gpar(fontsize = 26, font = 2))) ## for the main title
 ```
 
 <br/>

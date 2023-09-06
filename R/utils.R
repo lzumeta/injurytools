@@ -89,11 +89,12 @@ exp_unit_suffix <- function(exp_unit) {
 #' date2season(date)
 date2season <- function(date) {
   assert(checkDate(date),
-         checkNumeric(date),
-         combine = "or")
+    checkNumeric(date),
+    combine = "or"
+  )
 
   if (inherits(date, "Date")) {
-    year <- lubridate::year(date)
+    year  <- lubridate::year(date)
     month <- lubridate::month(date)
     year1 <- ifelse(month >= 7, year, year - 1)
   } else {
@@ -123,8 +124,9 @@ date2season <- function(date) {
 #' season2year(season)
 season2year <- function(season) {
   assert(checkmate::checkFactor(season),
-         checkmate::checkCharacter(season),
-         combine = "or")
+    checkmate::checkCharacter(season),
+    combine = "or"
+  )
   year <- stringr::str_sub(season, start = 1, end = 4)
   return(as.numeric(year))
 }
@@ -158,26 +160,31 @@ season2year <- function(season) {
 #' @examples
 #' # Prepare data
 #' \donttest{
-#' df_injuries  <- prepare_inj(df_injuries0   = raw_df_injuries,
-#'                            player         = "player_name",
-#'                            date_injured   = "from",
-#'                            date_recovered = "until")
+#' df_injuries <- prepare_inj(
+#'   df_injuries0   = raw_df_injuries,
+#'   player         = "player_name",
+#'   date_injured   = "from",
+#'   date_recovered = "until"
+#' )
 #'
-#' df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-#'                             player        = "player_name",
-#'                             date          = "year",
-#'                             time_expo     = "minutes_played")
+#' df_exposures <- prepare_exp(
+#'   df_exposures0 = raw_df_exposures,
+#'   player        = "player_name",
+#'   date          = "year",
+#'   time_expo     = "minutes_played"
+#' )
 #'
-#' injd <- prepare_all(data_exposures = df_exposures,
-#'                     data_injuries  = df_injuries,
-#'                     exp_unit = "matches_minutes")
-#'}
+#' injd <- prepare_all(
+#'   data_exposures = df_exposures,
+#'   data_injuries  = df_injuries,
+#'   exp_unit       = "matches_minutes"
+#' )
+#' }
 #'
 #' \donttest{
 #' cut_injd(injd, date0 = 2018)
 #' }
 cut_injd <- function(injd, date0, datef) {
-
   assert(checkClass(injd, "injd"))
   data_exposures <- attr(injd, "data_exposures")
 
@@ -193,7 +200,7 @@ cut_injd <- function(injd, date0, datef) {
       stop("datef and data_exposures[['date']] must be of the same class")
     }
   }
-  if ((!missing(date0) & !missing(datef))) {
+  if ((!missing(date0) && !missing(datef))) {
     if (class(date0) != class(datef)) {
       stop("date0 and datef must be of the same class")
     }
@@ -210,7 +217,7 @@ cut_injd <- function(injd, date0, datef) {
       dplyr::filter(.data$date >= date0)
     data_injuries <- data_injuries |>
       dplyr::filter(.data$date_injured >= date0 |
-                      lubridate::year(.data$date_injured) >= date0)
+        lubridate::year(.data$date_injured) >= date0)
   }
 
   if (!missing(datef)) {
@@ -218,15 +225,16 @@ cut_injd <- function(injd, date0, datef) {
       dplyr::filter(.data$date <= datef)
     data_injuries <- data_injuries |>
       dplyr::filter(.data$date_injured <= datef |
-                      lubridate::year(.data$date_injured) >= datef)
+        lubridate::year(.data$date_injured) >= datef)
   }
 
- if (!nrow(data_exposures)) stop("Empty injd object")
+  if (!nrow(data_exposures)) stop("Empty injd object")
 
- injd_new <- prepare_all(data_exposures,
-                         data_injuries,
-                         exp_unit)
+  injd_new <- prepare_all(
+    data_exposures,
+    data_injuries,
+    exp_unit
+  )
 
   return(injd_new)
 }
-
