@@ -197,7 +197,7 @@ gg_injriskmatrix(injds_perinj,
 
 We prepare two `injd` objects:
 
-```{r, warning=F}
+```{r, warning = F}
 # warnings set to FALSE
 injd1 <- cut_injd(injd, datef = 2017)
 injd2 <- cut_injd(injd, date0 = 2018)

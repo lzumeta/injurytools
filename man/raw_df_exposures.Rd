@@ -17,12 +17,15 @@ variables: \describe{
 \item{club_name}{Name of the club to which the player belongs in each season (factor)}
 \item{club_id}{Identification number of the club to which the player belongs in each season (factor)}
 \item{age}{Age of the player in each season (numeric)}
+\item{height}{Height of the player in m (numeric)}
 \item{place}{Place of birth of each player (character)}
+\item{citizenship}{Citizenship of the player (factor)}
 \item{position}{Position of the player on the pitch (factor)}
 \item{foot}{Dominant leg of the player. One of both, left or right (factor)}
 \item{goals}{Number of goals scored by the player in that season (numeric)}
 \item{assists}{Number of assists provided by the player in that season (numerical)}
-\item{reds}{Number of the red cards given to the player in that season (numeric)} }
+\item{yellows}{Number of the yellow cards received by the player in that season (numeric)}
+\item{reds}{Number of the red cards received by the player in that season (numeric)}}
 }
 \source{
 \url{https://www.transfermarkt.com/}

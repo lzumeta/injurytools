@@ -124,7 +124,7 @@ Now, the preprocessed data is passed to `injsummary()` to calculate injury summa
 injds <- injsummary(injd)
 ```
 
-We notice that it throws some warning messages (unless `quiet = TRUE`). They are thrown to make it clear what the exposure time unit is[^estimate-note-2]. 
+We notice that some warning messages pop up (unless `quiet = TRUE`). They are displayed to make it clear what the exposure time unit is[^estimate-note-2]. 
 
 [^estimate-note-2]: Something that it is important to be aware of.
 
