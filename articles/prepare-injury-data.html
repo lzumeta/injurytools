@@ -82,7 +82,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2023-09-06</h4>
+            <h4 data-toc-skip class="date">2023-09-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -145,20 +145,20 @@ consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www
 <span><span class="co">#&gt; 4 alex-oxlade-chamberlain    143424  17/18 2017             32           1483</span></span>
 <span><span class="co">#&gt; 5                 alisson    105470  18/19 2018             38           3420</span></span>
 <span><span class="co">#&gt; 6        andrew-robertson    234803  17/18 2017             22           1943</span></span>
-<span><span class="co">#&gt;      liga    club_name club_id age place                   position  foot goals</span></span>
-<span><span class="co">#&gt; 1 premier fc-liverpool      31  29  &lt;NA&gt; Midfield_AttackingMidfield  both     0</span></span>
-<span><span class="co">#&gt; 2 premier fc-liverpool      31  30  &lt;NA&gt; Midfield_AttackingMidfield  both     0</span></span>
-<span><span class="co">#&gt; 3 premier fc-liverpool      31  25  &lt;NA&gt;          Defender_LeftBack  left     0</span></span>
-<span><span class="co">#&gt; 4 premier fc-liverpool      31  24  &lt;NA&gt;   Midfield_CentralMidfield right     3</span></span>
-<span><span class="co">#&gt; 5 premier fc-liverpool      31  26  &lt;NA&gt;                 Goalkeeper right     0</span></span>
-<span><span class="co">#&gt; 6 premier fc-liverpool      31  23  &lt;NA&gt;          Defender_LeftBack  left     1</span></span>
-<span><span class="co">#&gt;   assists reds</span></span>
-<span><span class="co">#&gt; 1       0    0</span></span>
-<span><span class="co">#&gt; 2       0    0</span></span>
-<span><span class="co">#&gt; 3       0    0</span></span>
-<span><span class="co">#&gt; 4       7    0</span></span>
-<span><span class="co">#&gt; 5       0    0</span></span>
-<span><span class="co">#&gt; 6       5    0</span></span></code></pre></div>
+<span><span class="co">#&gt;      liga    club_name club_id age height            place citizenship</span></span>
+<span><span class="co">#&gt; 1 premier fc-liverpool      31  29   1.72      St Albans       England</span></span>
+<span><span class="co">#&gt; 2 premier fc-liverpool      31  30   1.72      St Albans       England</span></span>
+<span><span class="co">#&gt; 3 premier fc-liverpool      31  25   1.71        Sevilla         Spain</span></span>
+<span><span class="co">#&gt; 4 premier fc-liverpool      31  24   1.75     Portsmouth       England</span></span>
+<span><span class="co">#&gt; 5 premier fc-liverpool      31  26   1.91  Novo Hamburgo        Brazil</span></span>
+<span><span class="co">#&gt; 6 premier fc-liverpool      31  23   1.78        Glasgow      Scotland</span></span>
+<span><span class="co">#&gt;                     position  foot goals assists yellows reds</span></span>
+<span><span class="co">#&gt; 1 Midfield_AttackingMidfield  both     0       0       1    0</span></span>
+<span><span class="co">#&gt; 2 Midfield_AttackingMidfield  both     0       0       1    0</span></span>
+<span><span class="co">#&gt; 3          Defender_LeftBack  left     0       0       1    0</span></span>
+<span><span class="co">#&gt; 4   Midfield_CentralMidfield right     3       7       3    0</span></span>
+<span><span class="co">#&gt; 5                 Goalkeeper right     0       0       1    0</span></span>
+<span><span class="co">#&gt; 6          Defender_LeftBack  left     1       5       2    0</span></span></code></pre></div>
 <p>We standardize the <strong>key column names</strong> such as: player
 (subject) identifier, dates of injury and recovery (if any),
 training/match/season date and amount of time of exposure. And set them
@@ -296,7 +296,7 @@ number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
 <span><span class="co">#&gt; injd [108 × 19] (S3: injd/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
 <span><span class="co">#&gt;  - attr(*, "follow_up")= tibble [28 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  - attr(*, "data_exposures")='data.frame':   42 obs. of  16 variables:</span></span>
+<span><span class="co">#&gt;  - attr(*, "data_exposures")='data.frame':   42 obs. of  19 variables:</span></span>
 <span><span class="co">#&gt;  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
 <ul>
 <li><p><code>unit_exposure</code>: a character indicating the unit of
