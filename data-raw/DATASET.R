@@ -13,7 +13,8 @@ raw_df_exposures <- raw_df_exposures  |>
          year %in% years2select,
          matches_played > 5) |>
   droplevels() |>
-  # mutate(place = iconv(place, from = "UTF-8", to = "ASCII")) |>
+  mutate(place = iconv(place, from = "UTF-8", to = "ASCII"),
+         citizenship = iconv(citizenship, from = "UTF-8", to = "ASCII")) |>
   select(player_name, player_id, season, year, matches_played, minutes_played,
          liga, club_name, club_id, age, height, place, citizenship, position,
          foot, goals, assists, yellows, reds)
