@@ -9,10 +9,18 @@ navbar:
     menu:
     - text: Prepare data
       href: articles/prepare-injury-data.html
+    - text: "-------"
+    - text: Describe data
     - text: Estimate summary statistics
       href: articles/estimate-epi-measures.html
     - text: Visualize data
       href: articles/visualize-injury-data.html
+    - text: "-------"
+    - text: Model data
+    - text: Injuries as count data
+      href: articles/model-injury-data-i.html
+    - text: Injuries as time-to-event data
+      href: articles/model-injury-data-ii.html
   - text: News
     href: news/index.html
   right:
@@ -53,11 +61,13 @@ reference:
   - is_injds
 articles:
 - title: Articles
-  desc: Vignettes that describe the usage of injurytools
+  desc: These vignettes describe the usage of injurytools.
   contents:
   - prepare-injury-data
   - estimate-epi-measures
   - visualize-injury-data
+  - model-injury-data-i
+  - model-injury-data-ii
 authors:
   Lore Zumeta Olaskoaga:
     href: https://lzumeta.eus/

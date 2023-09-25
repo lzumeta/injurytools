@@ -31,6 +31,12 @@ Suggests:
     RColorBrewer,
     rmarkdown,
     spelling,
+    survival,
+    survminer,
+    coxme,
+    pscl,
+    lme4,
+    MASS,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
