@@ -11,7 +11,7 @@
 coverage](https://codecov.io/gh/lzumeta/injurytools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lzumeta/injurytools?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/injurytools)](https://cran.r-project.org/package=injurytools)
 [![MIT
-license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/license/mit/)
 <!-- badges: end -->
 
 <!-- - Shiny: -->
