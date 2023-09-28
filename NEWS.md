@@ -1,4 +1,4 @@
-# injurytools 1.0.2
+# injurytools 1.0.2 
 
 - Fixes in injsummary(): exposure for injury type corrected and proper `conf_level`.
 - Quit pipe operator %>% dependency.
