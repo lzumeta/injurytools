@@ -586,7 +586,7 @@ This model is also called a random intercepts model, since the frailty term acts
 summary(sffit)
 ```
 
-The estimated variance of the random effect is $\hat{\sigma}^2  = $ `r sffit$history[[1]][[1]]` and the p-value of the frailty term is significant.
+The estimated variance of the random effect is $\hat{\sigma}^2=$ `r round(sffit$history[[1]][[1]], 2)` and the p-value of the frailty term is significant.
 
 ```{r}
 summary(sffit2)
