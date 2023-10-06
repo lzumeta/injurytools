@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_injprev_polar.R
 \name{gg_injprev_polar}
 \alias{gg_injprev_polar}
-\title{Plot polar area diagrams representing available/injured players proportions}
+\title{Plot polar area diagrams representing players' prevalence}
 \usage{
 gg_injprev_polar(
   injd,

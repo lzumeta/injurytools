@@ -1,4 +1,4 @@
-#' Plot polar area diagrams representing available/injured players proportions
+#' Plot polar area diagrams representing players' prevalence
 #'
 #' Plot the proportions of available and injured players in the cohort, on a
 #' monthly or season basis, by a polar area diagram. Further information on the

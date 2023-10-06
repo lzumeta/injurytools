@@ -3,7 +3,7 @@
 \docType{data}
 \name{injd}
 \alias{injd}
-\title{Example of an injd object}
+\title{Example of an \code{injd} object}
 \format{
 The main data frame in \code{injd} gathers information of 28 players
 and has 108 rows and 19 columns:

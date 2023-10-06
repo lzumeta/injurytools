@@ -86,7 +86,7 @@
 #' @source \url{https://www.transfermarkt.com/}
 "raw_df_injuries"
 
-#' Example of an injd object
+#' Example of an `injd` object
 #'
 #' An \code{injd} object (\strong{S3}), called \code{injd}, to showcase what
 #' this object is like and also to save computation time in some help files
