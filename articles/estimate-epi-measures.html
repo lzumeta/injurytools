@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2023-10-06</h4>
+            <h4 data-toc-skip class="date">2023-10-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -207,8 +207,7 @@ calculate injury summary statistics:</p>
 <code>quiet = TRUE</code>). They are displayed to make it clear what the
 exposure time unit is<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Something that it is important to be aware of.&lt;/p&gt;"><sup>2</sup></a>.</p>
 <p>What <code><a href="../reference/injsummary.html">injsummary()</a></code> returns as its output is a list of two
-elements, i.e. the output stored (here) in the <code>injds</code> object
-consists of,</p>
+elements:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injds</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
@@ -218,7 +217,8 @@ consists of,</p>
 <span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
 <span><span class="co">#&gt;  - attr(*, "unit_timerisk")= chr "100 player-match"</span></span>
 <span><span class="co">#&gt;  - attr(*, "conf_level")= num 0.95</span></span></code></pre></div>
-<p>two data frames (two tables), which can be accessed by typing
+<p>i.e. the output stored in this <code>injds</code> object consists
+of,two data frames (two tables), which can be accessed by typing
 <code>injds[[1]]</code> (or <code>injds[["playerwise"]]</code>) and
 <code>injds[[2]]</code> (<code>injds[["overal"]]</code>).</p>
 <p>To present the results in a more tidier and comprehensible way

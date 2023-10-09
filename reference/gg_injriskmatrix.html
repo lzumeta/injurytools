@@ -97,7 +97,10 @@ size the greater the burden. See References section.</p>
 <span>  xlab <span class="op">=</span> <span class="st">"Incidence (injuries per _)"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"Mean time-loss (days) per injury"</span>,</span>
 <span>  errh_height <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  errv_width <span class="op">=</span> <span class="fl">0.05</span></span>
+<span>  errv_width <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  cont_max_x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cont_max_y <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -140,12 +143,25 @@ average time-loss'), which leads to injury burden (defaults to
 <dt>errh_height</dt>
 <dd><p>Set the height of the horizontal interval whiskers; the
 <code>height</code> argument for
-<code><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html" class="external-link">ggplot2::geom_errorbarh()</a></code></p></dd>
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html" class="external-link">ggplot2::geom_errorbarh()</a></code>.</p></dd>
 
 
 <dt>errv_width</dt>
 <dd><p>Set the width of the vertical interval whiskers; the
-<code>width</code> argument for <br><code><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">ggplot2::geom_errorbar()</a></code></p></dd>
+<code>width</code> argument for <br><code><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">ggplot2::geom_errorbar()</a></code>.</p></dd>
+
+
+<dt>cont_max_x, cont_max_y</dt>
+<dd><p>Numerical (optional) values indicating the
+maximum on the x-axis and y-axis, respectively, to be reached by the
+contour.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Other arguments passed on to
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_contour.html" class="external-link">ggplot2::geom_contour()</a></code> and
+<code><a href="https://rdrr.io/pkg/metR/man/geom_text_contour.html" class="external-link">metR::geom_text_contour()</a></code>.
+These are often aesthetics like <code>bins = 15</code> or <code>breaks = 10</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2023-10-06</h4>
+            <h4 data-toc-skip class="date">2023-10-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -102,9 +102,9 @@
 <p>Data preprocessing is the very first step one has to follow, every
 time one wants to analyze sports injury data using
 <code>injurytools</code> <strong>R</strong> package.</p>
-<p>This document briefly shows how to use the functions that are
-intended to facilitate this data preprocessing step and how the final
-data set is like.</p>
+<p>This document briefly shows how to use the functions intended to
+facilitate this data preprocessing step and what the final data set is
+like.</p>
 <div class="section level2">
 <h2 id="starting-point">Starting point<a class="anchor" aria-label="anchor" href="#starting-point"></a>
 </h2>
@@ -221,8 +221,8 @@ See the R-code
 <h2 id="integrate-both-sources-of-data">2) integrate both sources of data<a class="anchor" aria-label="anchor" href="#integrate-both-sources-of-data"></a>
 </h2>
 <p>Then, we apply <code><a href="../reference/prepare_data.html">prepare_all()</a></code> to the data sets tidied up
-above. It is important to specify the unit of exposure,
-<code>exp_unit</code> argument, that must be one of “minutes”, “hours”,
+above. It is important to specify the unit of exposure, i.e. the
+<code>exp_unit</code> argument, which must be one of “minutes”, “hours”,
 “days”, “matches_num”, “matches_minutes”, “activity_days” or
 “seasons”.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -247,7 +247,7 @@ above. It is important to specify the unit of exposure,
 <span><span class="co">#   group_by(player) |&gt; </span></span>
 <span><span class="co">#   slice(1, n())</span></span></code></pre></div>
 <p>The outcome is a prepared data set, structured in a suitable way that
-is ready for its use by statistical modelling approaches. This data set
+is ready for its use by statistical modelling approaches. These data set
 will always have the columns listed below (standardized columns or
 created by the function), as well as further (optional) sports-related
 variables.</p>
@@ -276,8 +276,8 @@ otherwise 0), i.e. <code>date_recovered</code> -
 <code>date_injured</code> in days.</p></li>
 </ul>
 <p>For example the first row of <code>injd</code> corresponds to the
-player Adam Lallana, to the risk set that starts in 2017-07-01 and ends
-at 2017-07-31, after having played 236 minutes, when he got firstly
+player Adam Lallana, to the risk set that starts on 2017-07-01 and ends
+on 2017-07-31, after having played 236 minutes, when he got firstly
 (<code>enum</code> = 1) injured (<code>status</code> = 1). The second
 row corresponds to the risk set of being injured by a second injury
 (<code>enum</code> = 2), the set starts when he was fully recovered in
@@ -291,7 +291,7 @@ number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
 <div class="section level2">
 <h2 id="the-prepared-data-set-an-injd-object">The prepared data set, an <code>injd</code> object<a class="anchor" aria-label="anchor" href="#the-prepared-data-set-an-injd-object"></a>
 </h2>
-<p>This final data set it’s an <strong>R</strong> object of class
+<p>These final data set it’s an <strong>R</strong> object of class
 <code>injd</code>,</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
