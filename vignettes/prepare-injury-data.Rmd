@@ -49,7 +49,7 @@ library(dplyr)
 
 Data preprocessing is the very first step one has to follow, every time one wants to analyze sports injury data using `injurytools` **R** package.
 
-This document briefly shows how to use the functions that are intended to facilitate this data preprocessing step and how the final data set is like.
+This document briefly shows how to use the functions intended to facilitate this data preprocessing step and what the final data set is like.
 
 # Starting point
 
@@ -118,7 +118,7 @@ head(injd)
 
 # 2) integrate both sources of data
 
-Then, we apply `prepare_all()` to the data sets tidied up above. It is important to specify the unit of exposure, `exp_unit` argument, that must be one of "minutes", "hours", "days", "matches_num", "matches_minutes", "activity_days" or  "seasons".
+Then, we apply `prepare_all()` to the data sets tidied up above. It is important to specify the unit of exposure, i.e. the `exp_unit` argument, which must be one of "minutes", "hours", "days", "matches_num", "matches_minutes", "activity_days" or  "seasons".
 
 ```{r}
 injd <-  prepare_all(data_exposures = df_exposures,
@@ -130,7 +130,7 @@ head(injd)
 #   slice(1, n())
 ```
 
-The outcome is a prepared data set, structured in a suitable way that is ready for its use by statistical modelling approaches. This data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
+The outcome is a prepared data set, structured in a suitable way that is ready for its use by statistical modelling approaches. These data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
 
 * `player`: player identifier.
 
@@ -148,13 +148,13 @@ The outcome is a prepared data set, structured in a suitable way that is ready f
 
 * `days_lost`: number of days lost due to injury occurred at `tstop`/`date_injured` (if any; otherwise 0), i.e. `date_recovered` - `date_injured` in days.
 
-For example the first row of `injd` corresponds to the player Adam Lallana, to the risk set that starts in 2017-07-01 and ends at 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), the set starts when he was fully recovered in 2017-11-23 and finishes when he suffered another hamstring injury[^prepare-note-3].
+For example the first row of `injd` corresponds to the player Adam Lallana, to the risk set that starts on 2017-07-01 and ends on 2017-07-31, after having played 236 minutes, when he got firstly (`enum` = 1) injured (`status` = 1). The second row corresponds to the risk set of being injured by a second injury (`enum` = 2), the set starts when he was fully recovered in 2017-11-23 and finishes when he suffered another hamstring injury[^prepare-note-3].
 
 [^prepare-note-3]: The fact that `tstart` equals `tstop` is due to the player did not participate and had no minutes playing a match in that period of time. Note that this will cause problems if one wants to use survival analysis techniques. Possible alternatives: use another exposure time unit, or add a small number of minutes (e.g. 0.5)...  
 
 # The prepared data set, an `injd` object
 
-This final data set it's an **R** object of class `injd`,
+These final data set it's an **R** object of class `injd`,
 
 ```{r}
 class(injd)

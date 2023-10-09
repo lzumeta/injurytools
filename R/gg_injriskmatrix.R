@@ -29,10 +29,17 @@
 #'   \code{\link[ggplot2:ylab]{ggplot2::ylab()}}.
 #' @param errh_height Set the height of the horizontal interval whiskers; the
 #'   \code{height} argument for
-#'   \code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}
+#'   \code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}.
 #' @param errv_width Set the width of the vertical interval whiskers; the
 #'   \code{width} argument for \cr
-#'   \code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}
+#'   \code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}.
+#' @param cont_max_x,cont_max_y Numerical (optional) values indicating the
+#'  maximum on the x-axis and y-axis, respectively, to be reached by the
+#'  contour.
+#' @param ... Other arguments passed on to
+#'  \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} and
+#'  \code{\link[metR:geom_text_contour]{metR::geom_text_contour()}}.
+#'  These are often aesthetics like `bins = 15` or `breaks = 10`.
 #'
 #' @return  A ggplot object (to which optionally more layers can be added).
 #' @export
@@ -76,7 +83,10 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
                              title = NULL,
                              xlab = "Incidence (injuries per _)",
                              ylab = "Mean time-loss (days) per injury",
-                             errh_height = 1, errv_width = 0.05) {
+                             errh_height = 1, errv_width = 0.05,
+                             cont_max_x = NULL,
+                             cont_max_y = NULL,
+                             ...) {
   ## check inputs
   assert(checkClass(injds, "injds"))
   assert_subset(var_type_injury, c(names(injds[[2]]), NULL))
@@ -104,8 +114,14 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
   }
 
   if (add_contour) {
-    grid <- expand.grid(x = seq(0, ceiling(max(injds_data[["injincidence_upper"]])), length.out = 100),
-                        y = seq(0, ceiling(max(injds_data[["quart75_dayslost"]])),  length.out = 100))
+    if (is.null(cont_max_x)) {
+      cont_max_x <- ceiling(max(injds_data[["injincidence_upper"]]))
+    }
+    if (is.null(cont_max_y)) {
+      cont_max_y <- ceiling(max(injds_data[["quart75_dayslost"]]))
+    }
+    grid <- expand.grid(x = seq(0, cont_max_x, length.out = 100),
+                        y = seq(0, cont_max_y,  length.out = 100))
     grid$z <- grid$x * grid$y
     # labels <- unique(grid$z[grid$z <= max(injds_data[["quart75_dayslost"]])])
     # grid_label <- data.frame(x = rep(max(grid$x), each = length(labels)),
@@ -127,10 +143,10 @@ gg_injriskmatrix <- function(injds, var_type_injury = NULL,
     p <- p +
       geom_contour(aes(x = .data$x, y = .data$y, z = .data$z),
                    data = grid, inherit.aes = F,
-                   linetype = "longdash", colour = "gray") +
+                   linetype = "longdash", colour = "gray", ...) +
       geom_text_contour(aes(x = .data$x, y = .data$y, z = .data$z),
                         data = grid, inherit.aes = F,
-                        colour = "gray", stroke = 0.15)
+                        colour = "gray", stroke = 0.15, ...)
   }
 
   return(p)

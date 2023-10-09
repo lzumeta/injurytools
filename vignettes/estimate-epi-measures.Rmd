@@ -128,13 +128,13 @@ We notice that some warning messages pop up (unless `quiet = TRUE`). They are di
 
 [^estimate-note-2]: Something that it is important to be aware of.
 
-What `injsummary()` returns as its output is a list of two elements, i.e. the output stored (here) in the `injds` object consists of,
+What `injsummary()` returns as its output is a list of two elements: 
 
 ```{r}
 str(injds, 1)
 ```
 
-two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
+i.e. the output stored in this `injds` object consists of,two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
 
 To present the results in a more tidier and comprehensible way (instead of **R** code styled output) the following can be done:
 

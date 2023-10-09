@@ -12,7 +12,10 @@ gg_injriskmatrix(
   xlab = "Incidence (injuries per _)",
   ylab = "Mean time-loss (days) per injury",
   errh_height = 1,
-  errv_width = 0.05
+  errv_width = 0.05,
+  cont_max_x = NULL,
+  cont_max_y = NULL,
+  ...
 )
 }
 \arguments{
@@ -40,11 +43,20 @@ average time-loss'), which leads to injury burden (defaults to
 
 \item{errh_height}{Set the height of the horizontal interval whiskers; the
 \code{height} argument for
-\code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}}
+\code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}.}
 
 \item{errv_width}{Set the width of the vertical interval whiskers; the
 \code{width} argument for \cr
-\code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}}
+\code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}.}
+
+\item{cont_max_x, cont_max_y}{Numerical (optional) values indicating the
+maximum on the x-axis and y-axis, respectively, to be reached by the
+contour.}
+
+\item{...}{Other arguments passed on to
+\code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} and
+\code{\link[metR:geom_text_contour]{metR::geom_text_contour()}}.
+These are often aesthetics like \code{bins = 15} or \code{breaks = 10}.}
 }
 \value{
 A ggplot object (to which optionally more layers can be added).

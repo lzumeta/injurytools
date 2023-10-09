@@ -200,7 +200,7 @@ Next, we plot the Kaplan-Meier (KM) curves for each season based on the above re
 ```{r, fig.width = 10, fig.height = 4.4}
 ggsurvplot(fit, data = injd_sub,
            palette = c("#E7B800", "#2E9FDF")) + ## colors for the curves
-  xlab("Time (calendar days)") + 
+  xlab("Time [calendar days]") + 
   ylab(expression("Survival probability  ("*hat(S)[KM](t)*")")) +
   ggtitle("Kaplan-Meier curves", 
           subtitle = "in each season (time to first injury)") 
@@ -233,7 +233,7 @@ ggsurv <- ggsurvplot(fit, data = injd_sub,
            break.time.by = 60,
            xlim = c(0, 370),
            legend.labs = c("Season 17/18", "Season 18/19")) +
-  xlab("Time (calendar days)") +
+  xlab("Time [calendar days]") +
   ylab(expression("Survival probability  ("*hat(S)[KM](t)*")")) +
   ggtitle("Kaplan-Meier curves", 
           subtitle = "in each season (time to first injury)") 
@@ -270,7 +270,7 @@ ggsurv <- ggsurvplot(fit, data = injd_sub,
            break.time.by = 60,
            xlim = c(0, 370),
            legend.labs = c("Season 17/18", "Season 18/19")) +
-  xlab("Time (calendar days)") +
+  xlab("Time [calendar days]") +
   ylab(expression("Survival probability  ("*hat(S)[KM](t)*")")) +
   ggtitle("Kaplan-Meier curves", 
           subtitle = "in each season (time to first injury)") 
@@ -315,10 +315,11 @@ ggsurv <- ggsurvplot(fit, data = injd_sub,
            risk.table.col = "strata", 
            ggtheme = theme_bw(),
            break.time.by = 60,
+           fontsize = 5.5,
            xlim = c(0, 370),
            legend.labs = c("Season 17/18", "Season 18/19"),
            legend.title = "") +
-  xlab("Time (calendar days)") +
+  xlab("Time [calendar days]") +
   ylab(expression("Survival probability  ("*hat(S)[KM](t)*")")) +
   ggtitle("Kaplan-Meier curves", 
           subtitle = "in each season (time to first injury)") 
@@ -365,10 +366,11 @@ ggsurv <- ggsurvplot(fit, data = injd_sub,
            risk.table.col = "strata", 
            ggtheme = theme_bw(),
            break.time.by = 60,
+           fontsize = 5.5,
            xlim = c(0, 370),
            legend.labs = c("Season 17/18", "Season 18/19"),
            legend.title = "") +
-  xlab("Time (calendar days)") +
+  xlab("Time [calendar days]") +
   ylab(expression("Survival probability  ("*hat(S)[KM](t)*")")) +
   ggtitle("Kaplan-Meier curves", 
           subtitle = "in each season (time to first injury)") 
