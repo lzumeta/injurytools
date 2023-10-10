@@ -441,7 +441,9 @@ The above summary can be displayed graphically (the hazard ratios and 95\% confi
 ```{r, fig.width = 10, fig.height = 5.4}
 ggforest(model = cfit,
          data = injd1819_sub |> 
-           filter(positionb != "Goalkeeper") |> as.data.frame(),
+           filter(positionb != "Goalkeeper") |> 
+           droplevels() |> 
+           as.data.frame(),
          fontsize = 1.2)
 ```
 

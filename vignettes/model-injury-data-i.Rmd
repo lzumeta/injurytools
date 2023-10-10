@@ -74,7 +74,7 @@ First, the distribution of the count/rate variables is explored, e.g. number of 
 
 # Exploring the distribution of injuries 
 
-We plot the histograms of the injury incidence and injury burden variables fpr each season.
+We plot the histograms of the injury incidence and injury burden variables for each season.
 
 <details>
 
@@ -285,10 +285,10 @@ injdsp <- injdsp |>
 </details>
 
 ```{r, eval = F}
-# incidence_glmm_pois <- glmer(formula = ninjuries ~ positionb + (1 | player), 
-#                              offset = log(totalexpo),
-#                              data = injdsp,
-#                              family = poisson)
+incidence_glmm_pois <- glmer(formula = ninjuries ~ positionb + (1 | player),
+                             offset = log(totalexpo),
+                             data = injdsp,
+                             family = poisson)
 # incidence_glmm_pois2 <- glmmTMB::glmmTMB(formula = ninjuries ~ positionb + (1 | player), 
 #                                          offset = log(totalexpo),
 #                                          data = injdsp,
@@ -312,8 +312,8 @@ summary(burden_glm_pois)
 The estimated coefficients are:
 
 ```{r}
-cbind(estimate = exp(coef(burden_glm_pois)),
-      exp(confint(burden_glm_pois))) |> 
+cbind(estimate = exp(coef(burden_glm_pois)), # *c(100, 1, 1) (to report per 100 player-matches!!)
+      exp(confint(burden_glm_pois))) |>      # *c(100, 1, 1)
   kable()
 ```
 
