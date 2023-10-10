@@ -51,8 +51,8 @@ test_that("prepare_all works", {
                               time_expo     = "minutes_played")
 
   injd <- suppressWarnings(prepare_all(data_exposures = df_exposures,
-                      data_injuries  = df_injuries,
-                      exp_unit = "matches_minutes"))
+                                       data_injuries  = df_injuries,
+                                       exp_unit = "matches_minutes"))
   expect_equal(is.data.frame(injd), TRUE)
   expect_s3_class(injd, "injd")
   expect_subset(c("player", "t0", "tf", "date_injured", "date_recovered",
@@ -83,6 +83,7 @@ test_that("prepare_all works fine when dates in injury and exposure data do not 
   data_exposures <- filter(df_exposures, date == 2018)
 
   # Should have 1 warning
+  local_edition(3)
   expect_snapshot({
     out <- prepare_all(data_exposures = data_exposures,
                        data_injuries  = df_injuries,

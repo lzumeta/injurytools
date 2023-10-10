@@ -28,6 +28,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: covr
+          upload-snapshots: true
 
       - name: Test coverage
         run: covr::codecov()
