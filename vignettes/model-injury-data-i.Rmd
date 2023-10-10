@@ -312,8 +312,8 @@ summary(burden_glm_pois)
 The estimated coefficients are:
 
 ```{r}
-cbind(estimate = exp(coef(burden_glm_pois)*c(100, 1, 1)), # *c(100, 1, 1) 
-      exp(confint(burden_glm_pois))*c(100, 1, 1)) |>      # (to report per 100 player-matches)
+cbind(estimate = exp(coef(burden_glm_pois)) * c(100, 1, 1), # *c(100, 1, 1) 
+      exp(confint(burden_glm_pois)) * c(100, 1, 1)) |>      # (to report per 100 player-matches)
   kable()
 ```
 
