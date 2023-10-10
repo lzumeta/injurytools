@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Counts</h1>
             
-            <h4 data-toc-skip class="date">2023-10-09</h4>
+            <h4 data-toc-skip class="date">2023-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-i.Rmd" class="external-link"><code>vignettes/model-injury-data-i.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-i.Rmd</code></div>
@@ -124,7 +124,7 @@ distributional assumptions made by each of them.</p>
 <h2 id="exploring-the-distribution-of-injuries">Exploring the distribution of injuries<a class="anchor" aria-label="anchor" href="#exploring-the-distribution-of-injuries"></a>
 </h2>
 <p>We plot the histograms of the injury incidence and injury burden
-variables fpr each season.</p>
+variables for each season.</p>
 <details><summary>
 See the code to prepare the data
 </summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -269,10 +269,10 @@ Add more covariates to <code>injdsp</code> data frame
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>positionb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split_i</a></span><span class="op">(</span><span class="va">position</span>, <span class="st">"_"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </details><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># incidence_glmm_pois &lt;- glmer(formula = ninjuries ~ positionb + (1 | player), </span></span>
-<span><span class="co">#                              offset = log(totalexpo),</span></span>
-<span><span class="co">#                              data = injdsp,</span></span>
-<span><span class="co">#                              family = poisson)</span></span>
+<code class="sourceCode R"><span><span class="va">incidence_glmm_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">ninjuries</span> <span class="op">~</span> <span class="va">positionb</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">player</span><span class="op">)</span>,</span>
+<span>                             offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">totalexpo</span><span class="op">)</span>,</span>
+<span>                             data <span class="op">=</span> <span class="va">injdsp</span>,</span>
+<span>                             family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span>
 <span><span class="co"># incidence_glmm_pois2 &lt;- glmmTMB::glmmTMB(formula = ninjuries ~ positionb + (1 | player), </span></span>
 <span><span class="co">#                                          offset = log(totalexpo),</span></span>
 <span><span class="co">#                                          data = injdsp,</span></span>
@@ -308,8 +308,8 @@ lets interpret the model output.</p>
 <span><span class="co">#&gt; Number of Fisher Scoring iterations: 6</span></span></code></pre></div>
 <p>The estimated coefficients are:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">burden_glm_pois</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">burden_glm_pois</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">burden_glm_pois</span><span class="op">)</span><span class="op">)</span>, <span class="co"># *c(100, 1, 1) (to report per 100 player-matches!!)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">burden_glm_pois</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span>      <span class="co"># *c(100, 1, 1)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Waiting for profiling to be done...</span></span></code></pre></div>
 <table class="table">

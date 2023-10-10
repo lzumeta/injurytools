@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2023-10-09</h4>
+            <h4 data-toc-skip class="date">2023-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -422,7 +422,9 @@ and further information about the goodness of fit of the model) as:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggforest.html" class="external-link">ggforest</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">cfit</span>,</span>
 <span>         data <span class="op">=</span> <span class="va">injd1819_sub</span> <span class="op">|&gt;</span> </span>
-<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">positionb</span> <span class="op">!=</span> <span class="st">"Goalkeeper"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">positionb</span> <span class="op">!=</span> <span class="st">"Goalkeeper"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>         fontsize <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-injury-data-ii_files/figure-html/unnamed-chunk-17-1.png" width="960"></p>
 <p>Then, we can check if the proportional hazards assumption for the Cox

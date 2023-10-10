@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2023-10-09</h4>
+            <h4 data-toc-skip class="date">2023-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -662,8 +662,8 @@ Code to format the table
 <span><span class="va">injds_tot_cis</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Incidence"</span>,  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI "</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_r\\)"</span><span class="op">)</span>, </span>
-<span>                      <span class="st">"Burden"</span>,     <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CI "</span>, <span class="va">conf_level</span>, <span class="st">"% for \\(I_{br}\\)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Incidence"</span>,  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">conf_level</span>, <span class="st">"% CI for \\(I_r\\)"</span><span class="op">)</span>, </span>
+<span>                      <span class="st">"Burden"</span>,     <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">conf_level</span>, <span class="st">"% CI for \\(I_{br}\\)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </details><table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -672,13 +672,13 @@ Code to format the table
 Incidence
 </th>
 <th style="text-align:left;">
-CI 95% for <span class="math inline">\(I_r\)</span>
+95% CI for <span class="math inline">\(I_r\)</span>
 </th>
 <th style="text-align:right;">
 Burden
 </th>
 <th style="text-align:left;">
-CI 95% for <span class="math inline">\(I_{br}\)</span>
+95% CI for <span class="math inline">\(I_{br}\)</span>
 </th>
 </tr></thead>
 <tbody><tr>
