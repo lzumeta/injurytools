@@ -83,7 +83,6 @@ test_that("prepare_all works fine when dates in injury and exposure data do not 
   data_exposures <- filter(df_exposures, date == 2018)
 
   # Should have 1 warning
-  local_edition(3)
   expect_snapshot({
     out <- prepare_all(data_exposures = data_exposures,
                        data_injuries  = df_injuries,
