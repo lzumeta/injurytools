@@ -75,14 +75,14 @@ This approach is possible when players are followed over the course of time, sin
 
 Broadly speaking, we define the outcome variable, $T$, as "the time until the occurrence of an injury (event)". Then, data analysis is regularly performed before or without knowing all injury event times (e.g. a study might be finished with players not experiencing the injury or players may drop out of the study), which leads to incomplete observations known as censoring (i.e. we observe $Y = \min(T, C)$, where $C$ is the censorship variable). 
 
-In the following two sections, we first show the application of the well-known Kaplan-Meier method and Cox Proportional Hazards (Cox PH) model on sports injury data and after that, we describe two possible survival modelling strategies that take into account the recurrence of injuries (repeated observations per player). 
+In the following two sections, we first show the application of the well-known Kaplan-Meier (KM) method and Cox Proportional Hazards (Cox PH) model on sports injury data and after that, we describe two possible survival modelling strategies that take into account the recurrence of injuries (repeated observations per player). 
 
 
 # Methods for time to first injury
 
 We prepare the data so that for each separate season we have an `injd` object with each observation (row) corresponding to **time to first injury** (or end of the season, or a transfer to another team, i.e. censored observation). 
 
-The final data frames are called `injd1718_sub ` and `injd1819_sub`. 
+The final data frames are called `injd1718_sub` and `injd1819_sub`. 
 
 <details>
 
@@ -195,7 +195,7 @@ fit
 
 The number of first-time injuries in both seasons is similar (16 vs. 17), but the median survival probability is lower in the 2018/2019 season, i.e. in 2018/2019 the estimated probability of being injury free by 106-th day or before is 50\% (equivalently, the estimated probability of surviving 106 days (three months and a half) is 50\%), whereas in 2017/2019 the probability of surviving the same time is `r  summary(fit)$surv[which(summary(fit)$strata == "seasonb=2017/2018" & summary(fit)$time >= 106)[[1]]] |> (\(x) round(x*100, 2))()`\%.
 
-Next, we plot the Kaplan-Meier (KM) curves for each season based on the above results via the [`survminer::ggsurvplot`](https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html) function:
+Next, we plot the Kaplan-Meier curves for each season based on the above results via the [`survminer::ggsurvplot()`](https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html) function:
 
 ```{r, fig.width = 10, fig.height = 4.4}
 ggsurvplot(fit, data = injd_sub,
@@ -569,7 +569,7 @@ injd <- injd |>
   droplevels()
 ```
 
-Now, we fit a shared frailty model in which the frailty term follows a Gamma distribution using the `frailty(player)` syntax inside `survival::coxph` function's formula:
+Now, we fit a shared frailty model in which the frailty term follows a Gamma distribution using the `frailty(player)` syntax inside `survival::coxph()` function's formula:
 
 ```{r, warning = F}
 sffit <- coxph(Surv(tstart_minPlay, tstop_minPlay, status) ~ 
