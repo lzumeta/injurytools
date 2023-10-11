@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2023-10-10</h4>
+            <h4 data-toc-skip class="date">2023-10-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -131,8 +131,8 @@ study), which leads to incomplete observations known as censoring
 where <span class="math inline">\(C\)</span> is the censorship
 variable).</p>
 <p>In the following two sections, we first show the application of the
-well-known Kaplan-Meier method and Cox Proportional Hazards (Cox PH)
-model on sports injury data and after that, we describe two possible
+well-known Kaplan-Meier (KM) method and Cox Proportional Hazards (Cox
+PH) model on sports injury data and after that, we describe two possible
 survival modelling strategies that take into account the recurrence of
 injuries (repeated observations per player).</p>
 </div>
@@ -252,8 +252,8 @@ season, i.e. in 2018/2019 the estimated probability of being injury free
 by 106-th day or before is 50% (equivalently, the estimated probability
 of surviving 106 days (three months and a half) is 50%), whereas in
 2017/2019 the probability of surviving the same time is 69.57%.</p>
-<p>Next, we plot the Kaplan-Meier (KM) curves for each season based on
-the above results via the <a href="https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html" class="external-link"><code>survminer::ggsurvplot</code></a>
+<p>Next, we plot the Kaplan-Meier curves for each season based on the
+above results via the <a href="https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html" class="external-link"><code>survminer::ggsurvplot()</code></a>
 function:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html" class="external-link">ggsurvplot</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">injd_sub</span>,</span>
@@ -570,7 +570,7 @@ Code to prepare the data
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Now, we fit a shared frailty model in which the frailty term follows
 a Gamma distribution using the <code>frailty(player)</code> syntax
-inside <code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph</a></code> function’s formula:</p>
+inside <code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code> function’s formula:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sffit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_minPlay</span>, <span class="va">tstop_minPlay</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                 <span class="va">age</span> <span class="op">+</span> <span class="va">days_lost</span> <span class="op">+</span> </span>
