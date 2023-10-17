@@ -413,7 +413,7 @@ Finally, this document shows how to perform descriptive analyses for injury epid
 </div>
 
 <div class="alert alert-warning" role="alert">
-**NOTE 3:** as @walden2023 point out, incidence-based measures that provide a standard time-window for the population at risk (injuries per hour) are preferable to measures for which the time at risk varies across individuals (injuries per athletic-exposure, injuries per number of matches), because time-based measures better facilitate comparison across sports.
+**NOTE 3:** as @walden2023 point out, incidence-based measures that provide a standardized time window for the population at risk (e.g., injuries per hour) are preferred over measures in which the time at risk varies among individuals (e.g., injuries per athletic exposure, injuries per number of matches). This preference for measures with standardized time scales aids in the comparison of statistics across different cohorts and sports.
 </div>
 
 
