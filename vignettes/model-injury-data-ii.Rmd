@@ -63,7 +63,7 @@ theme_set(theme_bw())
 
 **Example data**: we continue exploring the cohort of Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website[^visualize-note-1].
 
-[^visualize-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate, there might be a mismatch and non-completeness with what actually occurred.
+[^visualize-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate and could potentially include discrepancies or incomplete information compared to what actually occurred.
 
 
 This document presents basic examples for modeling the association between covariates and injuries using Survival Analysis, or Time-to-Event Analysis, models. Depending on the aim of the analyses, it illustrates possible survival models, as well as how to prepare the data, what model assumptions are made on the data, how to fit them and how to display the estimated results.

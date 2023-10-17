@@ -97,7 +97,7 @@ where $X$ is the number of injury cases and $N$ is the total number of players i
 
 Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html) vignette, we use the data sets available from the `injurytools` package: data from Liverpool Football Club male's first team players over two consecutive seasons, 2017-2018 and 2018-2019, scrapped from https://www.transfermarkt.com/ website[^estimate-note-1].
 
-[^estimate-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate, there might be a mismatch and non-completeness with what actually occurred.
+[^estimate-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate and could potentially include discrepancies or incomplete information compared to what actually occurred.
 
 ## - `injsummary()`
 
