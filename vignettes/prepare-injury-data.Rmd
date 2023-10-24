@@ -55,7 +55,7 @@ This document briefly shows how to use the functions intended to facilitate this
 
 Data can be collected in several ways and by several means. A conventional manner is to collect and store data as events occur. So, with regard to sports medicine, it is common to store injury records on one hand, and on the other side, data related to training and competitions/matches (*exposure time* among others) in a separate table. Following this, we consider that the user has the raw data in two separate data sets that we call **injury** and **exposure data**, respectively[^prepare-note-1].
 
-[^prepare-note-1]: If the data is not recorded this way, we suggest splitting both information into separate tables and then following the same functions provided by the package.
+[^prepare-note-1]: If the data are not recorded this way, we suggest splitting both information into separate tables and then following the same functions provided by the package.
 
 <!-- <img src="../man/figures/Illustration_data.pdf" alt="some text" width="4200" height="4200"> -->
 
