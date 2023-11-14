@@ -22,9 +22,9 @@ Useful links:
 \author{
 \strong{Maintainer}: Lore Zumeta Olaskoaga \email{lzumeta@bcamath.org} (\href{https://orcid.org/0000-0001-6141-1469}{ORCID})
 
-Authors:
+Other contributors:
 \itemize{
-  \item Dae-Jin Lee \email{dlee@bcamath.org} (\href{https://orcid.org/0000-0002-8995-8535}{ORCID})
+  \item Dae-Jin Lee \email{dlee@bcamath.org} (\href{https://orcid.org/0000-0002-8995-8535}{ORCID}) [contributor]
 }
 
 }
