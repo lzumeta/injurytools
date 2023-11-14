@@ -9,7 +9,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-6141-1469")),
     person(given = "Dae-Jin",
            family = "Lee",
-           role = c("aut"),
+           role = c("ctb"),
            email = "dlee@bcamath.org",
            comment = c(ORCID = "0000-0002-8995-8535")))
 Description: Sports Injury Data analysis aims to identify and describe the
