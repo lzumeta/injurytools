@@ -34,8 +34,8 @@ time-to-event data.
 To get an overview of the package, see the
 [Articles](https://lzumeta.github.io/injurytools/articles/) section.
 
-In practice, the package can help automate certain descriptive reports
-that are routinely made for sports injury surveillance.
+In practice, the package can automate specific descriptive reports that
+are routinely generated for sports injury surveillance.
 
 ## Installation
 
