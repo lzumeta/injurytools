@@ -193,7 +193,7 @@ fit <- survfit(Surv(tstart_day, tstop_day, status) ~ seasonb,
 fit
 ```
 
-The number of first-time injuries in both seasons is similar (16 vs. 17), but the median survival probability is lower in the 2018/2019 season, i.e. in 2018/2019 the estimated probability of being injury free by 106-th day or before is 50\% (equivalently, the estimated probability of surviving 106 days (three months and a half) is 50\%), whereas in 2017/2019 the probability of surviving the same time is `r  summary(fit)$surv[which(summary(fit)$strata == "seasonb=2017/2018" & summary(fit)$time >= 106)[[1]]] |> (\(x) round(x*100, 2))()`\%.
+The number of first-time injuries in both seasons is similar (16 vs. 17), but the median survival probability is lower in the 2018/2019 season, i.e. in 2018/2019 the estimated probability of being injury free by 106-th day or thereafter is less than or equal to 50\%  (equivalently, the estimated probability of surviving 106 days (three months and a half) is 50\%), whereas in 2017/2019 the probability of surviving the same time is `r  summary(fit)$surv[which(summary(fit)$strata == "seasonb=2017/2018" & summary(fit)$time >= 106)[[1]]] |> (\(x) round(x*100, 2))()`\%.
 
 Next, we plot the Kaplan-Meier curves for each season based on the above results via the [`survminer::ggsurvplot()`](https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html) function:
 
