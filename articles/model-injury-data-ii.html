@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2023-11-15</h4>
+            <h4 data-toc-skip class="date">2023-11-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -250,9 +250,10 @@ as follows:</p>
 <p>The number of first-time injuries in both seasons is similar (16
 vs. 17), but the median survival probability is lower in the 2018/2019
 season, i.e. in 2018/2019 the estimated probability of being injury free
-by 106-th day or before is 50% (equivalently, the estimated probability
-of surviving 106 days (three months and a half) is 50%), whereas in
-2017/2019 the probability of surviving the same time is 69.57%.</p>
+by 106-th day or thereafter is less than or equal to 50% (equivalently,
+the estimated probability of surviving 106 days (three months and a
+half) is 50%), whereas in 2017/2019 the probability of surviving the
+same time is 69.57%.</p>
 <p>Next, we plot the Kaplan-Meier curves for each season based on the
 above results via the <a href="https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html" class="external-link"><code>survminer::ggsurvplot()</code></a>
 function:</p>
