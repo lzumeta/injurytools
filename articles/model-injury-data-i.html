@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Counts</h1>
             
-            <h4 data-toc-skip class="date">2024-01-15</h4>
+            <h4 data-toc-skip class="date">2024-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-i.Rmd" class="external-link"><code>vignettes/model-injury-data-i.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-i.Rmd</code></div>
@@ -102,7 +102,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/atahk/pscl" class="external-link">pscl</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/atahk/pscl" class="external-link">pscl</a></span><span class="op">)</span></span>
 <span><span class="co"># library(glmmTMB)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -407,19 +407,19 @@ lets interpret the model output.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Count model coefficients (poisson with log link):</span></span>
 <span><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">#&gt; (Intercept)       -3.38576    0.06652 -50.897   &lt;2e-16 ***</span></span>
-<span><span class="co">#&gt; positionbDefender -0.21247    0.08894  -2.389   0.0169 *  </span></span>
-<span><span class="co">#&gt; positionbMidfield  0.77310    0.07781   9.936   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; (Intercept)       -3.38575    0.06652 -50.897   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; positionbDefender -0.21247    0.08893  -2.389   0.0169 *  </span></span>
+<span><span class="co">#&gt; positionbMidfield  0.77309    0.07781   9.936   &lt;2e-16 ***</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Zero-inflation model coefficients (binomial with logit link):</span></span>
 <span><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">#&gt; (Intercept)        -0.2877     0.7638  -0.377    0.706</span></span>
+<span><span class="co">#&gt; (Intercept)        -0.2878     0.7638  -0.377    0.706</span></span>
 <span><span class="co">#&gt; positionbDefender  -0.8109     1.1181  -0.725    0.468</span></span>
-<span><span class="co">#&gt; positionbMidfield  -1.3218     1.3354  -0.990    0.322</span></span>
+<span><span class="co">#&gt; positionbMidfield  -1.3217     1.3354  -0.990    0.322</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Number of iterations in BFGS optimization: 1 </span></span>
+<span><span class="co">#&gt; Number of iterations in BFGS optimization: 9 </span></span>
 <span><span class="co">#&gt; Log-likelihood: -929.5 on 6 Df</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -452,20 +452,20 @@ lets interpret the model output.</p>
 <span><span class="co">#&gt; Count model coefficients (negbin with log link):</span></span>
 <span><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
 <span><span class="co">#&gt; (Intercept)        -2.5214     0.6870  -3.670 0.000243 ***</span></span>
-<span><span class="co">#&gt; positionbDefender  -1.1727     0.8795  -1.333 0.182437    </span></span>
-<span><span class="co">#&gt; positionbMidfield   0.8246     0.9205   0.896 0.370337    </span></span>
-<span><span class="co">#&gt; Log(theta)         -0.6520     0.4735  -1.377 0.168550    </span></span>
+<span><span class="co">#&gt; positionbDefender  -1.1726     0.8795  -1.333 0.182449    </span></span>
+<span><span class="co">#&gt; positionbMidfield   0.8246     0.9205   0.896 0.370326    </span></span>
+<span><span class="co">#&gt; Log(theta)         -0.6520     0.4735  -1.377 0.168551    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Zero-inflation model coefficients (binomial with logit link):</span></span>
 <span><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)</span></span>
 <span><span class="co">#&gt; (Intercept)        -0.5269     0.9143  -0.576    0.564</span></span>
-<span><span class="co">#&gt; positionbDefender  -1.1295     1.6186  -0.698    0.485</span></span>
-<span><span class="co">#&gt; positionbMidfield  -1.3187     1.6114  -0.818    0.413</span></span>
+<span><span class="co">#&gt; positionbDefender  -1.1295     1.6187  -0.698    0.485</span></span>
+<span><span class="co">#&gt; positionbMidfield  -1.3186     1.6114  -0.818    0.413</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Theta = 0.521 </span></span>
-<span><span class="co">#&gt; Number of iterations in BFGS optimization: 12 </span></span>
+<span><span class="co">#&gt; Number of iterations in BFGS optimization: 14 </span></span>
 <span><span class="co">#&gt; Log-likelihood: -95.24 on 7 Df</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -517,7 +517,13 @@ fits:</p>
 <span>                     values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>, <span class="st">"chocolate"</span>, <span class="st">"purple"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Histogram of injury burden in 2017/2018\nwith conditional Poisson, NB, ZIP and ZINB Densities"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="va">theme_counts</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2</span></span>
+<span><span class="co">#&gt; 3.5.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use the `legend.position.inside` argument of `theme()` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
 <p><img src="model-injury-data-i_files/figure-html/unnamed-chunk-23-1.png" width="864"></p>
 <p>Besides, we compute goodness of fit measures such as AIC, BIC and
 deviance explained:</p>

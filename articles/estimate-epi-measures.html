@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2024-01-15</h4>
+            <h4 data-toc-skip class="date">2024-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -108,17 +108,17 @@ injuries have occurred, how often they have occurred or what the load
 has been.</p>
 <p>This document shows convenient functions from
 <code>injurytools</code> to describe sports injury data, in terms of
-measures used in sports injury epidemiology (see <span class="citation">Bahr and Holme (<a href="#ref-Bahr2003" role="doc-biblioref">2003</a>)</span> and <span class="citation">Waldén
-et al. (<a href="#ref-walden2023" role="doc-biblioref">2023</a>)</span>). Below, these measures are
-explained and then, <code><a href="../reference/injsummary.html">injsummary()</a></code> and <code><a href="../reference/injprev.html">injprev()</a></code>
-functions are illustrated.</p>
+measures used in sports injury epidemiology (see <span class="citation">Bahr and Holme (<a href="#ref-Bahr2003">2003</a>)</span> and <span class="citation">Waldén
+et al. (<a href="#ref-walden2023">2023</a>)</span>). Below, these
+measures are explained and then, <code><a href="../reference/injsummary.html">injsummary()</a></code> and
+<code><a href="../reference/injprev.html">injprev()</a></code> functions are illustrated.</p>
 <div class="section level2">
 <h2 id="measures-of-occurrence">Measures of occurrence<a class="anchor" aria-label="anchor" href="#measures-of-occurrence"></a>
 </h2>
 <div class="section level3">
 <h3 id="rates">Rates<a class="anchor" aria-label="anchor" href="#rates"></a>
 </h3>
-<p>As <span class="citation">Hodgson Phillips (<a href="#ref-Hodgson2000" role="doc-biblioref">2000</a>)</span> state,</p>
+<p>As <span class="citation">Hodgson Phillips (<a href="#ref-Hodgson2000">2000</a>)</span> state,</p>
 <p><em>“Sports injuries occur when athletes are exposed to their given
 sport and they occur under specific conditions, at a known time and
 place.”</em></p>
@@ -238,326 +238,139 @@ Code to format the table
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Player"</span>, <span class="st">"N injuries"</span>, <span class="st">"N days lost"</span>, </span>
 <span>                                  <span class="st">"Mean days lost"</span>, <span class="st">"Median days lost"</span>, <span class="st">"IQR days lost"</span>,</span>
 <span>                                  <span class="st">"Total exposure"</span>, <span class="st">"Incidence"</span>, <span class="st">"Burden"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><table class="table">
-<thead><tr>
-<th style="text-align:left;">
-Player
-</th>
-<th style="text-align:right;">
-N injuries
-</th>
-<th style="text-align:right;">
-N days lost
-</th>
-<th style="text-align:right;">
-Mean days lost
-</th>
-<th style="text-align:right;">
-Median days lost
-</th>
-<th style="text-align:left;">
-IQR days lost
-</th>
-<th style="text-align:right;">
-Total exposure
-</th>
-<th style="text-align:right;">
-Incidence
-</th>
-<th style="text-align:right;">
-Burden
-</th>
+</details><table style="width:100%;" class="table">
+<colgroup>
+<col width="14%">
+<col width="9%">
+<col width="9%">
+<col width="12%">
+<col width="14%">
+<col width="11%">
+<col width="12%">
+<col width="8%">
+<col width="6%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Player</th>
+<th align="right">N injuries</th>
+<th align="right">N days lost</th>
+<th align="right">Mean days lost</th>
+<th align="right">Median days lost</th>
+<th align="left">IQR days lost</th>
+<th align="right">Total exposure</th>
+<th align="right">Incidence</th>
+<th align="right">Burden</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-adam-lallana
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-302
-</td>
-<td style="text-align:right;">
-43.14
-</td>
-<td style="text-align:right;">
-43.0
-</td>
-<td style="text-align:left;">
-18.5-52.5
-</td>
-<td style="text-align:right;">
-700
-</td>
-<td style="text-align:right;">
-77.14
-</td>
-<td style="text-align:right;">
-3882.86
-</td>
+<tr class="odd">
+<td align="left">adam-lallana</td>
+<td align="right">6</td>
+<td align="right">302</td>
+<td align="right">43.14</td>
+<td align="right">43.0</td>
+<td align="left">18.5-52.5</td>
+<td align="right">700</td>
+<td align="right">77.14</td>
+<td align="right">3882.86</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-daniel-sturridge
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-122
-</td>
-<td style="text-align:right;">
-30.50
-</td>
-<td style="text-align:right;">
-33.5
-</td>
-<td style="text-align:left;">
-12-52
-</td>
-<td style="text-align:right;">
-927
-</td>
-<td style="text-align:right;">
-29.13
-</td>
-<td style="text-align:right;">
-1184.47
-</td>
+<tr class="even">
+<td align="left">daniel-sturridge</td>
+<td align="right">3</td>
+<td align="right">122</td>
+<td align="right">30.50</td>
+<td align="right">33.5</td>
+<td align="left">12-52</td>
+<td align="right">927</td>
+<td align="right">29.13</td>
+<td align="right">1184.47</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-divock-origi
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-2.50
-</td>
-<td style="text-align:right;">
-2.5
-</td>
-<td style="text-align:left;">
-1.25-3.75
-</td>
-<td style="text-align:right;">
-366
-</td>
-<td style="text-align:right;">
-24.59
-</td>
-<td style="text-align:right;">
-122.95
-</td>
+<tr class="odd">
+<td align="left">divock-origi</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">2.50</td>
+<td align="right">2.5</td>
+<td align="left">1.25-3.75</td>
+<td align="right">366</td>
+<td align="right">24.59</td>
+<td align="right">122.95</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-philippe-coutinho
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-15.50
-</td>
-<td style="text-align:right;">
-18.5
-</td>
-<td style="text-align:left;">
-9-25
-</td>
-<td style="text-align:right;">
-1117
-</td>
-<td style="text-align:right;">
-24.17
-</td>
-<td style="text-align:right;">
-499.55
-</td>
+<tr class="even">
+<td align="left">philippe-coutinho</td>
+<td align="right">3</td>
+<td align="right">62</td>
+<td align="right">15.50</td>
+<td align="right">18.5</td>
+<td align="left">9-25</td>
+<td align="right">1117</td>
+<td align="right">24.17</td>
+<td align="right">499.55</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-naby-keita
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-89
-</td>
-<td style="text-align:right;">
-22.25
-</td>
-<td style="text-align:right;">
-19.0
-</td>
-<td style="text-align:left;">
-13.5-27.75
-</td>
-<td style="text-align:right;">
-1393
-</td>
-<td style="text-align:right;">
-19.38
-</td>
-<td style="text-align:right;">
-575.02
-</td>
+<tr class="odd">
+<td align="left">naby-keita</td>
+<td align="right">3</td>
+<td align="right">89</td>
+<td align="right">22.25</td>
+<td align="right">19.0</td>
+<td align="left">13.5-27.75</td>
+<td align="right">1393</td>
+<td align="right">19.38</td>
+<td align="right">575.02</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-dejan-lovren
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-<td style="text-align:right;">
-22.86
-</td>
-<td style="text-align:right;">
-13.0
-</td>
-<td style="text-align:left;">
-9-28.5
-</td>
-<td style="text-align:right;">
-3109
-</td>
-<td style="text-align:right;">
-17.37
-</td>
-<td style="text-align:right;">
-463.17
-</td>
+<tr class="even">
+<td align="left">dejan-lovren</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">22.86</td>
+<td align="right">13.0</td>
+<td align="left">9-28.5</td>
+<td align="right">3109</td>
+<td align="right">17.37</td>
+<td align="right">463.17</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-jordan-henderson
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:right;">
-10.11
-</td>
-<td style="text-align:right;">
-7.0
-</td>
-<td style="text-align:left;">
-4-11
-</td>
-<td style="text-align:right;">
-4154
-</td>
-<td style="text-align:right;">
-17.33
-</td>
-<td style="text-align:right;">
-197.16
-</td>
+<tr class="odd">
+<td align="left">jordan-henderson</td>
+<td align="right">8</td>
+<td align="right">91</td>
+<td align="right">10.11</td>
+<td align="right">7.0</td>
+<td align="left">4-11</td>
+<td align="right">4154</td>
+<td align="right">17.33</td>
+<td align="right">197.16</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-xherdan-shaqiri
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:right;">
-33.50
-</td>
-<td style="text-align:right;">
-33.5
-</td>
-<td style="text-align:left;">
-23.25-43.75
-</td>
-<td style="text-align:right;">
-1057
-</td>
-<td style="text-align:right;">
-17.03
-</td>
-<td style="text-align:right;">
-570.48
-</td>
+<tr class="even">
+<td align="left">xherdan-shaqiri</td>
+<td align="right">2</td>
+<td align="right">67</td>
+<td align="right">33.50</td>
+<td align="right">33.5</td>
+<td align="left">23.25-43.75</td>
+<td align="right">1057</td>
+<td align="right">17.03</td>
+<td align="right">570.48</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fabinho
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-5.50
-</td>
-<td style="text-align:right;">
-5.5
-</td>
-<td style="text-align:left;">
-1.5-9.5
-</td>
-<td style="text-align:right;">
-2013
-</td>
-<td style="text-align:right;">
-13.41
-</td>
-<td style="text-align:right;">
-98.36
-</td>
+<tr class="odd">
+<td align="left">fabinho</td>
+<td align="right">3</td>
+<td align="right">22</td>
+<td align="right">5.50</td>
+<td align="right">5.5</td>
+<td align="left">1.5-9.5</td>
+<td align="right">2013</td>
+<td align="right">13.41</td>
+<td align="right">98.36</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-james-milner
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-48
-</td>
-<td style="text-align:right;">
-8.00
-</td>
-<td style="text-align:right;">
-9.0
-</td>
-<td style="text-align:left;">
-6.25-11.75
-</td>
-<td style="text-align:right;">
-3548
-</td>
-<td style="text-align:right;">
-12.68
-</td>
-<td style="text-align:right;">
-121.76
-</td>
+<tr class="even">
+<td align="left">james-milner</td>
+<td align="right">5</td>
+<td align="right">48</td>
+<td align="right">8.00</td>
+<td align="right">9.0</td>
+<td align="left">6.25-11.75</td>
+<td align="right">3548</td>
+<td align="right">12.68</td>
+<td align="right">121.76</td>
 </tr>
 </tbody>
 </table>
@@ -666,38 +479,21 @@ Code to format the table
 <span>        col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Incidence"</span>,  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">conf_level</span>, <span class="st">"% CI for \\(I_r\\)"</span><span class="op">)</span>, </span>
 <span>                      <span class="st">"Burden"</span>,     <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">conf_level</span>, <span class="st">"% CI for \\(I_{br}\\)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </details><table class="table">
-<thead><tr>
-<th style="text-align:left;">
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">Incidence</th>
+<th align="left">95% CI for <span class="math inline">\(I_r\)</span>
 </th>
-<th style="text-align:right;">
-Incidence
-</th>
-<th style="text-align:left;">
-95% CI for <span class="math inline">\(I_r\)</span>
-</th>
-<th style="text-align:right;">
-Burden
-</th>
-<th style="text-align:left;">
-95% CI for <span class="math inline">\(I_{br}\)</span>
+<th align="right">Burden</th>
+<th align="left">95% CI for <span class="math inline">\(I_{br}\)</span>
 </th>
 </tr></thead>
-<tbody><tr>
-<td style="text-align:left;">
-TOTAL
-</td>
-<td style="text-align:right;">
-9.88
-</td>
-<td style="text-align:left;">
-[7.7, 12]
-</td>
-<td style="text-align:right;">
-246.9
-</td>
-<td style="text-align:left;">
-[236.2, 257.6]
-</td>
+<tbody><tr class="odd">
+<td align="left">TOTAL</td>
+<td align="right">9.88</td>
+<td align="left">[7.7, 12]</td>
+<td align="right">246.9</td>
+<td align="left">[236.2, 257.6]</td>
 </tr></tbody>
 </table>
 <p>Players with the highest injury incidence rate (all type of injuries)
@@ -918,91 +714,41 @@ players on a season basis:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">prev_table1</span>,</span>
 <span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Season"</span>, <span class="st">"Status"</span>, <span class="st">"N"</span>, <span class="st">"Total"</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<thead><tr>
-<th style="text-align:left;">
-Season
-</th>
-<th style="text-align:left;">
-Status
-</th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-Total
-</th>
-<th style="text-align:right;">
-%
-</th>
+<thead><tr class="header">
+<th align="left">Season</th>
+<th align="left">Status</th>
+<th align="right">N</th>
+<th align="right">Total</th>
+<th align="right">%</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-season 2017/2018
-</td>
-<td style="text-align:left;">
-Available
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-30.4
-</td>
+<tr class="odd">
+<td align="left">season 2017/2018</td>
+<td align="left">Available</td>
+<td align="right">7</td>
+<td align="right">23</td>
+<td align="right">30.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-season 2017/2018
-</td>
-<td style="text-align:left;">
-Injured
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-69.6
-</td>
+<tr class="even">
+<td align="left">season 2017/2018</td>
+<td align="left">Injured</td>
+<td align="right">16</td>
+<td align="right">23</td>
+<td align="right">69.6</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-season 2018/2019
-</td>
-<td style="text-align:left;">
-Available
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-10.5
-</td>
+<tr class="odd">
+<td align="left">season 2018/2019</td>
+<td align="left">Available</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="right">10.5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-season 2018/2019
-</td>
-<td style="text-align:left;">
-Injured
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-89.5
-</td>
+<tr class="even">
+<td align="left">season 2018/2019</td>
+<td align="left">Injured</td>
+<td align="right">17</td>
+<td align="right">19</td>
+<td align="right">89.5</td>
 </tr>
 </tbody>
 </table>
@@ -1342,11 +1088,11 @@ cohorts) or to evaluate the influence of independent factors
 </h2>
 <div class="alert alert-warning" role="alert">
 <p><strong>NOTE 1:</strong> as <span class="citation">Bahr, Clarsen, and
-Ekstrand (<a href="#ref-Bahr2018" role="doc-biblioref">2018</a>)</span>
-state, injury incidence (likelihood) and injury burden (severity) should
-be reported and assessed in conjunction rather than in isolation. In
-this regard, see the risk matrix plot provided by
-<code><a href="../reference/gg_injriskmatrix.html">gg_injriskmatrix()</a></code> function.</p>
+Ekstrand (<a href="#ref-Bahr2018">2018</a>)</span> state, injury
+incidence (likelihood) and injury burden (severity) should be reported
+and assessed in conjunction rather than in isolation. In this regard,
+see the risk matrix plot provided by <code><a href="../reference/gg_injriskmatrix.html">gg_injriskmatrix()</a></code>
+function.</p>
 </div>
 <div class="alert alert-warning" role="alert">
 <p><strong>NOTE 2:</strong> neither injury incidence (<span class="math inline">\(I_r\)</span>) nor injury burden (<span class="math inline">\(I_{br}\)</span>) are ratios, and they are not
@@ -1355,19 +1101,19 @@ interpreted as a probability; they are rates and their unit
 of player-exposure, per player-season etc.).</p>
 </div>
 <div class="alert alert-warning" role="alert">
-<p><strong>NOTE 3:</strong> as <span class="citation">Waldén et al. (<a href="#ref-walden2023" role="doc-biblioref">2023</a>)</span> point out,
-incidence-based measures that provide a standardized time window for the
-population at risk (e.g., injuries per hour) are preferred over measures
-in which the time at risk varies among individuals (e.g., injuries per
-athletic exposure, injuries per number of matches). This preference for
-measures with standardized time scales aids in the comparison of
-statistics across different cohorts and sports.</p>
+<p><strong>NOTE 3:</strong> as <span class="citation">Waldén et al. (<a href="#ref-walden2023">2023</a>)</span> point out, incidence-based
+measures that provide a standardized time window for the population at
+risk (e.g., injuries per hour) are preferred over measures in which the
+time at risk varies among individuals (e.g., injuries per athletic
+exposure, injuries per number of matches). This preference for measures
+with standardized time scales aids in the comparison of statistics
+across different cohorts and sports.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Bahr2018" class="csl-entry">
 Bahr, R, B Clarsen, and J Ekstrand. 2018. <span>“Why We Should Focus on
 the Burden of Injuries and Illnesses, Not Just Their Incidence.”</span>

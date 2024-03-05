@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2024-01-15</h4>
+            <h4 data-toc-skip class="date">2024-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -613,26 +613,23 @@ frailty term acts in a multiplicative way on the hazard (or the
 the frailty term is significant.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sffit2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Cox mixed-effects model fit by maximum likelihood</span></span>
-<span><span class="co">#&gt;   Data: injd</span></span>
+<span><span class="co">#&gt; Mixed effects coxme model</span></span>
+<span><span class="co">#&gt;  Formula: Surv(tstart_minPlay, tstop_minPlay, status) ~ age + days_lost +      (1 | player) </span></span>
+<span><span class="co">#&gt;     Data: injd </span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   events, n = 81, 104</span></span>
-<span><span class="co">#&gt;   Iterations= 21 111 </span></span>
-<span><span class="co">#&gt;                     NULL Integrated   Fitted</span></span>
-<span><span class="co">#&gt; Log-likelihood -190.7449  -164.8804 -122.959</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                    Chisq    df          p   AIC   BIC</span></span>
-<span><span class="co">#&gt; Integrated loglik  51.73  3.00 3.4212e-11 45.73 38.55</span></span>
-<span><span class="co">#&gt;  Penalized loglik 135.57 21.69 0.0000e+00 92.20 40.27</span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;    group  variable       sd variance</span></span>
+<span><span class="co">#&gt; 1 player Intercept 3.472957 12.06143</span></span>
+<span><span class="co">#&gt;                    Chisq    df         p   AIC   BIC</span></span>
+<span><span class="co">#&gt; Integrated loglik  51.73  3.00 3.421e-11 45.73 38.55</span></span>
+<span><span class="co">#&gt;  Penalized loglik 135.57 21.69 0.000e+00 92.20 40.27</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Model:  Surv(tstart_minPlay, tstop_minPlay, status) ~ age + days_lost +      (1 | player) </span></span>
-<span><span class="co">#&gt; Fixed coefficients</span></span>
-<span><span class="co">#&gt;                  coef exp(coef)   se(coef)     z     p</span></span>
-<span><span class="co">#&gt; age        0.52986625 1.6987051 0.22283770  2.38 0.017</span></span>
-<span><span class="co">#&gt; days_lost -0.01228762 0.9877876 0.01001641 -1.23 0.220</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Random effects</span></span>
-<span><span class="co">#&gt;  Group  Variable  Std Dev   Variance </span></span>
-<span><span class="co">#&gt;  player Intercept  3.472957 12.061429</span></span></code></pre></div>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;               coef exp(coef) se(coef)     z      p</span></span>
+<span><span class="co">#&gt; age        0.52987   1.69871  0.22284  2.38 0.0174</span></span>
+<span><span class="co">#&gt; days_lost -0.01229   0.98779  0.01002 -1.23 0.2199</span></span></code></pre></div>
 <p>Let’s plot the covariate effects, i.e hazard ratios, and the frailty
 terms of the <code>sffit</code> model:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
