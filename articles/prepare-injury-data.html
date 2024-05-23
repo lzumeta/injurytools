@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2024-05-02</h4>
+            <h4 data-toc-skip class="date">2024-05-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -142,8 +142,9 @@ consecutive seasons, 2017-2018 and 2018-2019, scrapped from <a href="https://www
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> adam-lalla… 43530     18/19  2019-01-06 2019-01-18        12          2 Knock </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> adam-lalla… 43530     18/19  2019-04-01 2019-05-31        60         10 Knock </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">raw_df_exposures</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">raw_df_exposures</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               player_name player_id season year matches_played minutes_played</span></span>
 <span><span class="co">#&gt; 1            adam-lallana     43530  17/18 2017             12            236</span></span>
 <span><span class="co">#&gt; 2            adam-lallana     43530  18/19 2018             13            464</span></span>
@@ -173,12 +174,12 @@ proper names and formats by means of <code><a href="../reference/prepare_data.ht
 &lt;em&gt;Date&lt;/em&gt;, given in “%Y-%m-%d” format, or of class
 &lt;em&gt;integer&lt;/em&gt;/&lt;em&gt;numeric&lt;/em&gt;, a 4-digit integer referring to year
 in which the season started.&lt;/p&gt;"><sup>2</sup></a>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_injuries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_inj</a></span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,</span>
 <span>                           player         <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                           date_injured   <span class="op">=</span> <span class="st">"from"</span>,</span>
 <span>                           date_recovered <span class="op">=</span> <span class="st">"until"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
 <span>                            player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                            date          <span class="op">=</span> <span class="st">"year"</span>,</span>
@@ -189,7 +190,7 @@ time spent training and participating in competitions/matches. However,
 if the units are “seasons”, then do:</p>
 <details><summary>
 See the R-code
-</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## a possible way for the case where each row in exposure data correspond to a</span></span>
 <span><span class="co">## season and there is no more information about time of exposure</span></span>
 <span><span class="va">raw_df_exposures</span><span class="op">$</span><span class="va">time_expo_aux</span> <span class="op">&lt;-</span> <span class="fl">1</span> </span>
@@ -225,7 +226,7 @@ above. It is important to specify the unit of exposure, i.e. the
 <code>exp_unit</code> argument, which must be one of “minutes”, “hours”,
 “days”, “matches_num”, “matches_minutes”, “activity_days” or
 “seasons”.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injd</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/prepare_data.html">prepare_all</a></span><span class="op">(</span>data_exposures <span class="op">=</span> <span class="va">df_exposures</span>,</span>
 <span>                    data_injuries  <span class="op">=</span> <span class="va">df_injuries</span>,</span>
 <span>                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span>
@@ -242,8 +243,9 @@ above. It is important to specify the unit of exposure, i.e. the
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more variables: tstart_minPlay &lt;dbl&gt;, tstop_minPlay &lt;dbl&gt;, status &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span>
-<span><span class="co"># injd |&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># injd |&gt; </span></span>
 <span><span class="co">#   group_by(player) |&gt; </span></span>
 <span><span class="co">#   slice(1, n())</span></span></code></pre></div>
 <p>The outcome is a prepared data set, structured in a suitable way that
@@ -293,11 +295,11 @@ number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
 </h2>
 <p>These final data set it’s an <strong>R</strong> object of class
 <code>injd</code>,</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "injd"       "tbl_df"     "tbl"        "data.frame"</span></span></code></pre></div>
 <p>and have the following attributes:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; injd [108 × 19] (S3: injd/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
@@ -317,7 +319,7 @@ frame.</p></li>
 </ul>
 <p>To extract one of the attributes, for example
 <code>unit_exposure</code>, type:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">injd</span>, <span class="st">"unit_exposure"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "matches_minutes"</span></span></code></pre></div>
 </div>

@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2024-05-02</h4>
+            <h4 data-toc-skip class="date">2024-05-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -219,27 +219,30 @@ See the code to prepare the data
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## CHECK</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstop_day</span> <span class="op">==</span> <span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstart_day</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstop_minPlay</span> <span class="op">==</span> <span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstart_minPlay</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstop_day</span> <span class="op">==</span> <span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstart_day</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstop_minPlay</span> <span class="op">==</span> <span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstart_minPlay</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstop_minPlay</span> <span class="op">==</span> <span class="va">injd1718_sub</span><span class="op">$</span><span class="va">tstart_minPlay</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstop_day</span> <span class="op">==</span> <span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstart_day</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstop_minPlay</span> <span class="op">==</span> <span class="va">injd1819_sub</span><span class="op">$</span><span class="va">tstart_minPlay</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
 </details><div class="section level3">
 <h3 id="kaplan-meier-curve">Kaplan-Meier curve<a class="anchor" aria-label="anchor" href="#kaplan-meier-curve"></a>
 </h3>
 <p>For this section we join both data sets by row:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injd_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="st">"17-18"</span> <span class="op">=</span> <span class="va">injd1718_sub</span>,</span>
 <span>                      <span class="st">"18-19"</span> <span class="op">=</span> <span class="va">injd1819_sub</span>,</span>
 <span>                      .id <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code></pre></div>
 <p>Now, we estimate the survival probabilities, <span class="math inline">\(\hat{S}_{\text{KM}}(t)\)</span>, in each season,
 as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_day</span>, <span class="va">tstop_day</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">seasonb</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">injd_sub</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span></span>
 <span><span class="co">#&gt; Call: survfit(formula = Surv(tstart_day, tstop_day, status) ~ seasonb, </span></span>
 <span><span class="co">#&gt;     data = injd_sub)</span></span>
@@ -257,7 +260,7 @@ same time is 0.696.</p>
 <p>Next, we plot the Kaplan-Meier curves for each season based on the
 above results via the <a href="https://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html" class="external-link"><code>survminer::ggsurvplot()</code></a>
 function:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html" class="external-link">ggsurvplot</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">injd_sub</span>,</span>
 <span>           palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E7B800"</span>, <span class="st">"#2E9FDF"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co">## colors for the curves</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time [calendar days]"</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -269,7 +272,7 @@ function:</p>
 estimated median survival probability.</p>
 <details><summary>
 Code for adding more info to the previous plot
-</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## since tstop_day == (tstop_day - tstart_day)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">injd_sub</span><span class="op">$</span><span class="va">tstop_day</span> <span class="op">==</span> <span class="op">(</span><span class="va">injd_sub</span><span class="op">$</span><span class="va">tstop_day</span> <span class="op">-</span> <span class="va">injd_sub</span><span class="op">$</span><span class="va">tstart_day</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># [1] TRUE</span></span>
@@ -277,7 +280,7 @@ Code for adding more info to the previous plot
 <span><span class="co">## equivalent fits:</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_day</span>, <span class="va">tstop_day</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">seasonb</span>, data <span class="op">=</span> <span class="va">injd_sub</span><span class="op">)</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstop_day</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">seasonb</span>, data <span class="op">=</span> <span class="va">injd_sub</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ggsurv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html" class="external-link">ggsurvplot</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">injd_sub</span>,</span>
 <span>           palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E7B800"</span>, <span class="st">"#2E9FDF"</span><span class="op">)</span>,</span>
 <span>           surv.median.line <span class="op">=</span> <span class="st">"hv"</span>,</span>
@@ -317,7 +320,7 @@ survival probabilities of 17/18 and 18/19 season), we do the
 following.</p>
 <details><summary>
 Code for adding for info to the previous plot
-</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ggsurv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html" class="external-link">ggsurvplot</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">injd_sub</span>, </span>
 <span>           palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E7B800"</span>, <span class="st">"#2E9FDF"</span><span class="op">)</span>,</span>
 <span>           risk.table <span class="op">=</span> <span class="cn">T</span>,</span>
@@ -377,7 +380,7 @@ through the hazard function as <span class="math inline">\(\lambda(t |
 \lambda_0(t)\exp(\boldsymbol{x}'\boldsymbol{\beta})\)</span>.</p>
 <p>We use <code>injd1819_sub</code> data in this section and we add to
 it another variable (i.e. <code>positionb</code>).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## create positionb column </span></span>
 <span><span class="co">## (so that the categories are: Attack, Defender, Goalkeeper and Midfield)</span></span>
 <span><span class="va">injd1819_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">injd1819_sub</span>,</span>
@@ -385,12 +388,12 @@ it another variable (i.e. <code>positionb</code>).</p>
 <p>Now, we fit a Cox PH model with three covariates: player position
 (excluding goalkeepers), age and yellow cards received by each player
 during the 18/19 season.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstop_day</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">positionb</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">yellows</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">injd1819_sub</span> <span class="op">|&gt;</span> </span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">positionb</span> <span class="op">!=</span> <span class="st">"Goalkeeper"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The estimated effects of the <code>cfit</code> model are:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; coxph(formula = Surv(tstop_day, status) ~ positionb + age + yellows, </span></span>
@@ -421,7 +424,7 @@ the small sample size of the data.</p>
 <p>The above summary can be displayed graphically (the hazard ratios and
 95% confidence intervals, together with the p-values of each covariate,
 and further information about the goodness of fit of the model) as:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggforest.html" class="external-link">ggforest</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">cfit</span>,</span>
 <span>         data <span class="op">=</span> <span class="va">injd1819_sub</span> <span class="op">|&gt;</span> </span>
 <span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">positionb</span> <span class="op">!=</span> <span class="st">"Goalkeeper"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -431,7 +434,7 @@ and further information about the goodness of fit of the model) as:</p>
 <p><img src="model-injury-data-ii_files/figure-html/unnamed-chunk-17-1.png" width="960"></p>
 <p>Then, we can check if the proportional hazards assumption for the Cox
 PH model is hold by computing the Schoenfeld residuals:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html" class="external-link">cox.zph</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           chisq df    p</span></span>
 <span><span class="co">#&gt; positionb 1.465  2 0.48</span></span>
@@ -442,7 +445,7 @@ PH model is hold by computing the Schoenfeld residuals:</p>
 p-value).</p>
 <p>Let’s check the residuals for each covariate in the model
 graphically:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxzph.html" class="external-link">ggcoxzph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html" class="external-link">cox.zph</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-injury-data-ii_files/figure-html/unnamed-chunk-19-1.png" width="960"></p>
 </div>
@@ -462,10 +465,10 @@ for each level (stratum) of the <code>seasonb</code> covariate (strata),
 i.e. <span class="math inline">\(\lambda(t | \boldsymbol{x}) =
 \lambda_{0,k}(t)\exp(\boldsymbol{x}'\boldsymbol{\beta})\)</span> for
 <span class="math inline">\(k = 1, 2\)</span>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_day</span>, <span class="va">tstop_day</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/strata.html" class="external-link">strata</a></span><span class="op">(</span><span class="va">seasonb</span><span class="op">)</span>, </span>
 <span>              data <span class="op">=</span> <span class="va">injd_sub</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sfit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; coxph(formula = Surv(tstart_day, tstop_day, status) ~ age + strata(seasonb), </span></span>
@@ -489,7 +492,7 @@ However, we will keep on and illustrate how to plot the estimates of two
 players of different ages, 18 year-old vs. 36 year-old in both seasons,
 based on the fitted stratified model.</p>
 <p>First, we put the wanted estimates in a data frame.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## surv estimates of a player of 18 year-old based on sfit</span></span>
 <span><span class="va">player1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span>
 <span><span class="va">sfitn1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="va">sfit</span>, newdata <span class="op">=</span> <span class="va">player1</span><span class="op">)</span></span>
@@ -512,7 +515,7 @@ based on the fitted stratified model.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>strata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">strata</span><span class="op">)</span>,</span>
 <span>         Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then, we plot them:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sfitn</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">surv</span>, col <span class="op">=</span> <span class="va">strata</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_step</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="va">Age</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Season"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E7B800"</span>, <span class="st">"#2E9FDF"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -524,7 +527,7 @@ based on the fitted stratified model.</p>
 <p><img src="model-injury-data-ii_files/figure-html/unnamed-chunk-23-1.png" width="960"></p>
 <p>But the proportional hazard assumption for each strata doesn’t
 hold:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html" class="external-link">cox.zph</a></span><span class="op">(</span><span class="va">sfit</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        chisq df     p</span></span>
 <span><span class="co">#&gt; age        6  1 0.014</span></span>
@@ -545,7 +548,7 @@ for <span class="math inline">\(l = 1, \ldots, L\)</span> players, where
 Gamma or log-normal distribution.</p>
 <details><summary>
 Code to prepare the data
-</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## prepare exposure data set and create seasonb column</span></span>
 <span><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
 <span>                             player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
@@ -564,7 +567,7 @@ Code to prepare the data
 <span>         games_lost <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html" class="external-link">lag</a></span><span class="op">(</span><span class="va">games_lost</span>, default <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>         prev_inj <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html" class="external-link">lag</a></span><span class="op">(</span><span class="va">enum</span>, default <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </details><p>Code to do some more data set-up:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">injd</span> <span class="op">&lt;-</span> <span class="va">injd</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tstop_minPlay <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">tstop_minPlay</span> <span class="op">==</span> <span class="va">tstart_minPlay</span>,</span>
 <span>                                <span class="va">tstop_minPlay</span> <span class="op">+</span> <span class="fl">1</span>, <span class="va">tstop_minPlay</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -573,20 +576,20 @@ Code to prepare the data
 <p>Now, we fit a shared frailty model in which the frailty term follows
 a Gamma distribution using the <code>frailty(player)</code> syntax
 inside <code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code> function’s formula:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sffit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_minPlay</span>, <span class="va">tstop_minPlay</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                 <span class="va">age</span> <span class="op">+</span> <span class="va">days_lost</span> <span class="op">+</span> </span>
 <span>                 <span class="fu"><a href="https://rdrr.io/pkg/survival/man/frailty.html" class="external-link">frailty</a></span><span class="op">(</span><span class="va">player</span>, distribution <span class="op">=</span> <span class="st">"gamma"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">injd</span><span class="op">)</span></span></code></pre></div>
 <p>Or alternatively, we can use the <code>coxme</code> package (there
 are more packages also) and fit a model with a log-normal frailty using
 the <code>(1 | player)</code> syntax:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sffit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coxme/man/coxme.html" class="external-link">coxme</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">tstart_minPlay</span>, <span class="va">tstop_minPlay</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                  <span class="va">age</span> <span class="op">+</span> <span class="va">days_lost</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">player</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">injd</span><span class="op">)</span></span></code></pre></div>
 <p>This model is also called a random intercepts model, since the
 frailty term acts in a multiplicative way on the hazard (or the
 “intercept” of the curve).</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sffit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; coxph(formula = Surv(tstart_minPlay, tstop_minPlay, status) ~ </span></span>
@@ -611,7 +614,7 @@ frailty term acts in a multiplicative way on the hazard (or the
 <span><span class="co">#&gt; Likelihood ratio test= 122.5  on 13.88 df,   p=&lt;2e-16</span></span></code></pre></div>
 <p>The estimated variance of the random effect is <span class="math inline">\(\hat{\sigma}^2=\)</span> 2.69 and the p-value of
 the frailty term is significant.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sffit2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mixed effects coxme model</span></span>
 <span><span class="co">#&gt;  Formula: Surv(tstart_minPlay, tstop_minPlay, status) ~ age + days_lost +      (1 | player) </span></span>
@@ -632,7 +635,7 @@ the frailty term is significant.</p>
 <span><span class="co">#&gt; days_lost -0.01229   0.98779  0.01002 -1.23 0.2199</span></span></code></pre></div>
 <p>Let’s plot the covariate effects, i.e hazard ratios, and the frailty
 terms of the <code>sffit</code> model:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## plot p1, for covariate effects</span></span>
 <span><span class="co">## a trick to not to plot frailties as HRs</span></span>
 <span><span class="va">sffit_aux</span> <span class="op">&lt;-</span> <span class="va">sffit</span></span>
@@ -640,7 +643,7 @@ terms of the <code>sffit</code> model:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">sffit_aux</span><span class="op">$</span><span class="va">terms</span>, <span class="st">"dataClasses"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> </span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggforest.html" class="external-link">ggforest</a></span><span class="op">(</span><span class="va">sffit_aux</span>, data <span class="op">=</span> <span class="va">injd</span>,</span>
 <span>               fontsize <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## plot p2, for frailty terms</span></span>
 <span><span class="va">df_frailties</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>player <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">injd</span><span class="op">$</span><span class="va">player</span><span class="op">)</span>, </span>
 <span>                           frail <span class="op">=</span> <span class="va">sffit</span><span class="op">$</span><span class="va">frail</span>,</span>
@@ -655,7 +658,7 @@ terms of the <code>sffit</code> model:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">""</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkred"</span>, <span class="st">"dodgerblue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Code for further plot specifications
-</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_frailties</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>player <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">injd</span><span class="op">$</span><span class="va">player</span><span class="op">)</span>, </span>
 <span>                           frail <span class="op">=</span> <span class="va">sffit</span><span class="op">$</span><span class="va">frail</span>,</span>
 <span>                           expfrail <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">sffit</span><span class="op">$</span><span class="va">frail</span><span class="op">)</span>,</span>
@@ -677,7 +680,7 @@ Code for further plot specifications
 <span>        axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">1.2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>        axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">1.2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">1.4</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+</details><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-injury-data-ii_files/figure-html/unnamed-chunk-34-1.png" width="700"></p>
 <p>The models in this section might be extended to model data that
