@@ -5,7 +5,7 @@ Authors@R: c(
     person(given = "Lore",
            family = "Zumeta Olaskoaga",
            role = c("aut", "cre"),
-           email = "lzumeta@bcamath.org",
+           email = "lorezumeta@gmail.com",
            comment = c(ORCID = "0000-0001-6141-1469")),
     person(given = "Dae-Jin",
            family = "Lee",
@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: 
     covr,
     gridExtra,

@@ -2,8 +2,8 @@
 % Please edit documentation in R/injurytools-package.R
 \docType{package}
 \name{injurytools}
-\alias{injurytools}
 \alias{injurytools-package}
+\alias{injurytools}
 \title{\pkg{injurytools} package}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Lore Zumeta Olaskoaga \email{lzumeta@bcamath.org} (\href{https://orcid.org/0000-0001-6141-1469}{ORCID})
+\strong{Maintainer}: Lore Zumeta Olaskoaga \email{lorezumeta@gmail.com} (\href{https://orcid.org/0000-0001-6141-1469}{ORCID})
 
 Other contributors:
 \itemize{
