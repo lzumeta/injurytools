@@ -8,6 +8,7 @@
 ^appveyor\.yml$
 ^doc$
 ^Meta$
+^ga\.R$
 ^README.Rmd
 ^data-raw$
 ^LICENSE\.md$

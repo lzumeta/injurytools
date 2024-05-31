@@ -1,6 +1,17 @@
 url: https://lzumeta.github.io/injurytools/
 template:
   bootstrap: 5
+  includes:
+    in_header: |
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-17GBPW9WTZ"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-17GBPW9WTZ');
+      </script>
 navbar:
   left:
   - text: Reference
@@ -73,16 +84,6 @@ authors:
     href: https://lzumeta.eus/
   Dae-Jin Lee:
     href: http://idaejin.github.io/
-includes:
-    in_header: |
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-17GBPW9WTZ"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'G-17GBPW9WTZ');
-      </script>
 
 
