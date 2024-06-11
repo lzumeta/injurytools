@@ -4,8 +4,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{model-injury-data-ii}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -94,13 +96,13 @@ See the code to prepare the data
 ## 17/18
 df_exposures1718 <- prepare_exp(df_exposures0 = 
                                   raw_df_exposures |> filter(season == "17/18"),
-                                player        = "player_name",
+                                person_id     = "player_name",
                                 date          = "year",
                                 time_expo     = "minutes_played") |> 
   mutate(seasonb = date2season(date))
 df_injuries1718 <- prepare_inj(df_injuries0   =
                                  raw_df_injuries |> filter(season == "17/18"),
-                               player         = "player_name",
+                               person_id      = "player_name",
                                date_injured   = "from",
                                date_recovered = "until")
 injd1718 <- prepare_all(data_exposures = df_exposures1718,
@@ -110,19 +112,19 @@ injd1718 <- prepare_all(data_exposures = df_exposures1718,
 injd1718 <- injd1718 |> 
   mutate(seasonb = date2season(tstart)) |> 
   ## join to have info such as position, age, citizenship etc.
-  left_join(df_exposures1718, by = c("player" = "player", 
-                                     "seasonb" = "seasonb")) 
+  left_join(df_exposures1718, by = c("person_id" = "person_id", 
+                                     "seasonb"   = "seasonb")) 
 
 ## create injd1718_sub:
 ##  - time to first injury
 ##  - equivalent tstart and tstop in calendar days
 injd1718_sub <- injd1718 |> 
   mutate(tstop_day = as.numeric(difftime(tstop, tstart, units = "days"))) %>%
-  group_by(player) |>  ## important
+  group_by(person_id) |>  ## important
   mutate(tstop_day = cumsum(tstop_day),
          tstart_day = lag(tstop_day, default = 0)) |> 
   ungroup() |> 
-  dplyr::select(player:tstop_minPlay, tstart_day, tstop_day, everything()) |> 
+  dplyr::select(person_id:tstop_minPlay, tstart_day, tstop_day, everything()) |> 
   filter(enum == 1) ## time to first injury
 ```
 
@@ -130,13 +132,13 @@ injd1718_sub <- injd1718 |>
 ## 18/19
 df_exposures1819 <- prepare_exp(df_exposures0 = 
                                   raw_df_exposures |> filter(season == "18/19"),
-                                player        = "player_name",
+                                person_id     = "player_name",
                                 date          = "year",
                                 time_expo     = "minutes_played") |> 
   mutate(seasonb = date2season(date))
 df_injuries1819 <- prepare_inj(df_injuries0   = 
                                  raw_df_injuries |> filter(season == "18/19"),
-                               player         = "player_name",
+                               person_id      = "player_name",
                                date_injured   = "from",
                                date_recovered = "until")
 injd1819 <- prepare_all(data_exposures = df_exposures1819,
@@ -146,19 +148,19 @@ injd1819 <- prepare_all(data_exposures = df_exposures1819,
 injd1819 <- injd1819 |> 
   mutate(seasonb = date2season(tstart)) |> 
   ## join to have info such as position, age, citizenship etc.
-  left_join(df_exposures1819, by = c("player" = "player", 
-                                     "seasonb" = "seasonb")) 
+  left_join(df_exposures1819, by = c("person_id" = "person_id", 
+                                     "seasonb"   = "seasonb")) 
 
 ## create injd1819_sub:
 ##  - time to first injury
 ##  - equivalent tstart and tstop in calendar days
 injd1819_sub <- injd1819 |> 
   mutate(tstop_day = as.numeric(difftime(tstop, tstart, units = "days"))) %>%
-  group_by(player) |>  ## important
+  group_by(person_id) |>  ## important
   mutate(tstop_day = cumsum(tstop_day),
          tstart_day = lag(tstop_day, default = 0)) |> 
   ungroup() |> 
-  dplyr::select(player:tstop_minPlay, tstart_day, tstop_day, everything()) |> 
+  dplyr::select(person_id:tstop_minPlay, tstart_day, tstop_day, everything()) |> 
   filter(enum == 1) ## time to first injury
 ```
 
@@ -540,7 +542,7 @@ Code to prepare the data
 ```{r}
 ## prepare exposure data set and create seasonb column
 df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                             player        = "player_name",
+                             person_id     = "player_name",
                              date          = "year",
                              time_expo     = "minutes_played") |> 
   mutate(seasonb = date2season(date))
@@ -548,8 +550,8 @@ df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
 ## add more info to injd data frame (based on exposure data)
 injd <- injd |> 
   mutate(seasonb = date2season(tstart)) |> 
-  left_join(df_exposures, by = c("player" = "player",
-                                  "seasonb" = "seasonb")) |> 
+  left_join(df_exposures, by = c("person_id" = "person_id",
+                                  "seasonb"  = "seasonb")) |> 
   mutate(positionb = factor(str_split_i(position, "_", 1)),
          injury_severity = addNA(injury_severity),
          days_lost = lag(days_lost, default = 0),
@@ -569,19 +571,19 @@ injd <- injd |>
   droplevels()
 ```
 
-Now, we fit a shared frailty model in which the frailty term follows a Gamma distribution using the `frailty(player)` syntax inside `survival::coxph()` function's formula:
+Now, we fit a shared frailty model in which the frailty term follows a Gamma distribution using the `frailty(person_id)` syntax inside `survival::coxph()` function's formula:
 
 ```{r, warning = F}
 sffit <- coxph(Surv(tstart_minPlay, tstop_minPlay, status) ~ 
                  age + days_lost + 
-                 frailty(player, distribution = "gamma"), data = injd)
+                 frailty(person_id, distribution = "gamma"), data = injd)
 ```
 
-Or alternatively, we can use the `coxme` package (there are more packages also) and fit a model with a log-normal frailty using the `(1 | player)` syntax:
+Or alternatively, we can use the `coxme` package (there are more packages also) and fit a model with a log-normal frailty using the `(1 | person_id)` syntax:
 
 ```{r}
 sffit2 <- coxme(Surv(tstart_minPlay, tstop_minPlay, status) ~ 
-                  age + days_lost + (1 | player), data = injd)
+                  age + days_lost + (1 | person_id), data = injd)
 ```
 
 This model is also called a random intercepts model, since the frailty term acts in a multiplicative way on the hazard (or the "intercept" of the curve).
@@ -611,15 +613,15 @@ p1 <- ggforest(sffit_aux, data = injd,
 
 ```{r, eval = F}
 ## plot p2, for frailty terms
-df_frailties <- data.frame(player = levels(injd$player), 
+df_frailties <- data.frame(person_id = levels(injd$person_id), 
                            frail = sffit$frail,
                            expfrail = exp(sffit$frail),
                            col = factor(ifelse(sffit$frail >= 0, 1, 0)))
 p2 <- ggplot(df_frailties) +
-  geom_segment(aes(x = player, xend = player, 
+  geom_segment(aes(x = person_id, xend = person_id, 
                    y = 1, yend = expfrail, col = col)) +
   geom_hline(yintercept = 1) + 
-  geom_text(aes(x = player, y = expfrail + 0.12*sign(frail), label = player),
+  geom_text(aes(x = person_id, y = expfrail + 0.12*sign(frail), label = person_id),
             size = 3, angle = 30) +
   scale_color_manual(name = "", values = c("darkred", "dodgerblue"))
 ```
@@ -631,15 +633,15 @@ Code for further plot specifications
 </summary>
 
 ```{r}
-df_frailties <- data.frame(player = levels(injd$player), 
+df_frailties <- data.frame(person_id = levels(injd$person_id), 
                            frail = sffit$frail,
                            expfrail = exp(sffit$frail),
                            col = factor(ifelse(sffit$frail >= 0, 1, 0)))
 p2 <- ggplot(df_frailties) +
-  geom_segment(aes(x = player, xend = player,
+  geom_segment(aes(x = person_id, xend = person_id,
                    y = 1, yend = expfrail, col = col)) +
   geom_hline(yintercept = 1) + 
-  geom_text(aes(x = player, y = expfrail + 0.12*sign(frail), label = player),
+  geom_text(aes(x = person_id, y = expfrail + 0.12*sign(frail), label = person_id),
             size = 3, angle = 15) +
   scale_color_manual(name = "", values = c("darkred", "dodgerblue")) + 
   scale_x_discrete(expand = c(0.08, 0)) +

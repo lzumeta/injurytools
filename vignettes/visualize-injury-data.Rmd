@@ -4,8 +4,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{visualize-injury-data}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -61,10 +63,10 @@ library(knitr)
 # A quick glance
 
 ```{r, fig.width = 13.7, fig.height = 7}
-gg_injphoto(injd, 
-            title   = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
-            by_date = "2 month", 
-            fix     = TRUE) +
+gg_photo(injd, 
+         title   = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
+         by_date = "2 month", 
+         fix     = TRUE) +
   
   ## plus some lines of ggplot2 code..
   xlab("Follow-up date") + ylab("Players") + labs(caption = "source: transfermarkt.com") +
@@ -81,8 +83,8 @@ Let's count how many injuries (red crosses in the graph) occurred and how severe
 
 ```{r, warning = FALSE}
 # warnings set to FALSE
-injds        <- injsummary(injd) 
-injds_perinj <- injsummary(injd, var_type_injury = "injury_type") 
+df_summary        <- calc_summary(injd) 
+df_summary_perinj <- calc_summary(injd, by = "injury_type") 
 # injds
 ```
 
@@ -93,18 +95,18 @@ Code for tidying up the tables
 </summary>
 
 ```{r, eval = F}
-injds[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
 
-injds_perinj[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 4, 9, incidence_new, burden_new) |> 
+df_summary_perinj |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(1:2, 9, 4, incidence_new, burden_new) |> 
   kable(col.names = c("Type of injury", "N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -114,10 +116,10 @@ injds_perinj[["overall"]] |>
 **Overall**
 
 ```{r, echo = F, eval = modern_r}
-injds[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -125,10 +127,10 @@ injds[["overall"]] |>
 
 **Overall per type of injury**
 ```{r, echo = F, eval = modern_r}
-injds_perinj[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 4, 9, incidence_new, burden_new) |> 
+df_summary_perinj |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(1:2, 9, 4, incidence_new, burden_new) |> 
   kable(col.names = c("Type of injury", "N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -138,9 +140,9 @@ Let's plot the information shown in the second table in a risk matrix that displ
 
 ```{r, eval = F}
 # warnings set to FALSE
-gg_injriskmatrix(injds_perinj, 
-                 var_type_injury = "injury_type", 
-                 title = "Risk matrix")
+gg_riskmatrix(injd, 
+              by = "injury_type", 
+              title = "Risk matrix")
 ```
 
 <details>
@@ -150,8 +152,8 @@ Code for further plot specifications
 </summary>
 ```{r, eval = F}
 # warnings set to FALSE
-palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+palette <- c("#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+             Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
                 axis.text.x.bottom = element_text(size = 20),
@@ -161,11 +163,11 @@ theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20)
                 legend.title = element_text(size = 15),
                 legend.text = element_text(size = 15))
 
-gg_injriskmatrix(injds_perinj, 
-                 var_type_injury = "injury_type", 
-                 title = "Risk matrix") +
+gg_riskmatrix(injd, 
+              by = "injury_type", 
+              title = "Risk matrix") +
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(7:8, 2:3, 5)]) +
+                    values = palette) +
   guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 ```
@@ -173,8 +175,8 @@ gg_injriskmatrix(injds_perinj,
 
 
 ```{r, echo = F, fig.width = 9, fig.height = 5.8, warning = F}
-palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+palette <- c("#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+             Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
                 axis.text.x.bottom = element_text(size = 18),
@@ -184,11 +186,11 @@ theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20)
                 legend.title = element_text(size = 15),
                 legend.text = element_text(size = 15))
 
-gg_injriskmatrix(injds_perinj, 
-                 var_type_injury = "injury_type", 
-                 title = "Risk matrix") +
+gg_riskmatrix(injd, 
+              by = "injury_type", 
+              title = "Risk matrix") +
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(7:8, 2:3, 5)]) +
+                    values = palette) +
   guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 ```
@@ -207,16 +209,16 @@ injd2 <- cut_injd(injd, date0 = 2018)
 
 ```{r, eval = F}
 ## Plot just for checking whether cut_injd() worked well
-p1 <- gg_injphoto(injd1, fix = TRUE, by_date = "3 months")
-p2 <- gg_injphoto(injd2, fix = TRUE, by_date = "3 months")
+p1 <- gg_photo(injd1, fix = TRUE, by_date = "3 months")
+p2 <- gg_photo(injd2, fix = TRUE, by_date = "3 months")
 grid.arrange(p1, p2, ncol = 2)
 ```
 
 
 ```{r, echo = F, fig.width = 18, fig.height = 4}
-p1 <- gg_injphoto(injd1, fix = TRUE, by_date = "3 months")
+p1 <- gg_photo(injd1, fix = TRUE, by_date = "3 months")
 p1$layers[[3]]$aes_params$size <- 2
-p2 <- gg_injphoto(injd2, fix = TRUE, by_date = "3 months") 
+p2 <- gg_photo(injd2, fix = TRUE, by_date = "3 months") 
 p2$layers[[3]]$aes_params$size <- 2
 grid.arrange(p1, p2, ncol = 2)
 ```
@@ -225,8 +227,8 @@ Let's compute injury summary statistics for each season.
 
 ```{r, warning = FALSE}
 # warnings set to FALSE
-injds1 <- injsummary(injd1)
-injds2 <- injsummary(injd2)
+df_summary1 <- calc_summary(injd1, quiet = T)
+df_summary2 <- calc_summary(injd2, quiet = T)
 ```
 
 
@@ -238,19 +240,19 @@ Code for tidying up the tables
 
 ```{r, eval = F}
 ## **Season 2017/2018**
-injds1[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary1 |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
 
 ## **Season 2018/2019**
-injds2[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), "  (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), "  (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary2 |> 
+  mutate(incidence_new = paste0(round(incidence, 2), "  (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), "  (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -259,10 +261,10 @@ injds2[["overall"]] |>
 
 **Season 2017/2018**
 ```{r, echo = F, eval = modern_r}
-injds1[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), " (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), " (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary1 |> 
+  mutate(incidence_new = paste0(round(incidence, 2), " (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), " (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -270,10 +272,10 @@ injds1[["overall"]] |>
 
 **Season 2018/2019**
 ```{r, echo = F, eval = modern_r}
-injds2[["overall"]] |> 
-  mutate(incidence_new = paste0(round(injincidence, 2), "  (", round(injincidence_lower, 2), ",", round(injincidence_upper, 2), ")"),
-         burden_new    = paste0(round(injburden, 2), "  (", round(injburden_lower, 2), ",", round(injburden_upper, 2), ")")) |> 
-  dplyr::select(1:2, 6, incidence_new, burden_new) |> 
+df_summary2 |> 
+  mutate(incidence_new = paste0(round(incidence, 2), "  (", round(incidence_lower, 2), ",", round(incidence_upper, 2), ")"),
+         burden_new    = paste0(round(burden, 2), "  (", round(burden_lower, 2), ",", round(burden_upper, 2), ")")) |> 
+  dplyr::select(2, 7, 1, incidence_new, burden_new) |> 
   kable(col.names = c("N injuries", "N days lost", "Total expo", "Incidence (95% CI)", "Burden (95% CI)"),
         caption   = "Injury incidence and injury burden are reported as 100 player-matches",
         align     = "c")
@@ -283,13 +285,13 @@ injds2[["overall"]] |>
 
 ## - Who were the most injured players? And the most severely affected?
 
-Player-wise statistics can be extracted by `injds2 <- injsummary(injd1); injds2[[1]]` (or `injds2[["playerwise"]]`). Then, we plot them:
+Player-wise statistics can be computed by `df_summay1_pl <- calc_summary(injd1, overall = FALSE)`. Then, we plot them:
 
 ```{r}
-p11 <- gg_injbarplot(injds1)
-p12 <- gg_injbarplot(injds1, type = "burden")
-p21 <- gg_injbarplot(injds2)
-p22 <- gg_injbarplot(injds2, type = "burden") 
+p11 <- gg_rank(injd1, line_overall = TRUE)
+p12 <- gg_rank(injd1, summary_stat = "burden", line_overall = TRUE)
+p21 <- gg_rank(injd2, line_overall = TRUE)
+p22 <- gg_rank(injd2, summary_stat = "burden", line_overall = TRUE) 
 
 # grid.arrange(p11, p21, p12, p22, nrow = 2)
 ```
@@ -378,15 +380,10 @@ grid.arrange(p11, p21, p12, p22, nrow = 2)
 
 ```{r, warning = F}
 # warnings set to FALSE
-## Calculate summary statistics
-injds1_perinj <- injsummary(injd1, var_type_injury = "injury_type")
-injds2_perinj <- injsummary(injd2, var_type_injury = "injury_type")
-
-## Plot
-p1 <- gg_injriskmatrix(injds1_perinj, var_type_injury = "injury_type", 
-                       title = "Season 2017/2018", add_contour = FALSE)
-p2 <- gg_injriskmatrix(injds2_perinj, var_type_injury = "injury_type",
-                       title = "Season 2018/2019", add_contour = FALSE)
+p1 <- gg_riskmatrix(injd1, by = "injury_type", 
+                    title = "Season 2017/2018", add_contour = FALSE)
+p2 <- gg_riskmatrix(injd2, by = "injury_type",
+                    title = "Season 2018/2019", add_contour = FALSE)
 
 # Print both plots side by side
 # grid.arrange(p1, p2, nrow = 1)
@@ -400,8 +397,8 @@ Code for further plot specifications
 </summary>
 
 ```{r, eval = F}
-palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+palette <- c("#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+             Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
                 axis.text.x.bottom = element_text(size = 18),
@@ -412,28 +409,28 @@ theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20)
                 legend.text = element_text(size = 15))
 
 ## Plot
-p1 <- gg_injriskmatrix(injds1_perinj, var_type_injury = "injury_type", 
-                       title = "Season 2017/2018", add_contour = T,
-                       cont_max_x = 6, cont_max_y = 130, ## after checking the data
-                       bins = 15) 
-p2 <- gg_injriskmatrix(injds2_perinj, var_type_injury = "injury_type",
-                       title = "Season 2018/2019", add_contour = T, 
-                       cont_max_x = 6, cont_max_y = 130,
-                       bins = 15)
+p1 <- gg_riskmatrix(injd1, by = "injury_type", 
+                    title = "Season 2017/2018", add_contour = T,
+                    cont_max_x = 5.2, cont_max_y = 125, ## after checking the data
+                    bins = 10) 
+p2 <- gg_riskmatrix(injd2, by = "injury_type",
+                    title = "Season 2018/2019", add_contour = T, 
+                    cont_max_x = 5.2, cont_max_y = 125,
+                    bins = 10)
 
 p1 <- p1 +
-  scale_x_continuous(limits = c(0, 5.5)) +
-  scale_y_continuous(limits = c(0, 125)) + 
+  scale_x_continuous(limits = c(-0.05, 5.2)) +
+  scale_y_continuous(limits = c(-0.05, 125)) + 
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(8, 2:3, 5)]) + # get rid off the green (pos: 4) 
+                    values = palette) + 
   guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 p2 <- p2 +
-  scale_x_continuous(limits = c(0, 5.5)) +
-  scale_y_continuous(limits = c(0, 125)) + 
+  scale_x_continuous(limits = c(-0.5, 5.2)) +
+  scale_y_continuous(limits = c(-0.5, 125)) + 
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(7, 8, 2:3, 5)]) + # keep the same color coding
-   guides(fill = guide_legend(override.aes = list(size = 5))) +
+                    values = palette) + # keep the same color coding
+  guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 
 grid.arrange(p1, p2, ncol = 2, 
@@ -442,9 +439,9 @@ grid.arrange(p1, p2, ncol = 2,
 
 </details>
 
-```{r, echo = F, fig.width = 13, fig.height = 5.8, warning = FALSE}
-palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```{r, echo = F, fig.width = 13, fig.height = 5.8, warning = FALSE, message = FALSE}
+palette <- c("#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+             Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
                 axis.text.x.bottom = element_text(size = 18),
@@ -455,27 +452,27 @@ theme3 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20)
                 legend.text = element_text(size = 15))
 
 ## Plot
-p1 <- gg_injriskmatrix(injds1_perinj, var_type_injury = "injury_type", 
-                       title = "Season 2017/2018", add_contour = T,
-                       cont_max_x = 6, cont_max_y = 130, ## after checking the data
-                       bins = 15) 
-p2 <- gg_injriskmatrix(injds2_perinj, var_type_injury = "injury_type",
-                       title = "Season 2018/2019", add_contour = T, 
-                       cont_max_x = 6, cont_max_y = 130,
-                       bins = 15)
+p1 <- gg_riskmatrix(injd1, by = "injury_type", 
+                    title = "Season 2017/2018", add_contour = T,
+                    cont_max_x = 5.2, cont_max_y = 125, ## after checking the data
+                    bins = 10) 
+p2 <- gg_riskmatrix(injd2, by = "injury_type",
+                    title = "Season 2018/2019", add_contour = T, 
+                    cont_max_x = 5.2, cont_max_y = 125,
+                    bins = 10)
 
 p1 <- p1 +
-  scale_x_continuous(limits = c(0, 5.5)) +
-  scale_y_continuous(limits = c(0, 125)) + 
+  scale_x_continuous(limits = c(-0.05, 5.2)) +
+  scale_y_continuous(limits = c(-0.05, 125)) + 
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(8, 2:3, 5)]) + # get rid off the green (pos: 4)
+                    values = palette) + # get rid off the green (pos: 4) 
   guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 p2 <- p2 +
-  scale_x_continuous(limits = c(0, 5.5)) +
-  scale_y_continuous(limits = c(0, 125)) + 
+  scale_x_continuous(limits = c(-0.5, 5.2)) +
+  scale_y_continuous(limits = c(-0.5, 125)) + 
   scale_fill_manual(name = "Type of injury",
-                    values = palette[c(7:8, 2:3, 5)]) + # keep the same color coding
+                    values = palette) + # keep the same color coding
   guides(fill = guide_legend(override.aes = list(size = 5))) +
   theme3
 
@@ -485,14 +482,15 @@ grid.arrange(p1, p2, ncol = 2,
 
 <br/>
 
-## - How many players were injury free in each month?
+## - How many players were injured in each month?
 
-We will plot polar area diagrams[^visualize-note-2].
+We will create bar plots, with each bar representing the monthly prevalence[^visualize-note-2].
 
-[^visualize-note-2]: See the *Note* section in `?injprev()` or have a look at this section in [Estimate summary statistics](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html#injprev) vignette, to better understand what the proportions refer to.
+[^visualize-note-2]: See the *Note* section in `?calc_prevalence()` or have a look at this section in [Estimate summary statistics](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html#calc_prevalence) vignette, to better understand what the proportions refer to.
 
 ```{r, eval = F}
-gg_injprev_polar(injd, by = "monthly")
+gg_prevalence(injd, time_period = "monthly",
+              line_mean = TRUE)
 ```
 
 <details>
@@ -502,41 +500,40 @@ Code for further plot specifications
 
 ```{r, eval = F}
 theme4 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
-                axis.text.x = element_text(size = 16),
+                axis.text.x = element_text(size = 13.5),
                 axis.text.y = element_text(size = 18),
                 legend.title = element_text(size = 20),
                 legend.text = element_text(size = 20),
                 strip.text = element_text(size = 20))
 
 
-gg_injprev_polar(injd, by = "monthly",
-            title = "Proportion of injured and available\n players in each month") +
-  scale_fill_manual(name = "Type of injury", 
-                    values = c("seagreen3", "red3")) + 
+gg_prevalence(injd, time_period = "monthly",
+              line_mean = TRUE,
+              title = "Monthly prevalence of sports injuries") + 
   theme4
 ```
 </details>
 
 
-```{r, echo = F, fig.width = 10, fig.height = 7}
+```{r, echo = F, fig.width = 12.8, fig.height = 5.2}
 theme4 <- theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
-                axis.text.x = element_text(size = 16),
+                axis.text.x = element_text(size = 13.5),
                 axis.text.y = element_text(size = 18),
                 legend.title = element_text(size = 20),
                 legend.text = element_text(size = 20),
                 strip.text = element_text(size = 20))
 
 
-gg_injprev_polar(injd, by = "monthly",
-            title = "Proportion of injured and available\n players in each month") +
-  scale_fill_manual(name = "Type of injury", 
-                    values = c("seagreen3", "red3")) + 
+gg_prevalence(injd, time_period = "monthly",
+              line_mean = TRUE,
+              title = "Monthly prevalence of sports injuries") + 
   theme4
 ```
 
 
 ```{r, eval = F}
-gg_injprev_polar(injd, by = "monthly", var_type_injury = "injury_type")
+gg_prevalence(injd, time_period = "monthly",
+              by = "injury_type", line_mean = TRUE)
 ```
 
 <details>
@@ -545,30 +542,30 @@ Code for further plot specifications
 </summary>
 
 ```{r, eval = F}
-palette2 <- c("seagreen3", "#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+palette2 <- c("seagreen3", "#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+              Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 
 
-gg_injprev_polar(injd, by = "monthly", 
-            var_type_injury = "injury_type",
-            title = "Proportion of injured and available\n players in each month according to the type of injury") +
+gg_prevalence(injd, time_period = "monthly", 
+              by = "injury_type", line_mean = TRUE,
+              title = "Monthly prevalence of each type of sports injuries") +
   scale_fill_manual(name = "Type of injury", 
-                    values = palette2[c(1, 8:9, 3:4, 6)]) + 
+                    values = palette2) + 
   theme4
 ```
 </details>
 
-```{r, echo = F, fig.width = 10, fig.height = 7}
-palette2 <- c("seagreen3", "#000000", "#E69F00", "#56B4E9", "#009E73",
-             "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```{r, echo = F, fig.width = 12.8, fig.height = 5.2}
+palette2 <- c("seagreen3", "#000000", Ligament = "#E69F00", Muscle = "#56B4E9", "#009E73",
+              Unknown = "#F0E442", "#0072B2", Bone = "#D55E00", Concussion = "#CC79A7")
 # source of the palette: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 
 
-gg_injprev_polar(injd, by = "monthly", 
-                 var_type_injury = "injury_type",
-                 title = "Proportion of injured and available\n players in each month according to the type of injury") +
+gg_prevalence(injd, time_period = "monthly", 
+              by = "injury_type", line_mean = TRUE,
+              title = "Monthly prevalence of each type of sports injuries") +
   scale_fill_manual(name = "Type of injury", 
-                    values = palette2[c(1, 8:9, 3:4, 6)]) + 
+                    values = palette2) + 
   theme4
 ```

@@ -47,15 +47,23 @@ reference:
 - title: Compute injury summary statistics
   desc: Functions to estimate sports injury summary statistics.
   contents:
-  - injsummary
-  - injprev
+  - calc_summary
+  - calc_prevalence
+  - calc_ncases
+  - calc_ndayslost
+  - calc_mean_dayslost
+  - calc_median_dayslost
+  - calc_iqr_dayslost
+  - calc_exposure
+  - calc_incidence
+  - calc_burden
 - title: Visualize sports injury data
   desc: Functions to visualize relevant information in sports injury data.
   contents:
-  - gg_injphoto
-  - gg_injbarplot
-  - gg_injprev_polar
-  - gg_injriskmatrix
+  - gg_photo
+  - gg_riskmatrix
+  - gg_prevalence
+  - gg_rank
 - title: Data sets
   desc: Internal data sets to illustrate `injurytools` functionalities.
   contents:
@@ -69,7 +77,9 @@ reference:
   - season2year
   - cut_injd
   - is_injd
-  - is_injds
+  - get_data_followup
+  - get_data_injuries
+  - get_data_exposures
 articles:
 - title: Articles
   desc: These vignettes describe the usage of injurytools.

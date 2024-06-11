@@ -78,7 +78,7 @@ We standardize the **key column names** such as: player (subject) identifier, da
 
 ```{r}
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-                           player         = "player_name",
+                           person_id      = "player_name",
                            date_injured   = "from",
                            date_recovered = "until")
 ```
@@ -86,7 +86,7 @@ df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
 
 ```{r}
 df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                            player        = "player_name",
+                            person_id     = "player_name",
                             date          = "year",
                             time_expo     = "minutes_played")
 ```
@@ -104,7 +104,7 @@ We suggest collecting exposure time on as fine scale as possible, i.e. **minutes
 ## season and there is no more information about time of exposure
 raw_df_exposures$time_expo_aux <- 1 
 df_exposures2 <- prepare_exp(df_exposures0 = raw_df_exposures,
-                             player        = "player_name",
+                             person_id     = "player_name",
                              date          = "year",
                              time_expo     = "time_expo_aux")
 
@@ -132,7 +132,7 @@ head(injd)
 
 The outcome is a prepared data set, structured in a suitable way that is ready for its use by statistical modelling approaches. These data set will always have the columns listed below (standardized columns or created by the function), as well as further (optional) sports-related variables.
 
-* `player`: player identifier.
+* `person_id`: player identifier.
 
 * `t0` and `tf`: the follow-up period of the corresponding player, i.e. player's first and last dates observed (same value for each `player`).
 
@@ -160,7 +160,7 @@ These final data set it's an **R** object of class `injd`,
 class(injd)
 ```
  
-and have the following attributes:
+and have the following attribute:
 
 ```{r}
 str(injd, 1)
@@ -168,13 +168,7 @@ str(injd, 1)
 
 * `unit_exposure`: a character indicating the unit of exposure time used in this object.
 
-* `follow_up`: a data frame consisting of one row per player with their first and last dates observed (`t0` and `tf` columns).
-
-* `data_exposures`: the preprocessed exposure data frame.
-
-* `data_injuries`: the preprocessed injury data frame.
-
-To extract one of the attributes, for example `unit_exposure`, type:
+To extract the attribute `unit_exposure`, type:
 
 ```{r}
 attr(injd, "unit_exposure")

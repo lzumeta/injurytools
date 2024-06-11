@@ -4,10 +4,12 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{estimate-epi-measures}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 bibliography: refs.bib
 link-citations: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -57,7 +59,7 @@ library(kableExtra)
 
 Whenever one collects and prepares the data, the next natural step is to summarize and explore these data. In this case, from a sports-applied point of view, one wants to know e.g.: how many and what type of injuries have occurred, how often they have occurred or what the load has been.
 
-This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003 and @walden2023). Below, these measures are explained and then, `injsummary()` and `injprev()` functions are illustrated.
+This document shows convenient functions from `injurytools` to describe sports injury data, in terms of measures used in sports injury epidemiology (see @Bahr2003 and @walden2023). Below, these measures are explained and then, `calc_summary()` and `calc_prevalence()` functions are illustrated.
 
 # Measures of occurrence
 ## Rates
@@ -99,7 +101,7 @@ Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/articles/p
 
 [^estimate-note-1]: These data sets are provided for illustrative purposes. We warn that they might not be accurate and could potentially include discrepancies or incomplete information compared to what actually occurred.
 
-## - `injsummary()`
+## - `calc_summary()`
 
 <details>
 
@@ -108,9 +110,9 @@ Again, as in the [prepare-data](https://lzumeta.github.io/injurytools/articles/p
 </summary>
 
 ```{r, eval = FALSE}
-df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+df_exposures <- prepare_exp(raw_df_exposures, person_id = "player_name",
                             date = "year", time_expo = "minutes_played")
-df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+df_injuries  <- prepare_inj(raw_df_injuries, person_id = "player_name",
                             date_injured = "from", date_recovered = "until")
 injd         <- prepare_all(data_exposures = df_exposures,
                             data_injuries  = df_injuries,
@@ -118,29 +120,23 @@ injd         <- prepare_all(data_exposures = df_exposures,
 ```
 </details>
 
-Now, the preprocessed data are passed to `injsummary()` to calculate injury summary statistics:
+Now, the preprocessed data are passed to `calc_summary()` to calculate injury summary statistics overall or playerwise:
 
-```{r}
-injds <- injsummary(injd)
+```{r, warnings = FALSE}
+df_summary   <- calc_summary(injd)
+df_summary_p <- calc_summary(injd, overall = FALSE)
 ```
 
 We notice that some warning messages pop up (unless `quiet = TRUE`). They are displayed to make it clear what the exposure time unit is[^estimate-note-2]. 
 
 [^estimate-note-2]: Something that it is important to be aware of.
 
-What `injsummary()` returns as its output is a list of two elements: 
-
-```{r}
-str(injds, 1)
-```
-
-i.e. the output stored in this `injds` object consists of,two data frames (two tables), which can be accessed by typing `injds[[1]]` (or `injds[["playerwise"]]`) and `injds[[2]]` (`injds[["overal"]]`).
 
 To present the results in a more tidier and comprehensible way (instead of **R** code styled output) the following can be done:
 
 ```{r, eval = F}
 # the 'playerwise' data frame
-injds[[1]]
+df_summary_p
 ```
 
 <details>
@@ -149,22 +145,32 @@ injds[[1]]
 </summary>
 ```{r, eval = F}
 # format the 'playerwise' data frame for output as a table
-injds[[1]] |> 
-  arrange(desc(injincidence)) |> # sort by decreasing order of injincidence
+df_summary_p |> 
+  arrange(desc(incidence)) |> # sort by decreasing order of incidence
+  mutate(iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost)) |> 
+  select("person_id", "ncases", "ndayslost", "mean_dayslost",
+         "median_dayslost", "iqr_dayslost", "totalexpo",
+         "incidence", "burden") |> 
   head(10) |>
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
-                                  "Mean days lost", "Median days lost", "IQR days lost",
+                                  "Mean days lost", "Median days lost", 
+                                  "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
 ```
 </details>
 
 ```{r, echo = F, eval = modern_r}
 # format the 'playerwise' data frame for output as a table
-injds[[1]] |> 
-  arrange(desc(injincidence)) |> # sort by decreasing order of injincidence
+df_summary_p |> 
+  arrange(desc(incidence)) |> # sort by decreasing order of incidence
+  mutate(iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost)) |> 
+  select("person_id", "ncases", "ndayslost", "mean_dayslost",
+         "median_dayslost", "iqr_dayslost", "totalexpo",
+         "incidence", "burden") |> 
   head(10) |>
   kable(digits = 2, col.names = c("Player", "N injuries", "N days lost", 
-                                  "Mean days lost", "Median days lost", "IQR days lost",
+                                  "Mean days lost", "Median days lost", 
+                                  "IQR days lost",
                                   "Total exposure", "Incidence", "Burden"))
 ```
 
@@ -172,7 +178,7 @@ We used [RMarkdown](https://rmarkdown.rstudio.com/), in particular `knitr::kable
 
 ```{r, eval = F}
 # the 'overall' data frame
-injds[[2]]
+df_summary
 ```
 
 <details>
@@ -182,8 +188,10 @@ injds[[2]]
 
 ```{r, eval = F}
 # format the table of total incidence and burden (main columns)
-injds[[2]] |> 
-  select(1:8) |> 
+df_summary |> 
+  mutate(iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost)) |> 
+  select("ncases", "ndayslost", "mean_dayslost", "median_dayslost",
+         "iqr_dayslost", "totalexpo", "incidence", "burden") |> 
   data.frame(row.names = "TOTAL") |> 
   kable(digits = 2,
         col.names = c("N injuries", "N days lost", "Mean days lost",
@@ -196,8 +204,10 @@ injds[[2]] |>
 
 ```{r, echo = F, eval = modern_r}
 # format the table of total incidence and burden (main columns)
-injds[[2]] |> 
-  select(1:8) |> 
+df_summary |> 
+  mutate(iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost)) |> 
+  select("ncases", "ndayslost", "mean_dayslost", "median_dayslost",
+         "iqr_dayslost", "totalexpo", "incidence", "burden") |> 
   data.frame(row.names = "TOTAL") |> 
   kable(digits = 2,
         col.names = c("N injuries", "N days lost", "Mean days lost",
@@ -215,41 +225,41 @@ Note that to provide numbers that are easy to interpret and to avoid small decim
 </summary>
 ```{r, eval = F}
 # format the table of total incidence and burden (point + ci estimates)
-injds_tot_cis <- injds[[2]] |> 
-  select(7:last_col()) |> 
+dfs_cis <- df_summary |> 
+  select(starts_with("incid"), starts_with("burd")) |> 
   data.frame(row.names = "TOTAL")
-injds_tot_cis$ci_injincidence <- paste0("[",  round(injds_tot_cis$injincidence_lower, 1),
-                                        ", ", round(injds_tot_cis$injincidence_upper, 1), "]")
-injds_tot_cis$ci_injburden    <- paste0("[",  round(injds_tot_cis$injburden_lower, 1),
-                                        ", ", round(injds_tot_cis$injburden_upper, 1), "]")
+dfs_cis$ci_incidence <- paste0("[",  round(dfs_cis$incidence_lower, 1),
+                                        ", ", round(dfs_cis$incidence_upper, 1), "]")
+dfs_cis$ci_burden    <- paste0("[",  round(dfs_cis$burden_lower, 1),
+                                        ", ", round(dfs_cis$burden_upper, 1), "]")
 
-conf_level <- attr(injds, "conf_level") * 100
+conf_level <- 0.95 * 100
 
-injds_tot_cis |> 
-  select(1, 9, 2, 10) |> 
+dfs_cis |> 
+  select(1, 9, 5, 10) |> 
   kable(digits = 2,
-        col.names = c("Incidence",  paste0(conf_level, "% CI for \\(I_r\\)"), 
-                      "Burden",     paste0(conf_level, "% CI for \\(I_{br}\\)")))
+        col.names = c("Incidence", paste0(conf_level, "% CI for \\(I_r\\)"), 
+                      "Burden",    paste0(conf_level, "% CI for \\(I_{br}\\)")))
 ```
 </details>
 
 ```{r, echo = F, eval = modern_r}
 # format the table of total incidence and burden (point + ci estimates)
-injds_tot_cis <- injds[[2]] |> 
-  select(7:last_col()) |> 
+dfs_cis <- df_summary |> 
+  select(starts_with("incid"), starts_with("burd")) |> 
   data.frame(row.names = "TOTAL")
-injds_tot_cis$ci_injincidence <- paste0("[",  round(injds_tot_cis$injincidence_lower, 1),
-                                        ", ", round(injds_tot_cis$injincidence_upper, 1), "]")
-injds_tot_cis$ci_injburden    <- paste0("[",  round(injds_tot_cis$injburden_lower, 1),
-                                        ", ", round(injds_tot_cis$injburden_upper, 1), "]")
+dfs_cis$ci_incidence <- paste0("[",  round(dfs_cis$incidence_lower, 1),
+                                        ", ", round(dfs_cis$incidence_upper, 1), "]")
+dfs_cis$ci_burden    <- paste0("[",  round(dfs_cis$burden_lower, 1),
+                                        ", ", round(dfs_cis$burden_upper, 1), "]")
 
-conf_level <- attr(injds, "conf_level") * 100
+conf_level <- 0.95 * 100
 
-injds_tot_cis |> 
-  select(1, 9, 2, 10) |> 
+dfs_cis |> 
+  select(1, 9, 5, 10) |> 
   kable(digits = 2,
-        col.names = c("Incidence",  paste0(conf_level, "% CI for \\(I_r\\)"), 
-                      "Burden",     paste0(conf_level, "% CI for \\(I_{br}\\)")))
+        col.names = c("Incidence", paste0(conf_level, "% CI for \\(I_r\\)"), 
+                      "Burden",    paste0(conf_level, "% CI for \\(I_{br}\\)")))
 ```
 
 Players with the highest injury incidence rate (all type of injuries) were Adam Lallana and Daniel Sturridge with 77.1 and 29.1 injuries per 100 player-matches respectively. The teams overall injury incidence was of 9.9 injuries per 100 player-matches and the injury burden of 246.9 days lost per 100 player-matches. 
@@ -257,13 +267,13 @@ Players with the highest injury incidence rate (all type of injuries) were Adam 
 These summaries can be done by type of injury:
 
 ```{r}
-injstats_pertype <- injsummary(injd, var_type_injury = "injury_type", quiet = T)
+dfs_pertype <- calc_summary(injd, by = "injury_type", quiet = T)
 ```
 
 These are the results of the team regarding injury incidence and injury burden by type of injury:
 
 ```{r, eval = F}
-injstats_pertype[["overall"]]
+dfs_pertype
 ```
 
 <details>
@@ -271,13 +281,14 @@ injstats_pertype[["overall"]]
   Code to format the table
 </summary>
 ```{r, eval = F}
-injstats_pertype[["overall"]] |> 
-  select(1:5, 7:11) |> 
-  mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
-         ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
+dfs_pertype |> 
+  select(1:5, 9:15) |> 
+  mutate(ncases2 = paste0(ncases, " (", percent_ncases, ")"),
+         ndayslost2 = paste0(ndayslost, " (", percent_ndayslost, ")"),
+         iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost),
          median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) |> 
-  select(1, 11:13, 8:10) |> 
-  arrange(desc(injburden)) |> 
+  select(1, 13:14, 16, 4:5, 12) |> 
+  arrange(desc(burden)) |> 
   kable(digits = 2,
         col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
                       "Median days lost (IQR)",
@@ -288,13 +299,14 @@ injstats_pertype[["overall"]] |>
 </details>
 
 ```{r, echo = F, eval = modern_r}
-injstats_pertype[["overall"]] |> 
-  select(1:5, 7:11) |> 
-  mutate(ninjuries2 = paste0(ninjuries, " (", percent_ninjuries, ")"),
-         ndayslost2 = paste0(ndayslost, " (", percent_dayslost, ")"),
+dfs_pertype |> 
+  select(1:5, 9:15) |> 
+  mutate(ncases2 = paste0(ncases, " (", percent_ncases, ")"),
+         ndayslost2 = paste0(ndayslost, " (", percent_ndayslost, ")"),
+         iqr_dayslost = paste0(qt25_dayslost, " - ", qt75_dayslost),
          median_dayslost2 = paste0(median_dayslost, " (", iqr_dayslost, ")")) |> 
-  select(1, 11:13, 8:10) |> 
-  arrange(desc(injburden)) |> 
+  select(1, 13:14, 16, 4:5, 12) |> 
+  arrange(desc(burden)) |> 
   kable(digits = 2,
         col.names = c("Type of injury", "N injuries (%)", "N days lost (%)",
                       "Median days lost (IQR)",
@@ -304,7 +316,7 @@ injstats_pertype[["overall"]] |>
 ```
 
 
-## - `injprev()`
+## - `calc_prevalence()`
 
 <details>
 
@@ -313,9 +325,9 @@ injstats_pertype[["overall"]] |>
 </summary>
 
 ```{r, eval = FALSE}
-df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+df_exposures <- prepare_exp(raw_df_exposures, person_id = "player_name",
                             date = "year", time_expo = "minutes_played")
-df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+df_injuries  <- prepare_inj(raw_df_injuries, person_id = "player_name",
                             date_injured = "from", date_recovered = "until")
 injd         <- prepare_all(data_exposures = df_exposures,
                             data_injuries  = df_injuries,
@@ -326,7 +338,7 @@ injd         <- prepare_all(data_exposures = df_exposures,
 We calculate the injury prevalence and the proportions of injury-free players on a season basis:
 
 ```{r}
-prev_table1 <- injprev(injd, by = "season")
+prev_table1 <- calc_prevalence(injd, time_period = "season")
 prev_table1
 ```
 
@@ -340,7 +352,7 @@ kable(prev_table1,
 Overall, there were more injured players in the 18-19 season than in the previous season. Let's calculate it monthly:
 
 ```{r, eval = modern_r}
-prev_table2 <- injprev(injd, by = "monthly")
+prev_table2 <- calc_prevalence(injd, time_period = "monthly")
 
 ## compare two seasons July and August
 prev_table2 |>
@@ -358,7 +370,7 @@ Looking at monthly basis, there were more differences w.r.t. player availability
 
 
 ```{r}
-prev_table3 <- injprev(injd, by = "monthly", var_type_injury = "injury_type")
+prev_table3 <- calc_prevalence(injd, time_period = "monthly", by = "injury_type")
 ```
 
 <details>
@@ -398,7 +410,7 @@ prev_table3 |>
 
 # Further implementation
 
-In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in `injsummary()` function.
+In the near future there will be available the negative binomial (`method = "negbin"` argument), zero-inflated poisson ("`zinfpois`") and zero-inflated negative binomial (`"zinfnb"`) methods in `calc_incidence()` and `calc_burden()` functions.
 
 Finally, this document shows how to perform descriptive analyses for injury epidemiology, but naturally, following these analyses further statistical inferences or multivariate regression analyses may be chosen to infer about the player's/athletes population properties (e.g. to test whether there are differences between the injury incidence rates of two cohorts) or to evaluate the influence of independent factors (e.g. previous injuries, workload) on the injuries occurred.    
 
