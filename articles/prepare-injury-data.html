@@ -94,7 +94,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare Sports Injury Data</h1>
             
-            <h4 data-toc-skip class="date">2024-05-31</h4>
+            <h4 data-toc-skip class="date">2024-06-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/prepare-injury-data.Rmd" class="external-link"><code>vignettes/prepare-injury-data.Rmd</code></a></small>
       <div class="d-none name"><code>prepare-injury-data.Rmd</code></div>
@@ -182,12 +182,12 @@ proper names and formats by means of <code><a href="../reference/prepare_data.ht
 in which the season started.&lt;/p&gt;"><sup>2</sup></a>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_injuries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_inj</a></span><span class="op">(</span>df_injuries0   <span class="op">=</span> <span class="va">raw_df_injuries</span>,</span>
-<span>                           player         <span class="op">=</span> <span class="st">"player_name"</span>,</span>
+<span>                           person_id      <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                           date_injured   <span class="op">=</span> <span class="st">"from"</span>,</span>
 <span>                           date_recovered <span class="op">=</span> <span class="st">"until"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_exposures</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
-<span>                            player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
+<span>                            person_id     <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                            date          <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>                            time_expo     <span class="op">=</span> <span class="st">"minutes_played"</span><span class="op">)</span></span></code></pre></div>
 <p>We suggest collecting exposure time on as fine scale as possible,
@@ -201,7 +201,7 @@ See the R-code
 <span><span class="co">## season and there is no more information about time of exposure</span></span>
 <span><span class="va">raw_df_exposures</span><span class="op">$</span><span class="va">time_expo_aux</span> <span class="op">&lt;-</span> <span class="fl">1</span> </span>
 <span><span class="va">df_exposures2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prepare_data.html">prepare_exp</a></span><span class="op">(</span>df_exposures0 <span class="op">=</span> <span class="va">raw_df_exposures</span>,</span>
-<span>                             player        <span class="op">=</span> <span class="st">"player_name"</span>,</span>
+<span>                             person_id     <span class="op">=</span> <span class="st">"player_name"</span>,</span>
 <span>                             date          <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>                             time_expo     <span class="op">=</span> <span class="st">"time_expo_aux"</span><span class="op">)</span></span>
 <span></span>
@@ -211,17 +211,18 @@ See the R-code
 <span>                     exp_unit <span class="op">=</span> <span class="st">"seasons"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 19</span></span></span>
-<span><span class="co">#&gt;   player t0         tf         date_injured date_recovered tstart     tstop     </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> adam-… 2017-07-01 2019-06-30 2017-07-31   2017-11-25     2017-07-01 2017-07-31</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> adam-… 2017-07-01 2019-06-30 2018-03-31   2018-05-13     2017-11-25 2018-03-31</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> adam-… 2017-07-01 2019-06-30 2018-09-04   2018-10-19     2018-05-13 2018-09-04</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> adam-… 2017-07-01 2019-06-30 2018-11-09   2018-12-04     2018-10-19 2018-11-09</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> adam-… 2017-07-01 2019-06-30 2019-01-06   2019-01-18     2018-12-04 2019-01-06</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> adam-… 2017-07-01 2019-06-30 2019-04-01   2019-05-31     2019-01-18 2019-04-01</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more variables: tstart_s &lt;dbl&gt;, tstop_s &lt;dbl&gt;, status &lt;dbl&gt;, enum &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;, games_lost &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;, injury_severity &lt;fct&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   person_id    t0         tf         date_injured date_recovered tstart    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> adam-lallana 2017-07-01 2019-06-30 2017-07-31   2017-11-25     2017-07-01</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> adam-lallana 2017-07-01 2019-06-30 2018-03-31   2018-05-13     2017-11-25</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> adam-lallana 2017-07-01 2019-06-30 2018-09-04   2018-10-19     2018-05-13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> adam-lallana 2017-07-01 2019-06-30 2018-11-09   2018-12-04     2018-10-19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> adam-lallana 2017-07-01 2019-06-30 2019-01-06   2019-01-18     2018-12-04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> adam-lallana 2017-07-01 2019-06-30 2019-04-01   2019-05-31     2019-01-18</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: tstop &lt;date&gt;, tstart_s &lt;dbl&gt;, tstop_s &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;dbl&gt;, enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span></code></pre></div>
 </details>
 </div>
 <div class="section level2">
@@ -238,16 +239,16 @@ above. It is important to specify the unit of exposure, i.e. the
 <span>                    exp_unit <span class="op">=</span> <span class="st">"matches_minutes"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 19</span></span></span>
-<span><span class="co">#&gt;   player t0         tf         date_injured date_recovered tstart     tstop     </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> adam-… 2017-07-01 2019-06-30 2017-07-31   2017-11-25     2017-07-01 2017-07-31</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> adam-… 2017-07-01 2019-06-30 2018-03-31   2018-05-13     2017-11-25 2018-03-31</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> adam-… 2017-07-01 2019-06-30 2018-09-04   2018-10-19     2018-05-13 2018-09-04</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> adam-… 2017-07-01 2019-06-30 2018-11-09   2018-12-04     2018-10-19 2018-11-09</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> adam-… 2017-07-01 2019-06-30 2019-01-06   2019-01-18     2018-12-04 2019-01-06</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> adam-… 2017-07-01 2019-06-30 2019-04-01   2019-05-31     2019-01-18 2019-04-01</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more variables: tstart_minPlay &lt;dbl&gt;, tstop_minPlay &lt;dbl&gt;, status &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt;   person_id    t0         tf         date_injured date_recovered tstart    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> adam-lallana 2017-07-01 2019-06-30 2017-07-31   2017-11-25     2017-07-01</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> adam-lallana 2017-07-01 2019-06-30 2018-03-31   2018-05-13     2017-11-25</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> adam-lallana 2017-07-01 2019-06-30 2018-09-04   2018-10-19     2018-05-13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> adam-lallana 2017-07-01 2019-06-30 2018-11-09   2018-12-04     2018-10-19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> adam-lallana 2017-07-01 2019-06-30 2019-01-06   2019-01-18     2018-12-04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> adam-lallana 2017-07-01 2019-06-30 2019-04-01   2019-05-31     2019-01-18</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: tstop &lt;date&gt;, tstart_minPlay &lt;dbl&gt;, tstop_minPlay &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;dbl&gt;, enum &lt;dbl&gt;, days_lost &lt;dbl&gt;, player_id &lt;fct&gt;, season &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   games_lost &lt;dbl&gt;, injury &lt;chr&gt;, injury_acl &lt;fct&gt;, injury_type &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   injury_severity &lt;fct&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -260,7 +261,7 @@ will always have the columns listed below (standardized columns or
 created by the function), as well as further (optional) sports-related
 variables.</p>
 <ul>
-<li><p><code>player</code>: player identifier.</p></li>
+<li><p><code>person_id</code>: player identifier.</p></li>
 <li><p><code>t0</code> and <code>tf</code>: the follow-up period of the
 corresponding player, i.e. player’s first and last dates observed (same
 value for each <code>player</code>).</p></li>
@@ -304,27 +305,17 @@ number of minutes (e.g. 0.5)…&lt;/p&gt;"><sup>3</sup></a>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "injd"       "tbl_df"     "tbl"        "data.frame"</span></span></code></pre></div>
-<p>and have the following attributes:</p>
+<p>and have the following attribute:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">injd</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; injd [108 × 19] (S3: injd/tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span>
-<span><span class="co">#&gt;  - attr(*, "follow_up")= tibble [28 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  - attr(*, "data_exposures")='data.frame':   42 obs. of  19 variables:</span></span>
-<span><span class="co">#&gt;  - attr(*, "data_injuries")= tibble [82 × 11] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "unit_exposure")= chr "matches_minutes"</span></span></code></pre></div>
 <ul>
-<li><p><code>unit_exposure</code>: a character indicating the unit of
-exposure time used in this object.</p></li>
-<li><p><code>follow_up</code>: a data frame consisting of one row per
-player with their first and last dates observed (<code>t0</code> and
-<code>tf</code> columns).</p></li>
-<li><p><code>data_exposures</code>: the preprocessed exposure data
-frame.</p></li>
-<li><p><code>data_injuries</code>: the preprocessed injury data
-frame.</p></li>
+<li>
+<code>unit_exposure</code>: a character indicating the unit of
+exposure time used in this object.</li>
 </ul>
-<p>To extract one of the attributes, for example
-<code>unit_exposure</code>, type:</p>
+<p>To extract the attribute <code>unit_exposure</code>, type:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">injd</span>, <span class="st">"unit_exposure"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "matches_minutes"</span></span></code></pre></div>

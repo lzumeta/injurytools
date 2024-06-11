@@ -37,6 +37,36 @@
     <loc>https://lzumeta.github.io/injurytools/news/index.html</loc>
   </url>
   <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_burden.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_exposure.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_incidence.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_iqr_dayslost.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_mean_dayslost.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_median_dayslost.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_ncases.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_ndayslost.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_prevalence.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/calc_summary.html</loc>
+  </url>
+  <url>
     <loc>https://lzumeta.github.io/injurytools/reference/check_injfollowup.html</loc>
   </url>
   <url>
@@ -58,16 +88,25 @@
     <loc>https://lzumeta.github.io/injurytools/reference/exp_unit_suffix.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_injbarplot.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/get_data_exposures.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_injphoto.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/get_data_followup.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_injprev_polar.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/get_data_injuries.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_injriskmatrix.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/gg_photo.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/gg_prevalence.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/gg_rank.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/gg_riskmatrix.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/index.html</loc>
@@ -76,22 +115,13 @@
     <loc>https://lzumeta.github.io/injurytools/reference/injd.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injprev.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injsummary.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injsummary_unit.html</loc>
-  </url>
-  <url>
     <loc>https://lzumeta.github.io/injurytools/reference/injurytools.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/is_injd.html</loc>
   </url>
   <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/is_injds.html</loc>
+    <loc>https://lzumeta.github.io/injurytools/reference/label_unit.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/new_injd.html</loc>
@@ -107,6 +137,9 @@
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/season2year.html</loc>
+  </url>
+  <url>
+    <loc>https://lzumeta.github.io/injurytools/reference/summary_unit.html</loc>
   </url>
   <url>
     <loc>https://lzumeta.github.io/injurytools/reference/validate_injd.html</loc>
