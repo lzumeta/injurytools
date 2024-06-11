@@ -22,20 +22,21 @@ license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://open
 
 **`injurytools`** is a package designed for the field of Sports
 Medicine. It simplifies the data analysis workflow by providing
-convenience functions and handy tools for sports injury data.
+convenience functions and handy tools for sports injury and illness
+data.
 
-The functions can be classified into: (a) sports injury data
+The functions can be classified into: (a) sports injury and illness data
 preparation, (b) descriptive analyses and (c) data visualization
-routines. Further analyses, such as the estimation of the risk of injury
-with other covariate effects, can be performed outside of
-**`injurytools`**, whether the event of injury is viewed as count or
-time-to-event data.
+routines. Further analyses, such as the estimation of the risk of
+injury/illness (any sports-related health problem) with other covariate
+effects, can be performed outside of **`injurytools`**, whether the
+event of health problem is viewed as count or time-to-event data.
 
 To get an overview of the package, see the
 [Articles](https://lzumeta.github.io/injurytools/articles/) section.
 
 In practice, the package can automate specific descriptive reports that
-are routinely generated for sports injury surveillance.
+are routinely generated for sports injury and illness surveillance.
 
 ## Installation
 
@@ -53,20 +54,20 @@ devtools::install_github("lzumeta/injurytools")
 
 ## Usage
 
-Most functions contain or start with `inj*()` which stands for
-**injury**. Functions for data preparation start with `prepare_*()`; and
-those for data visualization with `gg_inj*()`.
+Functions for data preparation start with `prepare_*()`, those for
+estimating epidemiological measures start with `calc_*()`, and those for
+data visualization with `gg_*()`.
 
 The below outlines at a glance how **`injurytools`** can help to get a
-comprehensive picture of injury data:
+comprehensive picture of sports injury and illness data:
 
 ``` r
 library(injurytools)
 library(ggplot2)
 
-gg_injphoto(injd, 
-            title   = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
-            by_date = "2 month") +
+gg_photo(injd, 
+         title   = "Overview of injuries:\nLiverpool FC 1st male team during 2017-2018 and 2018-2019 seasons",
+         by_date = "2 month") +
   ## plus some lines of ggplot2 code..
   xlab("Follow-up date") + ylab("Players") + 
   labs(caption = "source: transfermarkt.com") +

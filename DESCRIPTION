@@ -1,5 +1,5 @@
 Package: injurytools
-Title: A Toolkit for Sports Injury Data Analysis
+Title: A Toolkit for Sports Injury and Illness Data Analysis
 Version: 1.0.3
 Authors@R: c(
     person(given = "Lore",
@@ -49,8 +49,10 @@ Imports:
     metR,
     purrr,
     rlang,
+    scales,
     stats,
     stringr,
+    tibble,
     tidyr,
     tidyselect,
     withr
