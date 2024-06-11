@@ -3,7 +3,7 @@ library(dplyr)
 library(injurytools)
 
 raw_df_exposures <- readRDS("../Injury-Scraping_data/players_longitudinal_df.Rds")
-raw_df_injuries <- readRDS("../Injury-Scraping_data/injuries_df.Rds")
+raw_df_injuries  <- readRDS("../Injury-Scraping_data/injuries_df.Rds")
 
 years2select <- c(2017, 2018)
 teams2select <- c("fc-liverpool")
@@ -28,12 +28,12 @@ raw_df_injuries <- raw_df_injuries |>
 usethis::use_data(raw_df_injuries, raw_df_exposures, overwrite = TRUE)
 
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-                           player         = "player_name",
+                           person_id         = "player_name",
                            date_injured   = "from",
                            date_recovered = "until")
 
 df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                            player        = "player_name",
+                            person_id        = "player_name",
                             date          = "year",
                             time_expo     = "minutes_played")
 
@@ -45,7 +45,7 @@ usethis::use_data(injd, overwrite = TRUE)
 
 ## internal data
 raw_df_exposures <- readRDS("../Injury-Scraping_data/players_longitudinal_df.Rds")
-raw_df_injuries <- readRDS("../Injury-Scraping_data/injuries_df.Rds")
+raw_df_injuries  <- readRDS("../Injury-Scraping_data/injuries_df.Rds")
 
 years2select <- c(2017, 2018)
 # teams2select <- c("fc-bayern-munchen", "fc-liverpool", "fc-barcelona", "real-madrid")
@@ -74,12 +74,12 @@ raw_df_injuries <- raw_df_injuries |>
 ##
 
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-                           player         = "player_name",
+                           person_id      = "player_name",
                            date_injured   = "from",
                            date_recovered = "until")
 
 df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                            player        = "player_name",
+                            person_id     = "player_name",
                             date          = "year",
                             time_expo     = "minutes_played")
 

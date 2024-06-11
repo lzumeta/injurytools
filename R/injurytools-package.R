@@ -6,6 +6,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom checkmate checkLogical
 #' @importFrom checkmate expect_data_frame
 #' @importFrom checkmate expect_subset
 #' @importFrom forcats fct_reorder
@@ -14,6 +15,7 @@
 #' @importFrom purrr map_dfr
 #' @importFrom stats relevel
 #' @importFrom stringr str_to_title
+#' @importFrom tidyr replace_na
 #' @importFrom withr with_locale
 ## usethis namespace: end
 NULL

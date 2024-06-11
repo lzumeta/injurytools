@@ -8,7 +8,7 @@
 The main data frame in \code{injd} gathers information of 28 players
 and has 108 rows and 19 columns:
 \describe{
-\item{player}{Player identifier (factor)}
+\item{person_id}{Player identifier (factor)}
 \item{t0}{Follow-up period of the corresponding player, i.e. player’s first observed date, same value for each player (Date)}
 \item{tf}{Follow-up period of the corresponding player, i.e. player’s last observed date, same value for each player (Date)}
 \item{date_injured}{Date of injury of the corresponding observation (if any). Otherwise NA (Date)}
