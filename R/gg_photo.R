@@ -1,10 +1,11 @@
-#' Plot injuries over the follow-up period
+#' Plot injuries and illnesses over the follow-up period
 #'
 #' Given an \code{injd} \strong{S3} object it plots an overview of the injuries
-#' sustained by each player/athlete in the cohort during the follow-up. Each
-#' subject timeline is depicted horizontally where the red cross indicates the
-#' exact injury date, the blue circle the recovery date and the bold black line
-#' indicates the duration of the injury (time-loss).
+#' and illnesses suffered by each player/athlete in the cohort during the
+#' follow-up. Each subject timeline is depicted horizontally where the red cross
+#' indicates the exact injury or illness date, the blue circle the recovery date
+#' and the bold black line indicates the duration of the injury (time-loss) or
+#' illness.
 #'
 #' @param injd Prepared data. An \code{injd} object.
 #' @param title Text for the main title.
@@ -25,24 +26,24 @@
 #'
 #' @examples
 #' \donttest{
-#' df_exposures <- prepare_exp(raw_df_exposures, player = "player_name",
+#' df_exposures <- prepare_exp(raw_df_exposures, person_id = "player_name",
 #'                             date = "year", time_expo = "minutes_played")
-#' df_injuries  <- prepare_inj(raw_df_injuries, player = "player_name",
+#' df_injuries  <- prepare_inj(raw_df_injuries, person_id = "player_name",
 #'                             date_injured = "from", date_recovered = "until")
 #' injd         <- prepare_all(data_exposures = df_exposures,
 #'                             data_injuries  = df_injuries,
 #'                             exp_unit = "minutes")
 #' }
 #'
-#' gg_injphoto(injd, title = "Injury Overview", by_date = "1 years")
-gg_injphoto <- function(injd, title = NULL, fix = FALSE, by_date = "1 months") {
+#' gg_photo(injd, title = "Injury Overview", by_date = "1 years")
+gg_photo <- function(injd, title = NULL, fix = FALSE, by_date = "1 months") {
 
   ## check inputs
   assert(checkClass(injd, "injd"))
 
   ## extract necessary data
-  data_followup <- attr(injd, "follow_up")
-  data_injuries <- attr(injd, "data_injuries")
+  data_followup <- get_data_followup(injd)
+  data_injuries <- get_data_injuries(injd)
 
   data_injuries_long <- data_injurieslong(data_injuries)
 
@@ -70,10 +71,10 @@ gg_injphoto <- function(injd, title = NULL, fix = FALSE, by_date = "1 months") {
 
   p1 <- ggplot() +
     geom_segment(data = data_followup, aes(x = .data$t0, xend = .data$tf,
-                                           y = .data$player, yend = .data$player)) +
+                                           y = .data$person_id, yend = .data$person_id)) +
     geom_segment(data = data_injuries, aes(x = .data$date_injured, xend = .data$date_recovered,
-                                           y = .data$player, yend = .data$player), linewidth = 1) +
-    geom_point(data = data_injuries_long, aes(x = .data$date, y = .data$player,
+                                           y = .data$person_id, yend = .data$person_id), linewidth = 1) +
+    geom_point(data = data_injuries_long, aes(x = .data$date, y = .data$person_id,
                                               shape = .data$event, color = .data$event), size = 5) +
     xlab(NULL) + ylab(NULL) + ggtitle(title) +
     theme_bw()
