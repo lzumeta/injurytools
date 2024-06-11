@@ -9,14 +9,14 @@
 \usage{
 prepare_inj(
   df_injuries0,
-  player = "player",
+  person_id = "person_id",
   date_injured = "date_injured",
   date_recovered = "date_recovered"
 )
 
 prepare_exp(
   df_exposures0,
-  player = "player",
+  person_id = "person_id",
   date = "date",
   time_expo = "time_expo"
 )
@@ -29,22 +29,22 @@ prepare_all(
 )
 }
 \arguments{
-\item{df_injuries0}{A data frame containing injury information, with columns
-referring to the player name/id, date of injury and date of recovery (as
-minimal data).}
+\item{df_injuries0}{A data frame containing injury or illness information,
+with columns referring to the athlete name/id, date of injury/illness and
+date of recovery (as minimal data).}
 
-\item{player}{Character referring to the column name where player information
-is stored.}
+\item{person_id}{Character referring to the column name storing sportsperson
+(player, athlete) identification information.}
 
 \item{date_injured}{Character referring to the column name where the
-information about the date of injury is stored.}
+information about the date of injury or illness is stored.}
 
 \item{date_recovered}{Character referring to the column name where the
 information about the date of recovery is stored.}
 
 \item{df_exposures0}{A data frame containing exposure information, with
-columns referring to the player name/id, date of exposure and the total
-time of exposure of the corresponding data entry (as minimal data).}
+columns referring to the sportsperson's name/id, date of exposure and the
+total time of exposure of the corresponding data entry (as minimal data).}
 
 \item{date}{Character referring to the column name where the exposure date
 information is stored. Besides, the column must be of class
@@ -67,7 +67,7 @@ default).}
 }
 \value{
 \code{prepare_inj()} returns a data frame in which the \strong{key
-columns} in injury data are standardized and have a proper format.
+columns} in injury/illness data are standardized and have a proper format.
 
 \code{prepare_exp()} returns a data frame in which the \strong{key
 columns} in exposure data are standardized and have a proper format.
@@ -80,8 +80,8 @@ statistics, visualize injury data).
 \item If \code{exp_unit} is "minutes" (the default), the columns
 \code{tstart_min} and \code{tstop_min} are created which specify the time
 to event (injury) values, the starting and stopping time of the interval,
-respectively. That is the training time in minutes, that the player has
-been at risk, until an injury (or censorship) has occurred. For other
+respectively. That is the training time in minutes, that the sportsperson has
+been at risk, until an injury/illness (or censorship) has occurred. For other
 choices, \code{tstart_x} and \code{tstop_x} are also created according to
 the \code{exp_unit} indicated (\code{x}, one of: \code{min}, \code{h},
 \code{match}, \code{minPlay}, \code{d}, \code{acd} or \code{s}). These
@@ -95,17 +95,17 @@ the raw data) it overrides.
 These are the data preprocessing functions provided by the \code{injurytools}
 package, which involve:
 \enumerate{
-\item setting \strong{exposure} and \strong{injury data} in a standardized
+\item setting \strong{exposure} and \strong{injury/illness data} in a standardized
 format and
 \item integrating both sources of data into an adequate data structure.
 }
 \code{prepare_inj()} and \code{prepare_exp()} set standardized names and
-proper classes to the (key) columns in injury and exposure data,
+proper classes to the (key) columns in injury/illness and exposure data,
 respectively. \code{prepare_all()} integrates both, standardized injury and
 exposure data sets, and convert them into an \code{injd} \strong{S3} object
-that has an adequate structure for further statistical analyses.
-See the \href{https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html}{Prepare Sports Injury Data}
-vignette for details.
+that has an adequate structure for further statistical analyses. See the
+\href{https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html}{Prepare
+Sports Injury Data} vignette for details.
 }
 \note{
 Depending on the unit of exposure, \code{tstart_x} and \code{tstop_x}
@@ -116,12 +116,12 @@ task.
 }
 \examples{
 df_injuries <- prepare_inj(df_injuries0   = raw_df_injuries,
-                           player         = "player_name",
+                           person_id      = "player_name",
                            date_injured   = "from",
                            date_recovered = "until")
 
 df_exposures <- prepare_exp(df_exposures0 = raw_df_exposures,
-                            player        = "player_name",
+                            person_id     = "player_name",
                             date          = "year",
                             time_expo     = "minutes_played")
 
