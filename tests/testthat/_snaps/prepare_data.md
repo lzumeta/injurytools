@@ -5,5 +5,5 @@
         exp_unit = "matches_minutes")
     Condition
       Warning in `check_injfollowup()`:
-      Injury data has been cut to the given follow-up period (in exposure data)
+      Injury/illness data has been cut to the given follow-up period (in exposure data)
 
