@@ -3,7 +3,7 @@
 #' @inheritParams prepare_all
 #'
 #' @return The \code{data_injuries} data frame in long format in which each row
-#'   corresponds to player-event.
+#'   corresponds to person-event.
 #' @importFrom rlang .data :=
 #' @importFrom dplyr select arrange mutate
 #' @importFrom tidyr gather
@@ -11,9 +11,9 @@
 #' @keywords internal
 data_injurieslong <- function(data_injuries) {
   data_injuries |>
-    dplyr::select("player", "date_injured", "date_recovered") |>
+    dplyr::select("person_id", "date_injured", "date_recovered") |>
     tidyr::gather(key = "event", value = "date", "date_injured", "date_recovered") |>
-    dplyr::arrange(.data$player, .data$date) |>
+    dplyr::arrange(.data$person_id, .data$date) |>
     dplyr::mutate(event = factor(.data$event))
 }
 
@@ -151,6 +151,8 @@ season2year <- function(season) {
 #'
 #' @importFrom checkmate assert checkClass checkMultiClass
 #' @importFrom lubridate year
+#' @importFrom dplyr left_join select
+#' @importFrom tidyselect starts_with
 #'
 #' @note Be aware that by modifying the follow-up period of the cohort, the
 #'   study design is being altered. This function should not be used, unless
@@ -162,14 +164,14 @@ season2year <- function(season) {
 #' \donttest{
 #' df_injuries <- prepare_inj(
 #'   df_injuries0   = raw_df_injuries,
-#'   player         = "player_name",
+#'   person_id      = "player_name",
 #'   date_injured   = "from",
 #'   date_recovered = "until"
 #' )
 #'
 #' df_exposures <- prepare_exp(
 #'   df_exposures0 = raw_df_exposures,
-#'   player        = "player_name",
+#'   person_id     = "player_name",
 #'   date          = "year",
 #'   time_expo     = "minutes_played"
 #' )
@@ -186,30 +188,27 @@ season2year <- function(season) {
 #' }
 cut_injd <- function(injd, date0, datef) {
   assert(checkClass(injd, "injd"))
-  data_exposures <- attr(injd, "data_exposures")
+
+  data_exposures <- get_data_exposures(injd)
 
   if (!missing(date0)) {
     assert(checkMultiClass(date0, c("Date", "numeric", "integer")))
-    if (class(date0) != class(data_exposures$date)) {
-      stop("date0 and data_exposures[['date']] must be of the same class")
-    }
+    if (is.numeric(date0)) data_exposures$date <- season2year(date2season(data_exposures$date))
   }
   if (!missing(datef)) {
     assert(checkMultiClass(datef, c("Date", "numeric", "integer")))
-    if (class(datef) != class(data_exposures$date)) {
-      stop("datef and data_exposures[['date']] must be of the same class")
-    }
+    if (is.numeric(datef)) data_exposures$date <- season2year(date2season(data_exposures$date))
   }
   if ((!missing(date0) && !missing(datef))) {
-    if (class(date0) != class(datef)) {
-      stop("date0 and datef must be of the same class")
-    }
     if (date0 >= datef) {
       stop("date0 must be < datef")
     }
   }
 
-  data_injuries <- attr(injd, "data_injuries")
+  data_injuries <- get_data_injuries(injd) |>
+    dplyr::left_join(injd, by = c("person_id", "date_injured", "date_recovered")) |>
+    dplyr::select(-c("t0", "tf", tidyselect::starts_with("tstart"), tidyselect::starts_with("tstop"),
+                     "status", "enum", "days_lost"))
   exp_unit <- attr(injd, "unit_exposure")
 
   if (!missing(date0)) {
@@ -237,4 +236,72 @@ cut_injd <- function(injd, date0, datef) {
   )
 
   return(injd_new)
+}
+
+#' Extract follow-up data frame
+#'
+#' Extract follow-up data frame from the injd object.
+#'
+#' @inheritParams calc_ncases
+#'
+#' @return The follow-up data frame containing the necessary columns:
+#'   "person_id", "t0" and "tf".
+#'
+#' @export
+#' @importFrom dplyr summarise first last
+#'
+#' @examples
+#' get_data_followup(injd)
+get_data_followup <- function(injd) {
+  data.frame(injd) |>
+    dplyr::summarise(t0 = dplyr::first(.data$tstart),
+                     tf = dplyr::last(.data$tstop),
+                     .by = "person_id")
+}
+
+
+#' Extract injury/illness data frame
+#'
+#' Extract injury/illness data frame from the injd object.
+#'
+#' @inheritParams calc_ncases
+#'
+#' @return The injury/illness data frame containing the necessary columns:
+#'   "person_id", "date_injured" and "date_recovered".
+#'
+#' @importFrom dplyr filter select
+#' @export
+#'
+#' @examples
+#' get_data_injuries(injd)
+get_data_injuries <- function(injd) {
+  data.frame(injd) |>
+    dplyr::filter(.data$status == 1) |>
+    droplevels() |>
+    dplyr::select("person_id", "date_injured", "date_recovered")
+}
+
+
+#' Extract exposures data frame
+#'
+#' Extract exposures data frame from the injd object.
+#'
+#' @inheritParams calc_ncases
+#'
+#' @return The exposure data frame containing the necessary columns:
+#'   "person_id", "date" and "time_expo".
+#' @export
+#'
+#' @importFrom dplyr select filter mutate
+#' @importFrom tidyselect starts_with
+#'
+#' @examples
+#' get_data_exposures(injd)
+get_data_exposures <- function(injd) {
+  data.frame(injd) |>
+    dplyr::select("person_id", date = "tstop", tstart_unx = tidyselect::starts_with("tstart_"),
+           tstop_unx = tidyselect::starts_with("tstop_")) |>
+    dplyr::mutate(time_expo = .data$tstop_unx - .data$tstart_unx) |>
+    dplyr::filter(.data$time_expo != 0) |>
+    dplyr::select("person_id", "date", "time_expo")
 }

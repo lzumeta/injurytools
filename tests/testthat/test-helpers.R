@@ -1,7 +1,7 @@
 test_that("check_injfollowup works", {
   followup_df <- attr(injd, "follow_up")
   data_injuries  <- prepare_inj(df_injuries0   = raw_df_injuries,
-                                player         = "player_name",
+                                person_id      = "player_name",
                                 date_injured   = "from",
                                 date_recovered = "until")
 
@@ -28,22 +28,6 @@ test_that("new_injd works", {
 test_that("validate_injd works", {
   newinjd <- validate_injd(injd)
   expect_equal(newinjd, injd)
-
-  follow_up <- attr(injd, "follow_up")
-  follow_up[1, "t0"] <- as.Date("2017-07-05")
-  injd2 <- injd
-  attr(injd2, "follow_up") <- follow_up
-  expect_error(validate_injd(injd2), "is not properly built")
-
-  data_injuries <- attr(injd, "data_injuries")
-  data_injuries <- data_injuries[-1, ]
-  injd3 <- injd
-  attr(injd3, "data_injuries") <- data_injuries
-  expect_error(validate_injd(injd3), "do not have same info on injuries")
-
-  injd4 <- injd
-  injd4$status[[1]] <- -1
-  expect_error(validate_injd(injd4), "status is not correctly recorded")
 
   injd5 <- injd
   injd5$tstop_minPlay[[2]] <- injd5$tstop_minPlay[[2]] + 1

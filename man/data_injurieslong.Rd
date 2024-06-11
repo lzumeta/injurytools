@@ -12,7 +12,7 @@ same fashion that \code{prepare_inj()} returns.}
 }
 \value{
 The \code{data_injuries} data frame in long format in which each row
-corresponds to player-event.
+corresponds to person-event.
 }
 \description{
 Transform injury data into a long format

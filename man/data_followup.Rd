@@ -11,8 +11,8 @@ data_followup(data_exposures)
 the same fashion that \code{prepare_exp()} returns.}
 }
 \value{
-A data frame in which each row corresponds to a player and his/her
-first date (\code{t0}) and last date (\code{tf}) observed.
+A data frame in which each row corresponds to a sportsperson and
+his/her first date (\code{t0}) and last date (\code{tf}) observed.
 }
 \description{
 Build follow-up data frame

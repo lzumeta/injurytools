@@ -13,7 +13,7 @@ check_injfollowup(followup_df, data_injuries)
 }
 \value{
 Same injury data or cut injury data in which the dates of injury
-occurrences are within the dates of each player's follow-up period.
+occurrences are within the dates of each person_id's follow-up period.
 }
 \description{
 Check that dates of injury data are within the dates of exposure data.
