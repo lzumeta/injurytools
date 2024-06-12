@@ -40,7 +40,7 @@ navbar:
 development:
   mode: auto
 reference:
-- title: Prepare sports injury data
+- title: Prepare sports injury and illness data
   desc: Functions that preprocess and prepare these type of data in a standardized
     format.
   contents: prepare_data
