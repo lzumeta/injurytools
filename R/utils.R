@@ -298,11 +298,18 @@ get_data_injuries <- function(injd) {
 #' @examples
 #' get_data_exposures(injd)
 get_data_exposures <- function(injd) {
-  unx <- exp_unit_suffix(attr(injd, "unit_exposure"))
+  attr_unit <- attr(injd, "unit_exposure")
+  unx <- exp_unit_suffix(attr_unit)
+  tstart_unx <- paste0("tstop_", unx)
+  if (!(tstart_unx %in% names(injd))) {
+    stop(paste0("Exposure time unit is ", attr_unit,
+                   ", but there is no column named as ", tstart_unx))
+  }
+
   data.frame(injd) |>
     dplyr::select("person_id", date = "tstop",
                   tstart_unx = tidyselect::matches(paste0("tstart_", unx)),
-           tstop_unx = tidyselect::matches(paste0("tstop_", unx))) |>
+                  tstop_unx = tidyselect::matches(paste0("tstop_", unx))) |>
     dplyr::mutate(time_expo = .data$tstop_unx - .data$tstart_unx) |>
     dplyr::filter(.data$time_expo != 0) |>
     dplyr::select("person_id", "date", "time_expo")
