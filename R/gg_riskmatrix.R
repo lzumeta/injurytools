@@ -133,8 +133,8 @@ gg_riskmatrix <- function(injd, by = NULL,
     geom_text(aes(label = round(.data$burden), fontface = "bold")) +
     # quit size legend
     scale_size_continuous(range = c(4, 9), guide = "none") +
-    scale_x_continuous(limits = c(-0.05, NA)) +
-    scale_y_continuous(limits = c(-0.05, NA)) +
+    xlim(c(-0.05, NA)) +
+    ylim(c(-0.05, NA)) +
     xlab(xlab) + ylab(ylab) + ggtitle(title) +
     theme_bw()
 
