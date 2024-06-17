@@ -73,8 +73,7 @@ test_that("summary_unit works", {
 
   injdv2 <- injd
   attr(injdv2, "unit_exposure") <- "activity_days"
-  ws2 <- capture_warnings(calc_summary(injdv2))
-  expect_match(ws2[[1]], "Exposure time unit is activity_days", fixed = TRUE)
+  expect_error(calc_summary(injdv2), "Exposure time unit is activity_days")
 })
 
 
