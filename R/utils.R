@@ -293,7 +293,7 @@ get_data_injuries <- function(injd) {
 #' @export
 #'
 #' @importFrom dplyr select filter mutate
-#' @importFrom tidyselect starts_with
+#' @importFrom tidyselect starts_with all_of
 #'
 #' @examples
 #' get_data_exposures(injd)
@@ -308,8 +308,8 @@ get_data_exposures <- function(injd) {
 
   data.frame(injd) |>
     dplyr::select("person_id", date = "tstop",
-                  tstart_unx = tidyselect::matches(paste0("tstart_", unx)),
-                  tstop_unx = tidyselect::matches(paste0("tstop_", unx))) |>
+                  tstart_unx = tidyselect::all_of(paste0("tstart_", unx)),
+                  tstop_unx = tidyselect::all_of(paste0("tstop_", unx))) |>
     dplyr::mutate(time_expo = .data$tstop_unx - .data$tstart_unx) |>
     dplyr::filter(.data$time_expo != 0) |>
     dplyr::select("person_id", "date", "time_expo")

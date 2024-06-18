@@ -16,7 +16,10 @@ gg_rank(
 \item{injd}{\code{injd} \strong{S3} object (see
 \code{\link[=prepare_all]{prepare_all()}}).}
 
-\item{by}{TOWRITE TO THINK!!!}
+\item{by}{Character specifying the name of the column according to which
+compute summary statistics. It should refer to a (categorical) variable
+that describes a grouping factor (e.g. "type of case or injury", "injury
+location", "sports club"). Optional, defaults to \code{NULL}.}
 
 \item{summary_stat}{A character value indicating whether to plot case
 incidence's (case's) or injury burden's (days losts') ranking. One of

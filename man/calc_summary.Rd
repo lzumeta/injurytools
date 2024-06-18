@@ -9,7 +9,6 @@ calc_summary(
   by = NULL,
   overall = TRUE,
   method = c("poisson", "negbin", "zinfpois", "zinfnb"),
-  time_period = NULL,
   conf_level = 0.95,
   scale = TRUE,
   quiet = FALSE
@@ -20,20 +19,18 @@ calc_summary(
 \code{\link[=prepare_all]{prepare_all()}}).}
 
 \item{by}{Character specifying the name of the column according to which
-compute (sports-related case) summary statistics. It should refer to a
-(categorical) variable that describes the "type of case" (e.g. type of
-injury). Optional, defaults to \code{NULL}.}
+compute summary statistics. It should refer to a (categorical) variable
+that describes a grouping factor (e.g. "type of case or injury", "injury
+location", "sports club"). Optional, defaults to \code{NULL}.}
 
 \item{overall}{Logical, whether to calculate overall (for all the cohort) or
-athlete-wise summary statistic (i.e. number of cases). Defaults to
-\code{TRUE}.}
+athlete-wise summary statistic (i.e. number of cases per cohort of per
+athlete). Defaults to \code{TRUE}.}
 
 \item{method}{Method to estimate the incidence (burden) rate. One of
 "poisson", "negbin", "zinfpois" or "zinfnb"; that stand for Poisson method,
 negative binomial method, zero-inflated Poisson and zero-inflated negative
 binomial.}
-
-\item{time_period}{TOWRITE!! TO THINK!!! see gg_time_trend also and prepare_all etc..}
 
 \item{conf_level}{Confidence level (defaults to 0.95).}
 

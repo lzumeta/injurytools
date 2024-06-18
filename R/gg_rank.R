@@ -7,7 +7,6 @@
 #' @param summary_stat A character value indicating whether to plot case
 #'   incidence's (case's) or injury burden's (days losts') ranking. One of
 #'   "incidence" ("ncases") or "burden" ("ndayslost"), respectively.
-#' @param by TOWRITE TO THINK!!!
 #' @param line_overall Logical, whether to draw a vertical red line indicating the overall incidence or burden. Defaults to \code{FALSE}.
 #' @param title Text for the main title.
 #'
@@ -16,6 +15,8 @@
 #'
 #' @importFrom checkmate assert checkClass checkChoice
 #' @importFrom forcats fct_reorder
+#' @importFrom tidyselect all_of
+#' @importFrom dplyr select
 #'
 #' @examples
 #' \donttest{
@@ -43,7 +44,8 @@
 #' if (require("gridExtra")) {
 #'   gridExtra::grid.arrange(p1, p2, nrow = 1)
 #' }
-gg_rank <- function(injd, by = NULL,
+gg_rank <- function(injd,
+                    by = NULL,
                     summary_stat = c("incidence", "burden", "ncases", "ndayslost"),
                     line_overall = FALSE,
                     title = NULL) {
@@ -63,19 +65,28 @@ gg_rank <- function(injd, by = NULL,
   col_summary_stat <- summary_stat
 
   if (line_overall) {
-    summary_ov_data <- calc_summary(injd, overall = TRUE, quiet = T)
-    summary_value <- summary_ov_data[[col_summary_stat]]
-  } else {
-    summary_value <- NULL
+    summary_ov_data <- calc_summary(injd, by = by, overall = TRUE, quiet = T)
+    summary_ov_data <- summary_ov_data |>
+      dplyr::select(tidyselect::all_of(by), tidyselect::all_of(col_summary_stat))
   }
 
-  ggplot(data = summary_data,
+  p <- ggplot(data = summary_data,
          aes(x = forcats::fct_reorder(.data$person_id, .data[[col_summary_stat]]), y = .data[[col_summary_stat]])) +
     geom_point() +
     geom_linerange(aes(x = .data$person_id, ymin = 0, ymax = .data[[col_summary_stat]])) +
-    geom_hline(yintercept = summary_value, col = "red") +
     coord_flip() +
     ylab(paste0("Case ", summary_stat)) + xlab("") +
     ggtitle(title) +
     theme_bw()
+
+  if (!is.null(by)) {
+    p <- p + facet_wrap(~.data[[by]])
+  }
+
+  if (line_overall) {
+    p <- p + geom_hline(aes(yintercept = .data[[col_summary_stat]]),
+                        col = "red", data = summary_ov_data)
+  }
+
+  return(p)
 }

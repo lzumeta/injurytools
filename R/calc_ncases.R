@@ -6,12 +6,12 @@
 #' @param injd \code{injd} \strong{S3} object (see
 #'   \code{\link[=prepare_all]{prepare_all()}}).
 #' @param by Character specifying the name of the column according to which
-#'   compute (sports-related case) summary statistics. It should refer to a
-#'   (categorical) variable that describes the "type of case" (e.g. type of
-#'   injury). Optional, defaults to \code{NULL}.
+#'   compute summary statistics. It should refer to a (categorical) variable
+#'   that describes a grouping factor (e.g. "type of case or injury", "injury
+#'   location", "sports club"). Optional, defaults to \code{NULL}.
 #' @param overall Logical, whether to calculate overall (for all the cohort) or
-#'   athlete-wise summary statistic (i.e. number of cases). Defaults to
-#'   \code{TRUE}.
+#'   athlete-wise summary statistic (i.e. number of cases per cohort of per
+#'   athlete). Defaults to \code{TRUE}.
 #'
 #' @return The number of cases. Either a numeric value (if overall \code{TRUE})
 #'   or a data frame indicating the number of cases per athlete.

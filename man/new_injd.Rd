@@ -4,24 +4,12 @@
 \alias{new_injd}
 \title{constructor of injd class}
 \usage{
-new_injd(
-  x = data.frame(),
-  unit_exposure = "match_minutes",
-  follow_up = data.frame(),
-  data_exposures = data.frame(),
-  data_injuries = data.frame()
-)
+new_injd(x = data.frame(), unit_exposure = "match_minutes")
 }
 \arguments{
 \item{x}{a data frame object to construct it to injd class object}
 
 \item{unit_exposure}{first attribute}
-
-\item{follow_up}{second attribute}
-
-\item{data_exposures}{third attribute}
-
-\item{data_injuries}{fourth attribute}
 }
 \value{
 a new injd object

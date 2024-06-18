@@ -7,7 +7,6 @@
 #' poisson or zero-inflated negative binomial, on a athlete and overall basis.
 #'
 #' @inheritParams calc_incidence
-#' @param time_period TOWRITE!! TO THINK!!! see gg_time_trend also and prepare_all etc..
 #'
 #' @return A data frame comprising of overall or athlete-wise epidemiological
 #'   summary statistics, that it's made up of the following columns:
@@ -79,7 +78,6 @@
 #' calc_summary(injd, by = "injury_type", overall = FALSE)
 calc_summary <- function(injd, by = NULL, overall = TRUE,
                          method = c("poisson", "negbin", "zinfpois", "zinfnb"),
-                         time_period = NULL,
                          conf_level = 0.95,
                          scale = TRUE,
                          quiet = FALSE) {

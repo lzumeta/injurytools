@@ -1,5 +1,5 @@
 test_that("check_injfollowup works", {
-  followup_df <- attr(injd, "follow_up")
+  followup_df <- get_data_followup(injd)
   data_injuries  <- prepare_inj(df_injuries0   = raw_df_injuries,
                                 person_id      = "player_name",
                                 date_injured   = "from",
@@ -13,16 +13,10 @@ test_that("check_injfollowup works", {
 })
 
 test_that("new_injd works", {
-  newinjd <- new_injd(data.frame(injd), "matches_minutes",
-                   attr(injd, "follow_up"),
-                   attr(injd, "data_exposures"),
-                   attr(injd, "data_injuries"))
+  newinjd <- new_injd(data.frame(injd), "matches_minutes")
   expect_equal(is_injd(newinjd), TRUE)
 
-  expect_error(new_injd(data.frame(injd), "match_min",
-                        attr(injd, "follow_up"),
-                        attr(injd, "data_exposures"),
-                        attr(injd, "data_injuries")))
+  expect_error(new_injd(data.frame(injd), "match_min"))
 })
 
 test_that("validate_injd works", {

@@ -29,32 +29,20 @@ check_injfollowup <- function(followup_df, data_injuries) {
 #'
 #' @param x a data frame object to construct it to injd class object
 #' @param unit_exposure first attribute
-#' @param follow_up second attribute
-#' @param data_exposures third attribute
-#' @param data_injuries fourth attribute
 #'
 #' @return a new injd object
 #' @keywords internal
 new_injd <- function(x = data.frame(),
-                     unit_exposure = "match_minutes",
-                     follow_up = data.frame(),
-                     data_exposures = data.frame(),
-                     data_injuries = data.frame()) {
+                     unit_exposure = "match_minutes") {
 
   stopifnot(is.data.frame(x))
   unit_exposure <- match.arg(unit_exposure, c("minutes", "hours", "days",
                                               "matches_num", "matches_minutes",
                                               "activity_days", "seasons"))
-  stopifnot(is.data.frame(follow_up))
-  stopifnot(is.data.frame(data_exposures))
-  stopifnot(is.data.frame(data_injuries))
 
   structure(x,
             class = "injd",
-            unit_exposure      = unit_exposure,
-            follow_up          = follow_up,
-            data_exposures     = data_exposures,
-            data_injuries      = data_injuries)
+            unit_exposure = unit_exposure)
 
 }
 
