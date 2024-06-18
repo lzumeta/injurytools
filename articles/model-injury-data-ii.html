@@ -94,7 +94,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Events</h1>
             
-            <h4 data-toc-skip class="date">2024-06-17</h4>
+            <h4 data-toc-skip class="date">2024-06-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/HEAD/vignettes/model-injury-data-ii.Rmd" class="external-link"><code>vignettes/model-injury-data-ii.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-ii.Rmd</code></div>
@@ -604,21 +604,21 @@ frailty term acts in a multiplicative way on the hazard (or the
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   n= 104, number of events= 81 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                           coef      se(coef) se2      Chisq  DF    p      </span></span>
-<span><span class="co">#&gt; age                        0.489503 0.278965            3.08  1.00 7.9e-02</span></span>
-<span><span class="co">#&gt; days_lost                 -0.006381 0.009761 0.006744   0.43  1.00 5.1e-01</span></span>
-<span><span class="co">#&gt; frailty(person_id, distri                             230.57 15.72 3.3e-40</span></span>
+<span><span class="co">#&gt;                           coef     se(coef) se2 Chisq  DF    p      </span></span>
+<span><span class="co">#&gt; age                        0.32711 0.349215       0.88  1.00 3.5e-01</span></span>
+<span><span class="co">#&gt; days_lost                 -0.01471 0.009955       2.18  1.00 1.4e-01</span></span>
+<span><span class="co">#&gt; frailty(person_id, distri                       147.07 13.74 2.0e-24</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;           exp(coef) exp(-coef) lower .95 upper .95</span></span>
-<span><span class="co">#&gt; age          1.6315     0.6129    0.9443     2.819</span></span>
-<span><span class="co">#&gt; days_lost    0.9936     1.0064    0.9748     1.013</span></span>
+<span><span class="co">#&gt; age          1.3870      0.721    0.6995     2.750</span></span>
+<span><span class="co">#&gt; days_lost    0.9854      1.015    0.9664     1.005</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Iterations: 10 outer, 184 Newton-Raphson</span></span>
-<span><span class="co">#&gt;      Variance of random effect= 2.673384   I-likelihood = -171.4 </span></span>
-<span><span class="co">#&gt; Degrees of freedom for terms= -2.3  0.5 15.7 </span></span>
-<span><span class="co">#&gt; Concordance= 0.882  (se = 0.026 )</span></span>
-<span><span class="co">#&gt; Likelihood ratio test= 122.5  on 13.88 df,   p=&lt;2e-16</span></span></code></pre></div>
-<p>The estimated variance of the random effect is <span class="math inline">\(\hat{\sigma}^2=\)</span> 2.69 and the p-value of
+<span><span class="co">#&gt;      Variance of random effect= 2.272003   I-likelihood = -180 </span></span>
+<span><span class="co">#&gt; Degrees of freedom for terms= -4.2 -0.5 13.7 </span></span>
+<span><span class="co">#&gt; Concordance= 0.856  (se = 0.026 )</span></span>
+<span><span class="co">#&gt; Likelihood ratio test= 104.1  on 9.08 df,   p=&lt;2e-16</span></span></code></pre></div>
+<p>The estimated variance of the random effect is <span class="math inline">\(\hat{\sigma}^2=\)</span> 2.27 and the p-value of
 the frailty term is significant.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sffit2</span><span class="op">)</span></span>
@@ -630,15 +630,15 @@ the frailty term is significant.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Random effects:</span></span>
 <span><span class="co">#&gt;       group  variable       sd variance</span></span>
-<span><span class="co">#&gt; 1 person_id Intercept 3.472957 12.06143</span></span>
+<span><span class="co">#&gt; 1 person_id Intercept 2.744821 7.534042</span></span>
 <span><span class="co">#&gt;                    Chisq    df         p   AIC   BIC</span></span>
-<span><span class="co">#&gt; Integrated loglik  51.73  3.00 3.421e-11 45.73 38.55</span></span>
-<span><span class="co">#&gt;  Penalized loglik 135.57 21.69 0.000e+00 92.20 40.27</span></span>
+<span><span class="co">#&gt; Integrated loglik  39.88  3.00 1.130e-08 33.88 26.70</span></span>
+<span><span class="co">#&gt;  Penalized loglik 117.21 21.17 2.664e-15 74.87 24.17</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fixed effects:</span></span>
-<span><span class="co">#&gt;               coef exp(coef) se(coef)     z      p</span></span>
-<span><span class="co">#&gt; age        0.52987   1.69871  0.22284  2.38 0.0174</span></span>
-<span><span class="co">#&gt; days_lost -0.01229   0.98779  0.01002 -1.23 0.2199</span></span></code></pre></div>
+<span><span class="co">#&gt;                coef exp(coef)  se(coef)     z      p</span></span>
+<span><span class="co">#&gt; age        0.199545  1.220847  0.186992  1.07 0.2859</span></span>
+<span><span class="co">#&gt; days_lost -0.020513  0.979696  0.009113 -2.25 0.0244</span></span></code></pre></div>
 <p>Let’s plot the covariate effects, i.e hazard ratios, and the frailty
 terms of the <code>sffit</code> model:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">

@@ -95,15 +95,15 @@ disease, injury) in a cohort.</p>
 
 <dt>by</dt>
 <dd><p>Character specifying the name of the column according to which
-compute (sports-related case) summary statistics. It should refer to a
-(categorical) variable that describes the "type of case" (e.g. type of
-injury). Optional, defaults to <code>NULL</code>.</p></dd>
+compute summary statistics. It should refer to a (categorical) variable
+that describes a grouping factor (e.g. "type of case or injury", "injury
+location", "sports club"). Optional, defaults to <code>NULL</code>.</p></dd>
 
 
 <dt>overall</dt>
 <dd><p>Logical, whether to calculate overall (for all the cohort) or
-athlete-wise summary statistic (i.e. number of cases). Defaults to
-<code>TRUE</code>.</p></dd>
+athlete-wise summary statistic (i.e. number of cases per cohort of per
+athlete). Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>method</dt>
@@ -163,7 +163,7 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   totalexpo ndayslost burden burden_sd burden_lower burden_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">73</span>158      <span style="text-decoration: underline;">2</span>049   252.      5.57         241.         263.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">74</span>690      <span style="text-decoration: underline;">2</span>049   247.      5.45         236.         258.</span>
 <span class="r-in"><span><span class="fu">calc_burden</span><span class="op">(</span><span class="va">injd</span>, overall <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   Exposure time unit is matches_minutes</span>
@@ -191,11 +191,11 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   injury_type totalexpo ndayslost burden burden_sd burden_lower burden_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bone            <span style="text-decoration: underline;">73</span>158       173   21.3      1.62         18.1         24.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Concussion      <span style="text-decoration: underline;">73</span>158       213   26.2      1.80         22.7         29.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Ligament        <span style="text-decoration: underline;">73</span>158       596   73.3      3.00         67.4         79.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Muscle          <span style="text-decoration: underline;">73</span>158       735   90.4      3.34         83.9         97.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Unknown         <span style="text-decoration: underline;">73</span>158       332   40.8      2.24         36.4         45.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bone            <span style="text-decoration: underline;">74</span>690       173   20.8      1.58         17.7         24.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Concussion      <span style="text-decoration: underline;">74</span>690       213   25.7      1.76         22.2         29.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Ligament        <span style="text-decoration: underline;">74</span>690       596   71.8      2.94         66.1         77.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Muscle          <span style="text-decoration: underline;">74</span>690       735   88.6      3.27         82.2         95.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Unknown         <span style="text-decoration: underline;">74</span>690       332   40.0      2.20         35.7         44.3</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

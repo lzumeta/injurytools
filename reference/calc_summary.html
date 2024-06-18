@@ -88,7 +88,6 @@ poisson or zero-inflated negative binomial, on a athlete and overall basis.</p>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  overall <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"poisson"</span>, <span class="st">"negbin"</span>, <span class="st">"zinfpois"</span>, <span class="st">"zinfnb"</span><span class="op">)</span>,</span>
-<span>  time_period <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -104,15 +103,15 @@ poisson or zero-inflated negative binomial, on a athlete and overall basis.</p>
 
 <dt>by</dt>
 <dd><p>Character specifying the name of the column according to which
-compute (sports-related case) summary statistics. It should refer to a
-(categorical) variable that describes the "type of case" (e.g. type of
-injury). Optional, defaults to <code>NULL</code>.</p></dd>
+compute summary statistics. It should refer to a (categorical) variable
+that describes a grouping factor (e.g. "type of case or injury", "injury
+location", "sports club"). Optional, defaults to <code>NULL</code>.</p></dd>
 
 
 <dt>overall</dt>
 <dd><p>Logical, whether to calculate overall (for all the cohort) or
-athlete-wise summary statistic (i.e. number of cases). Defaults to
-<code>TRUE</code>.</p></dd>
+athlete-wise summary statistic (i.e. number of cases per cohort of per
+athlete). Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>method</dt>
@@ -120,10 +119,6 @@ athlete-wise summary statistic (i.e. number of cases). Defaults to
 "poisson", "negbin", "zinfpois" or "zinfnb"; that stand for Poisson method,
 negative binomial method, zero-inflated Poisson and zero-inflated negative
 binomial.</p></dd>
-
-
-<dt>time_period</dt>
-<dd><p>TOWRITE!! TO THINK!!! see gg_time_trend also and prepare_all etc..</p></dd>
 
 
 <dt>conf_level</dt>
@@ -210,7 +205,7 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   totalexpo ncases incidence incidence_sd incidence_lower incidence_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">73</span>158     82      10.1         1.11            7.90            12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">74</span>690     82      9.88         1.09            7.74            12.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: ndayslost &lt;dbl&gt;, mean_dayslost &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   median_dayslost &lt;dbl&gt;, qt25_dayslost &lt;dbl&gt;, qt75_dayslost &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   burden &lt;dbl&gt;, burden_sd &lt;dbl&gt;, burden_lower &lt;dbl&gt;, burden_upper &lt;dbl&gt;</span></span>
@@ -253,11 +248,11 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   injury_type ncases percent_ncases totalexpo incidence incidence_sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bone            11           13.4     <span style="text-decoration: underline;">73</span>158      1.35        0.408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Concussion      16           19.5     <span style="text-decoration: underline;">73</span>158      1.97        0.492</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Ligament         9           11.0     <span style="text-decoration: underline;">73</span>158      1.11        0.369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Muscle          25           30.5     <span style="text-decoration: underline;">73</span>158      3.08        0.615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Unknown         21           25.6     <span style="text-decoration: underline;">73</span>158      2.58        0.564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bone            11           13.4     <span style="text-decoration: underline;">74</span>690      1.33        0.400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Concussion      16           19.5     <span style="text-decoration: underline;">74</span>690      1.93        0.482</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Ligament         9           11.0     <span style="text-decoration: underline;">74</span>690      1.08        0.361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Muscle          25           30.5     <span style="text-decoration: underline;">74</span>690      3.01        0.602</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Unknown         21           25.6     <span style="text-decoration: underline;">74</span>690      2.53        0.552</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: incidence_lower &lt;dbl&gt;, incidence_upper &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ndayslost &lt;dbl&gt;, percent_ndayslost &lt;dbl&gt;, mean_dayslost &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   median_dayslost &lt;dbl&gt;, qt25_dayslost &lt;dbl&gt;, qt75_dayslost &lt;dbl&gt;,</span></span>
@@ -347,11 +342,11 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 73                joe-gomez    Ligament      2960      3  9.121622     5.266371</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 74                joe-gomez      Muscle      2960      0  0.000000     0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 75                joe-gomez     Unknown      2960      0  0.000000     0.000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76               joel-matip        Bone      1994      1  4.513541     4.513541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77               joel-matip  Concussion      1994      0  0.000000     0.000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78               joel-matip    Ligament      1994      0  0.000000     0.000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79               joel-matip      Muscle      1994      2  9.027081     6.383110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80               joel-matip     Unknown      1994      0  0.000000     0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76               joel-matip        Bone      3526      1  2.552467     2.552467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77               joel-matip  Concussion      3526      0  0.000000     0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78               joel-matip    Ligament      3526      0  0.000000     0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79               joel-matip      Muscle      3526      2  5.104935     3.609734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80               joel-matip     Unknown      3526      0  0.000000     0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81         jordan-henderson        Bone      4154      1  2.166586     2.166586</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82         jordan-henderson  Concussion      4154      0  0.000000     0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 83         jordan-henderson    Ligament      4154      2  4.333173     3.064016</span>
@@ -488,10 +483,10 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 73       -1.2002753       19.443519       206     68.666667            54.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 74        0.0000000        0.000000         0      0.000000             0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 75        0.0000000        0.000000         0      0.000000             0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76       -4.3328364       13.359918        28     28.000000            28.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76       -2.4502768        7.555212        28     28.000000            28.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77        0.0000000        0.000000         0      0.000000             0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 78        0.0000000        0.000000         0      0.000000             0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79       -3.4835852       21.537748       116     58.000000            58.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79       -1.9700139       12.179883       116     58.000000            58.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 80        0.0000000        0.000000         0      0.000000             0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81       -2.0798449        6.413018        18     18.000000            18.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82        0.0000000        0.000000         0      0.000000             0.0</span>
@@ -629,10 +624,10 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 73          41.00         89.00  626.351351  43.639967  540.8185887</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 74           0.00          0.00    0.000000   0.000000    0.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 75           0.00          0.00    0.000000   0.000000    0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76          28.00         28.00  126.379137  23.883412   79.5685100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76          28.00         28.00   71.469087  13.506388   44.9970530</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77           0.00          0.00    0.000000   0.000000    0.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 78           0.00          0.00    0.000000   0.000000    0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79          41.50         74.50  523.570712  48.612320  428.2923153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79          41.50         74.50  296.086217  27.490915  242.2050132</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 80           0.00          0.00    0.000000   0.000000    0.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81          18.00         18.00   38.998556   9.192048   20.9824732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82           0.00          0.00    0.000000   0.000000    0.0000000</span>
@@ -770,10 +765,10 @@ medicine</em>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 73    711.884114</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 74      0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 75      0.000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76    173.189765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76     97.941121</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77      0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 78      0.000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79    618.849109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79    349.967420</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 80      0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81     57.014638</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82      0.000000</span>
