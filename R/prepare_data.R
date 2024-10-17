@@ -3,7 +3,7 @@
 #' These are the data preprocessing functions provided by the \code{injurytools}
 #' package, which involve:
 #' \enumerate{
-#'   \item setting \strong{exposure} and \strong{injury/illness data} in a standardized
+#'   \item setting \strong{exposure} and \strong{injury and illness data} in a standardized
 #'   format and
 #'   \item integrating both sources of data into an adequate data structure.
 #' }
