@@ -1,147 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/404.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/model-injury-data-i.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/model-injury-data-ii.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/articles/visualize-injury-data.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_burden.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_exposure.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_incidence.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_iqr_dayslost.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_mean_dayslost.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_median_dayslost.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_ncases.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_ndayslost.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_prevalence.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/calc_summary.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/check_injfollowup.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/cut_injd.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/data_followup.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/data_injurieslong.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/date2season.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/date_format.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/exp_unit_suffix.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/get_data_exposures.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/get_data_followup.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/get_data_injuries.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_photo.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_prevalence.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_rank.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/gg_riskmatrix.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injd.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/injurytools.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/is_injd.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/label_unit.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/new_injd.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/prepare_data.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/raw_df_exposures.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/raw_df_injuries.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/season2year.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/summary_unit.html</loc>
-  </url>
-  <url>
-    <loc>https://lzumeta.github.io/injurytools/reference/validate_injd.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://lzumeta.github.io/injurytools/404.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/LICENSE-text.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/LICENSE.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/index.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/model-injury-data-i.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/model-injury-data-ii.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/prepare-injury-data.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/articles/visualize-injury-data.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/authors.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/index.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/news/index.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_burden.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_exposure.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_incidence.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_iqr_dayslost.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_mean_dayslost.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_median_dayslost.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_ncases.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_ndayslost.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_prevalence.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/calc_summary.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/check_injfollowup.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/cut_injd.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/data_followup.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/data_injurieslong.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/date2season.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/date_format.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/exp_unit_suffix.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/get_data_exposures.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/get_data_followup.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/get_data_injuries.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/gg_photo.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/gg_prevalence.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/gg_rank.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/gg_riskmatrix.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/index.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/injd.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/injurytools.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/is_injd.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/label_unit.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/new_injd.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/prepare_data.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/raw_df_exposures.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/raw_df_injuries.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/season2year.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/summary_unit.html</loc></url>
+<url><loc>https://lzumeta.github.io/injurytools/reference/validate_injd.html</loc></url>
 </urlset>
+
