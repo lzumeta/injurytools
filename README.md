@@ -78,7 +78,8 @@ library(ggplot2)
           legend.text  = element_text(size = 20),
           legend.position = "top",
           plot.caption = element_text(face = "italic", size = 12, colour = "gray10"),
-          plot.title = element_text(face = "bold", hjust = 0.5, size = 22))
+          plot.title = element_text(face = "bold", hjust = 0.5, size = 22),
+          plot.title.position = "plot")
 )
 ```
 
