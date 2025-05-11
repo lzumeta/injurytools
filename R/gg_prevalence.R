@@ -1,7 +1,7 @@
-#' Plot polar area diagrams representing players' prevalence
+#' Plot bar plots representing players' prevalence
 #'
 #' Plot the proportions of available and injured players in the cohort, on a
-#' monthly or season basis, by a polar area diagram. Further information on the
+#' monthly or season basis, by a bar plot. Further information on the
 #' type of injury may be specified so that the injured players proportions are
 #' disaggregated and reported according to this variable.
 #'
@@ -12,7 +12,8 @@
 #' @param by Character specifying the name of the column on the basis of which
 #'   to classify the injuries and calculate proportions of the injured athletes.
 #'   Defaults to \code{NULL}.
-#' @param line_mean TOWRITE!!!
+#' @param line_mean Logical (defaults to FALSE) whether to add a horizontal line
+#' indicating the mean prevalence over the period.
 #' @param title Text for the main title.
 #'
 #' @return  A ggplot object (to which optionally more layers can be added).
@@ -37,11 +38,19 @@
 #' \donttest{
 #' library(ggplot2)
 #' our_palette <- c("red3", rev(RColorBrewer::brewer.pal(5, "Reds")), "seagreen3")
+#' gg_prevalence(injd, time_period = "monthly",
+#'               title = "Monthly prevalence of sports injuries") +
+#'   scale_fill_manual(values = our_palette)
+#' gg_prevalence(injd, time_period = "monthly",
+#'               title = "Monthly prevalence of sports injuries",
+#'               line_mean = TRUE) +
+#'   scale_fill_manual(values = our_palette)
 #' gg_prevalence(injd, time_period = "monthly", by = "injury_type",
 #'               title = "Monthly prevalence of each type of sports injury") +
 #'   scale_fill_manual(values = our_palette)
-#' gg_prevalence(injd, time_period = "monthly",
-#'               title = "Monthly prevalence of sports injuries") +
+#' gg_prevalence(injd, time_period = "monthly", by = "injury_type",
+#'               title = "Monthly prevalence of each type of sports injury",
+#'               line_mean = TRUE) +
 #'   scale_fill_manual(values = our_palette)
 #'}
 gg_prevalence <- function(injd,
@@ -82,7 +91,13 @@ gg_prevalence <- function(injd,
 
   if (!line_mean) df_prev_aux <- df_prev
 
-  ymax <- pmax(100, max(df_prev_aux$prop))
+
+  if (time_period == "monthly") {
+    ymax_data <- max(tapply(df_prev_aux$prop, INDEX = df_prev_aux$month, FUN = sum), na.rm = T)
+  } else {
+    ymax_data <- max(tapply(df_prev_aux$prop, INDEX = df_prev_aux$season, FUN = sum), na.rm = T)
+  }
+  ymax <- pmax(100, ymax_data)
   if (ymax > 100) {
     warning("Overall stacked prevalence >100% because there are athletes
             contributing to more than one case-specific prevalence.")

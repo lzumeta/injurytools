@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_prevalence.R
 \name{gg_prevalence}
 \alias{gg_prevalence}
-\title{Plot polar area diagrams representing players' prevalence}
+\title{Plot bar plots representing players' prevalence}
 \usage{
 gg_prevalence(
   injd,
@@ -23,7 +23,8 @@ and injured athletes.}
 to classify the injuries and calculate proportions of the injured athletes.
 Defaults to \code{NULL}.}
 
-\item{line_mean}{TOWRITE!!!}
+\item{line_mean}{Logical (defaults to FALSE) whether to add a horizontal line
+indicating the mean prevalence over the period.}
 
 \item{title}{Text for the main title.}
 }
@@ -32,7 +33,7 @@ A ggplot object (to which optionally more layers can be added).
 }
 \description{
 Plot the proportions of available and injured players in the cohort, on a
-monthly or season basis, by a polar area diagram. Further information on the
+monthly or season basis, by a bar plot. Further information on the
 type of injury may be specified so that the injured players proportions are
 disaggregated and reported according to this variable.
 }
@@ -50,11 +51,19 @@ injd         <- prepare_all(data_exposures = df_exposures,
 \donttest{
 library(ggplot2)
 our_palette <- c("red3", rev(RColorBrewer::brewer.pal(5, "Reds")), "seagreen3")
+gg_prevalence(injd, time_period = "monthly",
+              title = "Monthly prevalence of sports injuries") +
+  scale_fill_manual(values = our_palette)
+gg_prevalence(injd, time_period = "monthly",
+              title = "Monthly prevalence of sports injuries",
+              line_mean = TRUE) +
+  scale_fill_manual(values = our_palette)
 gg_prevalence(injd, time_period = "monthly", by = "injury_type",
               title = "Monthly prevalence of each type of sports injury") +
   scale_fill_manual(values = our_palette)
-gg_prevalence(injd, time_period = "monthly",
-              title = "Monthly prevalence of sports injuries") +
+gg_prevalence(injd, time_period = "monthly", by = "injury_type",
+              title = "Monthly prevalence of each type of sports injury",
+              line_mean = TRUE) +
   scale_fill_manual(values = our_palette)
 }
 }

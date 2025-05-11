@@ -9,7 +9,7 @@ test_that("gg_prevalence works", {
   gg3 <- gg_prevalence(injd, time_period = "season")
   expect_s3_class(gg3, class = c("gg", "ggplot"))
 
-  gg4 <- gg_prevalence(injd, time_period = "season", by = "injury_type")
+  gg4 <- suppressWarnings(gg_prevalence(injd, time_period = "season", by = "injury_type"))
   expect_s3_class(gg4, class = c("gg", "ggplot"))
 
   gg5 <- suppressWarnings(gg_prevalence(injd, time_period = "season", by = "injury_type",
