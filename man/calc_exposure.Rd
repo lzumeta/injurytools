@@ -4,13 +4,7 @@
 \alias{calc_exposure}
 \title{Calculate the exposure time}
 \usage{
-calc_exposure(
-  injd,
-  by = NULL,
-  overall = TRUE,
-  time_period = NULL,
-  quiet = FALSE
-)
+calc_exposure(injd, by = NULL, overall = TRUE, quiet = FALSE)
 }
 \arguments{
 \item{injd}{\code{injd} \strong{S3} object (see
@@ -24,8 +18,6 @@ location", "sports club"). Optional, defaults to \code{NULL}.}
 \item{overall}{Logical, whether to calculate overall (for all the cohort) or
 athlete-wise summary statistic (i.e. number of cases per cohort of per
 athlete). Defaults to \code{TRUE}.}
-
-\item{time_period}{TOWRITE TO THINK!!!!}
 
 \item{quiet}{Logical, whether or not to silence the warning messages
 (defaults to \code{FALSE}).}
