@@ -26,4 +26,17 @@ test_that("validate_injd works", {
   injd5 <- injd
   injd5$tstop_minPlay[[2]] <- injd5$tstop_minPlay[[2]] + 1
   expect_error(validate_injd(injd5), "tstart and tstop are not correctly recorded")
+
+  injdquitvar <- injd
+  names(injdquitvar)[[3]] <- "tfinal"
+  expect_error(validate_injd(injdquitvar), "The `x` data frame has not proper column names")
+
+  injddates <- injd
+  injddates$date_injured <- injddates$date_recovered + 1
+  expect_error(validate_injd(injddates), "Injury and recovery dates are not properly recorded in `x`")
+
+  injddates <- injd
+  injddates$date_injured[[1]] <- NA
+  injddates$status[[1]] <- 1
+  expect_error(validate_injd(injddates), "status is not correctly recorded in `x`")
 })

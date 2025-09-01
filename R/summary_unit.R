@@ -19,25 +19,25 @@ summary_unit <- function(unit, summary_data, quiet) {
     }
     if (unit == "minutes") {
       summary_data <- summary_data |>
-        dplyr::mutate(dplyr::across(tidyselect::any_of(c("incidence", "burden")):dplyr::last_col(), ~ .x * 60 * 1000))
+        dplyr::mutate(dplyr::across(tidyselect::any_of(tidyselect::starts_with(c("incidence", "burden"))), ~ .x * 60 * 1000))
     } else {
       summary_data <- summary_data |>
-        dplyr::mutate(dplyr::across(tidyselect::any_of(c("incidence", "burden")):dplyr::last_col(), ~ .x * 1000))
+        dplyr::mutate(dplyr::across(tidyselect::any_of(tidyselect::starts_with(c("incidence", "burden"))), ~ .x * 1000))
     }
   } else if (unit == "matches_minutes") {
     if (!quiet) {
-      warning(paste0("\n  Exposure time unit is ", unit,
-                     "\n  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)\n\n"))
+      warning(paste0("\n Exposure time unit is ", unit,
+                     "\n Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)\n\n"))
     }
     summary_data <- summary_data |>
-      dplyr::mutate(dplyr::across(tidyselect::any_of(c("incidence", "burden")):dplyr::last_col(), ~ .x * 90 * 100))
+      dplyr::mutate(dplyr::across(tidyselect::any_of(tidyselect::starts_with(c("incidence", "burden"))), ~ .x * 90 * 100))
   } else if (unit %in% c("matches_num", "days", "activity_days")) {
     if (!quiet) {
-      warning(paste0("\n  Exposure time unit is ", unit,
-                     "\n  Case incidence and case burden are calculated per 100 of ", unit, " of exposure\n\n"))
+      warning(paste0("\n Exposure time unit is ", unit,
+                     "\n Case incidence and case burden are calculated per 100 of ", unit, " of exposure\n\n"))
     }
     summary_data <- summary_data |>
-      dplyr::mutate(dplyr::across(tidyselect::any_of(c("incidence", "burden")):dplyr::last_col(), ~ .x * 100))
+      dplyr::mutate(dplyr::across(tidyselect::any_of(tidyselect::starts_with(c("incidence", "burden"))), ~ .x * 100))
     unit <- dplyr::case_when(unit == "matches_num" ~ "matches",
                              unit == "days" ~ "days",
                              unit == "activity_days" ~ "activity days")

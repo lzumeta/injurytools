@@ -62,9 +62,9 @@ validate_injd <- function(x) {
   exp_suffix <- exp_unit_suffix(unit_exposure)
   tstart_exp <- paste0("tstart_", exp_suffix)
   tstop_exp  <- paste0("tstop_", exp_suffix)
-  need_cols <- c("person_id", "t0", "tf", "date_injured",
-                 "date_recovered", "tstart", "tstop",
-                 tstart_exp, tstop_exp, "status", "enum")
+  need_cols  <- c("person_id", "t0", "tf", "date_injured",
+                  "date_recovered", "tstart", "tstop",
+                  tstart_exp, tstop_exp, "status", "enum")
   if (!all(need_cols %in% names(values))) {
     stop("The `x` data frame has not proper column names",
          call. = FALSE)
