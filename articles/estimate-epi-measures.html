@@ -74,7 +74,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Estimate Measures of Injury Epidemiology</h1>
             
-            <h4 data-toc-skip class="date">2025-05-11</h4>
+            <h4 data-toc-skip class="date">2025-09-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/master/vignettes/estimate-epi-measures.Rmd" class="external-link"><code>vignettes/estimate-epi-measures.Rmd</code></a></small>
       <div class="d-none name"><code>estimate-epi-measures.Rmd</code></div>
@@ -197,18 +197,18 @@ to calculate injury summary statistics overall or playerwise:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_summary</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_summary.html">calc_summary</a></span><span class="op">(</span><span class="va">injd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in summary_unit(unit, out, quiet): </span></span>
-<span><span class="co">#&gt;   Exposure time unit is matches_minutes</span></span>
-<span><span class="co">#&gt;   Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
+<span><span class="co">#&gt;  Exposure time unit is matches_minutes</span></span>
+<span><span class="co">#&gt;  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
 <span><span class="co">#&gt; Warning in summary_unit(unit, out, quiet): </span></span>
-<span><span class="co">#&gt;   Exposure time unit is matches_minutes</span></span>
-<span><span class="co">#&gt;   Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
+<span><span class="co">#&gt;  Exposure time unit is matches_minutes</span></span>
+<span><span class="co">#&gt;  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
 <span><span class="va">df_summary_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_summary.html">calc_summary</a></span><span class="op">(</span><span class="va">injd</span>, overall <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in summary_unit(unit, out, quiet): </span></span>
-<span><span class="co">#&gt;   Exposure time unit is matches_minutes</span></span>
-<span><span class="co">#&gt;   Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
+<span><span class="co">#&gt;  Exposure time unit is matches_minutes</span></span>
+<span><span class="co">#&gt;  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span>
 <span><span class="co">#&gt; Warning in summary_unit(unit, out, quiet): </span></span>
-<span><span class="co">#&gt;   Exposure time unit is matches_minutes</span></span>
-<span><span class="co">#&gt;   Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span></code></pre></div>
+<span><span class="co">#&gt;  Exposure time unit is matches_minutes</span></span>
+<span><span class="co">#&gt;  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)</span></span></code></pre></div>
 <p>We notice that some warning messages pop up (unless
 <code>quiet = TRUE</code>). They are displayed to make it clear what the
 exposure time unit is<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Something that it is important to be aware of.&lt;/p&gt;"><sup>2</sup></a>.</p>
@@ -1154,7 +1154,7 @@ Medicine</em>. <a href="https://doi.org/10.1136/bjsports-2022-106405" class="ext
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
