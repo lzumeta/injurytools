@@ -15,7 +15,9 @@ license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://open
 <!-- badges: end -->
 
 <!-- - Shiny: -->
+
 <!-- - Authors: -->
+
 <!-- - Version: -->
 
 ## Overview
