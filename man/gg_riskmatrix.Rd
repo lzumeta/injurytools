@@ -103,5 +103,5 @@ Sports Medicine} 2020; 54:372-389.
 
 Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk Contours
 in Team Sports: A Review of Principles, Practices and Problems.\emph{Sports
-Medicine}, 48(7), 1597–1606. \cr \url{https://doi.org/10.1007/s40279-018-0913-5}
+Medicine}, 48(7), 1597–1606. \cr \doi{10.1007/s40279-018-0913-5}
 }

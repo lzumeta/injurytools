@@ -102,7 +102,7 @@ calc_summary(injd, by = "injury_type", overall = FALSE)
 Bahr R., Clarsen B., & Ekstrand J. (2018). Why we should focus on the burden
 of injuries and illnesses, not just their incidence. \emph{British Journal
 of Sports Medicine}, 52(16), 1018–1021.
-\url{https://doi.org/10.1136/bjsports-2017-098160}
+\doi{10.1136/bjsports-2017-098160}
 
 Waldén M., Mountjoy M., McCall A., Serner A., Massey A., Tol J. L., ... &
 Andersen T. E. (2023). Football-specific extension of the IOC consensus
