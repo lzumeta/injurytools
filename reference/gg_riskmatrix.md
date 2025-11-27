@@ -111,7 +111,7 @@ STROBE Extension for Sport Injury and Illness Surveillance
 Fuller C. W. (2018). Injury Risk (Burden), Risk Matrices and Risk
 Contours in Team Sports: A Review of Principles, Practices and
 Problems.*Sports Medicine*, 48(7), 1597–1606.  
-<https://doi.org/10.1007/s40279-018-0913-5>
+[doi:10.1007/s40279-018-0913-5](https://doi.org/10.1007/s40279-018-0913-5)
 
 ## Examples
 
