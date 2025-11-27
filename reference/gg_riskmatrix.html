@@ -140,7 +140,7 @@ average time-loss'), which leads to case burden (defaults to
 <dt id="arg-errh-height">errh_height<a class="anchor" aria-label="anchor" href="#arg-errh-height"></a></dt>
 <dd><p>Set the height of the horizontal interval whiskers; the
 <code>height</code> argument for
-<code><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html" class="external-link">ggplot2::geom_errorbarh()</a></code>.</p></dd>
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">ggplot2::geom_errorbar()</a></code>.</p></dd>
 
 
 <dt id="arg-errv-width">errv_width<a class="anchor" aria-label="anchor" href="#arg-errv-width"></a></dt>
@@ -195,12 +195,14 @@ Medicine</em>, 48(7), 1597–1606. <br><a href="https://doi.org/10.1007/s40279-0
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     time-loss. Possibly, there is a concrete long-term injury in the data.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     For plotting purposes the vertical upper limit (i.e. 75% quartile)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     is lengthened to the average value.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `height` was translated to `width`.</span>
 <span class="r-plt img"><img src="gg_riskmatrix-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">gg_riskmatrix</span><span class="op">(</span><span class="va">injd</span>, by <span class="op">=</span> <span class="st">"injury_type"</span>, title <span class="op">=</span> <span class="st">"Risk matrix"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>An injury average time-loss is bigger than its 75% quartile</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     time-loss. Possibly, there is a concrete long-term injury in the data.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     For plotting purposes the vertical upper limit (i.e. 75% quartile)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>     is lengthened to the average value.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `height` was translated to `width`.</span>
 <span class="r-plt img"><img src="gg_riskmatrix-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
@@ -214,7 +216,7 @@ Medicine</em>, 48(7), 1597–1606. <br><a href="https://doi.org/10.1007/s40279-0
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -1,0 +1,772 @@
+# Calculate summary statistics
+
+Calculate epidemiological summary statistics such as case (e.g. injury)
+incidence and case burden (see Bahr et al. 2018), including total number
+of cases, number of days lost due to this event, total time of exposure
+etc., by means of a (widely used) Poisson method, negative binomial,
+zero-inflated poisson or zero-inflated negative binomial, on a athlete
+and overall basis.
+
+## Usage
+
+``` r
+calc_summary(
+  injd,
+  by = NULL,
+  overall = TRUE,
+  method = c("poisson", "negbin", "zinfpois", "zinfnb"),
+  conf_level = 0.95,
+  scale = TRUE,
+  quiet = FALSE
+)
+```
+
+## Arguments
+
+- injd:
+
+  `injd` **S3** object (see
+  [`prepare_all()`](https://lzumeta.github.io/injurytools/reference/prepare_data.md)).
+
+- by:
+
+  Character specifying the name of the column according to which compute
+  summary statistics. It should refer to a (categorical) variable that
+  describes a grouping factor (e.g. "type of case or injury", "injury
+  location", "sports club"). Optional, defaults to `NULL`.
+
+- overall:
+
+  Logical, whether to calculate overall (for all the cohort) or
+  athlete-wise summary statistic (i.e. number of cases per cohort of per
+  athlete). Defaults to `TRUE`.
+
+- method:
+
+  Method to estimate the incidence (burden) rate. One of "poisson",
+  "negbin", "zinfpois" or "zinfnb"; that stand for Poisson method,
+  negative binomial method, zero-inflated Poisson and zero-inflated
+  negative binomial.
+
+- conf_level:
+
+  Confidence level (defaults to 0.95).
+
+- scale:
+
+  Logical, whether to transform the incidence and burden rates output
+  according to the unit of exposure (defaults to `TRUE`).
+
+- quiet:
+
+  Logical, whether or not to silence the warning messages (defaults to
+  `FALSE`).
+
+## Value
+
+A data frame comprising of overall or athlete-wise epidemiological
+summary statistics, that it's made up of the following columns:
+
+- `totalexpo`: total exposure that the athlete has been under risk of
+  suffering a sports-related health problem.
+
+- `ncases`: number of sports-related health problems suffered by the
+  athlete or overall in the team/cohort over the given period specified
+  by the `injd` data frame.
+
+- `ndayslost`: number of days lost by the athlete or overall in the
+  team/cohort due to the sports-related health problem over the given
+  period specified by the `injd` data frame.
+
+- `mean_dayslost`: average of number of days lost (i.e. `ndayslost`)
+  athlete-wise or overall in the team/cohort.
+
+- `median_dayslost`: median of number of days lost (i.e. `ndayslost`)
+  athlete-wise or overall in the team/cohort.
+
+- `qt25_dayslost` and `qt75_dayslost`: interquartile range of number of
+  days lost (i.e. `ndayslost`) athlete-wise or overall in the
+  team/cohort.
+
+- `incidence`: case incidence rate, number of cases per unit of
+  exposure.
+
+- `burden`: case burden rate, number of days lost per unit of exposure.
+
+- `incidence_sd` and `burden_sd`: estimated standard deviation, by the
+  specified `method` argument, of case incidence (`incidence`) and case
+  burden (`burden`).
+
+- `incidence_lower` and `burden_lower`: lower bound of, for example, 95%
+  confidence interval (if `conf_level = 0.95`) of case incidence
+  (`incidence`) and case burden (`burden`).
+
+- `incidence_upper` and `burden_upper`: the same (as above item) applies
+  but for the upper bound.
+
+Apart from this column names, they may further include these other
+columns depending on the user's specifications to the function:
+
+- `by`: only if it is specified as an argument to function.
+
+- `percent_ncases`: percentage (%) of number of cases of that type
+  relative to all types of cases (if `by` specified).
+
+- `percent_dayslost`: percentage (%) of number of days lost because of
+  cases of that type relative to the total number of days lost because
+  of all types of cases (if `by` specified).
+
+## References
+
+Bahr R., Clarsen B., & Ekstrand J. (2018). Why we should focus on the
+burden of injuries and illnesses, not just their incidence. *British
+Journal of Sports Medicine*, 52(16), 1018–1021.
+<https://doi.org/10.1136/bjsports-2017-098160>
+
+Waldén M., Mountjoy M., McCall A., Serner A., Massey A., Tol J. L., ...
+& Andersen T. E. (2023). Football-specific extension of the IOC
+consensus statement: methods for recording and reporting of
+epidemiological data on injury and illness in sport 2020. *British
+journal of sports medicine*.
+
+## Examples
+
+``` r
+calc_summary(injd)
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> # A tibble: 1 × 15
+#>   totalexpo ncases incidence incidence_sd incidence_lower incidence_upper
+#>       <dbl>  <dbl>     <dbl>        <dbl>           <dbl>           <dbl>
+#> 1     74690     82      9.88         1.09            7.74            12.0
+#> # ℹ 9 more variables: ndayslost <dbl>, mean_dayslost <dbl>,
+#> #   median_dayslost <dbl>, qt25_dayslost <dbl>, qt75_dayslost <dbl>,
+#> #   burden <dbl>, burden_sd <dbl>, burden_lower <dbl>, burden_upper <dbl>
+calc_summary(injd, overall = FALSE)
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> # A tibble: 28 × 16
+#>    person_id             totalexpo ncases incidence incidence_sd incidence_lower
+#>    <fct>                     <dbl>  <dbl>     <dbl>        <dbl>           <dbl>
+#>  1 adam-lallana                700      6     77.1         31.5            15.4 
+#>  2 alberto-moreno             1264      1      7.12         7.12           -6.84
+#>  3 alex-oxlade-chamberl…      1483      1      6.07         6.07           -5.83
+#>  4 alisson                    3420      0      0            0               0   
+#>  5 andrew-robertson           5162      5      8.72         3.90            1.08
+#>  6 daniel-sturridge            927      3     29.1         16.8            -3.83
+#>  7 danny-ings                  265      0      0            0               0   
+#>  8 dejan-lovren               3109      6     17.4          7.09            3.47
+#>  9 divock-origi                366      1     24.6         24.6           -23.6 
+#> 10 dominic-solanke             581      0      0            0               0   
+#> # ℹ 18 more rows
+#> # ℹ 10 more variables: incidence_upper <dbl>, ndayslost <dbl>,
+#> #   mean_dayslost <dbl>, median_dayslost <dbl>, qt25_dayslost <dbl>,
+#> #   qt75_dayslost <dbl>, burden <dbl>, burden_sd <dbl>, burden_lower <dbl>,
+#> #   burden_upper <dbl>
+calc_summary(injd, by = "injury_type")
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> # A tibble: 5 × 18
+#>   injury_type ncases percent_ncases totalexpo incidence incidence_sd
+#>   <chr>        <dbl>          <dbl>     <dbl>     <dbl>        <dbl>
+#> 1 Bone            11           13.4     74690      1.33        0.400
+#> 2 Concussion      16           19.5     74690      1.93        0.482
+#> 3 Ligament         9           11.0     74690      1.08        0.361
+#> 4 Muscle          25           30.5     74690      3.01        0.602
+#> 5 Unknown         21           25.6     74690      2.53        0.552
+#> # ℹ 12 more variables: incidence_lower <dbl>, incidence_upper <dbl>,
+#> #   ndayslost <dbl>, percent_ndayslost <dbl>, mean_dayslost <dbl>,
+#> #   median_dayslost <dbl>, qt25_dayslost <dbl>, qt75_dayslost <dbl>,
+#> #   burden <dbl>, burden_sd <dbl>, burden_lower <dbl>, burden_upper <dbl>
+calc_summary(injd, by = "injury_type", overall = FALSE)
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#> Warning: 
+#>  Exposure time unit is matches_minutes
+#>  Case incidence and case burden are calculated per 100 athlete-matches of exposure (i.e. 90 minutes times 100)
+#> 
+#>                   person_id injury_type totalexpo ncases incidence incidence_sd
+#> 1              adam-lallana        Bone       700      0  0.000000     0.000000
+#> 2              adam-lallana  Concussion       700      3 38.571429    22.269225
+#> 3              adam-lallana    Ligament       700      0  0.000000     0.000000
+#> 4              adam-lallana      Muscle       700      3 38.571429    22.269225
+#> 5              adam-lallana     Unknown       700      0  0.000000     0.000000
+#> 6            alberto-moreno        Bone      1264      0  0.000000     0.000000
+#> 7            alberto-moreno  Concussion      1264      0  0.000000     0.000000
+#> 8            alberto-moreno    Ligament      1264      1  7.120253     7.120253
+#> 9            alberto-moreno      Muscle      1264      0  0.000000     0.000000
+#> 10           alberto-moreno     Unknown      1264      0  0.000000     0.000000
+#> 11  alex-oxlade-chamberlain        Bone      1483      0  0.000000     0.000000
+#> 12  alex-oxlade-chamberlain  Concussion      1483      0  0.000000     0.000000
+#> 13  alex-oxlade-chamberlain    Ligament      1483      1  6.068780     6.068780
+#> 14  alex-oxlade-chamberlain      Muscle      1483      0  0.000000     0.000000
+#> 15  alex-oxlade-chamberlain     Unknown      1483      0  0.000000     0.000000
+#> 16                  alisson        Bone      3420      0  0.000000     0.000000
+#> 17                  alisson  Concussion      3420      0  0.000000     0.000000
+#> 18                  alisson    Ligament      3420      0  0.000000     0.000000
+#> 19                  alisson      Muscle      3420      0  0.000000     0.000000
+#> 20                  alisson     Unknown      3420      0  0.000000     0.000000
+#> 21         andrew-robertson        Bone      5162      1  1.743510     1.743510
+#> 22         andrew-robertson  Concussion      5162      2  3.487021     2.465696
+#> 23         andrew-robertson    Ligament      5162      0  0.000000     0.000000
+#> 24         andrew-robertson      Muscle      5162      1  1.743510     1.743510
+#> 25         andrew-robertson     Unknown      5162      1  1.743510     1.743510
+#> 26         daniel-sturridge        Bone       927      0  0.000000     0.000000
+#> 27         daniel-sturridge  Concussion       927      0  0.000000     0.000000
+#> 28         daniel-sturridge    Ligament       927      0  0.000000     0.000000
+#> 29         daniel-sturridge      Muscle       927      1  9.708738     9.708738
+#> 30         daniel-sturridge     Unknown       927      2 19.417476    13.730229
+#> 31               danny-ings        Bone       265      0  0.000000     0.000000
+#> 32               danny-ings  Concussion       265      0  0.000000     0.000000
+#> 33               danny-ings    Ligament       265      0  0.000000     0.000000
+#> 34               danny-ings      Muscle       265      0  0.000000     0.000000
+#> 35               danny-ings     Unknown       265      0  0.000000     0.000000
+#> 36             dejan-lovren        Bone      3109      1  2.894821     2.894821
+#> 37             dejan-lovren  Concussion      3109      1  2.894821     2.894821
+#> 38             dejan-lovren    Ligament      3109      0  0.000000     0.000000
+#> 39             dejan-lovren      Muscle      3109      3  8.684464     5.013978
+#> 40             dejan-lovren     Unknown      3109      1  2.894821     2.894821
+#> 41             divock-origi        Bone       366      0  0.000000     0.000000
+#> 42             divock-origi  Concussion       366      0  0.000000     0.000000
+#> 43             divock-origi    Ligament       366      0  0.000000     0.000000
+#> 44             divock-origi      Muscle       366      0  0.000000     0.000000
+#> 45             divock-origi     Unknown       366      1 24.590164    24.590164
+#> 46          dominic-solanke        Bone       581      0  0.000000     0.000000
+#> 47          dominic-solanke  Concussion       581      0  0.000000     0.000000
+#> 48          dominic-solanke    Ligament       581      0  0.000000     0.000000
+#> 49          dominic-solanke      Muscle       581      0  0.000000     0.000000
+#> 50          dominic-solanke     Unknown       581      0  0.000000     0.000000
+#> 51                 emre-can        Bone      2094      0  0.000000     0.000000
+#> 52                 emre-can  Concussion      2094      0  0.000000     0.000000
+#> 53                 emre-can    Ligament      2094      0  0.000000     0.000000
+#> 54                 emre-can      Muscle      2094      0  0.000000     0.000000
+#> 55                 emre-can     Unknown      2094      1  4.297994     4.297994
+#> 56                  fabinho        Bone      2013      1  4.470939     4.470939
+#> 57                  fabinho  Concussion      2013      0  0.000000     0.000000
+#> 58                  fabinho    Ligament      2013      0  0.000000     0.000000
+#> 59                  fabinho      Muscle      2013      1  4.470939     4.470939
+#> 60                  fabinho     Unknown      2013      1  4.470939     4.470939
+#> 61      georginio-wijnaldum        Bone      5122      0  0.000000     0.000000
+#> 62      georginio-wijnaldum  Concussion      5122      2  3.514252     2.484952
+#> 63      georginio-wijnaldum    Ligament      5122      0  0.000000     0.000000
+#> 64      georginio-wijnaldum      Muscle      5122      0  0.000000     0.000000
+#> 65      georginio-wijnaldum     Unknown      5122      4  7.028504     3.514252
+#> 66             james-milner        Bone      3548      1  2.536640     2.536640
+#> 67             james-milner  Concussion      3548      2  5.073281     3.587351
+#> 68             james-milner    Ligament      3548      0  0.000000     0.000000
+#> 69             james-milner      Muscle      3548      2  5.073281     3.587351
+#> 70             james-milner     Unknown      3548      0  0.000000     0.000000
+#> 71                joe-gomez        Bone      2960      0  0.000000     0.000000
+#> 72                joe-gomez  Concussion      2960      1  3.040541     3.040541
+#> 73                joe-gomez    Ligament      2960      3  9.121622     5.266371
+#> 74                joe-gomez      Muscle      2960      0  0.000000     0.000000
+#> 75                joe-gomez     Unknown      2960      0  0.000000     0.000000
+#> 76               joel-matip        Bone      3526      1  2.552467     2.552467
+#> 77               joel-matip  Concussion      3526      0  0.000000     0.000000
+#> 78               joel-matip    Ligament      3526      0  0.000000     0.000000
+#> 79               joel-matip      Muscle      3526      2  5.104935     3.609734
+#> 80               joel-matip     Unknown      3526      0  0.000000     0.000000
+#> 81         jordan-henderson        Bone      4154      1  2.166586     2.166586
+#> 82         jordan-henderson  Concussion      4154      0  0.000000     0.000000
+#> 83         jordan-henderson    Ligament      4154      2  4.333173     3.064016
+#> 84         jordan-henderson      Muscle      4154      2  4.333173     3.064016
+#> 85         jordan-henderson     Unknown      4154      3  6.499759     3.752638
+#> 86             loris-karius        Bone      1710      0  0.000000     0.000000
+#> 87             loris-karius  Concussion      1710      1  5.263158     5.263158
+#> 88             loris-karius    Ligament      1710      0  0.000000     0.000000
+#> 89             loris-karius      Muscle      1710      0  0.000000     0.000000
+#> 90             loris-karius     Unknown      1710      0  0.000000     0.000000
+#> 91            mohamed-salah        Bone      6181      0  0.000000     0.000000
+#> 92            mohamed-salah  Concussion      6181      1  1.456075     1.456075
+#> 93            mohamed-salah    Ligament      6181      0  0.000000     0.000000
+#> 94            mohamed-salah      Muscle      6181      1  1.456075     1.456075
+#> 95            mohamed-salah     Unknown      6181      1  1.456075     1.456075
+#> 96               naby-keita        Bone      1393      0  0.000000     0.000000
+#> 97               naby-keita  Concussion      1393      1  6.460876     6.460876
+#> 98               naby-keita    Ligament      1393      0  0.000000     0.000000
+#> 99               naby-keita      Muscle      1393      2 12.921752     9.137058
+#> 100              naby-keita     Unknown      1393      0  0.000000     0.000000
+#> 101       philippe-coutinho        Bone      1117      0  0.000000     0.000000
+#> 102       philippe-coutinho  Concussion      1117      1  8.057296     8.057296
+#> 103       philippe-coutinho    Ligament      1117      0  0.000000     0.000000
+#> 104       philippe-coutinho      Muscle      1117      1  8.057296     8.057296
+#> 105       philippe-coutinho     Unknown      1117      1  8.057296     8.057296
+#> 106           ragnar-klavan        Bone      1448      0  0.000000     0.000000
+#> 107           ragnar-klavan  Concussion      1448      0  0.000000     0.000000
+#> 108           ragnar-klavan    Ligament      1448      0  0.000000     0.000000
+#> 109           ragnar-klavan      Muscle      1448      0  0.000000     0.000000
+#> 110           ragnar-klavan     Unknown      1448      0  0.000000     0.000000
+#> 111         roberto-firmino        Bone      5398      0  0.000000     0.000000
+#> 112         roberto-firmino  Concussion      5398      0  0.000000     0.000000
+#> 113         roberto-firmino    Ligament      5398      1  1.667284     1.667284
+#> 114         roberto-firmino      Muscle      5398      2  3.334568     2.357896
+#> 115         roberto-firmino     Unknown      5398      1  1.667284     1.667284
+#> 116              sadio-mane        Bone      5294      3  5.100113     2.944552
+#> 117              sadio-mane  Concussion      5294      0  0.000000     0.000000
+#> 118              sadio-mane    Ligament      5294      0  0.000000     0.000000
+#> 119              sadio-mane      Muscle      5294      1  1.700038     1.700038
+#> 120              sadio-mane     Unknown      5294      0  0.000000     0.000000
+#> 121          simon-mignolet        Bone      1710      0  0.000000     0.000000
+#> 122          simon-mignolet  Concussion      1710      0  0.000000     0.000000
+#> 123          simon-mignolet    Ligament      1710      0  0.000000     0.000000
+#> 124          simon-mignolet      Muscle      1710      0  0.000000     0.000000
+#> 125          simon-mignolet     Unknown      1710      0  0.000000     0.000000
+#> 126  trent-alexander-arnold        Bone      4043      1  2.226070     2.226070
+#> 127  trent-alexander-arnold  Concussion      4043      0  0.000000     0.000000
+#> 128  trent-alexander-arnold    Ligament      4043      0  0.000000     0.000000
+#> 129  trent-alexander-arnold      Muscle      4043      0  0.000000     0.000000
+#> 130  trent-alexander-arnold     Unknown      4043      2  4.452140     3.148138
+#> 131         virgil-van-dijk        Bone      4645      1  1.937567     1.937567
+#> 132         virgil-van-dijk  Concussion      4645      1  1.937567     1.937567
+#> 133         virgil-van-dijk    Ligament      4645      1  1.937567     1.937567
+#> 134         virgil-van-dijk      Muscle      4645      1  1.937567     1.937567
+#> 135         virgil-van-dijk     Unknown      4645      2  3.875135     2.740134
+#> 136         xherdan-shaqiri        Bone      1057      0  0.000000     0.000000
+#> 137         xherdan-shaqiri  Concussion      1057      0  0.000000     0.000000
+#> 138         xherdan-shaqiri    Ligament      1057      0  0.000000     0.000000
+#> 139         xherdan-shaqiri      Muscle      1057      2 17.029328    12.041554
+#> 140         xherdan-shaqiri     Unknown      1057      0  0.000000     0.000000
+#>     incidence_lower incidence_upper ndayslost mean_dayslost median_dayslost
+#> 1         0.0000000        0.000000         0      0.000000             0.0
+#> 2        -5.0754497       82.218307        97     32.333333            25.0
+#> 3         0.0000000        0.000000         0      0.000000             0.0
+#> 4        -5.0754497       82.218307       205     68.333333            45.0
+#> 5         0.0000000        0.000000         0      0.000000             0.0
+#> 6         0.0000000        0.000000         0      0.000000             0.0
+#> 7         0.0000000        0.000000         0      0.000000             0.0
+#> 8        -6.8351866       21.075693        50     50.000000            50.0
+#> 9         0.0000000        0.000000         0      0.000000             0.0
+#> 10        0.0000000        0.000000         0      0.000000             0.0
+#> 11        0.0000000        0.000000         0      0.000000             0.0
+#> 12        0.0000000        0.000000         0      0.000000             0.0
+#> 13       -5.8258098       17.963369       316    316.000000           316.0
+#> 14        0.0000000        0.000000         0      0.000000             0.0
+#> 15        0.0000000        0.000000         0      0.000000             0.0
+#> 16        0.0000000        0.000000         0      0.000000             0.0
+#> 17        0.0000000        0.000000         0      0.000000             0.0
+#> 18        0.0000000        0.000000         0      0.000000             0.0
+#> 19        0.0000000        0.000000         0      0.000000             0.0
+#> 20        0.0000000        0.000000         0      0.000000             0.0
+#> 21       -1.6737071        5.160728         3      3.000000             3.0
+#> 22       -1.3456546        8.319696         6      3.000000             3.0
+#> 23        0.0000000        0.000000         0      0.000000             0.0
+#> 24       -1.6737071        5.160728        12     12.000000            12.0
+#> 25       -1.6737071        5.160728         1      1.000000             1.0
+#> 26        0.0000000        0.000000         0      0.000000             0.0
+#> 27        0.0000000        0.000000         0      0.000000             0.0
+#> 28        0.0000000        0.000000         0      0.000000             0.0
+#> 29       -9.3200387       28.737514        16     16.000000            16.0
+#> 30       -7.4932781       46.328230       106     53.000000            53.0
+#> 31        0.0000000        0.000000         0      0.000000             0.0
+#> 32        0.0000000        0.000000         0      0.000000             0.0
+#> 33        0.0000000        0.000000         0      0.000000             0.0
+#> 34        0.0000000        0.000000         0      0.000000             0.0
+#> 35        0.0000000        0.000000         0      0.000000             0.0
+#> 36       -2.7789244        8.568567        72     72.000000            72.0
+#> 37       -2.7789244        8.568567         9      9.000000             9.0
+#> 38        0.0000000        0.000000         0      0.000000             0.0
+#> 39       -1.1427516       18.511681        70     23.333333            21.0
+#> 40       -2.7789244        8.568567         9      9.000000             9.0
+#> 41        0.0000000        0.000000         0      0.000000             0.0
+#> 42        0.0000000        0.000000         0      0.000000             0.0
+#> 43        0.0000000        0.000000         0      0.000000             0.0
+#> 44        0.0000000        0.000000         0      0.000000             0.0
+#> 45      -23.6056718       72.786000         5      5.000000             5.0
+#> 46        0.0000000        0.000000         0      0.000000             0.0
+#> 47        0.0000000        0.000000         0      0.000000             0.0
+#> 48        0.0000000        0.000000         0      0.000000             0.0
+#> 49        0.0000000        0.000000         0      0.000000             0.0
+#> 50        0.0000000        0.000000         0      0.000000             0.0
+#> 51        0.0000000        0.000000         0      0.000000             0.0
+#> 52        0.0000000        0.000000         0      0.000000             0.0
+#> 53        0.0000000        0.000000         0      0.000000             0.0
+#> 54        0.0000000        0.000000         0      0.000000             0.0
+#> 55       -4.1259197       12.721908        68     68.000000            68.0
+#> 56       -4.2919403       13.233818        11     11.000000            11.0
+#> 57        0.0000000        0.000000         0      0.000000             0.0
+#> 58        0.0000000        0.000000         0      0.000000             0.0
+#> 59       -4.2919403       13.233818         9      9.000000             9.0
+#> 60       -4.2919403       13.233818         2      2.000000             2.0
+#> 61        0.0000000        0.000000         0      0.000000             0.0
+#> 62       -1.3561634        8.384668        21     10.500000            10.5
+#> 63        0.0000000        0.000000         0      0.000000             0.0
+#> 64        0.0000000        0.000000         0      0.000000             0.0
+#> 65        0.1406967       13.916312        30      7.500000             7.0
+#> 66       -2.4350834        7.508364         6      6.000000             6.0
+#> 67       -1.9577984       12.104360        19      9.500000             9.5
+#> 68        0.0000000        0.000000         0      0.000000             0.0
+#> 69       -1.9577984       12.104360        23     11.500000            11.5
+#> 70        0.0000000        0.000000         0      0.000000             0.0
+#> 71        0.0000000        0.000000         0      0.000000             0.0
+#> 72       -2.9188094        8.999890         6      6.000000             6.0
+#> 73       -1.2002753       19.443519       206     68.666667            54.0
+#> 74        0.0000000        0.000000         0      0.000000             0.0
+#> 75        0.0000000        0.000000         0      0.000000             0.0
+#> 76       -2.4502768        7.555212        28     28.000000            28.0
+#> 77        0.0000000        0.000000         0      0.000000             0.0
+#> 78        0.0000000        0.000000         0      0.000000             0.0
+#> 79       -1.9700139       12.179883       116     58.000000            58.0
+#> 80        0.0000000        0.000000         0      0.000000             0.0
+#> 81       -2.0798449        6.413018        18     18.000000            18.0
+#> 82        0.0000000        0.000000         0      0.000000             0.0
+#> 83       -1.6721880       10.338534        15      7.500000             7.5
+#> 84       -1.6721880       10.338534        45     22.500000            22.5
+#> 85       -0.8552756       13.854794        13      4.333333             4.0
+#> 86        0.0000000        0.000000         0      0.000000             0.0
+#> 87       -5.0524420       15.578758        14     14.000000            14.0
+#> 88        0.0000000        0.000000         0      0.000000             0.0
+#> 89        0.0000000        0.000000         0      0.000000             0.0
+#> 90        0.0000000        0.000000         0      0.000000             0.0
+#> 91        0.0000000        0.000000         0      0.000000             0.0
+#> 92       -1.3977796        4.309930         6      6.000000             6.0
+#> 93        0.0000000        0.000000         0      0.000000             0.0
+#> 94       -1.3977796        4.309930         5      5.000000             5.0
+#> 95       -1.3977796        4.309930        18     18.000000            18.0
+#> 96        0.0000000        0.000000         0      0.000000             0.0
+#> 97       -6.2022081       19.123960        18     18.000000            18.0
+#> 98        0.0000000        0.000000         0      0.000000             0.0
+#> 99       -4.9865534       30.830057        71     35.500000            35.5
+#> 100       0.0000000        0.000000         0      0.000000             0.0
+#> 101       0.0000000        0.000000         0      0.000000             0.0
+#> 102      -7.7347143       23.849307        12     12.000000            12.0
+#> 103       0.0000000        0.000000         0      0.000000             0.0
+#> 104      -7.7347143       23.849307        25     25.000000            25.0
+#> 105      -7.7347143       23.849307        25     25.000000            25.0
+#> 106       0.0000000        0.000000         0      0.000000             0.0
+#> 107       0.0000000        0.000000         0      0.000000             0.0
+#> 108       0.0000000        0.000000         0      0.000000             0.0
+#> 109       0.0000000        0.000000         0      0.000000             0.0
+#> 110       0.0000000        0.000000         0      0.000000             0.0
+#> 111       0.0000000        0.000000         0      0.000000             0.0
+#> 112       0.0000000        0.000000         0      0.000000             0.0
+#> 113      -1.6005328        4.935101         6      6.000000             6.0
+#> 114      -1.2868227        7.955959        23     11.500000            11.5
+#> 115      -1.6005328        4.935101         1      1.000000             1.0
+#> 116      -0.6711022       10.871329        15      5.000000             4.0
+#> 117       0.0000000        0.000000         0      0.000000             0.0
+#> 118       0.0000000        0.000000         0      0.000000             0.0
+#> 119      -1.6319750        5.032051        24     24.000000            24.0
+#> 120       0.0000000        0.000000         0      0.000000             0.0
+#> 121       0.0000000        0.000000         0      0.000000             0.0
+#> 122       0.0000000        0.000000         0      0.000000             0.0
+#> 123       0.0000000        0.000000         0      0.000000             0.0
+#> 124       0.0000000        0.000000         0      0.000000             0.0
+#> 125       0.0000000        0.000000         0      0.000000             0.0
+#> 126      -2.1369468        6.589086        15     15.000000            15.0
+#> 127       0.0000000        0.000000         0      0.000000             0.0
+#> 128       0.0000000        0.000000         0      0.000000             0.0
+#> 129       0.0000000        0.000000         0      0.000000             0.0
+#> 130      -1.7180977       10.622377        39     19.500000            19.5
+#> 131      -1.8599948        5.735129         5      5.000000             5.0
+#> 132      -1.8599948        5.735129         5      5.000000             5.0
+#> 133      -1.8599948        5.735129         3      3.000000             3.0
+#> 134      -1.8599948        5.735129        24     24.000000            24.0
+#> 135      -1.4954292        9.245698        15      7.500000             7.5
+#> 136       0.0000000        0.000000         0      0.000000             0.0
+#> 137       0.0000000        0.000000         0      0.000000             0.0
+#> 138       0.0000000        0.000000         0      0.000000             0.0
+#> 139      -6.5716829       40.630339        67     33.500000            33.5
+#> 140       0.0000000        0.000000         0      0.000000             0.0
+#>     qt25_dayslost qt75_dayslost      burden  burden_sd burden_lower
+#> 1            0.00          0.00    0.000000   0.000000    0.0000000
+#> 2           18.50         42.50 1247.142857 126.628172  998.9562011
+#> 3            0.00          0.00    0.000000   0.000000    0.0000000
+#> 4           44.00         81.00 2635.714286 184.086271 2274.9118249
+#> 5            0.00          0.00    0.000000   0.000000    0.0000000
+#> 6            0.00          0.00    0.000000   0.000000    0.0000000
+#> 7            0.00          0.00    0.000000   0.000000    0.0000000
+#> 8           50.00         50.00  356.012658  50.347793  257.3327973
+#> 9            0.00          0.00    0.000000   0.000000    0.0000000
+#> 10           0.00          0.00    0.000000   0.000000    0.0000000
+#> 11           0.00          0.00    0.000000   0.000000    0.0000000
+#> 12           0.00          0.00    0.000000   0.000000    0.0000000
+#> 13         316.00        316.00 1917.734322 107.880984 1706.2914787
+#> 14           0.00          0.00    0.000000   0.000000    0.0000000
+#> 15           0.00          0.00    0.000000   0.000000    0.0000000
+#> 16           0.00          0.00    0.000000   0.000000    0.0000000
+#> 17           0.00          0.00    0.000000   0.000000    0.0000000
+#> 18           0.00          0.00    0.000000   0.000000    0.0000000
+#> 19           0.00          0.00    0.000000   0.000000    0.0000000
+#> 20           0.00          0.00    0.000000   0.000000    0.0000000
+#> 21           3.00          3.00    5.230531   3.019848   -0.6882632
+#> 22           2.50          3.50   10.461062   4.270711    2.0906228
+#> 23           0.00          0.00    0.000000   0.000000    0.0000000
+#> 24          12.00         12.00   20.922123   6.039697    9.0845351
+#> 25           1.00          1.00    1.743510   1.743510   -1.6737071
+#> 26           0.00          0.00    0.000000   0.000000    0.0000000
+#> 27           0.00          0.00    0.000000   0.000000    0.0000000
+#> 28           0.00          0.00    0.000000   0.000000    0.0000000
+#> 29          16.00         16.00  155.339806  38.834951   79.2246996
+#> 30          52.00         54.00 1029.126214  99.957574  833.2129682
+#> 31           0.00          0.00    0.000000   0.000000    0.0000000
+#> 32           0.00          0.00    0.000000   0.000000    0.0000000
+#> 33           0.00          0.00    0.000000   0.000000    0.0000000
+#> 34           0.00          0.00    0.000000   0.000000    0.0000000
+#> 35           0.00          0.00    0.000000   0.000000    0.0000000
+#> 36          72.00         72.00  208.427147  24.563375  160.2838170
+#> 37           9.00          9.00   26.053393   8.684464    9.0321558
+#> 38           0.00          0.00    0.000000   0.000000    0.0000000
+#> 39          17.00         28.50  202.637504  24.219814  155.1675405
+#> 40           9.00          9.00   26.053393   8.684464    9.0321558
+#> 41           0.00          0.00    0.000000   0.000000    0.0000000
+#> 42           0.00          0.00    0.000000   0.000000    0.0000000
+#> 43           0.00          0.00    0.000000   0.000000    0.0000000
+#> 44           0.00          0.00    0.000000   0.000000    0.0000000
+#> 45           5.00          5.00  122.950820  54.985278   15.1816548
+#> 46           0.00          0.00    0.000000   0.000000    0.0000000
+#> 47           0.00          0.00    0.000000   0.000000    0.0000000
+#> 48           0.00          0.00    0.000000   0.000000    0.0000000
+#> 49           0.00          0.00    0.000000   0.000000    0.0000000
+#> 50           0.00          0.00    0.000000   0.000000    0.0000000
+#> 51           0.00          0.00    0.000000   0.000000    0.0000000
+#> 52           0.00          0.00    0.000000   0.000000    0.0000000
+#> 53           0.00          0.00    0.000000   0.000000    0.0000000
+#> 54           0.00          0.00    0.000000   0.000000    0.0000000
+#> 55          68.00         68.00  292.263610  35.442169  222.7982361
+#> 56          11.00         11.00   49.180328  14.828427   20.1171454
+#> 57           0.00          0.00    0.000000   0.000000    0.0000000
+#> 58           0.00          0.00    0.000000   0.000000    0.0000000
+#> 59           9.00          9.00   40.238450  13.412817   13.9498124
+#> 60           2.00          2.00    8.941878   6.322862   -3.4507048
+#> 61           0.00          0.00    0.000000   0.000000    0.0000000
+#> 62           7.75         13.25   36.899649   8.052163   21.1176982
+#> 63           0.00          0.00    0.000000   0.000000    0.0000000
+#> 64           0.00          0.00    0.000000   0.000000    0.0000000
+#> 65           5.75          8.75   52.713784   9.624176   33.8507451
+#> 66           6.00          6.00   15.219842   6.213475    3.0416558
+#> 67           8.25         10.75   48.196167  11.056959   26.5249255
+#> 68           0.00          0.00    0.000000   0.000000    0.0000000
+#> 69          11.25         11.75   58.342728  12.165300   34.4991788
+#> 70           0.00          0.00    0.000000   0.000000    0.0000000
+#> 71           0.00          0.00    0.000000   0.000000    0.0000000
+#> 72           6.00          6.00   18.243243   7.447773    3.6458767
+#> 73          41.00         89.00  626.351351  43.639967  540.8185887
+#> 74           0.00          0.00    0.000000   0.000000    0.0000000
+#> 75           0.00          0.00    0.000000   0.000000    0.0000000
+#> 76          28.00         28.00   71.469087  13.506388   44.9970530
+#> 77           0.00          0.00    0.000000   0.000000    0.0000000
+#> 78           0.00          0.00    0.000000   0.000000    0.0000000
+#> 79          41.50         74.50  296.086217  27.490915  242.2050132
+#> 80           0.00          0.00    0.000000   0.000000    0.0000000
+#> 81          18.00         18.00   38.998556   9.192048   20.9824732
+#> 82           0.00          0.00    0.000000   0.000000    0.0000000
+#> 83           7.25          7.75   32.498796   8.391153   16.0524384
+#> 84          16.75         28.25   97.496389  14.533904   69.0104615
+#> 85           3.00          5.50   28.165623   7.811738   12.8548975
+#> 86           0.00          0.00    0.000000   0.000000    0.0000000
+#> 87          14.00         14.00   73.684211  19.692934   35.0867699
+#> 88           0.00          0.00    0.000000   0.000000    0.0000000
+#> 89           0.00          0.00    0.000000   0.000000    0.0000000
+#> 90           0.00          0.00    0.000000   0.000000    0.0000000
+#> 91           0.00          0.00    0.000000   0.000000    0.0000000
+#> 92           6.00          6.00    8.736450   3.566641    1.7459626
+#> 93           0.00          0.00    0.000000   0.000000    0.0000000
+#> 94           5.00          5.00    7.280375   3.255883    0.8989623
+#> 95          18.00         18.00   26.209351   6.177603   14.1014712
+#> 96           0.00          0.00    0.000000   0.000000    0.0000000
+#> 97          18.00         18.00  116.295765  27.411175   62.5708496
+#> 98           0.00          0.00    0.000000   0.000000    0.0000000
+#> 99          27.75         43.25  458.722182  54.440307  352.0211409
+#> 100          0.00          0.00    0.000000   0.000000    0.0000000
+#> 101          0.00          0.00    0.000000   0.000000    0.0000000
+#> 102         12.00         12.00   96.687556  27.911293   41.9824265
+#> 103          0.00          0.00    0.000000   0.000000    0.0000000
+#> 104         25.00         25.00  201.432408  40.286482  122.4723551
+#> 105         25.00         25.00  201.432408  40.286482  122.4723551
+#> 106          0.00          0.00    0.000000   0.000000    0.0000000
+#> 107          0.00          0.00    0.000000   0.000000    0.0000000
+#> 108          0.00          0.00    0.000000   0.000000    0.0000000
+#> 109          0.00          0.00    0.000000   0.000000    0.0000000
+#> 110          0.00          0.00    0.000000   0.000000    0.0000000
+#> 111          0.00          0.00    0.000000   0.000000    0.0000000
+#> 112          0.00          0.00    0.000000   0.000000    0.0000000
+#> 113          6.00          6.00   10.003705   4.083995    1.9992210
+#> 114          8.25         14.75   38.347536   7.996014   22.6756366
+#> 115          1.00          1.00    1.667284   1.667284   -1.6005328
+#> 116          3.00          6.50   25.500567   6.584218   12.5957365
+#> 117          0.00          0.00    0.000000   0.000000    0.0000000
+#> 118          0.00          0.00    0.000000   0.000000    0.0000000
+#> 119         24.00         24.00   40.800907   8.328450   24.4774442
+#> 120          0.00          0.00    0.000000   0.000000    0.0000000
+#> 121          0.00          0.00    0.000000   0.000000    0.0000000
+#> 122          0.00          0.00    0.000000   0.000000    0.0000000
+#> 123          0.00          0.00    0.000000   0.000000    0.0000000
+#> 124          0.00          0.00    0.000000   0.000000    0.0000000
+#> 125          0.00          0.00    0.000000   0.000000    0.0000000
+#> 126         15.00         15.00   33.391046   8.621531   16.4931559
+#> 127          0.00          0.00    0.000000   0.000000    0.0000000
+#> 128          0.00          0.00    0.000000   0.000000    0.0000000
+#> 129          0.00          0.00    0.000000   0.000000    0.0000000
+#> 130         16.25         22.75   86.816720  13.901801   59.5696907
+#> 131          5.00          5.00    9.687836   4.332532    1.1962294
+#> 132          5.00          5.00    9.687836   4.332532    1.1962294
+#> 133          3.00          3.00    5.812702   3.355965   -0.7648686
+#> 134         24.00         24.00   46.501615   9.492102   27.8974359
+#> 135          6.75          8.25   29.063509   7.504166   14.3556145
+#> 136          0.00          0.00    0.000000   0.000000    0.0000000
+#> 137          0.00          0.00    0.000000   0.000000    0.0000000
+#> 138          0.00          0.00    0.000000   0.000000    0.0000000
+#> 139         23.25         43.75  570.482498  69.695530  433.8817694
+#> 140          0.00          0.00    0.000000   0.000000    0.0000000
+#>     burden_upper
+#> 1       0.000000
+#> 2    1495.329513
+#> 3       0.000000
+#> 4    2996.516747
+#> 5       0.000000
+#> 6       0.000000
+#> 7       0.000000
+#> 8     454.692519
+#> 9       0.000000
+#> 10      0.000000
+#> 11      0.000000
+#> 12      0.000000
+#> 13   2129.177166
+#> 14      0.000000
+#> 15      0.000000
+#> 16      0.000000
+#> 17      0.000000
+#> 18      0.000000
+#> 19      0.000000
+#> 20      0.000000
+#> 21     11.149325
+#> 22     18.831500
+#> 23      0.000000
+#> 24     32.759711
+#> 25      5.160728
+#> 26      0.000000
+#> 27      0.000000
+#> 28      0.000000
+#> 29    231.454912
+#> 30   1225.039459
+#> 31      0.000000
+#> 32      0.000000
+#> 33      0.000000
+#> 34      0.000000
+#> 35      0.000000
+#> 36    256.570477
+#> 37     43.074631
+#> 38      0.000000
+#> 39    250.107468
+#> 40     43.074631
+#> 41      0.000000
+#> 42      0.000000
+#> 43      0.000000
+#> 44      0.000000
+#> 45    230.719984
+#> 46      0.000000
+#> 47      0.000000
+#> 48      0.000000
+#> 49      0.000000
+#> 50      0.000000
+#> 51      0.000000
+#> 52      0.000000
+#> 53      0.000000
+#> 54      0.000000
+#> 55    361.728985
+#> 56     78.243510
+#> 57      0.000000
+#> 58      0.000000
+#> 59     66.527088
+#> 60     21.334460
+#> 61      0.000000
+#> 62     52.681599
+#> 63      0.000000
+#> 64      0.000000
+#> 65     71.576822
+#> 66     27.398028
+#> 67     69.867408
+#> 68      0.000000
+#> 69     82.186278
+#> 70      0.000000
+#> 71      0.000000
+#> 72     32.840610
+#> 73    711.884114
+#> 74      0.000000
+#> 75      0.000000
+#> 76     97.941121
+#> 77      0.000000
+#> 78      0.000000
+#> 79    349.967420
+#> 80      0.000000
+#> 81     57.014638
+#> 82      0.000000
+#> 83     48.945154
+#> 84    125.982317
+#> 85     43.476349
+#> 86      0.000000
+#> 87    112.281651
+#> 88      0.000000
+#> 89      0.000000
+#> 90      0.000000
+#> 91      0.000000
+#> 92     15.726938
+#> 93      0.000000
+#> 94     13.661788
+#> 95     38.317231
+#> 96      0.000000
+#> 97    170.020679
+#> 98      0.000000
+#> 99    565.423224
+#> 100     0.000000
+#> 101     0.000000
+#> 102   151.392685
+#> 103     0.000000
+#> 104   280.392461
+#> 105   280.392461
+#> 106     0.000000
+#> 107     0.000000
+#> 108     0.000000
+#> 109     0.000000
+#> 110     0.000000
+#> 111     0.000000
+#> 112     0.000000
+#> 113    18.008189
+#> 114    54.019436
+#> 115     4.935101
+#> 116    38.405397
+#> 117     0.000000
+#> 118     0.000000
+#> 119    57.124369
+#> 120     0.000000
+#> 121     0.000000
+#> 122     0.000000
+#> 123     0.000000
+#> 124     0.000000
+#> 125     0.000000
+#> 126    50.288937
+#> 127     0.000000
+#> 128     0.000000
+#> 129     0.000000
+#> 130   114.063750
+#> 131    18.179443
+#> 132    18.179443
+#> 133    12.390272
+#> 134    65.105793
+#> 135    43.771404
+#> 136     0.000000
+#> 137     0.000000
+#> 138     0.000000
+#> 139   707.083226
+#> 140     0.000000
+```

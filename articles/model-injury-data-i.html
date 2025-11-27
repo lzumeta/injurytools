@@ -74,7 +74,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Model Sports Injuries as Counts</h1>
             
-            <h4 data-toc-skip class="date">2025-09-01</h4>
+            <h4 data-toc-skip class="date">2025-11-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lzumeta/injurytools/blob/master/vignettes/model-injury-data-i.Rmd" class="external-link"><code>vignettes/model-injury-data-i.Rmd</code></a></small>
       <div class="d-none name"><code>model-injury-data-i.Rmd</code></div>
@@ -189,7 +189,7 @@ Code for further plot specifications
 <span>                      legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">1.3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">p1</span> <span class="op">+</span> <span class="va">theme_counts</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">theme_counts</span></span></code></pre></div>
-</details><p><img src="model-injury-data-i_files/figure-html/unnamed-chunk-6-1.png" width="960"></p>
+</details><p><img src="model-injury-data-i_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="960"></p>
 <p>In the following, we use <code>dfs1718p</code> data.</p>
 </div>
 <div class="section level2">
@@ -502,14 +502,8 @@ fits:</p>
 <span>                     values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>, <span class="st">"chocolate"</span>, <span class="st">"purple"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Histogram of injury burden in 2017/2018\nwith conditional Poisson, NB, ZIP and ZINB Densities"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="va">theme_counts</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2</span></span>
-<span><span class="co">#&gt; 3.5.0.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use the `legend.position.inside` argument of `theme()` instead.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
-<p><img src="model-injury-data-i_files/figure-html/unnamed-chunk-23-1.png" width="864"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="model-injury-data-i_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" width="864"></p>
 <p>Besides, we compute goodness of fit measures such as AIC, BIC and
 deviance explained:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -594,7 +588,7 @@ deviance explained:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

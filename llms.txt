@@ -1,0 +1,203 @@
+# injurytools
+
+## Overview
+
+**`injurytools`** is a package designed for the field of Sports
+Medicine. It simplifies the data analysis workflow by providing
+convenience functions and handy tools for sports injury and illness
+data.
+
+The functions can be classified into: (a) sports injury and illness data
+preparation, (b) descriptive analyses and (c) data visualization
+routines. Further analyses, such as the estimation of the risk of
+injury/illness (any sports-related health problem) with other covariate
+effects, can be performed outside of **`injurytools`**, whether the
+event of health problem is viewed as count or time-to-event data.
+
+To get an overview of the package, see the
+[Articles](https://lzumeta.github.io/injurytools/articles/) section.
+
+In practice, the package can automate specific descriptive reports that
+are routinely generated for sports injury and illness surveillance.
+
+## Installation
+
+To install from [CRAN](https://CRAN.R-project.org):
+
+``` r
+install.packages("injurytools")
+```
+
+To install the most current version from GitHub:
+
+``` r
+devtools::install_github("lzumeta/injurytools")
+```
+
+## Usage
+
+Functions for data preparation start with `prepare_*()`, those for
+estimating epidemiological measures start with `calc_*()`, and those for
+data visualization with `gg_*()`.
+
+The below outlines at a glance how **`injurytools`** can help to get a
+comprehensive picture of sports injury and illness data:
+
+``` r
+library(injurytools)
+library(ggplot2)
+
+(p <- gg_photo(injd, 
+               title   = "Injury overview of Liverpool FC's men's first team, 2017-2018 and 2018-2019 seasons",
+               by_date = "2 month") +
+    ## plus some lines of ggplot2 code..
+    xlab("Follow-up date") + ylab("Players") + 
+    labs(caption = "source: transfermarkt.com") +
+    theme(axis.text.x.bottom = element_text(size = 13, angle = 20, hjust = 1),
+          axis.text.y.left   = element_text(size = 12),
+          axis.title.x = element_text(size = 20, face = "bold", vjust = -1),
+          axis.title.y = element_text(size = 20, face = "bold", vjust = 1.8),
+          legend.text  = element_text(size = 20),
+          legend.position = "top",
+          plot.caption = element_text(face = "italic", size = 12, colour = "gray10"),
+          plot.title = element_text(face = "bold", hjust = 0.5, size = 22),
+          plot.title.position = "plot")
+)
+```
+
+![](reference/figures/README-unnamed-chunk-4-1.png)
+
+``` r
+p +
+  ## add days lost info
+  geom_text(aes(x = date_injured + days_lost/2, y = person_id, label = paste0(days_lost, " days")), 
+            vjust = -0.5, data = injd) +
+  scale_y_discrete(expand = expansion(mult = 0.05))
+```
+
+![](reference/figures/README-unnamed-chunk-5-1.png)
+
+``` r
+p + 
+  ## add injury info
+  geom_text(aes(x = date_injured + days_lost/2, y = person_id, label = injury),
+            vjust = -0.5, data = injd) +
+  scale_y_discrete(expand = expansion(mult = 0.05))
+```
+
+![](reference/figures/README-unnamed-chunk-6-1.png)
+
+## How to contribute
+
+If you have problems with the package, find any bugs, or have
+suggestions for improvements, please feel free to open a [GitHub
+issue](https://github.com/lzumeta/injurytools/issues) or touch us
+directly via email. We also welcome your feedback.
+
+# Package index
+
+## Prepare sports injury and illness data
+
+Functions that preprocess and prepare these type of data in a
+standardized format.
+
+- [`prepare_inj()`](https://lzumeta.github.io/injurytools/reference/prepare_data.md)
+  [`prepare_exp()`](https://lzumeta.github.io/injurytools/reference/prepare_data.md)
+  [`prepare_all()`](https://lzumeta.github.io/injurytools/reference/prepare_data.md)
+  : Prepare data in a standardized format
+
+## Compute injury summary statistics
+
+Functions to estimate sports injury summary statistics.
+
+- [`calc_summary()`](https://lzumeta.github.io/injurytools/reference/calc_summary.md)
+  : Calculate summary statistics
+- [`calc_prevalence()`](https://lzumeta.github.io/injurytools/reference/calc_prevalence.md)
+  : Calculate prevalence proportion
+- [`calc_ncases()`](https://lzumeta.github.io/injurytools/reference/calc_ncases.md)
+  : Calculate number of cases
+- [`calc_ndayslost()`](https://lzumeta.github.io/injurytools/reference/calc_ndayslost.md)
+  : Calculate number of days lost
+- [`calc_mean_dayslost()`](https://lzumeta.github.io/injurytools/reference/calc_mean_dayslost.md)
+  : Calculate the mean days lost
+- [`calc_median_dayslost()`](https://lzumeta.github.io/injurytools/reference/calc_median_dayslost.md)
+  : Calculate the median days lost
+- [`calc_iqr_dayslost()`](https://lzumeta.github.io/injurytools/reference/calc_iqr_dayslost.md)
+  : Calculate the interquartile range days lost
+- [`calc_exposure()`](https://lzumeta.github.io/injurytools/reference/calc_exposure.md)
+  : Calculate the exposure time
+- [`calc_incidence()`](https://lzumeta.github.io/injurytools/reference/calc_incidence.md)
+  : Calculate case incidence rate
+- [`calc_burden()`](https://lzumeta.github.io/injurytools/reference/calc_burden.md)
+  : Calculate case burden rate
+
+## Visualize sports injury data
+
+Functions to visualize relevant information in sports injury data.
+
+- [`gg_photo()`](https://lzumeta.github.io/injurytools/reference/gg_photo.md)
+  : Plot injuries and illnesses over the follow-up period
+- [`gg_riskmatrix()`](https://lzumeta.github.io/injurytools/reference/gg_riskmatrix.md)
+  : Plot risk matrices
+- [`gg_prevalence()`](https://lzumeta.github.io/injurytools/reference/gg_prevalence.md)
+  : Plot bar plots representing players' prevalence
+- [`gg_rank()`](https://lzumeta.github.io/injurytools/reference/gg_rank.md)
+  : Plot athlete's health problem incidence or burden ranking
+
+## Data sets
+
+Internal data sets to illustrate `injurytools` functionalities.
+
+- [`raw_df_exposures`](https://lzumeta.github.io/injurytools/reference/raw_df_exposures.md)
+  : Minimal example of exposure data
+
+- [`raw_df_injuries`](https://lzumeta.github.io/injurytools/reference/raw_df_injuries.md)
+  : Minimal example of injury data
+
+- [`injd`](https://lzumeta.github.io/injurytools/reference/injd.md) :
+
+  Example of an `injd` object
+
+## Utilities
+
+Utility functions.
+
+- [`date2season()`](https://lzumeta.github.io/injurytools/reference/date2season.md)
+  : Get the season
+
+- [`season2year()`](https://lzumeta.github.io/injurytools/reference/season2year.md)
+  : Get the year
+
+- [`cut_injd()`](https://lzumeta.github.io/injurytools/reference/cut_injd.md)
+  : Cut the range of the follow-up
+
+- [`is_injd()`](https://lzumeta.github.io/injurytools/reference/is_injd.md)
+  :
+
+  Check if an object is of class `injd`
+
+- [`get_data_followup()`](https://lzumeta.github.io/injurytools/reference/get_data_followup.md)
+  : Extract follow-up data frame
+
+- [`get_data_injuries()`](https://lzumeta.github.io/injurytools/reference/get_data_injuries.md)
+  : Extract injury/illness data frame
+
+- [`get_data_exposures()`](https://lzumeta.github.io/injurytools/reference/get_data_exposures.md)
+  : Extract exposures data frame
+
+# Articles
+
+### Articles
+
+These vignettes describe the usage of injurytools.
+
+- [Prepare Sports Injury
+  Data](https://lzumeta.github.io/injurytools/articles/prepare-injury-data.md):
+- [Estimate Measures of Injury
+  Epidemiology](https://lzumeta.github.io/injurytools/articles/estimate-epi-measures.md):
+- [Visualize Sports Injury
+  Data](https://lzumeta.github.io/injurytools/articles/visualize-injury-data.md):
+- [Model Sports Injuries as
+  Counts](https://lzumeta.github.io/injurytools/articles/model-injury-data-i.md):
+- [Model Sports Injuries as
+  Events](https://lzumeta.github.io/injurytools/articles/model-injury-data-ii.md):
