@@ -50,7 +50,7 @@ average time-loss'), which leads to case burden (defaults to
 
 \item{errh_height}{Set the height of the horizontal interval whiskers; the
 \code{height} argument for
-\code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}.}
+\code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}.}
 
 \item{errv_width}{Set the width of the vertical interval whiskers; the
 \code{width} argument for \cr

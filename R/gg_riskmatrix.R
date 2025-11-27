@@ -32,7 +32,7 @@
 #'   \code{\link[ggplot2:ylab]{ggplot2::ylab()}}.
 #' @param errh_height Set the height of the horizontal interval whiskers; the
 #'   \code{height} argument for
-#'   \code{\link[ggplot2:geom_errorbarh]{ggplot2::geom_errorbarh()}}.
+#'   \code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}.
 #' @param errv_width Set the width of the vertical interval whiskers; the
 #'   \code{width} argument for \cr
 #'   \code{\link[ggplot2:geom_errorbar]{ggplot2::geom_errorbar()}}.
@@ -127,7 +127,7 @@ gg_riskmatrix <- function(injd, by = NULL,
 
   ## plot
   p <- ggplot(data = summary_data, aes(x = .data$incidence, y = .data$mean_dayslost, group = !! by)) +
-    geom_errorbarh(aes(xmin = .data$incidence_lower, xmax = .data$incidence_upper), height = errh_height) +
+    geom_errorbar(aes(xmin = .data$incidence_lower, xmax = .data$incidence_upper), height = errh_height, orientation = "y") +
     geom_errorbar(aes(ymin  = .data$qt25_dayslost,   ymax = .data$qt75_dayslost), width = errv_width) +
     geom_point(aes(fill = !! by, size = .data$burden), colour = "black", shape = 21) +
     geom_text(aes(label = round(.data$burden), fontface = "bold")) +
