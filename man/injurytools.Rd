@@ -24,7 +24,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Dae-Jin Lee \email{dlee@bcamath.org} (\href{https://orcid.org/0000-0002-8995-8535}{ORCID}) [contributor]
+  \item Dae-Jin Lee \email{daelee@faculty.ie.edu} (\href{https://orcid.org/0000-0002-8995-8535}{ORCID}) [contributor]
 }
 
 }
