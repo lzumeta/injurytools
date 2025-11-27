@@ -1,45 +1,24 @@
 Package: injurytools
 Title: A Toolkit for Sports Injury and Illness Data Analysis
-Version: 1.0.3
+Version: 2.0.0
 Authors@R: c(
-    person(given = "Lore",
-           family = "Zumeta Olaskoaga",
-           role = c("aut", "cre"),
-           email = "lorezumeta@gmail.com",
+    person("Lore", "Zumeta Olaskoaga", , "lorezumeta@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6141-1469")),
-    person(given = "Dae-Jin",
-           family = "Lee",
-           role = c("ctb"),
-           email = "dlee@bcamath.org",
-           comment = c(ORCID = "0000-0002-8995-8535")))
+    person("Dae-Jin", "Lee", , "daelee@faculty.ie.edu", role = "ctb",
+           comment = c(ORCID = "0000-0002-8995-8535"))
+  )
 Description: Sports Injury Data analysis aims to identify and describe the
-  magnitude of the injury problem, and to gain more insights (e.g. determine
-  potential risk factors) by statistical modelling approaches. The 'injurytools'
-  package provides standardized routines and utilities that simplify such
-  analyses. It offers functions for data preparation, informative visualizations 
-  and descriptive and model-based analyses.
+    magnitude of the injury problem, and to gain more insights (e.g.
+    determine potential risk factors) by statistical modelling approaches.
+    The 'injurytools' package provides standardized routines and utilities
+    that simplify such analyses. It offers functions for data preparation,
+    informative visualizations and descriptive and model-based analyses.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
-Suggests: 
-    covr,
-    gridExtra,
-    kableExtra,
-    knitr,
-    RColorBrewer,
-    rmarkdown,
-    spelling,
-    survival,
-    survminer,
-    coxme,
-    pscl,
-    lme4,
-    MASS,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Language: en-US
+URL: https://github.com/lzumeta/injurytools,
+    https://lzumeta.github.io/injurytools/
+BugReports: https://github.com/lzumeta/injurytools/issues
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     checkmate,
     dplyr,
@@ -56,9 +35,26 @@ Imports:
     tidyr,
     tidyselect,
     withr
-Depends: 
-    R (>= 3.5)
-VignetteBuilder: knitr
-URL: https://github.com/lzumeta/injurytools,
-    https://lzumeta.github.io/injurytools/
-BugReports: https://github.com/lzumeta/injurytools/issues
+Suggests: 
+    coxme,
+    grid,
+    gridExtra,
+    kableExtra,
+    knitr,
+    lme4,
+    MASS,
+    pscl,
+    RColorBrewer,
+    rmarkdown,
+    spelling,
+    survival,
+    survminer,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
