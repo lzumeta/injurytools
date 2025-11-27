@@ -24,5 +24,5 @@ Useful links:
 
 Other contributors:
 
-- Dae-Jin Lee <dlee@bcamath.org>
+- Dae-Jin Lee <daelee@faculty.ie.edu>
   ([ORCID](https://orcid.org/0000-0002-8995-8535)) \[contributor\]

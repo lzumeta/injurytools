@@ -48,6 +48,26 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.0" id="injurytools-200">injurytools 2.0.0<a class="anchor" aria-label="anchor" href="#injurytools-200"></a></h2>
+<ul><li>
+<p>The “nomenclature” now is changed:</p>
+<ul><li>player –&gt; athlete;</li>
+<li>injuries -&gt; cases or/and sports-related health problem.</li>
+<li>
+<code>gg_injriskmatrix()</code> -&gt; <code><a href="../reference/gg_riskmatrix.html">gg_riskmatrix()</a></code>
+</li>
+<li>
+<code>gg_injphoto()</code> -&gt; <code><a href="../reference/gg_photo.html">gg_photo()</a></code>
+</li>
+<li>
+<code>gg_injbarplot()</code> -&gt; <code><a href="../reference/gg_rank.html">gg_rank()</a></code> some new functionalities also added to these functions.</li>
+</ul></li>
+<li><p><code>injsummary()</code> function has been split into smaller functions and its name now is: <code>injsummary()</code> -&gt; <code><a href="../reference/calc_summary.html">calc_summary()</a></code>. New (auxiliary) functions created: - <code><a href="../reference/calc_ncases.html">calc_ncases()</a></code> - <code><a href="../reference/calc_ndayslost.html">calc_ndayslost()</a></code> - <code><a href="../reference/calc_exposure.html">calc_exposure()</a></code> - <code><a href="../reference/calc_mean_dayslost.html">calc_mean_dayslost()</a></code> - <code><a href="../reference/calc_median_dayslost.html">calc_median_dayslost()</a></code> - <code><a href="../reference/calc_iqr_dayslost.html">calc_iqr_dayslost()</a></code> - <code><a href="../reference/calc_incidence.html">calc_incidence()</a></code> - <code><a href="../reference/calc_burden.html">calc_burden()</a></code>.</p></li>
+<li><p><code>injprev()</code> has been modified and named <code><a href="../reference/calc_prevalence.html">calc_prevalence()</a></code>. Also, <code>gg_injprev_polar()</code> has been modified and named <code><a href="../reference/gg_prevalence.html">gg_prevalence()</a></code>.</p></li>
+<li><p><code><a href="../reference/prepare_data.html">prepare_all()</a></code> has been modified: some attributes have been removed, and, in general, has been made more efficient/faster.</p></li>
+<li><p>Created some utility and help functions.</p></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.3" id="injurytools-103">injurytools 1.0.3<a class="anchor" aria-label="anchor" href="#injurytools-103"></a></h2><p class="text-muted">CRAN release: 2023-11-14</p>
 <ul><li>
 <code>gg_injriskmatrix</code> now has <code>cont_max_x</code> and <code>cont_max_y</code> arguments to (optionally) control the ranges of contour lines and allows to pass on more arguments to <code><a href="https://ggplot2.tidyverse.org/reference/geom_contour.html" class="external-link">geom_contour()</a></code>, e.g. <code>bins =</code>, <code>binwidth =</code>, etc.</li>
