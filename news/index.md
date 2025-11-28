@@ -2,6 +2,8 @@
 
 ## injurytools 2.0.0
 
+CRAN release: 2025-11-28
+
 - The “nomenclature” now is changed:
 
   - player –\> athlete;
