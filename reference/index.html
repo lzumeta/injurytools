@@ -22,20 +22,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/prepare-injury-data.html">Prepare data</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Describe data</h6></li>
-    <li><a class="dropdown-item" href="../articles/estimate-epi-measures.html">Estimate summary statistics</a></li>
-    <li><a class="dropdown-item" href="../articles/visualize-injury-data.html">Visualize data</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Model data</h6></li>
-    <li><a class="dropdown-item" href="../articles/model-injury-data-i.html">Injuries as count data</a></li>
-    <li><a class="dropdown-item" href="../articles/model-injury-data-ii.html">Injuries as time-to-event data</a></li>
-  </ul></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/lzumeta/injurytools" aria-label="View on GitHub"><span class="fa fa-github"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/lzumeta/injurytools/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -51,8 +42,7 @@
 
       <div class="section-desc"><p>Functions that preprocess and prepare these type of data in a standardized format.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -68,8 +58,7 @@
 
       <div class="section-desc"><p>Functions to estimate sports injury summary statistics.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -80,55 +69,64 @@
 
         </dt>
         <dd>Calculate summary statistics</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_prevalence.html">calc_prevalence()</a></code>
 
         </dt>
         <dd>Calculate prevalence proportion</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_ncases.html">calc_ncases()</a></code>
 
         </dt>
         <dd>Calculate number of cases</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_ndayslost.html">calc_ndayslost()</a></code>
 
         </dt>
         <dd>Calculate number of days lost</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_mean_dayslost.html">calc_mean_dayslost()</a></code>
 
         </dt>
         <dd>Calculate the mean days lost</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_median_dayslost.html">calc_median_dayslost()</a></code>
 
         </dt>
         <dd>Calculate the median days lost</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_iqr_dayslost.html">calc_iqr_dayslost()</a></code>
 
         </dt>
         <dd>Calculate the interquartile range days lost</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_exposure.html">calc_exposure()</a></code>
 
         </dt>
         <dd>Calculate the exposure time</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_incidence.html">calc_incidence()</a></code>
 
         </dt>
         <dd>Calculate case incidence rate</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="calc_burden.html">calc_burden()</a></code>
 
@@ -139,8 +137,7 @@
 
       <div class="section-desc"><p>Functions to visualize relevant information in sports injury data.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -151,19 +148,22 @@
 
         </dt>
         <dd>Plot injuries and illnesses over the follow-up period</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="gg_riskmatrix.html">gg_riskmatrix()</a></code>
 
         </dt>
         <dd>Plot risk matrices</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="gg_prevalence.html">gg_prevalence()</a></code>
 
         </dt>
         <dd>Plot bar plots representing players' prevalence</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="gg_rank.html">gg_rank()</a></code>
 
@@ -174,8 +174,7 @@
 
       <div class="section-desc"><p>Internal data sets to illustrate <code>injurytools</code> functionalities.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -186,13 +185,15 @@
 
         </dt>
         <dd>Minimal example of exposure data</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="raw_df_injuries.html">raw_df_injuries</a></code>
 
         </dt>
         <dd>Minimal example of injury data</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="injd.html">injd</a></code>
 
@@ -203,8 +204,7 @@
 
       <div class="section-desc"><p>Utility functions.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -215,37 +215,43 @@
 
         </dt>
         <dd>Get the season</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="season2year.html">season2year()</a></code>
 
         </dt>
         <dd>Get the year</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="cut_injd.html">cut_injd()</a></code>
 
         </dt>
         <dd>Cut the range of the follow-up</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="is_injd.html">is_injd()</a></code>
 
         </dt>
         <dd>Check if an object is of class <code>injd</code></dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_data_followup.html">get_data_followup()</a></code>
 
         </dt>
         <dd>Extract follow-up data frame</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_data_injuries.html">get_data_injuries()</a></code>
 
         </dt>
         <dd>Extract injury/illness data frame</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_data_exposures.html">get_data_exposures()</a></code>
 
@@ -261,7 +267,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
