@@ -126,7 +126,7 @@ injd <-  prepare_all(data_exposures = df_exposures,
                     exp_unit = "matches_minutes")
 head(injd)
 # injd |> 
-#   group_by(player) |> 
+#   group_by(person_id) |> 
 #   slice(1, n())
 ```
 
