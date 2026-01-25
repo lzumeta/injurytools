@@ -13,9 +13,10 @@ template:
         gtag('config', 'G-17GBPW9WTZ');
       </script>
 navbar:
-  left:
-  - text: Reference
-    href: reference/index.html
+  structure:
+    left:  [reference, articles, news]
+    right: [search, github]
+  components:
   - text: Articles
     menu:
     - text: Prepare data
@@ -34,9 +35,6 @@ navbar:
       href: articles/model-injury-data-ii.html
   - text: News
     href: news/index.html
-  right:
-  - icon: fa-github
-    href: https://github.com/lzumeta/injurytools
 development:
   mode: auto
 reference:
