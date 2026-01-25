@@ -17,24 +17,26 @@ navbar:
     left:  [reference, articles, news]
     right: [search, github]
   components:
-  - text: Articles
-    menu:
-    - text: Prepare data
-      href: articles/prepare-injury-data.html
-    - text: "-------"
-    - text: Describe data
-    - text: Estimate summary statistics
-      href: articles/estimate-epi-measures.html
-    - text: Visualize data
-      href: articles/visualize-injury-data.html
-    - text: "-------"
-    - text: Model data
-    - text: Injuries as count data
-      href: articles/model-injury-data-i.html
-    - text: Injuries as time-to-event data
-      href: articles/model-injury-data-ii.html
-  - text: News
-    href: news/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Prepare data
+        href: articles/prepare-injury-data.html
+      - text: "-------"
+      - text: Describe data
+      - text: Estimate summary statistics
+        href: articles/estimate-epi-measures.html
+      - text: Visualize data
+        href: articles/visualize-injury-data.html
+      - text: "-------"
+      - text: Model data
+      - text: Injuries as count data
+        href: articles/model-injury-data-i.html
+      - text: Injuries as time-to-event data
+        href: articles/model-injury-data-ii.html
+    news:
+      text: News
+      href: news/index.html
 development:
   mode: auto
 reference:
