@@ -103,14 +103,14 @@ calc_incidence(injd, overall = FALSE)
 #>    person_id             totalexpo ncases incidence incidence_sd incidence_lower
 #>    <fct>                     <dbl>  <dbl>     <dbl>        <dbl>           <dbl>
 #>  1 adam-lallana                700      6     77.1         31.5            15.4 
-#>  2 alberto-moreno             1264      1      7.12         7.12           -6.84
-#>  3 alex-oxlade-chamberl…      1483      1      6.07         6.07           -5.83
+#>  2 alberto-moreno             1264      1      7.12         7.12            0   
+#>  3 alex-oxlade-chamberl…      1483      1      6.07         6.07            0   
 #>  4 alisson                    3420      0      0            0               0   
 #>  5 andrew-robertson           5162      5      8.72         3.90            1.08
-#>  6 daniel-sturridge            927      3     29.1         16.8            -3.83
+#>  6 daniel-sturridge            927      3     29.1         16.8             0   
 #>  7 danny-ings                  265      0      0            0               0   
 #>  8 dejan-lovren               3109      6     17.4          7.09            3.47
-#>  9 divock-origi                366      1     24.6         24.6           -23.6 
+#>  9 divock-origi                366      1     24.6         24.6             0   
 #> 10 dominic-solanke             581      0      0            0               0   
 #> # ℹ 18 more rows
 #> # ℹ 1 more variable: incidence_upper <dbl>
