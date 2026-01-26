@@ -11,16 +11,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/lzumeta/injurytools/blob/master/DESCRIPTION)
+[`inst/CITATION`](https://github.com/lzumeta/injurytools/blob/master/inst/CITATION)
 
-Zumeta Olaskoaga L (2026). *injurytools: A Toolkit for Sports Injury and
-Illness Data Analysis*. R package version 2.0.0,
-<https://github.com/lzumeta/injurytools>.
+Zumeta Olaskoaga L, Lee D (2026). “injurytools: A Toolkit for Sports
+Injury and Illness Data Analysis.” R package version 2.0.1,
+<https://lzumeta.github.io/injurytools/>.
 
-    @Manual{,
+    @Misc{,
       title = {injurytools: A Toolkit for Sports Injury and Illness Data Analysis},
-      author = {Lore {Zumeta Olaskoaga}},
+      author = {Lore {Zumeta Olaskoaga} and Dae-Jin Lee},
       year = {2026},
-      note = {R package version 2.0.0},
-      url = {https://github.com/lzumeta/injurytools},
+      url = {https://lzumeta.github.io/injurytools/},
+      note = {R package version 2.0.1},
     }

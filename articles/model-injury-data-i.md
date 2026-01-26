@@ -177,7 +177,8 @@ function:
 ```
 
 Besides, if we have repeated measurements as in `dfsp`, we can fit a
-Mixed Model via:
+Mixed Model via
+[`lme4::glmer`](https://rdrr.io/cran/lme4/man/glmer.html):
 
 Add more covariates to `dfsp` data frame
 

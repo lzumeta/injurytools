@@ -1,5 +1,15 @@
 # Changelog
 
+## injurytools 2.0.1
+
+- [`calc_incidence()`](https://lzumeta.github.io/injurytools/reference/calc_incidence.md)
+  and
+  [`calc_burden()`](https://lzumeta.github.io/injurytools/reference/calc_burden.md),
+  slightly modified. If the confidence interval lower bound is negative,
+  then it is replaced by zero.
+
+- CITATION file added
+
 ## injurytools 2.0.0
 
 CRAN release: 2025-11-28
