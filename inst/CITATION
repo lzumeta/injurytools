@@ -1,0 +1,10 @@
+bibentry(
+  bibtype = "Misc",
+  title = "injurytools: A Toolkit for Sports Injury and Illness Data Analysis",
+  author = c(
+    person("Lore", "Zumeta Olaskoaga", role = c("aut", "cre")),
+    person("Dae-Jin", "Lee", role = "ctb")),
+  year = 2026,
+  url = "https://lzumeta.github.io/injurytools/",
+  note = "R package version 2.0.1"
+)
