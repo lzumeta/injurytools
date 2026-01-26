@@ -1,3 +1,9 @@
+# Injurytools 2.0.1
+
+- `calc_incidence()` and `calc_burden()`, slightly modified. If the confidence interval lower bound is negative, then it is replaced by zero.
+
+- CITATION file added
+
 # injurytools 2.0.0
 
 - The "nomenclature" now is changed:

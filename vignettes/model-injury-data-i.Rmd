@@ -258,7 +258,7 @@ Or alternatively, we can use the [`glmmTMB::glmmTMB`](https://glmmtmb.github.io/
 # summary(incidence_glm_pois2)
 ```
 
-Besides, if we have repeated measurements as in `dfsp`, we can fit a Mixed Model via:
+Besides, if we have repeated measurements as in `dfsp`, we can fit a Mixed Model via [`lme4::glmer`](https://rdrr.io/cran/lme4/man/glmer.html):
 
 <details>
 
