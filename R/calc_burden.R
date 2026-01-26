@@ -70,6 +70,9 @@ calc_burden <- function(injd, by = NULL, overall = TRUE,
         dplyr::mutate(burden_sd = sqrt(.data$burden / .data$totalexpo),
                       burden_lower = .data$burden - stats::qnorm(minusalphahalf) * .data$burden_sd,
                       burden_upper = .data$burden + stats::qnorm(minusalphahalf) * .data$burden_sd)
+      ## NEW
+      out <- out |> 
+        dplyr::mutate(burden_lower = if_else(.data$burden_lower < 0, 0, .data$burden_lower))
     }
   }
   out <- out |>

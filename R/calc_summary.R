@@ -7,6 +7,7 @@
 #' poisson or zero-inflated negative binomial, on a athlete and overall basis.
 #'
 #' @inheritParams calc_incidence
+#' @param ... Other arguments passed on to \link[injurytools]{calc_incidence} function arguments.
 #'
 #' @return A data frame comprising of overall or athlete-wise epidemiological
 #'   summary statistics, that it's made up of the following columns:
@@ -80,7 +81,8 @@ calc_summary <- function(injd, by = NULL, overall = TRUE,
                          method = c("poisson", "negbin", "zinfpois", "zinfnb"),
                          conf_level = 0.95,
                          scale = TRUE,
-                         quiet = FALSE) {
+                         quiet = FALSE,
+                         ...) {
   ## check inputs
   assert(checkClass(injd, "injd"))
   assert_subset(by, c(names(injd), NULL))

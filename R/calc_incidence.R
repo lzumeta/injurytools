@@ -82,6 +82,9 @@ calc_incidence <- function(injd, by = NULL, overall = TRUE,
         dplyr::mutate(incidence_sd = sqrt(.data$incidence / .data$totalexpo),
                       incidence_lower = .data$incidence - stats::qnorm(minusalphahalf) * .data$incidence_sd,
                       incidence_upper = .data$incidence + stats::qnorm(minusalphahalf) * .data$incidence_sd)
+      ## NEW
+      out <- out |> 
+        dplyr::mutate(incidence_lower = if_else(.data$incidence_lower < 0, 0, .data$incidence_lower))
     }
   }
   out <- out |>

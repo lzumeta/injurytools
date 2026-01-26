@@ -128,7 +128,7 @@ gg_riskmatrix <- function(injd, by = NULL,
   ## plot
   p <- ggplot(data = summary_data, aes(x = .data$incidence, y = .data$mean_dayslost, group = !! by)) +
     geom_errorbar(aes(xmin = .data$incidence_lower, xmax = .data$incidence_upper), height = errh_height, orientation = "y") +
-    geom_errorbar(aes(ymin  = .data$qt25_dayslost,   ymax = .data$qt75_dayslost), width = errv_width) +
+    geom_errorbar(aes(ymin  = .data$qt25_dayslost,   ymax = .data$qt75_dayslost), height = errv_width) +
     geom_point(aes(fill = !! by, size = .data$burden), colour = "black", shape = 21) +
     geom_text(aes(label = round(.data$burden), fontface = "bold")) +
     # quit size legend

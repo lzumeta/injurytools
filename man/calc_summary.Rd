@@ -11,7 +11,8 @@ calc_summary(
   method = c("poisson", "negbin", "zinfpois", "zinfnb"),
   conf_level = 0.95,
   scale = TRUE,
-  quiet = FALSE
+  quiet = FALSE,
+  ...
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ output according to the unit of exposure (defaults to \code{TRUE}).}
 
 \item{quiet}{Logical, whether or not to silence the warning messages
 (defaults to \code{FALSE}).}
+
+\item{...}{Other arguments passed on to \link[injurytools]{calc_incidence} function arguments.}
 }
 \value{
 A data frame comprising of overall or athlete-wise epidemiological
