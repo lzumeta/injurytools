@@ -132,14 +132,12 @@ gg_riskmatrix(injd)
 #>     time-loss. Possibly, there is a concrete long-term injury in the data.
 #>     For plotting purposes the vertical upper limit (i.e. 75% quartile)
 #>     is lengthened to the average value.
-#> `height` was translated to `width`.
 
 gg_riskmatrix(injd, by = "injury_type", title = "Risk matrix")
 #> Warning: An injury average time-loss is bigger than its 75% quartile
 #>     time-loss. Possibly, there is a concrete long-term injury in the data.
 #>     For plotting purposes the vertical upper limit (i.e. 75% quartile)
 #>     is lengthened to the average value.
-#> `height` was translated to `width`.
 
 # }
 ```

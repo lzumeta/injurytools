@@ -119,8 +119,6 @@ gg_riskmatrix(injd,
   theme3
 ```
 
-    #> `height` was translated to `width`.
-
 ![](visualize-injury-data_files/figure-html/unnamed-chunk-9-1.png)
 
   
