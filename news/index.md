@@ -2,6 +2,8 @@
 
 ## injurytools 2.0.1
 
+CRAN release: 2026-01-26
+
 - [`calc_incidence()`](https://lzumeta.github.io/injurytools/reference/calc_incidence.md)
   and
   [`calc_burden()`](https://lzumeta.github.io/injurytools/reference/calc_burden.md),
