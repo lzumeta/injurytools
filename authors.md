@@ -11,7 +11,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/lzumeta/injurytools/blob/v2.0.1/inst/CITATION)
+[`inst/CITATION`](https://github.com/lzumeta/injurytools/blob/master/inst/CITATION)
 
 Zumeta Olaskoaga L, Lee D (2026). “injurytools: A Toolkit for Sports
 Injury and Illness Data Analysis.” R package version 2.0.1,
